@@ -7,8 +7,8 @@ export default Service.extend({
   isConnected: false,
   exampleData: null,
 
-  createConnection(websocket) {
-    const socket = this.get('websockets').socketFor(websocket);
+  createConnection(address) {
+    const socket = this.get('websockets').socketFor(address);
 
     socket.on('open', this._openHandler, this);
     socket.on('message', this._messageHandler, this);
@@ -17,9 +17,9 @@ export default Service.extend({
     this.set('socketRef', socket);
   },
 
-  disconnect(websocket) {
+  disconnect(address) {
     this._cleanup();
-    this.get('websockets').closeSocketFor(websocket);
+    this.get('websockets').closeSocketFor(address);
   },
 
   _cleanup() {
