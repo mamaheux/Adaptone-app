@@ -1,0 +1,13 @@
+<img class="config-list-logo" src="assets/images/adaptone_logo.svg">
+
+<h1>
+  {{t 'config-list.title'}}
+</h1>
+
+<div class="configuration-list">
+  {{#each configurations as |config|}}
+    {{aa-config config=config}}
+  {{/each}}
+
+  <button class="new-config">{{t 'config-list.new'}}</button>
+</div>
