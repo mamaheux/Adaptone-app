@@ -18,7 +18,7 @@ export default Service.extend({
       const filePath = this._getFilePath(fileName);
       fs.writeFileSync(filePath, JSON.stringify(data));
     } catch (error) {
-      alert('An error occured while tr')
+      alert('An error occured while trying to write the file. \n' + error.message);
     }
   },
 
@@ -27,7 +27,7 @@ export default Service.extend({
       const filePath = this._getFilePath(fileName);
       return JSON.parse(fs.readFileSync(filePath, FILE_FORMAT));
     } catch (error) {
-      alert('An error occured while trying to access the file. \n' + error.message);
+      //alert('An error occured while trying to access the file. \n' + error.message);
     }
   },
 
