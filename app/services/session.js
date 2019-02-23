@@ -1,8 +1,10 @@
-import Service from '@ember/service';
+import Service, {inject as service} from '@ember/service';
 import {computed} from '@ember/object';
 import config from 'adaptone-front/config/environment';
 
 export default Service.extend({
+  fileSystem: service('file-system'),
+
   configuration: computed({
     get() {
       const configuration = localStorage.getItem(config.APP.LOCAL_STORAGE.SESSION_NAMESPACE);
@@ -18,9 +20,8 @@ export default Service.extend({
     }
   }),
 
-  loadFromFile() {
-    // use filesystem service here
-    const configuration = '';
+  loadFromFile(filename) {
+    const configuration = this.get('fileSystem').readFile(filename);
     this.set('configuration', configuration);
   },
 
