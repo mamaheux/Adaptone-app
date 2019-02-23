@@ -18,6 +18,7 @@ module.exports = {
     "requireNode": "on"
   },
   rules: {
+    "indent": [2, 2]
   },
   overrides: [
     // node files

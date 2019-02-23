@@ -1,4 +1,4 @@
-import {assert} from 'chai';
+import {expect, assert} from 'chai';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {setupTest} from 'ember-mocha';
 import sinon from 'sinon';
@@ -12,6 +12,7 @@ describe('Unit | Services | file system', () => {
   let filePathStub;
   let writeFileSyncStub;
   let readFileSyncStub;
+  let deleteFileSyncStub;
 
   beforeEach(function() {
     service = this.subject();
@@ -29,13 +30,22 @@ describe('Unit | Services | file system', () => {
         name: 'Sagati dsa mere'
       };
     });
+
+    deleteFileSyncStub = sinon.stub(fs, 'unlinkSync');
+
+    JSON.parse = sinon.stub().callsFake(() => {
+      return {
+        name: 'Sagati dsa mere'
+      };
+    });
   });
 
   afterEach(() => {
     filePathStub.restore();
     writeFileSyncStub.restore();
     readFileSyncStub.restore();
-  })
+    deleteFileSyncStub.restore();
+  });
 
   describe('writeFile', () => {
     it('should write a file containing the specified data', () => {
@@ -62,7 +72,7 @@ describe('Unit | Services | file system', () => {
         assert(readFileSyncStub.calledOnce);
         assert(filePathStub.calledOnce);
 
-        expect(data).to.equal({
+        expect(data).to.deep.equal({
           name: 'Sagati dsa mere'
         });
       });
@@ -72,7 +82,13 @@ describe('Unit | Services | file system', () => {
   describe('deleteFile', () => {
     describe('when a valid file is specified', () => {
       it('should delete the specified file', () => {
+        const fileName = 'some-file.json';
 
+        service.deleteFile(fileName);
+
+        assert(deleteFileSyncStub.calledOnce);
+        assert(filePathStub.calledOnce);
+        sinon.assert.calledWith(deleteFileSyncStub, `someFake/path/${fileName}`);
       });
     });
   })
