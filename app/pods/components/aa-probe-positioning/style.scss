@@ -1,0 +1,31 @@
+@import "app/styles/variables.scss";
+
+& {
+  padding: 15px 100px;
+}
+
+.positioning-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.positioning-instructions {
+  color: $big-stone;
+  font-family: $title-font-semibold;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.run-initialization-button {
+  color: $big-stone;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: $text-font-semibold;
+  font-size: 18px;
+  text-align: center;
+  padding: 10px 70px;
+  margin-top: 30px;
+}

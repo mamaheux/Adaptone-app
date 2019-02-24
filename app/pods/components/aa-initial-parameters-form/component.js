@@ -5,6 +5,8 @@ import config from 'adaptone-front/config/environment';
 
 export default Component.extend({
   fileSystem: service('file-system'),
+  router: service('router'),
+  session: service('session'),
 
   model: null,
   configurations: null,
@@ -28,6 +30,8 @@ export default Component.extend({
     saveConfig() {
       this.configurations.push(this.model);
       this.get('fileSystem').writeFile(config.APP.CONFIGURATION_FILE.FILENAME, this.configurations);
+      this.get('session').set('configuration', this.model);
+      this.get('router').transitionTo('probe-positioning');
     }
   }
 });
