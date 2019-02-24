@@ -1,0 +1,66 @@
+{{aa-page-header title=(t 'initial-parameters-form.title')}}
+
+<form
+  class="form"
+  {{action "saveConfig" on="submit"}}
+>
+
+  <div class="input-wrapper">
+    <label class="label">
+      {{t 'initial-parameters-form.configuration-name'}}
+    </label>
+
+    {{input
+      class="input"
+      type="text"
+      placeholder=(t 'initial-parameters-form.configuration-name')
+      value=this.model.name
+    }}
+  </div>
+
+  <div class="input-wrapper">
+    <label class="label">
+      {{t 'initial-parameters-form.monitors-number'}}
+    </label>
+
+    {{input
+      class="input"
+      type="number"
+      placeholder=(t 'initial-parameters-form.monitors-number')
+      value=this.model.monitorsNumber
+    }}
+  </div>
+
+  <div class="input-wrapper">
+    <label class="label">
+      {{t 'initial-parameters-form.speakers-number'}}
+    </label>
+
+    {{input
+      class="input"
+      type="number"
+      placeholder=(t 'initial-parameters-form.speakers-number')
+      value=this.model.speakersNumber
+    }}
+  </div>
+
+  <div class="input-wrapper">
+    <label class="label">
+      {{t 'initial-parameters-form.probes-number'}}
+    </label>
+
+    {{input
+      class="input"
+      type="number"
+      placeholder=(t 'initial-parameters-form.probes-number')
+      value=this.model.probesNumber
+    }}
+  </div>
+
+  <button
+    class="save-config-button"
+    type="submit"
+  >
+    {{t 'initial-parameters-form.confirm'}}
+  </button>
+</form>

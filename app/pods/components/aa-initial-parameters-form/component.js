@@ -5,7 +5,8 @@ import config from 'adaptone-front/config/environment';
 
 export default Component.extend({
   fileSystem: service('file-system'),
-  router: service('router'),
+
+  model: null,
   configurations: null,
 
   init() {
@@ -15,18 +16,18 @@ export default Component.extend({
     const configs = result.success ? result.data : [];
 
     this.set('configurations', configs);
+    this.set('model', {
+      name: null,
+      monitorsNumber: null,
+      speakersNumber: null,
+      probesNumber: null
+    });
   },
 
   actions: {
-    addConfig() {
-      this.get('router').transitionTo('initial-parameters');
-    },
-
-    removeConfig(currentConfig) {
-      let configs = this.get('configurations').filter(configuration => configuration !== currentConfig);
-      this.get('fileSystem').writeFile(config.APP.CONFIGURATION_FILE.FILENAME, configs);
-
-      this.set('configurations', configs);
+    saveConfig() {
+      this.configurations.push(this.model);
+      this.get('fileSystem').writeFile(config.APP.CONFIGURATION_FILE.FILENAME, this.configurations);
     }
   }
 });

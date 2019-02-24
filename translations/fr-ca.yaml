@@ -5,3 +5,10 @@ config:
 config-list:
   title: Choisissez une configuration
   new: Nouveau lieu
+initial-parameters-form:
+  title: Paramètres initiaux
+  configuration-name: Nom de la configuration
+  monitors-number: Nombre de moniteurs
+  speakers-number: Nombre de haut-parleurs
+  probes-number: Nombre de sondes
+  confirm: Confirmer
