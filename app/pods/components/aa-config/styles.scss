@@ -1,3 +1,38 @@
+@import "app/styles/variables.scss";
+
+& {
+  margin: 10px 0;
+}
+
 .config-container {
   display: flex;
+}
+
+.select-config {
+  color: #fff;
+  background-color: $blue-ribbon;
+  border: 1px solid $blue-ribbon;
+  border-radius: 5px;
+  font-family: $text-font-regular;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  width: 350px;
+  height: 40px;
+  padding: 0 10px;
+}
+
+.delete-config {
+  color: #000;
+  background-color: $roman;
+  border: 1px solid $roman;
+  border-radius: 5px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
 }

@@ -19,6 +19,9 @@ module.exports = function(environment) {
     },
 
     APP: {
+      CONFIGURATION_FILE: {
+        FILENAME: 'adaptone-configs.json'
+      },
       LOCAL_STORAGE: {
         SESSION_NAMESPACE: 'adaptone-session'
       }

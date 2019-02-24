@@ -25,9 +25,17 @@ export default Service.extend({
   readFile(fileName) {
     try {
       const filePath = this._getFilePath(fileName);
-      return JSON.parse(fs.readFileSync(filePath, FILE_FORMAT));
+      const data = JSON.parse(fs.readFileSync(filePath, FILE_FORMAT));
+
+      return {
+        success: true,
+        data
+      }
     } catch (error) {
-      return 'An error occured while trying to access the file. \n' + error.message;
+      return {
+        success: false,
+        data: 'An error occured while trying to access the file. \n' + error.message
+      };
     }
   },
 

@@ -6,8 +6,11 @@
 
 <div class="configuration-list">
   {{#each configurations as |config|}}
-    {{aa-config config=config}}
+    {{aa-config
+      config=config
+      removeConfig=(action "removeConfig" config)
+    }}
   {{/each}}
 
-  <button class="new-config">{{t 'config-list.new'}}</button>
+  <button {{action "addConfig"}} class="new-config">{{t 'config-list.new'}}</button>
 </div>

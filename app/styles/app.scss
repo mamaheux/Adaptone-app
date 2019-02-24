@@ -1,34 +1,38 @@
 @import "pod-styles";
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
+@import "./variables.scss";
 
-// Mixins
-@mixin font-face($name) {
-  @font-face {
-    font-family: $name;
-    src:  url("fonts/#{$name}.otf") format("opentype"),
-	  url("fonts/#{$name}.ttf") format("truetype");
-  }
+
+html, body {
+  background-color: $mercury;
 }
 
-// Color constants
-$blue-ribbon: #006eee;
-$big-stone: #153244;
-$tangerine: #ee9700;
-$medium-purple: #bd3cda;
-$mercury: #e5e5e5;
-$gallery: #ebebeb;
+.ember-modal-dialog {
+  padding: 15px;
+  font-family: $title-font-regular;
 
-// Fonts
-@include font-face('Montserrat-Regular');
-@include font-face('Montserrat-SemiBold');
-@include font-face('Montserrat-Bold');
-@include font-face('OpenSans-Regular');
-@include font-face('OpenSans-Semibold');
-@include font-face('OpenSans-Bold');
+  .modal-message {
+    font-size: 18px;
+  }
 
-// Font constants
-$title-font-regular: 'Montserrat-Regular';
-$title-font-semibold: 'Montserrat-SemiBold';
-$title-font-bold: 'Montserrat-Bold';
-$text-font-regular: 'OpenSans-Regular';
-$text-font-semibold: 'OpenSans-Semibold';
-$text-font-bold: 'OpenSans-Bold';
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .select-config {
+    color: #000;
+    background-color: #fff;
+    border: 1px solid $blue-ribbon;
+    border-radius: 5px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    text-align: center;
+    width: 100px;
+    height: 40px;
+    margin: 10px 10px;
+    padding: 0 10px;
+  }
+}
