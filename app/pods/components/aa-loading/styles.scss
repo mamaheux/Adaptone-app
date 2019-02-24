@@ -1,14 +1,14 @@
 @import "app/styles/variables.scss";
 
 & {
-  width: 100px;
+  width: 75px;
 }
 
 .spinner {
   display: block;
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   border: 3px solid transparent;
   border-top-color: $blue-ribbon;
