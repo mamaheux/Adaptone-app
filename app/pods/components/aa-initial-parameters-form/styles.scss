@@ -1,0 +1,10 @@
+@import 'app/styles/variables.scss';
+
+.title-wrapper {
+  display: flex;
+}
+
+.title {
+  color: $big-stone;
+  font-family: $title-font-bold;
+}
