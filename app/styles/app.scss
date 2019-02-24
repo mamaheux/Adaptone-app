@@ -1,1 +1,34 @@
 @import "pod-styles";
+
+// Mixins
+@mixin font-face($name) {
+  @font-face {
+    font-family: $name;
+    src:  url("fonts/#{$name}.otf") format("opentype"),
+	  url("fonts/#{$name}.ttf") format("truetype");
+  }
+}
+
+// Color constants
+$blue-ribbon: #006eee;
+$big-stone: #153244;
+$tangerine: #ee9700;
+$medium-purple: #bd3cda;
+$mercury: #e5e5e5;
+$gallery: #ebebeb;
+
+// Fonts
+@include font-face('Montserrat-Regular');
+@include font-face('Montserrat-SemiBold');
+@include font-face('Montserrat-Bold');
+@include font-face('OpenSans-Regular');
+@include font-face('OpenSans-Semibold');
+@include font-face('OpenSans-Bold');
+
+// Font constants
+$title-font-regular: 'Montserrat-Regular';
+$title-font-semibold: 'Montserrat-SemiBold';
+$title-font-bold: 'Montserrat-Bold';
+$text-font-regular: 'OpenSans-Regular';
+$text-font-semibold: 'OpenSans-Semibold';
+$text-font-bold: 'OpenSans-Bold';
