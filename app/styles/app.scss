@@ -1,5 +1,33 @@
 @import "pod-styles";
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
 
 html, body {
   background-color: #e5e5e5;
+}
+
+.ember-modal-dialog {
+  .modal-message {
+    font-size: 18px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .select-config {
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #006eee;
+    border-radius: 5px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    text-align: center;
+    width: 100px;
+    height: 40px;
+    margin: 10px 10px;
+    padding: 0 10px;
+  }
 }

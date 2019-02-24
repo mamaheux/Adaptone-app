@@ -1,3 +1,7 @@
+config:
+  confirmation: Voulez-vous vraiment supprimer cette configuration?
+  yes: Oui
+  no: Non
 config-list:
   title: Choisissez une configuration
   new: Nouveau lieu
