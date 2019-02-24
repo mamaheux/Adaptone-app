@@ -24,7 +24,6 @@ export default Component.extend({
     });
   },
 
-
   actions: {
     saveConfig() {
       this.configurations.push(this.model);
