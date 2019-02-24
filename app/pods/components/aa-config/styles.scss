@@ -1,3 +1,5 @@
+@import "app/styles/variables.scss";
+
 & {
   margin: 10px 0;
 }
@@ -8,12 +10,13 @@
 
 .select-config {
   color: #fff;
-  background-color: #006eee;
-  border: 1px solid #006eee;
+  background-color: $blue-ribbon;
+  border: 1px solid $blue-ribbon;
   border-radius: 5px;
+  font-family: $text-font-regular;
   font-size: 16px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   text-align: center;
   width: 350px;
   height: 40px;
@@ -22,12 +25,12 @@
 
 .delete-config {
   color: #000;
-  background-color: #d9534f;
-  border: 1px solid #d9534f;
+  background-color: $roman;
+  border: 1px solid $roman;
   border-radius: 5px;
   font-size: 16px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   text-align: center;
   width: 40px;
   height: 40px;
