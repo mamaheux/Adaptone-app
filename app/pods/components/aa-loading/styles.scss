@@ -1,0 +1,51 @@
+@import "app/styles/variables.scss";
+
+& {
+  width: 75px;
+}
+
+.spinner {
+  display: block;
+  position: relative;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: $blue-ribbon;
+  animation: spin 2s linear infinite;
+}
+
+.spinner::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: $big-stone;
+  animation: spin 3s linear infinite;
+}
+
+.spinner::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: $tangerine;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

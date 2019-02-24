@@ -12,6 +12,9 @@ initial-parameters-form:
   speakers-number: Nombre de haut-parleurs
   probes-number: Nombre de sondes
   confirm: Confirmer
+probe-initialization:
+  title: Routine d'initialization
+  description: Détermination de la position des sondes...
 probe-positioning:
   instructions: Veuillez placer les haut-parleurs et les sondes de façon uniforme dans la zone désirée, puis lancez la routine d'initialisation
   run: Lancer la routine d'initialisation
