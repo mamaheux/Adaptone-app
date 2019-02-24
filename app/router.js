@@ -9,6 +9,7 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('configs');
   this.route('initial-parameters');
+  this.route('probe-positioning');
 });
 
 export default Router;
