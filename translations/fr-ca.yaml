@@ -12,3 +12,6 @@ initial-parameters-form:
   speakers-number: Nombre de haut-parleurs
   probes-number: Nombre de sondes
   confirm: Confirmer
+probe-initialization:
+  title: Routine d'initialization
+  description: Détermination de la position des sondes...
