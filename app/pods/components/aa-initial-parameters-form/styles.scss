@@ -1,10 +1,56 @@
-@import 'app/styles/variables.scss';
+@import "app/styles/variables.scss";
 
-.title-wrapper {
-  display: flex;
+& {
+  padding: 45px 100px;
 }
 
-.title {
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: #fff;
   color: $big-stone;
-  font-family: $title-font-bold;
+  font-family: $text-font-light;
+  font-size: 14px;
+  border: 1.25px solid $big-stone;
+  margin-bottom: 25px;
+  width: 400px;
+
+  &::placeholder {
+    color: $mercury;
+  }
+
+  &:hover,
+  &:focus {
+    border-color: $tangerine;
+  }
+}
+
+.label {
+  font-family: $text-font-semibold;
+  font-size: 16px;
+  color: $big-stone;
+  margin-bottom: 10px;
+}
+
+.save-config-button {
+  color: $big-stone;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-family: $text-font-semibold;
+  font-size: 18px;
+  text-align: center;
+  padding: 10px 70px;
+  margin-top: 10px;
 }

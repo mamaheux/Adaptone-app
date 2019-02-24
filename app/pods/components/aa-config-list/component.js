@@ -5,6 +5,7 @@ import config from 'adaptone-front/config/environment';
 
 export default Component.extend({
   fileSystem: service('file-system'),
+  router: service('router'),
   configurations: null,
 
   init() {
@@ -18,7 +19,7 @@ export default Component.extend({
 
   actions: {
     addConfig() {
-      // Transition to config creation page
+      this.get('router').transitionTo('initial-parameters');
     },
 
     removeConfig(currentConfig) {

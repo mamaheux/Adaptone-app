@@ -1,0 +1,17 @@
+@import 'app/styles/variables.scss';
+
+.title-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 50px;
+  margin-right: 5px;
+}
+
+.title {
+  color: $big-stone;
+  font-family: $title-font-bold;
+  font-size: 48px;
+}
