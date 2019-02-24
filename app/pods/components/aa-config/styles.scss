@@ -1,3 +1,35 @@
+& {
+  margin: 10px 0;
+}
+
 .config-container {
   display: flex;
+}
+
+.select-config {
+  color: #fff;
+  background-color: #006eee;
+  border: 1px solid #006eee;
+  border-radius: 5px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  text-align: center;
+  width: 350px;
+  height: 40px;
+  padding: 0 10px;
+}
+
+.delete-config {
+  color: #000;
+  background-color: #d9534f;
+  border: 1px solid #d9534f;
+  border-radius: 5px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
 }

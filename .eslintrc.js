@@ -14,7 +14,11 @@ module.exports = {
   env: {
     browser: true
   },
+  globals: {
+    "requireNode": "on"
+  },
   rules: {
+    "indent": [2, 2]
   },
   overrides: [
     // node files
