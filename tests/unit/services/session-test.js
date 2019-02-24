@@ -5,9 +5,7 @@ import {setupTest} from 'ember-mocha';
 import config from 'adaptone-front/config/environment';
 
 describe('Unit | Services | session', () => {
-  setupTest('service:session', {
-    // needs: ['service:filesystem']
-  });
+  setupTest('service:session');
 
   let service;
   const configuration = {

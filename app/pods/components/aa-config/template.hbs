@@ -1,4 +1,22 @@
 <div class="config-container">
   <button class="select-config">{{config.name}}</button>
-  <button class="delete-config">X</button>
+  <button {{action "toggleModal"}} class="delete-config">X</button>
 </div>
+
+{{#if isShowingModal}}
+  {{#modal-dialog
+    onClose=(action "toggleModal")
+    targetAttachment="center"
+    translucentOverlay=true
+    class="modal-dialog"
+  }}
+    <div class="modal-message">
+      {{t "config.confirmation"}}
+    </div>
+
+    <div class="button-container">
+      <button onClick={{removeConfig}} class="select-config">{{t "config.yes"}}</button>
+      <button {{action "toggleModal"}} class="select-config">{{t "config.no"}}</button>
+    </div>
+  {{/modal-dialog}}
+{{/if}}
