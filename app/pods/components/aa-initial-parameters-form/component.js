@@ -7,10 +7,15 @@ export default Component.extend({
   fileSystem: service('file-system'),
 
   model: null,
+  configurations: null,
 
   init() {
     this._super(...arguments);
 
+    const result = this.get('fileSystem').readFile(config.APP.CONFIGURATION_FILE.FILENAME);
+    const configs = result.success ? result.data : [];
+
+    this.set('configurations', configs);
     this.set('model', {
       name: null,
       monitorsNumber: null,
@@ -22,7 +27,8 @@ export default Component.extend({
 
   actions: {
     saveConfig() {
-      this.get('fileSystem').writeFile(config.APP.CONFIGURATION_FILE.FILENAME, this.model);
+      this.configurations.push(this.model);
+      this.get('fileSystem').writeFile(config.APP.CONFIGURATION_FILE.FILENAME, this.configurations);
     }
   }
 });
