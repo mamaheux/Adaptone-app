@@ -8,6 +8,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('configs');
+  this.route('console-loading');
   this.route('initial-parameters');
   this.route('optimization');
   this.route('probe-initialization');

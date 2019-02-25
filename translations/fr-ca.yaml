@@ -12,6 +12,9 @@ config:
 config-list:
   title: Choisissez une configuration
   new: Nouveau lieu
+console-loading:
+  title: Initialisation complétée
+  description: Chargement de la console de mixage en cours...
 initial-parameters-form:
   title: Paramètres initiaux
   configuration-name: Nom de la configuration

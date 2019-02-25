@@ -1,0 +1,37 @@
+@import "app/styles/variables.scss";
+
+& {
+  padding: 15px 100px;
+}
+
+.title-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.checkmark-icon {
+  width: 48px;
+  height: auto;
+  margin-left: 10px;
+  fill: $big-stone;
+}
+
+.title {
+  color: $big-stone;
+  font-family: $title-font-bold;
+  font-size: 48px;
+}
+
+.console-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.console-loading-instructions {
+  color: $big-stone;
+  font-family: $title-font-semibold;
+  font-size: 18px;
+  text-align: center;
+  margin: 80px 0 40px;
+}
