@@ -1,3 +1,10 @@
+breadcrumb:
+  parameters: Paramètres initiaux
+  placement: Placement des sondes
+  initialization: Routine d'initialisation
+  confirmation: Confirmation
+  optimization: Optimisation
+  end: Fin
 config:
   confirmation: Voulez-vous vraiment supprimer cette configuration?
   yes: Oui

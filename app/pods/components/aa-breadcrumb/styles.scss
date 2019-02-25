@@ -1,0 +1,71 @@
+@import "app/styles/variables.scss";
+
+& {
+  position: fixed;
+  left: calc(50% - 390px);
+  bottom: 80px;
+  border: 1px solid $big-stone;
+  background-color: $big-stone;
+}
+
+.breadcrumb {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  font-family: $text-font-regular;
+  font-size: 13px;
+
+  li {
+    float: left;
+    color: #929292;
+    width: 70px;
+    min-height: 36px;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 10px 10px 50px;
+    background: #fff;
+    position: relative;
+    display: block;
+
+    &.active {
+      color: #fff;
+      background-color: $blue-ribbon;
+
+      &::after {
+        border-left: 30px solid $blue-ribbon;
+      }
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 50px solid transparent;
+      border-bottom: 50px solid transparent;
+      border-left: 30px solid #fff;
+      position: absolute;
+      top: 50%;
+      margin-top: -50px;
+      left: 100%;
+      z-index: 2;
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 50px solid transparent;
+      border-bottom: 50px solid transparent;
+      border-left: 30px solid $big-stone;
+      position: absolute;
+      top: 50%;
+      margin-top: -50px;
+      margin-left: 1px;
+      left: 100%;
+      z-index: 1;
+    }
+  }
+}
