@@ -1,0 +1,17 @@
+<div class="canvas-wrapper">
+  <canvas class="canvas"></canvas>
+  <div class="overlay">
+    {{#each this.micPositions as |micPosition|}}
+      <div style={{micPosition.style}}>
+       {{inline-svg "assets/images/microphone-icon.svg" class="microphone"}}
+      </div>
+    {{/each}}
+
+    {{#each this.speakerPositions as |speakerPosition|}}
+    {{log speakerPosition.style}}
+      <div style={{speakerPosition.style}}>
+       {{inline-svg "assets/images/speaker-icon.svg" class="speaker"}}
+      </div>
+    {{/each}}
+  </div>
+</div>

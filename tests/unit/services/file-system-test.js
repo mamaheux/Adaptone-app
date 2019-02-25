@@ -67,12 +67,12 @@ describe('Unit | Services | file system', () => {
       it('should return the data that the file contains', () => {
         const fileName = 'some-file.json';
 
-        const data = service.readFile(fileName);
+        const response = service.readFile(fileName);
 
         assert(readFileSyncStub.calledOnce);
         assert(filePathStub.calledOnce);
 
-        expect(data).to.deep.equal({
+        expect(response.data).to.deep.equal({
           name: 'Sagati dsa mere'
         });
       });

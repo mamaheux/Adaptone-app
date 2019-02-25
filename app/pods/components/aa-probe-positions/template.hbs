@@ -1,0 +1,22 @@
+{{aa-page-header title=(t 'probe-positions.title')}}
+
+<div class="map">
+  {{aa-positions-map positions=this.positions}}
+</div>
+
+<div class="buttons-wrapper">
+  <button
+    class="button rerun-initialization-button"
+    onClick={{action "rerunInitialization"}}
+  >
+    {{inline-svg "assets/images/replay-icon.svg" class="replay-icon"}}
+    {{t 'probe-positions.rerun'}}
+  </button>
+
+  <button
+    class="button confirm-button"
+    onClick={{action "confirmPositions"}}
+  >
+    {{t 'probe-positions.confirm'}}
+  </button>
+</div>
