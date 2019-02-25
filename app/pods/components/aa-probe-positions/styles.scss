@@ -1,0 +1,55 @@
+@import "app/styles/variables.scss";
+
+& {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.map {
+  width: 100%;
+  height: 400px;
+  background-color: $wild-sand;
+}
+
+.buttons-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: 55px;
+}
+
+.button-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.replay-icon {
+  width: 30px;
+  margin-right: 10px;
+  fill: #fff;
+}
+
+.button {
+  border: none;
+  border-radius: 5px;
+  font-family: $text-font-semibold;
+  font-size: 16px;
+  text-align: center;
+  padding: 10px 40px 10px 30px;
+  min-width: 350px;
+}
+
+.rerun-initialization-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #fff;
+  background-color: $blue-ribbon;
+  margin-right: 30px;
+}
+
+.confirm-button {
+  color: $big-stone;
+  background-color: #fff;
+}

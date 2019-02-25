@@ -19,6 +19,9 @@
 }
 
 .run-initialization-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   color: $big-stone;
   background-color: #fff;
   border: none;
@@ -26,6 +29,12 @@
   font-family: $text-font-semibold;
   font-size: 18px;
   text-align: center;
-  padding: 10px 70px;
+  padding: 10px 30px 10px 60px;
   margin-top: 30px;
+}
+
+.arrow-icon {
+  fill: $big-stone;
+  margin-left: 10px;
+  transform: rotate(180deg);
 }
