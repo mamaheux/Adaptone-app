@@ -33,9 +33,7 @@ export default Component.extend({
   }),
 
   _adjustPositions(canvas) {
-    const maxima = this.get('maxima');
-    const micPositions = this.get('micPositions');
-    const speakerPositions = this.get('speakerPositions');
+    const {maxima, micPositions, speakerPositions} = this.getProperties('maxima', 'micPositions', 'speakerPositions');
 
     const widthRatio = (canvas.clientWidth - CANVAS_PADDING) / (maxima.biggestX);
     const heightRatio = (canvas.clientHeight - CANVAS_PADDING) / (maxima.biggestY);
