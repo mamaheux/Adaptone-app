@@ -1,0 +1,55 @@
+@import "app/styles/variables.scss";
+
+& {
+  padding: 15px 100px;
+}
+
+.optimization-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.optimization-instructions {
+  color: $big-stone;
+  font-family: $title-font-semibold;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.optimization-button {
+  width: 250px;
+  border: none;
+  border-radius: 5px;
+  font-family: $text-font-semibold;
+  font-size: 18px;
+  text-align: center;
+  padding: 10px 70px;
+  margin-top: 30px;
+
+  &.yes {
+    color: $big-stone;
+    background-color: #fff;
+  }
+
+  &.no {
+    color: #fff;
+    background-color: $blue-ribbon;
+    margin-right: 40px;
+  }
+}
+
+.optimization-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.optimizing {
+  color: $big-stone;
+  font-family: $title-font-semibold;
+  font-size: 18px;
+  text-align: center;
+  margin: 80px 0 40px;
+}

@@ -1,0 +1,30 @@
+{{aa-page-header title=(t 'optimization.title')}}
+
+<div class="optimization-container">
+  {{#if isOptimizing}}
+    <div class="optimization-container">
+      <div class="optimizing">
+        {{t 'optimization.optimizing'}}
+      </div>
+
+      {{aa-loading}}
+    </div>
+  {{else}}
+    <div class="optimization-instructions">
+      {{t 'optimization.prompt'}}
+    </div>
+
+    <div class="button-container">
+      <button class="optimization-button no">
+        {{t 'optimization.no'}}
+      </button>
+
+      <button
+        class="optimization-button yes"
+        onClick={{action "startOptimization"}}
+      >
+        {{t 'optimization.yes'}}
+      </button>
+    </div>
+  {{/if}}
+</div>
