@@ -12,6 +12,12 @@ initial-parameters-form:
   speakers-number: Nombre de haut-parleurs
   probes-number: Nombre de sondes
   confirm: Confirmer
+optimization:
+  no: Non
+  optimizing: Optimisation en cours...
+  prompt: Désirez-vous optimiser les emplacements des haut-parleurs et des sondes?
+  title: Optimisation
+  yes: Oui
 probe-initialization:
   title: Routine d'initialisation
   description: Détermination de la position des sondes...
