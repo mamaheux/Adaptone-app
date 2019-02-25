@@ -32,8 +32,8 @@ app.on('ready', () => {
   // const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
   // mainWindow = new BrowserWindow({width, height});
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600
+    width: 1064,
+    height: 768
   });
 
   // If you want to open up dev tools programmatically, call
