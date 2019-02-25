@@ -2,8 +2,8 @@
 
 & {
   position: fixed;
-  left: calc(50% - 390px);
-  bottom: 80px;
+  left: calc(50% - 410px);
+  bottom: 40px;
   border: 1px solid $big-stone;
   background-color: $big-stone;
 }
@@ -19,7 +19,7 @@
   li {
     float: left;
     color: #929292;
-    width: 70px;
+    width: 75px;
     min-height: 36px;
     text-align: center;
     text-decoration: none;

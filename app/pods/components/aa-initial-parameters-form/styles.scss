@@ -1,7 +1,7 @@
 @import "app/styles/variables.scss";
 
 & {
-  padding: 45px 100px;
+  padding: 15px 100px;
 }
 
 .form {
@@ -23,7 +23,7 @@
   font-family: $text-font-light;
   font-size: 14px;
   border: 1.25px solid $big-stone;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   width: 400px;
 
   &::placeholder {
