@@ -16,8 +16,8 @@ export default Component.extend({
 
     const canvas = this.element.querySelector('canvas');
 
-    this.set('micPositions', this.get('positions').filter(position => position.type === MIC_TYPE));
-    this.set('speakerPositions', this.get('positions').filter(position => position.type === SPEAKER_TYPE));
+    this._setMicPositions();
+    this._setSpeakerPositions();
 
     this._adjustPositions(canvas);
   },
@@ -55,4 +55,12 @@ export default Component.extend({
     this.set('micPositions', micPositions);
     this.set('speakerPositions', speakerPositions);
   },
+
+  _setMicPositions() {
+    this.set('micPositions', this.get('positions').filter(position => position.type === MIC_TYPE));
+  },
+
+  _setSpeakerPositions() {
+    this.set('speakerPositions', this.get('positions').filter(position => position.type === SPEAKER_TYPE));
+  }
 });

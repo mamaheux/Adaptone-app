@@ -1,8 +1,6 @@
 import Component from '@ember/component';
 import {inject as service} from '@ember/service';
 
-import config from 'adaptone-front/config/environment';
-
 export default Component.extend({
   router: service('router'),
   fileSystem: service('file-system'),
@@ -58,9 +56,7 @@ export default Component.extend({
     },
 
     confirmPositions() {
-      const currentConfig = this.get('session');
-
-      this.get('fileSystem').writeFile(config.APP.CONFIGURATION_FILE.FILENAME, currentConfig);
+      this.get('router').transitionTo('optimization');
     }
   }
 });
