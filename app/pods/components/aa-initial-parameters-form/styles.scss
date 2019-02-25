@@ -44,6 +44,9 @@
 }
 
 .save-config-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   color: $big-stone;
   background-color: #fff;
   border: none;
@@ -51,6 +54,12 @@
   font-family: $text-font-semibold;
   font-size: 18px;
   text-align: center;
-  padding: 10px 70px;
+  padding: 10px 40px 10px 60px;
   margin-top: 10px;
+}
+
+.arrow-icon {
+  fill: $big-stone;
+  transform: rotate(180deg);
+  margin-left: 15px;
 }
