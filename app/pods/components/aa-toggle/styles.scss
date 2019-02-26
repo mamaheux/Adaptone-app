@@ -40,7 +40,7 @@ input[type='checkbox'] {
   height: $height * 1.4;
   width: $height * 1.4;
   border-radius: 50%;
-  background: white;
+  background: $blue-ribbon;
   position: absolute;
   top: ($height * 1.4 - $height) / -2;
   left: ($height * 1.4 - $height) / -2;
