@@ -1,6 +1,6 @@
 {{ui-slider
   value=value
-  min=minx
+  min=min
   max=max
   step=1
   orientation='vertical'
@@ -14,7 +14,9 @@
 
 {{#if showValue}}
   <div class="value-container">
-    <div class="value-text">{{valueTitle}}</div>
+    <div class="value-text">
+      {{valueTitle}}
+    </div>
     <div class="value-separator"></div>
     <div class="value-text">{{value}}</div>
   </div>
