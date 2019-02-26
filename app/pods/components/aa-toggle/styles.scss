@@ -1,0 +1,58 @@
+@import "app/styles/variables.scss";
+
+& {
+  display: flex;
+  color: $big-stone;
+  font-family: $text-font-semibold;
+  font-size: 22px;
+}
+
+$width: 40px;
+$height: $width / 2.5;
+
+input[type='checkbox'] {
+  display: none;
+
+  &:checked ~ .toggle {
+    background: $blue-ribbon;
+    left: ($width - ($height * 1.4 - $height) / 2) - $height;
+    transition: 0.3s;
+  }
+
+  &:checked ~ .switch {
+    background: $big-stone;
+    transition: 0.3s;
+  }
+}
+
+.switch {
+  display: block;
+  width: $width;
+  height: $height;
+  background: $big-stone;
+  border-radius: $height / 2;
+  position: absolute;
+  top: 0;
+  transition: 0.3s;
+}
+
+.toggle {
+  height: $height * 1.4;
+  width: $height * 1.4;
+  border-radius: 50%;
+  background: $blue-ribbon;
+  position: absolute;
+  top: ($height * 1.4 - $height) / -2;
+  left: ($height * 1.4 - $height) / -2;
+  box-shadow: 0 $width / 50 $width / 25 rgba(black, .4);
+  transition: 0.3s;
+}
+
+.card {
+  display: inline-block;
+  margin: (($height * 1.4 - $height) / 2) + 5px;
+  width: $width;
+  height: $height;
+  text-align: center;
+  position: relative;
+}
