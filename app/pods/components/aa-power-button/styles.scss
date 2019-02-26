@@ -29,7 +29,7 @@
 
 .button-wrapper {
   &.active {
-    > .power-off-icon {
+    >.power-off-icon {
       fill: $blue-ribbon;
     }
   }
