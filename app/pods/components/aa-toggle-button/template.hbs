@@ -1,0 +1,12 @@
+<button
+  class="button {{if this.isActive "active"}}"
+  onClick={{action "toggleActive"}}
+>
+  {{#if this.text}}
+    {{this.text}}
+  {{/if}}
+
+  {{#if this.icon}}
+    {{inline-svg this.icon class="icon"}}
+  {{/if}}
+</button>
