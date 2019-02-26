@@ -1,0 +1,15 @@
+<div class="text-wrapper">
+  <p class="text {{if this.isOn "active"}}">
+    {{t 'power-button.on'}}
+  </p>
+
+  <p class="text">
+    {{t 'power-button.off'}}
+  </p>
+</div>
+
+<div
+  class="button-wrapper {{if this.isOn "active"}}"
+  onClick={{action "togglePower"}}>
+  {{inline-svg "assets/images/power-off-icon.svg" class="power-off-icon"}}
+</div>
