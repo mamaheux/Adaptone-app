@@ -5,7 +5,7 @@ export default Component.extend({
 
   actions: {
     togglePower() {
-      this.set('isOn', !this.get('isOn'));
+      this.toggleProperty('isOn');
     }
   }
 });
