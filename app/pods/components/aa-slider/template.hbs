@@ -1,0 +1,23 @@
+{{ui-slider
+  value=value
+  min=min
+  max=max
+  step=1
+  orientation='vertical'
+  tooltip='hide'
+  disabled=false
+  reversed=true
+  focus=false
+  naturalArrowKeys=false
+  immediateResponse=false
+}}
+
+{{#if showValue}}
+  <div class="value-container">
+    <div class="value-text">
+      {{valueTitle}}
+    </div>
+    <div class="value-separator"></div>
+    <div class="value-text">{{value}}</div>
+  </div>
+{{/if}}

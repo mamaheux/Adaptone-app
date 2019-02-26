@@ -43,3 +43,6 @@ optimal-positions:
   title: Positions optimales
   rerun: Relancer la routine d'optimisation
   confirm: Confirmer
+power-button:
+  on: On
+  off: Off
