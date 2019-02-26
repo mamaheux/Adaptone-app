@@ -14,6 +14,7 @@ Router.map(function() {
   this.route('probe-initialization');
   this.route('probe-positioning');
   this.route('probe-positions');
+  this.route('optimal-positions');
 });
 
 export default Router;

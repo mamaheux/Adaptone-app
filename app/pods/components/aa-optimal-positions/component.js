@@ -9,11 +9,11 @@ export default Component.extend({
 
   actions: {
     rerunInitialization() {
-      this.get('router').transitionTo('probe-initialization');
+      this.get('router').transitionTo('optimization');
     },
 
     confirmPositions() {
-      this.get('router').transitionTo('optimization');
+      this.get('router').transitionTo('console-loading');
     }
   }
 });

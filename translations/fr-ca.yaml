@@ -39,3 +39,7 @@ probe-positions:
   title: Confirmation des positions
   rerun: Relancer la routine d'initialisation
   confirm: Confirmer
+optimal-positions:
+  title: Positions optimales
+  rerun: Relancer la routine d'optimisation
+  confirm: Confirmer
