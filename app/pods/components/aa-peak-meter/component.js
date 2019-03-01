@@ -49,7 +49,7 @@ export default Component.extend({
   renderPeakMeter(value = this.get('value')) {
     const meterValue = {
       currentValue: value,
-      peak: this.updatePeakValue(this.get('meterElements').peakParameters, value)
+      peak: this.updatePeak(this.get('meterElements').peakParameters, value)
     };
 
     this.drawPeakMeter(meterValue);
@@ -73,32 +73,32 @@ export default Component.extend({
     }
 
     if (value > this.get('redLimit')) {
-        dom.red.style.width = this.formatValue(value - this.get('redLimit'));
+      dom.red.style.width = this.formatValue(value - this.get('redLimit'));
     } else {
-        dom.red.style.width = 0;
+      dom.red.style.width = 0;
     }
 
     dom.peak.style.left = this.formatValue(peak - dom.peak.style.width);
   },
 
-  updatePeakValue(peak, value) {
+  updatePeak(peak, value) {
     let now = (new Date()).getTime();
 
     if (value > peak.value) {
-        peak.value = value;
-        peak.lastTime = now;
-        peak.falling = null;
+      peak.value = value;
+      peak.lastTime = now;
+      peak.falling = null;
     } else if (now > peak.lastTime + peak.delay) {
-        if (peak.falling === null) {
-            peak.falling = {
-                startTime: now,
-                from: peak.value,
-                to: value
-            };
-        }
+      if (peak.falling === null) {
+        peak.falling = {
+          startTime: now,
+          from: peak.value,
+          to: value
+        };
+      }
 
-        let fallRatio = Math.min(1, (now - peak.falling.startTime) / peak.fallDuration);
-        peak.value = peak.falling.from - (peak.falling.from - peak.falling.to) * fallRatio;
+      let fallRatio = Math.min(1, (now - peak.falling.startTime) / peak.fallDuration);
+      peak.value = peak.falling.from - (peak.falling.from - peak.falling.to) * fallRatio;
     }
 
     return peak;
@@ -106,11 +106,11 @@ export default Component.extend({
 
   normalize(value) {
     if (value > this.get('max')) {
-        return this.get('max');
+      return this.get('max');
     } else if (value < this.get('min') || isNaN(value)) {
-        return this.get('min');
+      return this.get('min');
     } else {
-        return (value - this.get('min') / this.get('max') - this.get('min'));
+      return value;
     }
   },
 
@@ -118,4 +118,4 @@ export default Component.extend({
     let ratio = this.get('meterElements').size / this.get('max');
     return `${Math.round(value*ratio)}px`
   }
- });
+});
