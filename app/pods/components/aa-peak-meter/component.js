@@ -56,28 +56,32 @@ export default Component.extend({
   },
 
   drawPeakMeter(meterValue) {
-    let peak = this.normalize(meterValue.peak.value);
+    const {
+      meterElements,
+      yellowLimit,
+      redLimit
+    } = this.getProperties('meterElements', 'yellowLimit', 'redLimit');
 
     let value = meterValue.currentValue;
-
     value = this.normalize(value);
 
-    let dom = this.get('meterElements');
+    let dom = meterElements;
 
     dom.green.style.width = this.formatValue(value);
 
-    if (value > this.get('yellowLimit')) {
-      dom.yellow.style.width = this.formatValue(value - this.get('yellowLimit'));
+    if (value > yellowLimit) {
+      dom.yellow.style.width = this.formatValue(value - yellowLimit);
     } else {
       dom.yellow.style.width = 0;
     }
 
-    if (value > this.get('redLimit')) {
-      dom.red.style.width = this.formatValue(value - this.get('redLimit'));
+    if (value > redLimit) {
+      dom.red.style.width = this.formatValue(value - redLimit);
     } else {
       dom.red.style.width = 0;
     }
 
+    const peak = this.normalize(meterValue.peak.value);
     dom.peak.style.left = this.formatValue(peak - dom.peak.style.width);
   },
 
@@ -105,17 +109,19 @@ export default Component.extend({
   },
 
   normalize(value) {
-    if (value > this.get('max')) {
-      return this.get('max');
-    } else if (value < this.get('min') || isNaN(value)) {
-      return this.get('min');
+    const {max, min} = this.getProperties('max', 'min');
+
+    if (value > max) {
+      return max;
+    } else if (value < min || isNaN(value)) {
+      return min;
     } else {
       return value;
     }
   },
 
   formatValue(value) {
-    let ratio = this.get('meterElements').size / this.get('max');
+    const ratio = this.get('meterElements').size / this.get('max');
     return `${Math.round(value*ratio)}px`
   }
 });
