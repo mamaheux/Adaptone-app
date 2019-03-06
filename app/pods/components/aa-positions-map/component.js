@@ -1,5 +1,6 @@
 import Component from '@ember/component';
-import {computed} from '@ember/object';
+import {computed, set} from '@ember/object';
+import {htmlSafe} from '@ember/template'
 
 // Constants
 const MIC_TYPE = 'm';
@@ -41,18 +42,18 @@ export default Component.extend({
     micPositions.forEach((micPosition, i) => {
       const currentMicPosition = micPositions.objectAt(i);
 
-      Ember.set(currentMicPosition, 'x', Math.round(micPosition.x * widthRatio));
-      Ember.set(currentMicPosition, 'y', Math.round(micPosition.y * heightRatio));
-      Ember.set(currentMicPosition, 'value', micPosition.value);
-      Ember.set(currentMicPosition, 'style', `position:absolute;top:${micPosition.y}px;left:${micPosition.x}px`);
+      set(currentMicPosition, 'x', Math.round(micPosition.x * widthRatio));
+      set(currentMicPosition, 'y', Math.round(micPosition.y * heightRatio));
+      set(currentMicPosition, 'value', micPosition.value);
+      set(currentMicPosition, 'style', htmlSafe(`position:absolute;top:${micPosition.y}px;left:${micPosition.x}px`));
     });
 
     speakerPositions.forEach((speakerPosition, i) => {
       const currentSpeakerPosition = speakerPositions.objectAt(i);
 
-      Ember.set(currentSpeakerPosition, 'x', Math.round(speakerPosition.x * widthRatio));
-      Ember.set(currentSpeakerPosition, 'y', Math.round(speakerPosition.y * heightRatio));
-      Ember.set(currentSpeakerPosition, 'style', `position:absolute;top:${speakerPosition.y}px;left:${speakerPosition.x}px`);
+      set(currentSpeakerPosition, 'x', Math.round(speakerPosition.x * widthRatio));
+      set(currentSpeakerPosition, 'y', Math.round(speakerPosition.y * heightRatio));
+      set(currentSpeakerPosition, 'style', htmlSafe(`position:absolute;top:${speakerPosition.y}px;left:${speakerPosition.x}px`));
     });
   },
 
