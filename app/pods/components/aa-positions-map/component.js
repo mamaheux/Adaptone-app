@@ -39,19 +39,21 @@ export default Component.extend({
     const heightRatio = (canvas.clientHeight - CANVAS_PADDING) / (maxima.biggestY);
 
     micPositions.forEach((micPosition, i) => {
-      micPositions[i].x = Math.round(micPosition.x * widthRatio);
-      micPositions[i].y = Math.round(micPosition.y * heightRatio);
-      micPositions[i].style = `position:absolute;top:${micPosition.y}px;left:${micPosition.x}px`;
+      const currentMicPosition = micPositions.objectAt(i);
+
+      Ember.set(currentMicPosition, 'x', Math.round(micPosition.x * widthRatio));
+      Ember.set(currentMicPosition, 'y', Math.round(micPosition.y * heightRatio));
+      Ember.set(currentMicPosition, 'value', micPosition.value);
+      Ember.set(currentMicPosition, 'style', `position:absolute;top:${micPosition.y}px;left:${micPosition.x}px`);
     });
 
     speakerPositions.forEach((speakerPosition, i) => {
-      speakerPositions[i].x = Math.round(speakerPosition.x * widthRatio);
-      speakerPositions[i].y = Math.round(speakerPosition.y * heightRatio);
-      speakerPositions[i].style = `position:absolute;top:${speakerPosition.y}px;left:${speakerPosition.x}px`;
-    });
+      const currentSpeakerPosition = speakerPositions.objectAt(i);
 
-    this.set('micPositions', micPositions);
-    this.set('speakerPositions', speakerPositions);
+      Ember.set(currentSpeakerPosition, 'x', Math.round(speakerPosition.x * widthRatio));
+      Ember.set(currentSpeakerPosition, 'y', Math.round(speakerPosition.y * heightRatio));
+      Ember.set(currentSpeakerPosition, 'style', `position:absolute;top:${speakerPosition.y}px;left:${speakerPosition.x}px`);
+    });
   },
 
   setMicPositions() {
