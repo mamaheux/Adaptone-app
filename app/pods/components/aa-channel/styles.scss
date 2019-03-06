@@ -1,0 +1,28 @@
+@import 'app/styles/variables.scss';
+
+& {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.buttons-wrapper {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+}
+
+.button-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  border: 1px solid $big-stone;
+  border-radius: 5px;
+  font-family: $text-font-semibold;
+  font-size: 16px;
+  text-align: center;
+  padding: 10px 40px;
+  min-width: 20px;
+}
