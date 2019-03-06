@@ -16,10 +16,10 @@ export default Component.extend({
 
     const canvas = this.element.querySelector('canvas');
 
-    this._setMicPositions();
-    this._setSpeakerPositions();
+    this.setMicPositions();
+    this.setSpeakerPositions();
 
-    this._adjustPositions(canvas);
+    this.adjustPositions(canvas);
   },
 
   maxima: computed('positions', function() {
@@ -32,7 +32,7 @@ export default Component.extend({
     return {biggestX, biggestY};
   }),
 
-  _adjustPositions(canvas) {
+  adjustPositions(canvas) {
     const {maxima, micPositions, speakerPositions} = this.getProperties('maxima', 'micPositions', 'speakerPositions');
 
     const widthRatio = (canvas.clientWidth - CANVAS_PADDING) / (maxima.biggestX);
@@ -54,11 +54,11 @@ export default Component.extend({
     this.set('speakerPositions', speakerPositions);
   },
 
-  _setMicPositions() {
+  setMicPositions() {
     this.set('micPositions', this.get('positions').filter(position => position.type === MIC_TYPE));
   },
 
-  _setSpeakerPositions() {
+  setSpeakerPositions() {
     this.set('speakerPositions', this.get('positions').filter(position => position.type === SPEAKER_TYPE));
   }
 });

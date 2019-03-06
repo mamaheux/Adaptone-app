@@ -42,10 +42,10 @@ describe('Unit | Component | aa-positions-map', function() {
       });
     });
 
-    describe('private functions', () => {
+    describe('functions', () => {
       describe('setMicPositions', () => {
         it('should properly set the mic positions', () => {
-          component._setMicPositions();
+          component.setMicPositions();
 
           expect(component.get('micPositions').length).to.equal(2);
           expect(component.get('micPositions')).to.deep.equal([
@@ -65,7 +65,7 @@ describe('Unit | Component | aa-positions-map', function() {
 
       describe('setSpeakerPositions', () => {
         it('should properly set the mic positions', () => {
-          component._setSpeakerPositions();
+          component.setSpeakerPositions();
 
           expect(component.get('speakerPositions').length).to.equal(1);
           expect(component.get('speakerPositions')).to.deep.equal([
@@ -109,9 +109,9 @@ describe('Unit | Component | aa-positions-map', function() {
             clientHeight: 202
           };
 
-          component._setMicPositions();
-          component._setSpeakerPositions();
-          component._adjustPositions(canvas);
+          component.setMicPositions();
+          component.setSpeakerPositions();
+          component.adjustPositions(canvas);
 
           expect(component.get('micPositions')).to.deep.equal(expectedMicPositions);
           expect(component.get('speakerPositions')).to.deep.equal(expectedSpeakerPositions);
