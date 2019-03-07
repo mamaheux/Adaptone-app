@@ -16,6 +16,8 @@ export default Component.extend({
     this._super(...arguments);
 
     const canvas = this.element.querySelector('canvas');
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
 
     this.setMicPositions();
     this.setSpeakerPositions();
