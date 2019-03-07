@@ -9,8 +9,13 @@ const STEPS = 35;
 
 export default Component.extend(RecognizerMixin, {
   recognizers: 'pan',
-  value: 16,
+  value: 0,
   lastDragValue: 0,
+
+  init() {
+    this._super(...arguments);
+    this.set('value', this.get('min'));
+  },
 
   degreesValue: computed('value', function() {
     const {
