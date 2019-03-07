@@ -24,7 +24,7 @@ export default PositionsMap.extend({
     const micPositions = this.get('micPositions');
     const config = {
       container: canvasWrapper,
-      backgroundColor: '#00ee7f',
+      backgroundColor: GREEN_GRADIENT_COLOR,
       radius: this.get('radius'),
       gradient: {
         '0': GREEN_GRADIENT_COLOR,
