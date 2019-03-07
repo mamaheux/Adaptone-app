@@ -17,7 +17,7 @@ export default Component.extend(RecognizerMixin, {
     this.set('value', this.get('min'));
   },
 
-  degreesValue: computed('value', function() {
+  degreesValue: computed('value', 'min', 'mid', 'max', function() {
     const {
       min,
       mid,
@@ -42,28 +42,8 @@ export default Component.extend(RecognizerMixin, {
       value,
       lastDragValue
     } = this.getProperties('min','mid', 'max', 'value', 'lastDragValue');
-    let newValue = 0;
-    let increment = 0;
 
-    if (value <= mid) {
-      increment = ((mid - min) / STEPS);
-      newValue = panAmount > lastDragValue ? value + increment : value - increment;
-      newValue = newValue < min ? min : newValue;
-
-      if (newValue > mid) {
-        newValue = value + ((max - mid) / STEPS);
-      }
-    } else {
-      increment = ((max - mid) / STEPS);
-      newValue = panAmount > lastDragValue ? value + increment : value - increment;
-      newValue = newValue > max ? max : newValue;
-
-      if (newValue < mid) {
-        newValue = value - ((mid - min) / STEPS);
-      }
-    }
-
-    newValue = Math.round(newValue);
+    const newValue = this._getNewValue(panAmount, value, min, mid, max, lastDragValue);
 
     this.set('lastDragValue', panAmount);
     this.set('value', newValue);
@@ -78,6 +58,31 @@ export default Component.extend(RecognizerMixin, {
   valueChanged: observer('degreesValue', function() {
     this._setValue(this.get('degreesValue'));
   }),
+
+  _getNewValue(panAmount, value, min, mid, max, lastDragValue) {
+    let newValue = 0;
+    let increment = 0;
+
+    if (value <= mid) {
+      increment = (mid - min) / STEPS;
+      newValue = panAmount > lastDragValue ? value + increment : value - increment;
+      newValue = newValue < min ? min : newValue;
+
+      if (newValue > mid) {
+        newValue = value + ((max - mid) / STEPS);
+      }
+    } else {
+      increment = (max - mid) / STEPS;
+      newValue = panAmount > lastDragValue ? value + increment : value - increment;
+      newValue = newValue > max ? max : newValue;
+
+      if (newValue < mid) {
+        newValue = value - ((mid - min) / STEPS);
+      }
+    }
+
+    return Math.round(newValue);
+  },
 
   _alignTop(degrees) {
     return degrees - 45;
