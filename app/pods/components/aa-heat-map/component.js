@@ -1,43 +1,49 @@
 import PositionsMap from '../aa-positions-map/component';
+import h337 from 'heatmap.js';
+
+const MIC_ICON_X_OFFSET = 15;
+const MIC_ICON_Y_OFFSET = 20;
 
 export default PositionsMap.extend({
   radius: null,
-  redThreshold: null,
-  yellowThreshold: null,
+  max: null,
+  min: null,
 
   didInsertElement() {
     this._super(...arguments);
 
-    const canvas = this.element.querySelector('canvas');
+    const canvasWrapper = this.element.querySelector('.canvas-wrapper');
 
-    this.generateHeatGradients(canvas);
+    this.generateHeatMap(canvasWrapper);
   },
 
-  generateHeatGradients(canvas) {
+  generateHeatMap(canvasWrapper) {
     const micPositions = this.get('micPositions');
-    const {yellowThreshold, redThreshold, radius} = this.getProperties('yellowThreshold', 'redThreshold', 'radius');
-    let context = canvas.getContext('2d');
+    const config = {
+      container: canvasWrapper,
+      backgroundColor: '#00ee7f',
+      blur: 0.75,
+      radius: this.get('radius'),
+      gradient: {
+        '0': '#00ee7f',
+        '0.5': '#eed200',
+        '1': '#ee0038'
+      }
+    };
+
+    const heatMap = h337.create(config);
+    heatMap.setData({
+      max: this.get('max'),
+      min: this.get('min'),
+      data: []
+    })
 
     micPositions.forEach(micPosition => {
-      let gradient;
-
-      if (yellowThreshold <= micPosition.value && micPosition.value <= redThreshold) {
-        gradient = context.createRadialGradient(micPosition.x, micPosition.y, 0, micPosition.x, micPosition.y, radius);
-        gradient.addColorStop(0, '#eed200');
-        gradient.addColorStop(1, '#00ee7f');
-      } else if (micPosition.value > redThreshold) {
-        gradient = context.createRadialGradient(micPosition.x, micPosition.y, 0, micPosition.x, micPosition.y, radius);
-        gradient.addColorStop(0, '#ee0038');
-        gradient.addColorStop(0.5, '#eed200');
-        gradient.addColorStop(1, '#00ee7f');
-      }
-
-      if (gradient) {
-        context.beginPath();
-        context.arc(micPosition.x, micPosition.y, radius, 0, 2*Math.PI, false);
-        context.fillStyle = gradient;
-        context.fill();
-      }
+      heatMap.addData({
+        x: micPosition.x + MIC_ICON_X_OFFSET,
+        y: micPosition.y + MIC_ICON_Y_OFFSET,
+        value: micPosition.value
+      })
     });
   }
 });

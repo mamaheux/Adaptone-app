@@ -8,12 +8,12 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: $z-index-map-overlay;
 }
 
 .canvas {
   width: 100%;
   height: 400px;
-  background-color: $spring-green;
 }
 
 .speaker {
