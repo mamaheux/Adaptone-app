@@ -46,6 +46,8 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
+    ENV.APP.CONFIGURATION_FILE.FILENAME = 'some-file.json';
+    ENV.APP.LOCAL_STORAGE.SESSION_NAMESPACE = 'adaptone-session-test';
   }
 
   if (environment === 'production') {

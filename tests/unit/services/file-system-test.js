@@ -13,6 +13,7 @@ describe('Unit | Services | file system', () => {
   let writeFileSyncStub;
   let readFileSyncStub;
   let deleteFileSyncStub;
+  let jsonParseStub;
 
   beforeEach(function() {
     service = this.subject();
@@ -27,13 +28,16 @@ describe('Unit | Services | file system', () => {
 
     readFileSyncStub = sinon.stub(fs, 'readFileSync').callsFake(() => {
       return {
-        name: 'Sagati dsa mere'
+        success: true,
+        data: {
+          name: 'Sagati dsa mere'
+        }
       };
     });
 
     deleteFileSyncStub = sinon.stub(fs, 'unlinkSync');
 
-    JSON.parse = sinon.stub().callsFake(() => {
+    jsonParseStub = sinon.stub(JSON, 'parse').callsFake(() => {
       return {
         name: 'Sagati dsa mere'
       };
@@ -45,6 +49,7 @@ describe('Unit | Services | file system', () => {
     writeFileSyncStub.restore();
     readFileSyncStub.restore();
     deleteFileSyncStub.restore();
+    jsonParseStub.restore();
   });
 
   describe('writeFile', () => {
@@ -59,6 +64,84 @@ describe('Unit | Services | file system', () => {
       assert(writeFileSyncStub.calledOnce);
       assert(filePathStub.calledOnce);
       sinon.assert.calledWith(writeFileSyncStub, `someFake/path/${fileName}`, JSON.stringify(fileData));
+    });
+  });
+
+  describe('writeNewConfiguration', () => {
+    it('should append a new configuration to the file with a correct id', () => {
+      const serviceReadFileStub = sinon.stub(service, 'readFile').callsFake(() => {
+        return {
+          success: true,
+          data: [
+            oldConfiguration
+          ]
+        }
+      });
+
+      const oldConfiguration = {
+        id: 1,
+        name: 'Old config',
+        monitorsNumber: 1,
+        speakersNumber: 2,
+        probesNumber: 3,
+        positions: []
+      };
+
+      const newConfiguration = {
+        id: null,
+        name: 'New config',
+        monitorsNumber: 5,
+        speakersNumber: 6,
+        probesNumber: 7,
+        positions: []
+      };
+
+      service.writeNewConfiguration(newConfiguration);
+
+      assert(writeFileSyncStub.calledOnce);
+      sinon.assert.calledWith(writeFileSyncStub, 'someFake/path/some-file.json', JSON.stringify([oldConfiguration, newConfiguration]));
+      expect(newConfiguration.id).to.equal(2);
+
+      serviceReadFileStub.restore();
+    });
+  });
+
+  describe('removeConfiguration', () => {
+    it('should remove the specified configuration', () => {
+      const firstConfiguration = {
+        id: 1,
+        name: 'First config',
+        monitorsNumber: 1,
+        speakersNumber: 2,
+        probesNumber: 3,
+        positions: []
+      };
+
+      const secondConfiguration = {
+        id: 2,
+        name: 'Second config',
+        monitorsNumber: 5,
+        speakersNumber: 6,
+        probesNumber: 7,
+        positions: []
+      };
+
+      const serviceReadFileStub = sinon.stub(service, 'readFile').callsFake(() => {
+        return {
+          success: true,
+          data: [
+            firstConfiguration,
+            secondConfiguration
+          ]
+        }
+      });
+
+      service.removeConfiguration(1);
+
+      assert(writeFileSyncStub.calledOnce);
+      sinon.assert.calledWith(writeFileSyncStub, 'someFake/path/some-file.json', JSON.stringify([secondConfiguration]));
+
+      serviceReadFileStub.restore();
     });
   });
 
