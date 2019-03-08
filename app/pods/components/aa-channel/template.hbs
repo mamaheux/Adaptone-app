@@ -1,18 +1,27 @@
 <div class="channel">
-  {{input
-    class="input"
-    type="text"
-    size=5
-    value=this.inputName
-  }}
-  {{aa-slider}}
-  {{aa-peak-meter}}
-  <div class="buttons">
+  <div class="title-container">
+    {{input
+      class="input"
+      type="text"
+      size=5
+      value=this.inputName
+    }}
+    <div class="eq-redirector">...</div>
+  </div>
+
+  <div class="slider-peak-meter-container">
+    {{aa-slider}}
+    {{aa-peak-meter class="peak-meter"}}
+  </div>
+
+  <div class="button-container">
     {{aa-toggle-button
+      class="toggle-button"
       isActive=true
       text="M"
     }}
     {{aa-toggle-button
+      class="toggle-button"
       isActive=true
       text="S"
     }}
