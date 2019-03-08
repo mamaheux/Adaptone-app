@@ -32,7 +32,6 @@ export default Component.extend({
     },
 
     selectConfig(configuration) {
-      console.log('allo');
       this.get('session').set('configuration', configuration);
       this._routeStep(configuration.step);
     }
