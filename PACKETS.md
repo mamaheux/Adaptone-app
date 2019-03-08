@@ -74,10 +74,17 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 {
   "seqId": 3,
   "data": {
-    "positions": [
+    "firstSymmetryPositions": [
       {
         "x": 140,
         "y": 340,
+        "type": "s"
+      }
+    ],
+    "secondSymmetryPositions": [
+      {
+        "x": 340,
+        "y": 140,
         "type": "s"
       }
     ]
@@ -97,7 +104,8 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  "seqId": 5
+  "seqId": 5,
+  "symmetry": 0
 }
 ```
 
