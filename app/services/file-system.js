@@ -39,6 +39,17 @@ export default Service.extend({
     this.writeFile(configurationFile, configurations);
   },
 
+  editConfiguration(configuration) {
+    const configurationFile = config.APP.CONFIGURATION_FILE.FILENAME;
+    const fileContent = this.readFile(configurationFile);
+    const configurations = fileContent.success ? fileContent.data : [];
+
+    const configurationIndex = configurations.findIndex(config => config.id === configuration.id);
+    configurations[configurationIndex] = configuration;
+
+    this.writeFile(configurationFile, configurations);
+  },
+
   removeConfiguration(configurationId) {
     const configurationFile = config.APP.CONFIGURATION_FILE.FILENAME;
     const fileContent = this.readFile(configurationFile);
