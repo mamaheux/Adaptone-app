@@ -8,7 +8,7 @@
   {{#each configurations as |config|}}
     {{aa-config
       config=config
-      removeConfig=(action "removeConfig" config)
+      removeConfig=(action "removeConfig" config.id)
     }}
   {{/each}}
 

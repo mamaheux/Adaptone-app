@@ -1,4 +1,5 @@
 import Service from '@ember/service';
+import config from 'adaptone-front/config/environment';
 
 // Constants
 const FILE_FORMAT = 'utf-8';
@@ -20,6 +21,34 @@ export default Service.extend({
     } catch (error) {
       return 'An error occured while trying to write the file. \n' + error.message;
     }
+  },
+
+  writeNewConfiguration(configuration) {
+    const configurationFile = config.APP.CONFIGURATION_FILE.FILENAME;
+    const fileContent = this.readFile(configurationFile);
+    const configurations = fileContent.success ? fileContent.data : [];
+
+    let biggestId = -1;
+    configurations.map(config => {
+      if (config.id > biggestId) biggestId = config.id;
+    });
+
+    configuration.id = biggestId + 1;
+    configurations.push(configuration);
+
+    this.writeFile(configurationFile, configurations);
+  },
+
+  removeConfiguration(configurationId) {
+    const configurationFile = config.APP.CONFIGURATION_FILE.FILENAME;
+    const fileContent = this.readFile(configurationFile);
+    let configurations = fileContent ? fileContent.data : [];
+
+    configurations = configurations.filter(configuration => configuration.id !== configurationId);
+
+    this.writeFile(configurationFile, configurations);
+
+    return configurations;
   },
 
   readFile(fileName) {

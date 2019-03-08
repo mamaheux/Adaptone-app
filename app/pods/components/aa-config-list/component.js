@@ -22,11 +22,10 @@ export default Component.extend({
       this.get('router').transitionTo('initial-parameters');
     },
 
-    removeConfig(currentConfig) {
-      let configs = this.get('configurations').filter(configuration => configuration !== currentConfig);
-      this.get('fileSystem').writeFile(config.APP.CONFIGURATION_FILE.FILENAME, configs);
+    removeConfig(configurationId) {
+      let configurations = this.get('fileSystem').removeConfiguration(configurationId);
 
-      this.set('configurations', configs);
+      this.set('configurations', configurations);
     }
   }
 });

@@ -1,6 +1,7 @@
-import { expect } from 'chai';
-import {describe, it, beforeEach } from 'mocha';
-import { setupComponentTest } from 'ember-mocha';
+import {expect} from 'chai';
+import {describe, it, beforeEach} from 'mocha';
+import {setupComponentTest} from 'ember-mocha';
+import {htmlSafe} from '@ember/template'
 
 describe('Unit | Component | aa-positions-map', function() {
   setupComponentTest('aa-positions-map', {
@@ -84,13 +85,13 @@ describe('Unit | Component | aa-positions-map', function() {
             {
               x: 30,
               y: 51,
-              style: 'position:absolute;top:51px;left:30px',
+              style: htmlSafe('position:absolute;top:51px;left:30px'),
               type: 'm'
             },
             {
               x: 90,
               y: 101,
-              style: 'position:absolute;top:101px;left:90px',
+              style: htmlSafe('position:absolute;top:101px;left:90px'),
               type: 'm'
             }
           ];
@@ -99,7 +100,7 @@ describe('Unit | Component | aa-positions-map', function() {
             {
               x: 150,
               y: 152,
-              style: 'position:absolute;top:152px;left:150px',
+              style: htmlSafe('position:absolute;top:152px;left:150px'),
               type: 's'
             }
           ];
