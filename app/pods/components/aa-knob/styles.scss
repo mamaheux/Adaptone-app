@@ -1,0 +1,112 @@
+@import "app/styles/variables.scss";
+
+& {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  user-select: none;
+}
+
+.title {
+  font-family: $text-font-semibold;
+  font-size: 20px;
+  color: $big-stone;
+  margin-bottom: 25px;
+}
+
+.value {
+  position: absolute;
+  top: 35px;
+  width: 100%;
+  text-align: center;
+  font-family: $text-font-bold;
+  font-size: 16px;
+  color: $big-stone;
+  z-index: 3;
+}
+
+.knob {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.quarter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 14px solid;
+  border-color: transparent $blue-ribbon transparent transparent;
+}
+
+.underlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 14px solid #fff;
+  box-shadow: 0 0 0 2px #000, inset 0 0 0 2px #000;
+}
+
+.overlay {
+  position: absolute;
+  top: 60px;
+  left: 19px;
+  width: 60px;
+  height: 60px;
+  background-color: $mercury;
+  transform: rotate(45deg);
+  z-index: 2;
+}
+
+.dot {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #000;
+  z-index: 3;
+
+  &.min {
+    top: 77px;
+    left: 10px;
+  }
+
+  &.mid {
+    top: -3px;
+    left: 47px;
+  }
+
+  &.max {
+    top: 77px;
+    left: 80px;
+  }
+}
+
+.label {
+  font-family: $text-font-semibold;
+  font-size: 18px;
+  color: $big-stone;
+  position: absolute;
+  z-index: 3;
+
+  &.min {
+    top: 82px;
+    left: 0;
+  }
+
+  &.mid {
+    top: -25px;
+    left: 35px;
+  }
+
+  &.max {
+    top: 82px;
+    left: 56px;
+  }
+}
