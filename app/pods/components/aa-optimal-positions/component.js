@@ -12,7 +12,7 @@ export default Component.extend({
   actions: {
     rerunInitialization() {
       const configuration = this.get('session').get('configuration');
-      configuration.step = steps['OPTIMIZATION'];
+      configuration.step = steps['optimization'];
 
       this.get('fileSystem').editConfiguration(configuration);
       this.get('session').set('configuration', configuration);
@@ -21,7 +21,7 @@ export default Component.extend({
 
     confirmPositions() {
       const configuration = this.get('session').get('configuration');
-      configuration.step = steps['COMPLETE'];
+      configuration.step = steps['console-loading:'];
 
       this.get('fileSystem').editConfiguration(configuration);
       this.get('session').set('configuration', configuration);

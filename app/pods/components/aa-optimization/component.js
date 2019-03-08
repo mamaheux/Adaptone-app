@@ -16,7 +16,7 @@ export default Component.extend({
 
     loadConsole() {
       const configuration = this.get('session').get('configuration');
-      configuration.step = steps['COMPLETE'];
+      configuration.step = steps['console-loading:'];
 
       this.get('fileSystem').editConfiguration(configuration);
       this.get('session').set('configuration', configuration);

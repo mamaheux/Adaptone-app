@@ -18,7 +18,7 @@ export default Component.extend({
 
   actions: {
     saveConfig() {
-      this.configuration.step = steps['PROBE_POSITIONING'];
+      this.configuration.step = steps['probe-positioning'];
 
       this.get('fileSystem').writeNewConfiguration(this.configuration);
       this.get('session').set('configuration', this.configuration);

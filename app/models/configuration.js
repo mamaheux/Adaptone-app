@@ -8,6 +8,6 @@ export default class Configuration {
     this.speakersNumber = null;
     this.probesNumber = null;
     this.positions = [];
-    this.step = steps['INITIAL_PARAMETERS'];
+    this.step = steps['initial-parameters'];
   }
 }

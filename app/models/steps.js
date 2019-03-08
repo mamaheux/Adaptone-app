@@ -1,11 +1,11 @@
 const steps = {
-  'INITIAL_PARAMETERS': 0,
-  'PROBE_POSITIONING': 1,
-  'PROBE_INITIALIZATON': 2,
-  'PROBE_POSITIONS': 3,
-  'OPTIMIZATION': 4,
-  'OPTIMAL_POSITIONS': 5,
-  'COMPLETE': 6
+  'initial-parameters': 0,
+  'probe-positioning': 1,
+  'probe-initialization': 2,
+  'probe-positions': 3,
+  'optimization': 4,
+  'optimal-positions': 5,
+  'console-loading': 6
 }
 
 export default steps;

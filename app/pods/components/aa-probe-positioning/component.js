@@ -10,7 +10,7 @@ export default Component.extend({
   actions: {
     initializeProbes() {
       const configuration = this.get('session').get('configuration');
-      configuration.step = steps['PROBE_INITIALIZATON'];
+      configuration.step = steps['probe-initialization'];
 
       this.get('fileSystem').editConfiguration(configuration);
       this.get('session').set('configuration', configuration);
