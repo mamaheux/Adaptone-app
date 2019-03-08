@@ -1,0 +1,11 @@
+const steps = {
+  'INITIAL_PARAMETERS': 0,
+  'PROBE_POSITIONING': 1,
+  'PROBE-INITIALIZATON': 2,
+  'PROBE-POSITIONS': 3,
+  'OPTIMIZATION': 4,
+  'OPTIMAL-POSITIONS': 5,
+  'COMPLETE': 6
+}
+
+export default steps;
