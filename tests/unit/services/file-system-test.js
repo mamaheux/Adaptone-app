@@ -106,6 +106,54 @@ describe('Unit | Services | file system', () => {
     });
   });
 
+  describe('editConfiguration', () => {
+    it('should edit the specified configuration', () => {
+      const firstConfiguration = {
+        id: 1,
+        name: 'First config',
+        monitorsNumber: 1,
+        speakersNumber: 2,
+        probesNumber: 3,
+        positions: []
+      };
+
+      const modifiedFirstConfiguration = {
+        id: 1,
+        name: 'First config new name',
+        monitorsNumber: 11,
+        speakersNumber: 22,
+        probesNumber: 33,
+        positions: []
+      };
+
+      const secondConfiguration = {
+        id: 2,
+        name: 'Second config',
+        monitorsNumber: 5,
+        speakersNumber: 6,
+        probesNumber: 7,
+        positions: []
+      };
+
+      const serviceReadFileStub = sinon.stub(service, 'readFile').callsFake(() => {
+        return {
+          success: true,
+          data: [
+            firstConfiguration,
+            secondConfiguration
+          ]
+        }
+      });
+
+      service.editConfiguration(modifiedFirstConfiguration);
+
+      assert(writeFileSyncStub.calledOnce);
+      sinon.assert.calledWith(writeFileSyncStub, 'someFake/path/some-file.json', JSON.stringify([modifiedFirstConfiguration, secondConfiguration]));
+
+      serviceReadFileStub.restore();
+    });
+  });
+
   describe('removeConfiguration', () => {
     it('should remove the specified configuration', () => {
       const firstConfiguration = {
