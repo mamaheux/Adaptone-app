@@ -8,30 +8,31 @@ html, body {
 }
 
 .ember-modal-dialog {
-  padding: 15px;
+  padding: 50px 30px;
+  width: 50%;
   font-family: $title-font-regular;
 
   .modal-message {
+    text-align: center;
+    color: $big-stone;
     font-size: 18px;
   }
 
   .button-container {
     display: flex;
     justify-content: center;
+    margin-top: 30px;
   }
 
   .select-config {
-    color: #000;
+    color: $big-stone;
     background-color: #fff;
     border: 1px solid $blue-ribbon;
     border-radius: 5px;
     font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
+    font-family: $text-font-semibold;
     text-align: center;
-    width: 100px;
-    height: 40px;
-    margin: 10px 10px;
-    padding: 0 10px;
+    margin: 0 10px;
+    padding: 7px 25px;
   }
 }
