@@ -27,21 +27,18 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  seqId: 0,
-  data: {
-    id: 10,
-    name: "super nom",
-    monitorsNumber: 5,
-    speakersNumber: 4,
-    probesNumber: 8,
-    positions: [
+  "seqId": 0,
+  "data": {
+    "id": 10,
+    "name": "super nom",
+    "monitorsNumber": 5,
+    "speakersNumber": 4,
+    "probesNumber": 8,
+    "positions": [
       {
-        x: 140,
-        y: 340,
-        type: "s"
-      },
-      {
-        ...
+        "x": 140,
+        "y": 340,
+        "type": "s"
       }
     ]
   }
@@ -52,13 +49,13 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  seqId: 1,
-  data: {
-    id: 10,
-    name: "super nom",
-    monitorsNumber: 5,
-    speakersNumber: 4,
-    probesNumber: 8
+  "seqId": 1,
+  "data": {
+    "id": 10,
+    "name": "super nom",
+    "monitorsNumber": 5,
+    "speakersNumber": 4,
+    "probesNumber": 8
   }
 }
 ```
@@ -67,7 +64,7 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  seqId: 2
+  "seqId": 2
 }
 ```
 
@@ -75,16 +72,13 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  seqId: 3,
-  data: {
-    positions: [
+  "seqId": 3,
+  "data": {
+    "positions": [
       {
-        x: 140,
-        y: 340,
-        type: "s"
-      },
-      {
-        ...
+        "x": 140,
+        "y": 340,
+        "type": "s"
       }
     ]
   }
@@ -95,7 +89,7 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  seqId: 4
+  "seqId": 4
 }
 ```
 
@@ -103,7 +97,7 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  seqId: 5
+  "seqId": 5
 }
 ```
 
@@ -111,7 +105,7 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  seqId: 6
+  "seqId": 6
 }
 ```
 
@@ -119,16 +113,13 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  seqId: 7,
-  data: {
-    positions: [
+  "seqId": 7,
+  "data": {
+    "positions": [
       {
-        x: 140,
-        y: 340,
-        type: "s"
-      },
-      {
-        ...
+        "x": 140,
+        "y": 340,
+        "type": "s"
       }
     ]
   }
@@ -139,7 +130,7 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  seqId: 8
+  "seqId": 8
 }
 ```
 
@@ -147,7 +138,7 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  seqId: 9
+  "seqId": 9
 }
 ```
 
@@ -157,33 +148,25 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  seqId: 10
-  data: {
-    channelId: 1,
-    channelName: "Master",
-    gain: 75,
-    volume: 100,
-    mute: false,
-    solo: true
-    paramEq: [
+  "seqId": 10,
+  "data": {
+    "channelId": 1,
+    "channelName": "Master",
+    "gain": 75,
+    "volume": 100,
+    "paramEq": [
       {
-        id: 0,
-        on: true,
-        freq:  1000,
-        q: 4.4,
-        gain: 20
-      },
-      {
-        ...
+        "id": 0,
+        "on": true,
+        "freq":  1000,
+        "q": 4.4,
+        "gain": 20
       }
     ],
-    graphEq: [
+    "graphEq": [
       {
-        id: 0,
-        value: 50
-      },
-      {
-        ...
+        "id": 0,
+        "value": 50
       }
     ]
   }
@@ -196,17 +179,14 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  seqId: 11,
-  data: {
-    positions: [
+  "seqId": 11,
+  "data": {
+    "positions": [
       {
-        x: 140,
-        y: 340,
-        type: "s",
-        errorRate: 0.12
-      },
-      {
-        ...
+        "x": 140,
+        "y": 340,
+        "type": "s",
+        "errorRate": 0.12
       }
     ]
   }
@@ -217,16 +197,13 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  seqId: 12,
-  data: {
-    channelId: 1,
-    points: [
+  "seqId": 12,
+  "data": {
+    "channelId": 1,
+    "points": [
       {
-        freq: 500,
-        amplitude: 4
-      },
-      {
-        ...
+        "freq": 500,
+        "amplitude": 4
       }
     ]
   }
