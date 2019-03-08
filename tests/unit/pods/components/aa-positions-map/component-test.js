@@ -1,6 +1,6 @@
-import { expect } from 'chai';
-import {describe, it, beforeEach } from 'mocha';
-import { setupComponentTest } from 'ember-mocha';
+import {expect} from 'chai';
+import {describe, it, beforeEach} from 'mocha';
+import {setupComponentTest} from 'ember-mocha';
 import {htmlSafe} from '@ember/template'
 
 describe('Unit | Component | aa-positions-map', function() {
