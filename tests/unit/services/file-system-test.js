@@ -69,15 +69,6 @@ describe('Unit | Services | file system', () => {
 
   describe('writeNewConfiguration', () => {
     it('should append a new configuration to the file with a correct id', () => {
-      const serviceReadFileStub = sinon.stub(service, 'readFile').callsFake(() => {
-        return {
-          success: true,
-          data: [
-            oldConfiguration
-          ]
-        }
-      });
-
       const oldConfiguration = {
         id: 1,
         name: 'Old config',
@@ -95,6 +86,15 @@ describe('Unit | Services | file system', () => {
         probesNumber: 7,
         positions: []
       };
+
+      const serviceReadFileStub = sinon.stub(service, 'readFile').callsFake(() => {
+        return {
+          success: true,
+          data: [
+            oldConfiguration
+          ]
+        }
+      });
 
       service.writeNewConfiguration(newConfiguration);
 
