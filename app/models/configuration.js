@@ -1,3 +1,5 @@
+import steps from './steps';
+
 export default class Configuration {
   constructor() {
     this.id = null;
@@ -6,5 +8,6 @@ export default class Configuration {
     this.speakersNumber = null;
     this.probesNumber = null;
     this.positions = [];
+    this.step = steps['initial-parameters'];
   }
 }
