@@ -2,56 +2,58 @@
 
 .channel {
   background-color: $silver;
-  border: 1px solid #000000;
-  width: 90px;
+  border: 1.5px solid $big-stone;
+  width: 100px;
 }
 
-.title-container {
+.name {
   display: flex;
   flex-direction: row;
 }
 
 .input {
-  width: 50px;
+  font-family: $text-font-semibold;
+  font-size: 16px;
+  color: $big-stone;
+  width: 60px;
   border: none;
-  color: #000000;
   background-color: $silver;
-  padding: 0px 5px;
+  margin-left: 5px;
 }
 
-.eq-redirector {
-  font-size: 20px;
-  font-weight: bold;
+.details {
+  font-size: 26px;
+  font-family: $text-font-bold;
   transform: rotate(-90deg)
 }
 
 .button-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: left;
   margin-top: 5px;
 }
 
 .toggle-button {
   & > .button {
-    border: 1px solid #000000;
+    padding: 0px 18px;
+    border: 1px solid $big-stone;
     border-radius: 0px;
   }
-  width: 45px;
 }
 
-.slider-peak-meter-container {
+.meter-container {
   display: flex;
   flex-direction: row;
   align-items: left;
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 .peak-meter {
   & > .peak-meter {
     position: relative;
     top: 95px;
-    left: -90px;
+    right: 90px;
     height: 25px;
     width: 210px;
     transform: rotate(-90deg);
