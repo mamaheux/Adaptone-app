@@ -3,7 +3,7 @@
 .channel {
   background-color: $silver;
   border: 1.5px solid $big-stone;
-  width: 100px;
+  width: 97px;
 }
 
 .name {
@@ -31,22 +31,25 @@
 .button-container {
   display: flex;
   flex-direction: row;
-  align-items: left;
+  align-items: center;
   margin-top: 5px;
 }
 
 .toggle-button {
   & > .button {
     padding: 0px 18px;
-    border: 1px solid $big-stone;
+    border-top: 1px solid $big-stone;
     border-radius: 0px;
+  }
+
+  & > .button:first-child {
+    border-right: 1px solid $big-stone;
   }
 }
 
 .meter-container {
   display: flex;
   flex-direction: row;
-  align-items: left;
   margin: 10px 0 10px 15px;
 }
 
