@@ -1,0 +1,78 @@
+@import "app/styles/variables.scss";
+
+.graph-options {
+  display: flex;
+  flex-direction: row;
+  padding: 30px 30px 10px 40px;
+  background-color: #fff;
+  border: 2px solid $big-stone;
+  border-radius: 4px;
+  max-height: 150px;
+  z-index: $z-index-modal;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  margin-right: 70px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.checkbox {
+  display: flex;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.label {
+  font-family: $text-font-semibold;
+  color: $big-stone;
+  font-size: 18px;
+  margin-left: 30px;
+  margin-top: -3px;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+
+  &:checked ~ .checkmark {
+    border: none;
+    background-color: $blue-ribbon;
+  }
+
+  &:checked ~ .checkmark:after {
+    display: block;
+  }
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  box-sizing: border-box;
+  border: 2px solid $big-stone;
+  border-radius: 4px;
+  transition: 0.3s background-color ease, 0.3s border ease;
+
+  &:after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 1px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
