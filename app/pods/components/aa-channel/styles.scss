@@ -18,13 +18,14 @@
   width: 60px;
   border: none;
   background-color: $silver;
-  margin: 5px 0 0 5px;
+  margin: 10px 0 0 5px;
   text-align: center;
 }
 
 .details {
-  font-size: 26px;
+  font-size: 30px;
   font-family: $text-font-bold;
+  color: $big-stone;
   transform: rotate(-90deg)
 }
 
@@ -50,7 +51,7 @@
 .meter-container {
   display: flex;
   flex-direction: row;
-  margin: 10px 0 10px 15px;
+  margin: 10px 0 10px 10px;
 }
 
 .peak-meter {
@@ -69,4 +70,5 @@
       height: 25px;
     }
   }
+  margin-left: 5px;
 }
