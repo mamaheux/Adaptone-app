@@ -1,0 +1,74 @@
+@import 'app/styles/variables.scss';
+
+.channel {
+  background-color: $silver;
+  border: 1.5px solid $big-stone;
+  width: 97px;
+}
+
+.name {
+  display: flex;
+  flex-direction: row;
+}
+
+.input {
+  font-family: $text-font-semibold;
+  font-size: 16px;
+  color: $big-stone;
+  width: 60px;
+  border: none;
+  background-color: $silver;
+  margin: 10px 0 0 5px;
+  text-align: center;
+}
+
+.details {
+  font-size: 30px;
+  font-family: $text-font-bold;
+  color: $big-stone;
+  transform: rotate(-90deg)
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.toggle-button {
+  & > .button {
+    padding: 0px 18px;
+    border-top: 1px solid $big-stone;
+    border-radius: 0px;
+  }
+
+  & > .button:first-child {
+    border-right: 1px solid $big-stone;
+  }
+}
+
+.meter-container {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0 10px 10px;
+}
+
+.peak-meter {
+  & > .peak-meter {
+    position: relative;
+    top: 95px;
+    right: 90px;
+    height: 25px;
+    width: 210px;
+    transform: rotate(-90deg);
+  }
+  
+  & > .peak-meter-part {
+    &.peak {
+      width: 2px;
+      height: 25px;
+    }
+  }
+  margin-left: 5px;
+}

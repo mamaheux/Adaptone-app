@@ -1,0 +1,24 @@
+<div class="channel">
+  <div class="name">
+    <div class="input">{{inputName}}</div>
+    <div class="details">...</div>
+  </div>
+
+  <div class="meter-container">
+    {{aa-slider}}
+    {{aa-peak-meter class="peak-meter"}}
+  </div>
+
+  <div class="button-container">
+    {{aa-toggle-button
+      class="toggle-button"
+      isActive=true
+      text="M"
+    }}
+    {{aa-toggle-button
+      class="toggle-button"
+      isActive=true
+      text="S"
+    }}
+  </div>
+</div>
