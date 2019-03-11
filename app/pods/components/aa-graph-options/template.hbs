@@ -1,0 +1,21 @@
+<div class="graph-options">
+  {{#each-in this.columns as |column options|}}
+    <div class="column">
+      {{#each options as |option|}}
+      <label class="checkbox">
+        <span class="label">
+          {{option.name}}
+        </span>
+
+        {{input
+          class="input"
+          type="checkbox"
+          checked=option.checked
+        }}
+
+        <span class="checkmark"></span>
+      </label>
+      {{/each}}
+    </div>
+  {{/each-in}}
+</div>
