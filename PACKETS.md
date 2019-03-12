@@ -105,7 +105,9 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 ```json
 {
   "seqId": 5,
-  "symmetry": 0
+  "data": {
+    "symmetry": 0
+  }
 }
 ```
 

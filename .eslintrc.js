@@ -18,7 +18,7 @@ module.exports = {
     "requireNode": "on"
   },
   rules: {
-    "indent": [2, 2]
+    "indent": [2, 2, { "SwitchCase": 1 }]
   },
   overrides: [
     // node files
