@@ -20,6 +20,7 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 | *Échanges de données* |
 | 11 | [Taux erreur](#taux-erreur) |
 | 12 | [Spectre sonore entrée](#spectre-sonore-entrée)
+| 13 | [Positions](#positions) |
 
 ## Étapes
 
@@ -105,7 +106,9 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 ```json
 {
   "seqId": 5,
-  "symmetry": 0
+  "data": {
+    "symmetry": 0
+  }
 }
 ```
 

@@ -4,7 +4,7 @@ import {setupTest} from 'ember-mocha';
 
 describe('Unit | Services | connection', () => {
   setupTest('service:connection', {
-    needs: ['service:websockets']
+    needs: ['service:websockets', 'service:packet-dispatcher']
   });
 
   let service;

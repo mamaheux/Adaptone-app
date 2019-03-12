@@ -3,9 +3,9 @@ import {later} from '@ember/runloop';
 
 export default Service.extend({
   websockets: service('websockets'),
+  packetDispatcher: service('packet-dispatcher'),
   socketRef: null,
   isConnected: false,
-  exampleData: null,
 
   createConnection(address) {
     const socket = this.get('websockets').socketFor(address);
@@ -35,15 +35,7 @@ export default Service.extend({
   },
 
   _messageHandler(event) {
-    /*
-      La logique de séparation des paquets reçus peut être ici ou dans un autre service si ça devient complexe.
-      Petit exemple d'utilisation dans un component:
-
-      exempleData: Ember.observer('connection.exampleData', function() {
-        console.log('J'ai reçu du data heyo');
-      })
-    */
-    this.set('exampleData', event.data);
+    this.get('packetDispatcher').dispatch(event.data);
   },
 
   _closeHandler() {
@@ -56,6 +48,6 @@ export default Service.extend({
   },
 
   sendMessage(message) {
-    this.get('socketRef').send(message);
+    this.get('socketRef').send(JSON.stringify(message));
   }
 });

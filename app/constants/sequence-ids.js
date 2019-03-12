@@ -1,0 +1,17 @@
+const SequenceIds = {
+  CONFIG_CHOICE: 0,
+  INITIAL_PARAMS: 1,
+  RUN_INIT: 2,
+  CONFIRM_POS: 3,
+  RERUN_INIT: 4,
+  CONFIRM: 5,
+  OPTIMIZE_POS: 6,
+  OPTIMIZED_POS: 7,
+  RERUN_OPTIMIZATION: 8,
+  END: 9,
+  CHANNEL_INFO: 10,
+  ERROR_RATES: 11,
+  INPUT_SPECTRUM: 12
+}
+
+export default SequenceIds;
