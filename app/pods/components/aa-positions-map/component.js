@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import {computed, set} from '@ember/object';
-import {htmlSafe} from '@ember/template'
+import {htmlSafe} from '@ember/template';
 
 // Constants
 const MIC_TYPE = 'm';
@@ -30,7 +30,7 @@ export default Component.extend({
     const yPositions = this.get('positions').map(position => position.y);
 
     const biggestX = Math.max(...xPositions);
-    const biggestY = Math.max(...yPositions)
+    const biggestY = Math.max(...yPositions);
 
     return {biggestX, biggestY};
   }),

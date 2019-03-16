@@ -27,9 +27,9 @@ export default PositionsMap.extend({
       backgroundColor: GREEN_GRADIENT_COLOR,
       radius: this.get('radius'),
       gradient: {
-        '0': GREEN_GRADIENT_COLOR,
-        '0.5': YELLOW_GRADIENT_COLOR,
-        '1': RED_GRADIENT_COLOR
+        0: GREEN_GRADIENT_COLOR,
+        0.5: YELLOW_GRADIENT_COLOR,
+        1: RED_GRADIENT_COLOR
       }
     };
 
@@ -38,14 +38,14 @@ export default PositionsMap.extend({
       max: this.get('max'),
       min: this.get('min'),
       data: []
-    })
+    });
 
     micPositions.forEach(micPosition => {
       heatMap.addData({
         x: micPosition.x + MIC_ICON_X_OFFSET,
         y: micPosition.y + MIC_ICON_Y_OFFSET,
         value: micPosition.value
-      })
+      });
     });
   }
 });

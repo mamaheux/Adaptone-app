@@ -28,7 +28,7 @@ export default Component.extend({
 
     confirmPositions() {
       const configuration = this.get('session').get('configuration');
-      configuration.step = steps['optimization'];
+      configuration.step = steps.optimization;
 
       this.get('fileSystem').editConfiguration(configuration);
       this.get('session').set('configuration', configuration);

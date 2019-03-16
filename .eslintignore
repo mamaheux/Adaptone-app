@@ -5,3 +5,6 @@ vendor/**/*.js
 dist/**/*.js
 tmp/**/*.js
 app/locales/*/translations.js
+testem-electron.js
+testem.js
+*-test.js

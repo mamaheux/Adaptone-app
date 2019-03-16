@@ -1,12 +1,12 @@
 import Service from '@ember/service';
 import Evented from '@ember/object/evented';
-import SequenceIds from 'adaptone-front/constants/sequence-ids'
+import SequenceIds from 'adaptone-front/constants/sequence-ids';
 
 export default Service.extend(Evented, {
   dispatch(rawMessage) {
     const message = JSON.parse(rawMessage);
 
-    switch(message.seqId) {
+    switch (message.seqId) {
       case SequenceIds.ERROR_RATES:
         this.trigger('error-rates', message.data);
         break;

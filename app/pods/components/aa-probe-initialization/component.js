@@ -7,7 +7,7 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    this.get('packetDispatcher').one('positions',  this._routeToConfirmPositions, this);
+    this.get('packetDispatcher').one('positions', this._routeToConfirmPositions, this);
   },
 
   _routeToConfirmPositions(data) {

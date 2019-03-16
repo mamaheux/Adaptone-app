@@ -12,6 +12,6 @@ const SequenceIds = {
   CHANNEL_INFO: 10,
   ERROR_RATES: 11,
   INPUT_SPECTRUM: 12
-}
+};
 
 export default SequenceIds;

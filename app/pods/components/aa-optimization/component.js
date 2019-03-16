@@ -27,7 +27,7 @@ export default Component.extend({
         seqId: SequenceIds.OPTIMIZE_POS
       });
 
-      this.get('packetDispatcher').one('optimized-positions',  this._routeToConfirmOptimization, this);
+      this.get('packetDispatcher').one('optimized-positions', this._routeToConfirmOptimization, this);
     },
 
     loadConsole() {
