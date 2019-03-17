@@ -1,0 +1,110 @@
+@import "app/styles/variables.scss";
+
+& {
+  position: relative;
+}
+
+.title {
+  font-family: $text-font-semibold;
+  font-size: 30px;
+  color: $big-stone;
+  margin-right: 120px;;
+}
+
+.parametric-filters {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    bottom: -25px;
+    width: 100%;
+    border-bottom: 1px solid $big-stone;
+    background: $big-stone;
+  }
+}
+
+.graphic-filters {
+  display: flex;
+  flex-direction: column;
+}
+
+.parametric-filter-buttons-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.parametric-filter-button {
+  border: none;
+  margin-right: 30px;
+  border-radius: 4px;
+  margin-top: 40px;
+  padding: 5px 30px;
+  color: $big-stone;
+  font-family: $text-font-semibold;
+  font-size: 18px;
+  background-color: #fff;
+  transition: 0.3s background-color ease, 0.3s color ease;
+
+  &.active {
+    background-color: $blue-ribbon;
+    color: #fff;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.parametric-filter-options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.graphic-filter-options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.power-button {
+  margin-right: 40px;
+}
+
+.knob {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 15px;
+  font-family: $text-font-semibold;
+  font-size: 20px;
+  color: $big-stone;
+  text-transform: uppercase;
+}
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slider {
+  margin: 0 60px;
+  height: 300px;
+}
+
+.slider-name {
+  font-family: $text-font-semibold;
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-top: 15px;
+}
