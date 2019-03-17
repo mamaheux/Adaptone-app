@@ -28,7 +28,7 @@ export default Component.extend({
     },
 
     removeConfig(configurationId) {
-      let configurations = this.get('fileSystem').removeConfiguration(configurationId);
+      const configurations = this.get('fileSystem').removeConfiguration(configurationId);
 
       this.set('configurations', configurations);
     },

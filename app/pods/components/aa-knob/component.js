@@ -6,6 +6,8 @@ import $ from 'jquery';
 const START_DEG = -225;
 const DEG_RANGE = 270;
 const STEPS = 35;
+const ALIGN_TOP_DEGREES = 45;
+const SET_VALUE_DEGREES = 90;
 
 export default Component.extend(RecognizerMixin, {
   recognizers: 'pan',
@@ -23,7 +25,7 @@ export default Component.extend(RecognizerMixin, {
       mid,
       max,
       value
-    } = this.getProperties('min','mid', 'max', 'value');
+    } = this.getProperties('min', 'mid', 'max', 'value');
 
     if (value <= mid) {
       return (value / (mid - min)) * (DEG_RANGE / 2);
@@ -41,7 +43,7 @@ export default Component.extend(RecognizerMixin, {
       max,
       value,
       lastDragValue
-    } = this.getProperties('min','mid', 'max', 'value', 'lastDragValue');
+    } = this.getProperties('min', 'mid', 'max', 'value', 'lastDragValue');
 
     const newValue = this._getNewValue(panAmount, value, min, mid, max, lastDragValue);
 
@@ -85,7 +87,7 @@ export default Component.extend(RecognizerMixin, {
   },
 
   _alignTop(degrees) {
-    return degrees - 45;
+    return degrees - ALIGN_TOP_DEGREES;
   },
 
   _rotate(templateElement, degrees) {
@@ -98,7 +100,7 @@ export default Component.extend(RecognizerMixin, {
     let quarterNumber = 1;
 
     $('.knob').find('.quarter').each(function() {
-      const angle = Math.min(quarterNumber * 90, value);
+      const angle = Math.min(quarterNumber * SET_VALUE_DEGREES, value);
       parent._rotate($(this), START_DEG + angle);
       quarterNumber++;
     });

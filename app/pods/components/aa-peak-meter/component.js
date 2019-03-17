@@ -65,7 +65,7 @@ export default Component.extend({
     let value = meterValue.currentValue;
     value = this.normalize(value);
 
-    let dom = meterElements;
+    const dom = meterElements;
 
     dom.green.style.width = this.formatValue(value);
 
@@ -86,7 +86,7 @@ export default Component.extend({
   },
 
   updatePeak(peak, value) {
-    let now = (new Date()).getTime();
+    const now = (new Date()).getTime();
 
     if (value > peak.value) {
       peak.value = value;
@@ -101,7 +101,7 @@ export default Component.extend({
         };
       }
 
-      let fallRatio = Math.min(1, (now - peak.falling.startTime) / peak.fallDuration);
+      const fallRatio = Math.min(1, (now - peak.falling.startTime) / peak.fallDuration);
       peak.value = peak.falling.from - (peak.falling.from - peak.falling.to) * fallRatio;
     }
 
@@ -122,6 +122,6 @@ export default Component.extend({
 
   formatValue(value) {
     const ratio = this.get('meterElements').size / this.get('max');
-    return `${Math.round(value*ratio)}px`
+    return `${Math.round(value * ratio)}px`;
   }
 });

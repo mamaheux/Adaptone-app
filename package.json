@@ -25,7 +25,7 @@
     "devtron": "^1.4.0",
     "electron-forge": "^5.2.4",
     "electron-prebuilt-compile": "4.0.0",
-    "ember-ajax": "^3.0.0",
+    "ember-ajax": "^3.1.0",
     "ember-auto-import": "^1.2.21",
     "ember-cli": "~3.1.4",
     "ember-cli-app-version": "^3.0.0",
@@ -47,7 +47,7 @@
     "ember-gestures": "^1.1.1",
     "ember-hammertime": "^1.6.0",
     "ember-inline-svg": "^0.2.1",
-    "ember-intl": "^3.5.0",
+    "ember-intl": "^3.5.2",
     "ember-load-initializers": "^1.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-mocha": "^0.14.0",
@@ -59,7 +59,7 @@
     "eslint-plugin-ember": "^5.0.0",
     "heatmap.js": "^2.0.5",
     "loader.js": "^4.2.3",
-    "sass": "^1.17.1",
+    "sass": "^1.17.2",
     "ui-ember-slider": "^0.5.0"
   },
   "engines": {

@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {describe, it, beforeEach} from 'mocha';
 import {setupTest} from 'ember-mocha';
+import sinon from 'sinon';
 
 describe('Unit | Services | connection', () => {
   setupTest('service:connection', {
@@ -8,10 +9,21 @@ describe('Unit | Services | connection', () => {
   });
 
   let service;
+  let websocketServiceStub;
   const websocket = 'ws://localhost:3201';
 
   beforeEach(function() {
     service = this.subject();
+
+    websocketServiceStub = sinon.stub(service.get('websockets'), 'socketFor').callsFake(() => {
+      return {
+        on: function(){}
+      }
+    });
+  });
+
+  afterEach(() => {
+    websocketServiceStub.restore();
   });
 
   it('should create a connection to the websocket', () => {

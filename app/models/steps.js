@@ -6,6 +6,6 @@ const steps = {
   'optimization': 4,
   'optimal-positions': 5,
   'console-loading': 6
-}
+};
 
 export default steps;
