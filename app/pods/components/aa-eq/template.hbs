@@ -21,6 +21,7 @@
       {{aa-power-button
         class="power-button"
         isOn=this.currentFilter.isActive
+        toggleFilter=(action "toggleFilter")
       }}
 
       <div class="knob">
@@ -37,8 +38,8 @@
         {{t 'eq.q'}}
         {{aa-knob
           min=0
-          mid=4.4
-          max=60
+          mid=50
+          max=200
           value=this.currentFilter.q
         }}
       </div>
@@ -47,7 +48,7 @@
         {{t 'eq.gain'}}
         {{aa-knob
           min=0
-          mid=15
+          mid=100
           max=500
           value=this.currentFilter.gain
         }}
