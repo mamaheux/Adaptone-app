@@ -20,10 +20,6 @@ export default Component.extend({
 
       set(selectedFilter, 'isSelected', true);
       this.set('currentFilter', selectedFilter);
-    },
-
-    toggleFilter(state) {
-      set(this.get('currentFilter'), 'isActive', state);
     }
   },
 
