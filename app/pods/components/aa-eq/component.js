@@ -10,12 +10,12 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    if (this.isParametric) this._setCurrentFilter();
+    if (this.get('isParametric')) this._setCurrentFilter();
   },
 
   actions: {
     onFilterClick(selectedFilter) {
-      const previouslySelectedFilter = this.parametricFilters.find(filter => filter.isSelected === true);
+      const previouslySelectedFilter = this.get('parametricFilters').find(filter => filter.isSelected === true);
       if (previouslySelectedFilter) set(previouslySelectedFilter, 'isSelected', false);
 
       set(selectedFilter, 'isSelected', true);
@@ -24,7 +24,7 @@ export default Component.extend({
   },
 
   _setCurrentFilter() {
-    const selectedFilter = this.parametricFilters.find(filter => filter.isSelected === true);
+    const selectedFilter = this.get('parametricFilters').find(filter => filter.isSelected === true);
     if (selectedFilter) this.set('currentFilter', selectedFilter);
   }
 });
