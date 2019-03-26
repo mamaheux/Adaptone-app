@@ -99,7 +99,7 @@ export default Component.extend(RecognizerMixin, {
     const parent = this;
     let quarterNumber = 1;
 
-    $('.knob').find('.quarter').each(function() {
+    $(`#${this.elementId}`).find('.knob').find('.quarter').each(function() {
       const angle = Math.min(quarterNumber * SET_VALUE_DEGREES, value);
       parent._rotate($(this), START_DEG + angle);
       quarterNumber++;

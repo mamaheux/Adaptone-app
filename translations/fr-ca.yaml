@@ -46,3 +46,8 @@ optimal-positions:
 power-button:
   on: On
   off: Off
+eq:
+  title: EQ
+  frequency: FREQ (Hz)
+  q: Q
+  gain: Gain (dB)
