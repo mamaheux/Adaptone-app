@@ -5,7 +5,7 @@ import {htmlSafe} from '@ember/template';
 // Constants
 const MIC_TYPE = 'm';
 const SPEAKER_TYPE = 's';
-const CANVAS_PADDING = 50;
+const CANVAS_PADDING = 60;
 
 export default Component.extend({
   micPositions: null,
