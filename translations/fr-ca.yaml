@@ -50,4 +50,4 @@ eq:
   title: EQ
   frequency: FREQ (Hz)
   q: Q
-  gain: Gain
+  gain: Gain (dB)

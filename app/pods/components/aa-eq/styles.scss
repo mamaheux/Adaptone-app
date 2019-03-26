@@ -8,7 +8,8 @@
   font-family: $text-font-semibold;
   font-size: 30px;
   color: $big-stone;
-  margin-right: 120px;;
+  margin-right: 120px;
+  user-select: none;
 }
 
 .parametric-filters {
@@ -90,6 +91,10 @@
   text-transform: uppercase;
 }
 
+.knob-title {
+  user-select: none;
+}
+
 .slider-container {
   display: flex;
   flex-direction: column;
@@ -97,14 +102,22 @@
 }
 
 .slider {
-  margin: 0 60px;
+  margin: 0 20px;
   height: 300px;
 }
 
 .slider-name {
   font-family: $text-font-semibold;
+  color: $big-stone;
   text-transform: uppercase;
   font-size: 18px;
   letter-spacing: 1px;
+  margin-top: 5px;
+}
+
+.slider-frequency {
+  font-family: $text-font-semibold;
+  color: $big-stone;
+  font-size: 16px;
   margin-top: 15px;
 }

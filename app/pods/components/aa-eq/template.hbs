@@ -24,7 +24,9 @@
       }}
 
       <div class="knob">
-        {{t 'eq.frequency'}}
+        <span class="knob-title">
+          {{t 'eq.frequency'}}
+        </span>
         {{aa-knob
           min=0
           mid=600
@@ -34,21 +36,25 @@
       </div>
 
       <div class="knob">
-        {{t 'eq.q'}}
+        <span class="knob-title">
+          {{t 'eq.q'}}
+        </span>
         {{aa-knob
-          min=0
-          mid=50
-          max=200
+          min=0.5
+          mid=2
+          max=5
           value=this.currentFilter.q
         }}
       </div>
 
       <div class="knob">
-        {{t 'eq.gain'}}
+        <span class="knob-title">
+          {{t 'eq.gain'}}
+        </span>
         {{aa-knob
-          min=0
-          mid=100
-          max=500
+          min=-12
+          mid=0
+          max=12
           value=this.currentFilter.gain
         }}
       </div>
@@ -68,8 +74,13 @@
             min=filter.min
             max=filter.max
             value=filter.value
+            showValue=true
+            valueTitle="Gain"
           }}
 
+          <span class="slider-frequency">
+            {{filter.frequency}}
+          </span>
           <span class="slider-name">
             {{filter.name}}
           </span>
