@@ -1,0 +1,36 @@
+<div class="volume-gain">
+  <div class="volume-gain-container">
+    <div class="volume-container">
+      {{aa-peak-meter class="volume-peak-meter"}}
+      {{aa-slider
+        class="volume-slider"
+        showValue=true
+        valueTitle="VOL"
+      }}
+    </div>
+
+    <div class="gain-container">
+      {{aa-peak-meter class="gain-peak-meter"}}
+      {{aa-slider 
+        class="gain-slider"
+        showValue=true
+        valueTitle="GAIN"
+      }}
+    </div>
+
+    <div class="button-container">
+      {{aa-toggle-button
+        class="toggle-button"
+        isActive=true
+        text="Mute"
+        icon="assets/images/volume-off-icon.svg"
+      }}
+      {{aa-toggle-button
+        class="toggle-button"
+        isActive=true
+        text="Solo"
+        icon="assets/images/volume-on-icon.svg"
+      }}
+    </div>
+  </div>
+</div>
