@@ -25,13 +25,13 @@
   <div class="button-container">
     {{aa-toggle-button
       class="toggle-button"
-      isActive=this.mute
+      isActive=this.isMuted
       text="M"
       onButtonClick=this.onChannelMuteChange
     }}
     {{aa-toggle-button
       class="toggle-button"
-      isActive=this.solo
+      isActive=this.isSolo
       text="S"
       onButtonClick=this.onChannelSoloChange
     }}

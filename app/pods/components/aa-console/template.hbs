@@ -10,8 +10,8 @@
     {{aa-channel
       name=channel.data.channelName
       volume=channel.data.volume
-      mute=channel.data.isMuted
-      solo=channel.data.isSolo
+      isMuted=channel.data.isMuted
+      isSolo=channel.data.isSolo
       onChannelVolumeChange=(action "onChannelVolumeChange" channel.data)
       onChannelMuteChange=(action "onChannelMuteChange" channel.data)
       onChannelSoloChange=(action "onChannelSoloChange" channel.data)
