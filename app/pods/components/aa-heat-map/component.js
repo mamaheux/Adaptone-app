@@ -44,7 +44,7 @@ export default PositionsMap.extend({
       heatMap.addData({
         x: micPosition.x + MIC_ICON_X_OFFSET,
         y: micPosition.y + MIC_ICON_Y_OFFSET,
-        value: micPosition.value
+        value: micPosition.errorRate
       });
     });
   }

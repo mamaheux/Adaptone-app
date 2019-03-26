@@ -8,7 +8,6 @@ const SPEAKER_TYPE = 's';
 const CANVAS_PADDING = 50;
 
 export default Component.extend({
-
   micPositions: null,
   speakerPositions: null,
 

@@ -9,6 +9,7 @@
       min=0
       value=this.volume
       max=100
+      onSliderChange=this.onChannelVolumeChange
     }}
 
     {{aa-peak-meter
@@ -26,11 +27,13 @@
       class="toggle-button"
       isActive=this.mute
       text="M"
+      onButtonClick=this.onChannelMuteChange
     }}
     {{aa-toggle-button
       class="toggle-button"
       isActive=this.solo
       text="S"
+      onButtonClick=this.onChannelSoloChange
     }}
   </div>
 </div>

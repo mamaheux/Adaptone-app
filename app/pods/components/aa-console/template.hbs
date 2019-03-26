@@ -1,10 +1,20 @@
+{{aa-heat-map
+  max=0.15
+  min=0
+  radius=250
+  positions=this.positions.data.positions
+}}
+
 <div class="channels">
   {{#each-in this.channels as |index channel|}}
     {{aa-channel
       name=channel.data.channelName
       volume=channel.data.volume
-      isMuted=channel.data.isMuted
-      isSolo=channel.data.isSolo
+      mute=channel.data.isMuted
+      solo=channel.data.isSolo
+      onChannelVolumeChange=(action "onChannelVolumeChange" channel.data)
+      onChannelMuteChange=(action "onChannelMuteChange" channel.data)
+      onChannelSoloChange=(action "onChannelSoloChange" channel.data)
     }}
   {{/each-in}}
 </div>
