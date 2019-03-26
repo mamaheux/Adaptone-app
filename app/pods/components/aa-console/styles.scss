@@ -1,6 +1,12 @@
+@import "app/styles/variables.scss";
+
 & {
   display: flex;
   flex-direction: column;
+}
+
+.heat-map {
+  border: 3px solid $big-stone;
 }
 
 .channels {
