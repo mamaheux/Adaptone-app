@@ -1,8 +1,8 @@
 @import 'app/styles/variables.scss';
 
-.volume-gain{
+.volume-gain {
   margin-top: 10px;
-  width: 310px;
+  max-width: 310px;
 }
 
 .volume-gain-container {
@@ -51,10 +51,6 @@
 }
 
 .toggle-button {
-  & > .button {
-    border-radius: 0px;
-  }
-
   & > .button:first-child {
     margin-right: 35px;
   }

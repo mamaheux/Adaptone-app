@@ -12,7 +12,7 @@
       {{aa-slider
         class="slider"
         showValue=true
-        valueTitle="VOL"
+        valueTitle=(t 'volume-gain.volume')
         min=0
         value=this.volume
         max=100
@@ -32,7 +32,7 @@
       {{aa-slider 
         class="slider"
         showValue=true
-        valueTitle="GAIN"
+        valueTitle=(t 'volume-gain.gain')
         min=0
         value=this.gain
         max=100
@@ -45,13 +45,13 @@
     {{aa-toggle-button
       class="toggle-button"
       isActive=this.isMute
-      text="Mute"
+      text=(t 'volume-gain.mute')
       icon="assets/images/volume-off-icon.svg"
     }}
     {{aa-toggle-button
       class="toggle-button"
       isActive=this.isSolo
-      text="Solo"
+      text=(t 'volume-gain.solo')
       onButtonClick=this.onChannelSoloChange
       icon="assets/images/volume-on-icon.svg"
     }}
