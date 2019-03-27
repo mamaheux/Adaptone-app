@@ -3,6 +3,7 @@
 .channel {
   background-color: $silver;
   border: 1.5px solid $big-stone;
+  border-top: none;
   width: 97px;
 }
 
@@ -63,7 +64,7 @@
     width: 210px;
     transform: rotate(-90deg);
   }
-  
+
   & > .peak-meter-part {
     &.peak {
       width: 2px;

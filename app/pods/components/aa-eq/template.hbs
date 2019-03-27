@@ -1,0 +1,91 @@
+{{#if this.isParametric}}
+  <div class="parametric-filters">
+    <span class="title">
+      {{t 'eq.title'}}
+    </span>
+
+    <div class="parametric-filter-buttons-container">
+      {{#each-in this.parametricFilters as |index filter|}}
+        <button
+          class="parametric-filter-button {{if filter.isSelected "active"}}"
+          onclick={{action "onFilterClick" filter}}
+        >
+          {{filter.name}}
+        </button>
+      {{/each-in}}
+    </div>
+  </div>
+
+  {{#if this.currentFilter}}
+    <div class="parametric-filter-options">
+      {{aa-power-button
+        class="power-button"
+        isOn=this.currentFilter.isActive
+      }}
+
+      <div class="knob">
+        <span class="knob-title">
+          {{t 'eq.frequency'}}
+        </span>
+        {{aa-knob
+          min=0
+          mid=600
+          max=20000
+          value=this.currentFilter.frequency
+        }}
+      </div>
+
+      <div class="knob">
+        <span class="knob-title">
+          {{t 'eq.q'}}
+        </span>
+        {{aa-knob
+          min=0.5
+          mid=2
+          max=5
+          value=this.currentFilter.q
+        }}
+      </div>
+
+      <div class="knob">
+        <span class="knob-title">
+          {{t 'eq.gain'}}
+        </span>
+        {{aa-knob
+          min=-12
+          mid=0
+          max=12
+          value=this.currentFilter.gain
+        }}
+      </div>
+    </div>
+  {{/if}}
+{{else}}
+  <div class="graphic-filters">
+    <span class="title">
+      {{t 'eq.title'}}
+    </span>
+
+    <div class="graphic-filter-options">
+      {{#each-in this.graphicFilters as |index filter|}}
+        <div class="slider-container">
+          {{aa-slider
+            class="slider"
+            min=filter.min
+            max=filter.max
+            value=filter.value
+            showValue=true
+            valueTitle="Gain"
+          }}
+
+          <span class="slider-frequency">
+            {{filter.frequency}}
+          </span>
+          <span class="slider-name">
+            {{filter.name}}
+          </span>
+        </div>
+      {{/each-in}}
+    </div>
+  </div>
+{{/if}}

@@ -6,6 +6,10 @@ export default Component.extend({
   actions: {
     toggleActive() {
       this.toggleProperty('isActive');
+
+      if (this.get('onButtonClick')) {
+        this.get('onButtonClick')();
+      }
     }
   }
 });
