@@ -1,0 +1,68 @@
+@import 'app/styles/variables.scss';
+
+.volume-gain{
+
+}
+
+.volume-gain-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.volume-container {
+  margin-left: 70px;
+}
+
+.volume-peak-meter {
+  & > .peak-meter {
+    position: relative;
+    top: 120px;
+    right: 140px;
+    height: 25px;
+    width: 210px;
+    transform: rotate(-90deg);
+  }
+  & > .peak-meter-part {
+    &.peak {
+      width: 2px;
+      height: 25px;
+    }
+  }
+}
+
+.volume-slider {
+
+}
+
+.gain-container {
+
+}
+
+.gain-peak-meter {
+  & > .peak-meter {
+    position: relative;
+    top: 120px;
+    right: 140px;
+    height: 25px;
+    width: 210px;
+    transform: rotate(-90deg);
+  }
+  & > .peak-meter-part {
+    &.peak {
+      width: 2px;
+      height: 25px;
+    }
+  }
+}
+
+.gain-slider {
+  
+}
+
+.button-container {
+
+}
+
+.toggle-button {
+
+}
