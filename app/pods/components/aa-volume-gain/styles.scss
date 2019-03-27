@@ -1,68 +1,61 @@
 @import 'app/styles/variables.scss';
 
 .volume-gain{
-
+  margin-top: 10px;
+  width: 310px;
 }
 
 .volume-gain-container {
   display: flex;
   flex-direction: row;
+  margin-bottom: 20px;
 }
 
 .volume-container {
-  margin-left: 70px;
-}
-
-.volume-peak-meter {
-  & > .peak-meter {
-    position: relative;
-    top: 120px;
-    right: 140px;
-    height: 25px;
-    width: 210px;
-    transform: rotate(-90deg);
-  }
-  & > .peak-meter-part {
-    &.peak {
-      width: 2px;
-      height: 25px;
-    }
-  }
-}
-
-.volume-slider {
-
+  margin-left: 40px;
+  width: 150px;
 }
 
 .gain-container {
-
+  width: 120px;
 }
 
-.gain-peak-meter {
+.peak-meter {
   & > .peak-meter {
     position: relative;
-    top: 120px;
-    right: 140px;
-    height: 25px;
+    top: 115px;
+    right: 130px;
+    height: 15px;
     width: 210px;
     transform: rotate(-90deg);
-  }
+  }  
+  
   & > .peak-meter-part {
     &.peak {
       width: 2px;
-      height: 25px;
+      height: 15px;
     }
   }
 }
 
-.gain-slider {
-  
+.slider {
+  & > .value-container {
+    height: 80px;
+  }
 }
 
 .button-container {
-
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .toggle-button {
+  & > .button {
+    border-radius: 0px;
+  }
 
+  & > .button:first-child {
+    margin-right: 35px;
+  }
 }
