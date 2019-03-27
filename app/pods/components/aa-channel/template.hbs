@@ -1,24 +1,39 @@
 <div class="channel">
   <div class="name">
-    <div class="input">{{inputName}}</div>
+    <div class="input">{{this.name}}</div>
     <div class="details">...</div>
   </div>
 
   <div class="meter-container">
-    {{aa-slider}}
-    {{aa-peak-meter class="peak-meter"}}
+    {{aa-slider
+      min=0
+      value=this.volume
+      max=100
+      onSliderChange=this.onChannelVolumeChange
+    }}
+
+    {{aa-peak-meter
+      min=0
+      max=100
+      yellowLimit=65
+      redLimit=85
+      value=this.volume
+      class="peak-meter"
+    }}
   </div>
 
   <div class="button-container">
     {{aa-toggle-button
       class="toggle-button"
-      isActive=true
+      isActive=this.isMuted
       text="M"
+      onButtonClick=this.onChannelMuteChange
     }}
     {{aa-toggle-button
       class="toggle-button"
-      isActive=true
+      isActive=this.isSolo
       text="S"
+      onButtonClick=this.onChannelSoloChange
     }}
   </div>
 </div>
