@@ -1,0 +1,35 @@
+@import 'app/styles/variables.scss';
+
+& {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.channel-name {
+  background-color: $big-stone;
+  color: #fff;
+  font-family: $text-font-semibold;
+  font-size: 24px;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-right: 20px;
+}
+
+.graph {
+  height: 410px;
+  width: 100%;
+  border: 2px solid $big-stone;
+}
+
+.eq-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}

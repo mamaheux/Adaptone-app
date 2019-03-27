@@ -51,3 +51,6 @@ eq:
   frequency: FREQ (Hz)
   q: Q
   gain: Gain (dB)
+channel-details:
+  graphic: Graph
+  parametric: Param

@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import {set} from '@ember/object';
 
 export default Component.extend({
-  isParametric: true,
+  isParametric: false,
   parametricFilters: null,
   graphicFilters: null,
   currentFilter: null,
@@ -24,7 +24,13 @@ export default Component.extend({
   },
 
   _setCurrentFilter() {
-    const selectedFilter = this.get('parametricFilters').find(filter => filter.isSelected === true);
-    if (selectedFilter) this.set('currentFilter', selectedFilter);
+    const parametricFilters = this.get('parametricFilters');
+    const selectedFilter = parametricFilters.find(filter => filter.isSelected === true);
+    if (selectedFilter) {
+      this.set('currentFilter', selectedFilter)
+    } else {
+      this.parametricFilters[0].isSelected = true;
+      this.set('currentFilter', parametricFilters[0])
+    }
   }
 });
