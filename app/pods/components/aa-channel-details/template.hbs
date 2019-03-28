@@ -17,10 +17,14 @@
 <div class="eq-container">
   {{aa-volume-gain
     class="volume-gain-container"
-    volume=this.channel.data.volume
-    gain=this.channel.data.gain
+    volume=this.channelVolume
+    gain=this.channelGain
     isMute=this.channel.data.isMuted
     isSolo=this.channel.data.isSolo
+    onVolumeChange=(action "onVolumeChange")
+    onGainChange=(action "onGainChange")
+    onIsMutedChange=(action "onIsMutedChange")
+    onIsSoloChange=(action "onIsSoloChange")
   }}
 
   {{aa-eq

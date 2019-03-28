@@ -9,6 +9,7 @@
         redLimit=85
         value=this.volume
       }}
+
       {{aa-slider
         class="slider"
         showValue=true
@@ -16,7 +17,6 @@
         min=0
         value=this.volume
         max=100
-        onSliderChange=this.onChannelVolumeChange
       }}
     </div>
 
@@ -29,6 +29,7 @@
         redLimit=85
         value=this.gain
       }}
+
       {{aa-slider
         class="slider"
         showValue=true
@@ -36,7 +37,6 @@
         min=0
         value=this.gain
         max=100
-        onButtonClick=this.onChannelMuteChange
       }}
     </div>
   </div>
@@ -47,13 +47,15 @@
       isActive=this.isMuted
       text=(t 'volume-gain.mute')
       icon="assets/images/volume-off-icon.svg"
+      onButtonClick=(action "onIsMutedChange" this.isMuted)
     }}
+
     {{aa-toggle-button
       class="toggle-button"
       isActive=this.isSolo
       text=(t 'volume-gain.solo')
-      onButtonClick=this.onChannelSoloChange
       icon="assets/images/volume-on-icon.svg"
+      onButtonClick=(action "onIsSoloChange" this.isSolo)
     }}
   </div>
 </div>

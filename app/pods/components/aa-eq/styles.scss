@@ -9,7 +9,6 @@
   font-size: 30px;
   color: $big-stone;
   margin-right: 120px;
-  user-select: none;
 }
 
 .parametric-filters {
@@ -89,10 +88,6 @@
   font-size: 20px;
   color: $big-stone;
   text-transform: uppercase;
-}
-
-.knob-title {
-  user-select: none;
 }
 
 .slider-container {

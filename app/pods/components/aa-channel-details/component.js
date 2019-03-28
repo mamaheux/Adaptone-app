@@ -4,6 +4,9 @@ export default Component.extend({
   channel: null,
   isParametric: true,
 
+  channelVolume: 0,
+  channelGain: 0,
+
   init() {
     this._super(...arguments);
     this.set('channel', {
@@ -32,5 +35,25 @@ export default Component.extend({
         ]
       }
     });
+  },
+
+  actions: {
+    onVolumeChange(value) {
+      return value;
+    },
+
+    onGainChange(value) {
+      return value;
+    },
+
+    onIsMutedChange(value) {
+
+      return value;
+    },
+
+    onIsSoloChange(value) {
+
+      return value;
+    }
   }
 });

@@ -16,7 +16,6 @@
   font-family: $text-font-semibold;
   color: $big-stone;
   text-transform: uppercase;
-  user-select: none;
   transition: 0.3s color ease;
 
   &.active {
