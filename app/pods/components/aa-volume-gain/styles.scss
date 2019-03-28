@@ -2,7 +2,7 @@
 
 .volume-gain {
   margin-top: 10px;
-  max-width: 310px;
+  max-width: 300px;
 }
 
 .volume-gain-container {
@@ -13,11 +13,12 @@
 
 .volume-container {
   margin-left: 40px;
-  width: 150px;
+  max-width: 100px;
 }
 
 .gain-container {
-  width: 120px;
+  margin-left: 40px;
+  max-width: 120px;
 }
 
 .peak-meter {
@@ -27,7 +28,6 @@
     right: 130px;
     height: 15px;
     width: 210px;
-    transform: rotate(-90deg);
   }  
   
   & > .peak-meter-part {
