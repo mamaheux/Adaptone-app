@@ -33,3 +33,17 @@
   align-items: center;
   justify-content: space-around;
 }
+
+.volume-gain-container {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    width: 1px;
+    height: 100%;
+    background-color: $big-stone
+  }
+}

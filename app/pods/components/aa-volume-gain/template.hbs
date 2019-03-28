@@ -1,7 +1,7 @@
 <div class="volume-gain">
   <div class="volume-gain-container">
     <div class="volume-container">
-      {{aa-peak-meter 
+      {{aa-peak-meter
         class="peak-meter"
         min=0
         max=100
@@ -21,7 +21,7 @@
     </div>
 
     <div class="gain-container">
-      {{aa-peak-meter 
+      {{aa-peak-meter
         class="peak-meter"
         min=0
         max=100
@@ -29,7 +29,7 @@
         redLimit=85
         value=this.gain
       }}
-      {{aa-slider 
+      {{aa-slider
         class="slider"
         showValue=true
         valueTitle=(t 'volume-gain.gain')
@@ -44,7 +44,7 @@
   <div class="button-container">
     {{aa-toggle-button
       class="toggle-button"
-      isActive=this.isMute
+      isActive=this.isMuted
       text=(t 'volume-gain.mute')
       icon="assets/images/volume-off-icon.svg"
     }}

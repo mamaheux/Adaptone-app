@@ -11,13 +11,18 @@
   }}
 </div>
 
-
 <div class="graph"></div>
 
+
 <div class="eq-container">
-  <div>
-    hi
-  </div>
+  {{aa-volume-gain
+    class="volume-gain-container"
+    volume=this.channel.data.volume
+    gain=this.channel.data.gain
+    isMute=this.channel.data.isMuted
+    isSolo=this.channel.data.isSolo
+  }}
+
   {{aa-eq
     isParametric=this.isParametric
     parametricFilters=this.channel.data.paramEq
