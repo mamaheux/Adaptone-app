@@ -51,3 +51,8 @@ eq:
   frequency: FREQ (Hz)
   q: Q
   gain: Gain (dB)
+volume-gain:
+  volume: vol
+  gain: gain
+  mute: Mute
+  solo: Solo

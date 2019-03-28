@@ -1,0 +1,59 @@
+<div class="volume-gain">
+  <div class="volume-gain-container">
+    <div class="volume-container">
+      {{aa-peak-meter 
+        class="peak-meter"
+        min=0
+        max=100
+        yellowLimit=65
+        redLimit=85
+        value=this.volume
+      }}
+      {{aa-slider
+        class="slider"
+        showValue=true
+        valueTitle=(t 'volume-gain.volume')
+        min=0
+        value=this.volume
+        max=100
+        onSliderChange=this.onChannelVolumeChange
+      }}
+    </div>
+
+    <div class="gain-container">
+      {{aa-peak-meter 
+        class="peak-meter"
+        min=0
+        max=100
+        yellowLimit=65
+        redLimit=85
+        value=this.gain
+      }}
+      {{aa-slider 
+        class="slider"
+        showValue=true
+        valueTitle=(t 'volume-gain.gain')
+        min=0
+        value=this.gain
+        max=100
+        onButtonClick=this.onChannelMuteChange
+      }}
+    </div>
+  </div>
+
+  <div class="button-container">
+    {{aa-toggle-button
+      class="toggle-button"
+      isActive=this.isMute
+      text=(t 'volume-gain.mute')
+      icon="assets/images/volume-off-icon.svg"
+    }}
+    {{aa-toggle-button
+      class="toggle-button"
+      isActive=this.isSolo
+      text=(t 'volume-gain.solo')
+      onButtonClick=this.onChannelSoloChange
+      icon="assets/images/volume-on-icon.svg"
+    }}
+  </div>
+</div>

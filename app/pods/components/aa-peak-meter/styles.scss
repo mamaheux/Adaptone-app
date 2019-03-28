@@ -1,6 +1,7 @@
 @import 'app/styles/variables.scss';
 
 .peak-meter {
+  transform: rotate(-90deg);
   width: 250px;
   height: 25px;
   border: none;
