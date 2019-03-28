@@ -54,3 +54,8 @@ eq:
 channel-details:
   graphic: Graph
   parametric: Param
+volume-gain:
+  volume: vol
+  gain: gain
+  mute: Mute
+  solo: Solo
