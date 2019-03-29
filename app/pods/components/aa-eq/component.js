@@ -20,6 +20,18 @@ export default Component.extend({
 
       set(selectedFilter, 'isSelected', true);
       this.set('currentFilter', selectedFilter);
+    },
+
+    onFrequencyChange(value) {
+      this.get('onFrequencyChange')(value);
+    },
+
+    onGainChange(value) {
+      this.get('onGainChange')(value);
+    },
+
+    onQChange(value) {
+      this.get('onQChange')(value);
     }
   },
 

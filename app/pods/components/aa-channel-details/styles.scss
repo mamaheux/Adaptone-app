@@ -5,10 +5,18 @@
   flex-direction: column;
 }
 
+.graph-container {
+  position: relative;
+  border: 2px solid $big-stone;
+}
+
 .header {
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .channel-name {
@@ -16,15 +24,14 @@
   color: #fff;
   font-family: $text-font-semibold;
   font-size: 24px;
-  border-radius: 4px;
-  padding: 5px 10px;
-  margin-right: 20px;
+  border-radius: 0 4px 4px 0;
+  padding: 2px 8px;
+  margin-right: 15px;
 }
 
 .graph {
-  height: 410px;
+  height: 350px;
   width: 100%;
-  border: 2px solid $big-stone;
 }
 
 .eq-container {
@@ -41,9 +48,9 @@
     content: '';
     position: absolute;
     top: 20px;
-    right: -30px;
+    right: 0;
     width: 1px;
-    height: 100%;
+    height: 85%;
     background-color: $big-stone
   }
 }

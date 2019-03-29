@@ -1,11 +1,16 @@
 import Component from '@ember/component';
+import {observer} from '@ember/object';
 
 export default Component.extend({
   channel: null,
   isParametric: true,
 
-  channelVolume: 0,
-  channelGain: 0,
+  userChannelVolume: 0,
+  userChannelGain: 0,
+
+  graphEqChange: observer('channel.data.graphEq.@each.value', function() {
+    return this.channel.data.graphEq;
+  }),
 
   init() {
     this._super(...arguments);
@@ -30,7 +35,15 @@ export default Component.extend({
         graphEq: [
           {
             id: 0,
-            value: 50
+            value: -10
+          },
+          {
+            id: 1,
+            value: 2
+          },
+          {
+            id: 2,
+            value: 11
           }
         ]
       }
@@ -47,12 +60,22 @@ export default Component.extend({
     },
 
     onIsMutedChange(value) {
-
       return value;
     },
 
     onIsSoloChange(value) {
+      return value;
+    },
 
+    onFrequencyChange(value) {
+      return value;
+    },
+
+    onGainChange(value) {
+      return value;
+    },
+
+    onQChange(value) {
       return value;
     }
   }

@@ -1,24 +1,25 @@
-{{this.channelId}}
+<div class="graph-container">
+  <div class="header">
+    <div class="channel-name">
+      {{this.channel.data.channelName}}
+    </div>
 
-<div class="header">
-  <div class="channel-name">
-    {{this.channel.data.channelName}}
+    {{aa-toggle
+      leftValue=(t 'channel-details.graphic')
+      rightValue=(t 'channel-details.parametric')
+      isActive=this.isParametric
+    }}
   </div>
-  {{aa-toggle
-    leftValue=(t 'channel-details.graphic')
-    rightValue=(t 'channel-details.parametric')
-    isActive=this.isParametric
-  }}
-</div>
 
-<div class="graph"></div>
+  <div class="graph"></div>
+</div>
 
 
 <div class="eq-container">
   {{aa-volume-gain
     class="volume-gain-container"
-    volume=this.channelVolume
-    gain=this.channelGain
+    volume=this.userChannelVolume
+    gain=this.userChannelGain
     isMute=this.channel.data.isMuted
     isSolo=this.channel.data.isSolo
     onVolumeChange=(action "onVolumeChange")
@@ -31,5 +32,8 @@
     isParametric=this.isParametric
     parametricFilters=this.channel.data.paramEq
     graphicFilters=this.channel.data.graphEq
+    onFrequencyChange=(action "onFrequencyChange")
+    onGainChange=(action "onGainChange")
+    onQChange=(action "onQChange")
   }}
 </div>

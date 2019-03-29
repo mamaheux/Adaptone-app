@@ -32,6 +32,7 @@
           mid=600
           max=20000
           value=this.currentFilter.frequency
+          onValueChange=(action "onFrequencyChange")
         }}
       </div>
 
@@ -44,6 +45,7 @@
           mid=2
           max=5
           value=this.currentFilter.q
+          onValueChange=(action "onQChange")
         }}
       </div>
 
@@ -56,6 +58,7 @@
           mid=0
           max=12
           value=this.currentFilter.gain
+          onValueChange=(action "onGainChange")
         }}
       </div>
     </div>
@@ -71,11 +74,11 @@
         <div class="slider-container">
           {{aa-slider
             class="slider"
-            min=filter.min
-            max=filter.max
+            min=-12
+            max=12
             value=filter.value
             showValue=true
-            valueTitle="Gain"
+            valueTitle=(t 'eq.gain-short')
           }}
 
           <span class="slider-frequency">
