@@ -46,6 +46,7 @@
     "ember-export-application-global": "^2.0.0",
     "ember-gestures": "^1.1.1",
     "ember-hammertime": "^1.6.0",
+    "ember-highcharts": "^1.1.1",
     "ember-inline-svg": "^0.2.1",
     "ember-intl": "^3.5.2",
     "ember-load-initializers": "^1.0.0",
@@ -58,6 +59,7 @@
     "ember-websockets": "^7.2.0",
     "eslint-plugin-ember": "^5.0.0",
     "heatmap.js": "^2.0.5",
+    "highcharts": "^7.0.3",
     "loader.js": "^4.2.3",
     "sass": "^1.17.2",
     "ui-ember-slider": "^0.5.0"
