@@ -33,10 +33,6 @@ export default Component.extend({
       return value;
     },
 
-    onGainChange(value) {
-      return value;
-    },
-
     onQChange(value) {
       return value;
     }

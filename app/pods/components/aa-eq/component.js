@@ -39,10 +39,10 @@ export default Component.extend({
     const parametricFilters = this.get('parametricFilters');
     const selectedFilter = parametricFilters.find(filter => filter.isSelected === true);
     if (selectedFilter) {
-      this.set('currentFilter', selectedFilter)
+      this.set('currentFilter', selectedFilter);
     } else {
       this.parametricFilters[0].isSelected = true;
-      this.set('currentFilter', parametricFilters[0])
+      this.set('currentFilter', parametricFilters[0]);
     }
   }
 });
