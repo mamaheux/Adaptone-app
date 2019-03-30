@@ -4,6 +4,7 @@
 @import "./variables.scss";
 
 html, body {
+  user-select: none;
   background-color: $mercury;
 }
 

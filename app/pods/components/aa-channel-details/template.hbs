@@ -1,0 +1,43 @@
+<div class="graph-container">
+  <div class="header">
+    <div class="channel-name">
+      {{this.channel.data.channelName}}
+    </div>
+
+    {{aa-toggle
+      leftValue=(t 'channel-details.graphic')
+      rightValue=(t 'channel-details.parametric')
+      isActive=this.isParametric
+    }}
+  </div>
+
+  <div class="graph"></div>
+</div>
+
+
+<div class="eq-container">
+  {{aa-volume-gain
+    class="volume-gain-container"
+    volume=this.userChannelVolume
+    gain=this.userChannelGain
+    isMute=this.channel.data.isMuted
+    isSolo=this.channel.data.isSolo
+    onVolumeChange=(action "onVolumeChange")
+    onGainChange=(action "onGainChange")
+    onIsMutedChange=(action "onIsMutedChange")
+    onIsSoloChange=(action "onIsSoloChange")
+  }}
+
+  {{aa-eq
+    isParametric=this.isParametric
+    parametricFilters=this.channel.data.paramEq
+    graphicFilters=this.channel.data.graphEq
+    onFrequencyChange=(action "onFrequencyChange")
+    onGainChange=(action "onGainChange")
+    onQChange=(action "onQChange")
+  }}
+</div>
+
+{{#link-to 'console'}}
+  {{inline-svg "assets/images/arrow-icon.svg" class="arrow-icon"}}
+{{/link-to}}

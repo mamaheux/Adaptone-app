@@ -104,5 +104,7 @@ export default Component.extend(RecognizerMixin, {
       parent._rotate($(this), START_DEG + angle);
       quarterNumber++;
     });
+
+    this.get('onValueChange')(value);
   }
 });

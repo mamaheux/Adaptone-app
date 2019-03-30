@@ -24,10 +24,15 @@
 }
 
 .details {
-  font-size: 30px;
-  font-family: $text-font-bold;
-  color: $big-stone;
-  transform: rotate(-90deg)
+  margin-right: 10px;
+  transform: rotate(-90deg);
+
+  & > a {
+    text-decoration: none;
+    font-size: 34px;
+    font-family: $text-font-bold;
+    color: $big-stone;
+  }
 }
 
 .button-container {

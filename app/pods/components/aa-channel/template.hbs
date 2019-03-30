@@ -1,7 +1,11 @@
 <div class="channel">
   <div class="name">
     <div class="input">{{this.name}}</div>
-    <div class="details">...</div>
+    <div class="details">
+      {{#link-to "channel-details" (query-params channelId=this.channelId)}}
+        ...
+      {{/link-to}}
+    </div>
   </div>
 
   <div class="meter-container">

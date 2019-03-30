@@ -51,6 +51,10 @@ eq:
   frequency: FREQ (Hz)
   q: Q
   gain: Gain (dB)
+  gain-short: Gain
+channel-details:
+  graphic: Graph
+  parametric: Param
 volume-gain:
   volume: vol
   gain: gain
