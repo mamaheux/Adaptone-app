@@ -1,3 +1,5 @@
+@import "app/styles/variables.scss";
+
 & {
   display: flex;
   align-items: center;
@@ -15,14 +17,22 @@
 }
 
 .button {
-  width: 10px;
-  height: 10px;
-  color: $mercury;
+  width: 12px;
+  height: 12px;
+  fill: $mercury;
   padding: 4px;
+}
+
+.close:hover {
+  background-color: $torch-red;
+}
+
+.minimize:hover,
+.maximize:hover {
+  background-color: lighten($big-stone, 20%);
 }
 
 .window-controls {
   display: flex;
-  margin-right: 5px;
   -webkit-app-region: no-drag;
 }

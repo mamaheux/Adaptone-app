@@ -14,6 +14,18 @@ export default Component.extend({
       });
     });
 
+    $('.maximize').on('click', () => {
+      run(() => {
+        const window = remote.getCurrentWindow();
+
+        if (window.isMaximized()) {
+          window.unmaximize();
+        } else {
+          window.maximize();
+        }
+      });
+    });
+
     $('.close').on('click', () => {
       run(() => {
         remote.app.quit();
