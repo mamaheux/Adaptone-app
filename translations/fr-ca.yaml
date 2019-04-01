@@ -70,4 +70,4 @@ eq-graph:
   series:
     eq-gain: Gains de l'EQ
     channel-amplitudes: Amplitude du canal
-    channels-amplitudes: Amplitudes des canaux ajoutées
+    channels-amplitudes: Amplitudes des canaux ajoutés
