@@ -60,3 +60,14 @@ volume-gain:
   gain: gain
   mute: Mute
   solo: Solo
+eq-graph:
+  axis:
+    frequency: Frequency (Hz)
+    gain: Gain (dB)
+  tooltip:
+    frequency: Freq
+    gain: Gain
+  series:
+    eq-gain: EQ gains
+    channel-amplitudes: Channel amplitudes
+    channels-amplitudes: Added channels amplitudes
