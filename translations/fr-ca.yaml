@@ -62,12 +62,12 @@ volume-gain:
   solo: Solo
 eq-graph:
   axis:
-    frequency: Frequency (Hz)
+    frequency: Fréquence (Hz)
     gain: Gain (dB)
   tooltip:
     frequency: Freq
     gain: Gain
   series:
-    eq-gain: EQ gains
-    channel-amplitudes: Channel amplitudes
-    channels-amplitudes: Added channels amplitudes
+    eq-gain: Gains de l'EQ
+    channel-amplitudes: Amplitude du canal
+    channels-amplitudes: Amplitudes des canaux ajoutées
