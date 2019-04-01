@@ -129,6 +129,58 @@ export default Component.extend({
           }
         ]
       }
+    },
+      {
+      seqId: 12,
+      data: {
+        channelId: 3,
+        points: [
+         {
+            freq: 16,
+            amplitude: -6
+          },
+          {
+            freq: 32,
+            amplitude: 5
+          },
+          {
+            freq: 63,
+            amplitude: 6
+          },
+          {
+            freq: 125,
+            amplitude: 5
+          },
+          {
+            freq: 250,
+            amplitude: 6
+          },
+          {
+            freq: 500,
+            amplitude: -5
+          },
+          {
+            freq: 1000,
+            amplitude: 2
+          },
+          {
+            freq: 2000,
+            amplitude: 3
+          },
+          {
+            freq: 4000,
+            amplitude: -5
+          },
+          {
+            freq: 8000,
+            amplitude: -6
+          },
+          {
+            freq: 16000,
+            amplitude: -10
+          }
+        ]
+      }
     }
     ]);
 
@@ -215,7 +267,7 @@ export default Component.extend({
     const amplitudes = this.get('amplitudes');
     let formattedData = {};
 
-    amplitudes.forEach(amplitude => {
+    amplitudes.filter(amplitude => amplitude.data.channelId !== this.get('currentChannelId')).forEach(amplitude => {
       amplitude.data.points.forEach(point => {
         if (formattedData[point.freq]) {
           formattedData[point.freq] += point.amplitude;
