@@ -1,5 +1,5 @@
 /* eslint-env node */
-const { app, BrowserWindow, protocol } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu, protocol } = require('electron');
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
 
@@ -29,11 +29,10 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
-  // const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
-  // mainWindow = new BrowserWindow({width, height});
   mainWindow = new BrowserWindow({
     width: 1064,
-    height: 768
+    height: 768,
+    frame: false
   });
 
   // If you want to open up dev tools programmatically, call
