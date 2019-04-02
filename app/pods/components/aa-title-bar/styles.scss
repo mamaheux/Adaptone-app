@@ -32,6 +32,17 @@
   background-color: lighten($big-stone, 20%);
 }
 
+.maximize rect {
+  width: 9px;
+  height: 9px;
+  stroke: #e5e5e5;
+}
+
+.minimize rect {
+  width: 10px;
+  height: 1px;
+}
+
 .window-controls {
   display: flex;
   -webkit-app-region: no-drag;
