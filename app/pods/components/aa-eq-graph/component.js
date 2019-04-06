@@ -35,21 +35,21 @@ export default Component.extend({
   chart: null,
 
   eqGainsChanged: observer('channelInfos.data.{paramEq,graphEq}.@each.{on,freq,q,gain}', 'isParametric', function() {
-    let chart = Highcharts.charts[CHART_INDEX];
+    const chart = Highcharts.charts[CHART_INDEX];
     this.setEqGains();
 
     chart.series[EQ_GAINS_SERIE_INDEX].setData(this.get('eqGains'), true);
   }),
 
   channelAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
-    let chart = Highcharts.charts[CHART_INDEX];
+    const chart = Highcharts.charts[CHART_INDEX];
     this.setChannelAmplitudes();
 
     chart.series[AMPLITUDES_SERIE_INDEX].setData(this.get('channelAmplitudes'), true);
   }),
 
   addedChannelsAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
-    let chart = Highcharts.charts[CHART_INDEX];
+    const chart = Highcharts.charts[CHART_INDEX];
     this.setAddedChannelsAmplitudes();
 
     chart.series[ADDED_AMPLITUDES_SERIE_INDEX].setData(this.get('addedChannelsAmplitudes'), true);
@@ -63,23 +63,23 @@ export default Component.extend({
     // Fetch all amplitudes in a service here
 
     this.setEqGains();
-    //this.setChannelAmplitudes();
-    //this.setAddedChannelsAmplitudes();
+    // this.setChannelAmplitudes();
+    // this.setAddedChannelsAmplitudes();
 
     this.setChartOptions();
   },
 
   setEqGains() {
     const channelInfos = this.get('channelInfos');
-    let formattedData = [];
+    const formattedData = [];
 
     if (this.get('isParametric')) {
       channelInfos.data.paramEq.forEach(paramEq => {
-        formattedData.push([paramEq.freq, paramEq.gain])
+        formattedData.push([paramEq.freq, paramEq.gain]);
       });
     } else {
       channelInfos.data.graphEq.forEach(graphEq => {
-        formattedData.push([graphEq.freq, graphEq.value])
+        formattedData.push([graphEq.freq, graphEq.value]);
       });
     }
 
