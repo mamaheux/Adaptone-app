@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import Component from '@ember/component';
 import {observer} from '@ember/object';
 import {inject as service} from '@ember/service';
