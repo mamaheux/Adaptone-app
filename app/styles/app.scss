@@ -6,6 +6,9 @@
 html, body {
   user-select: none;
   background-color: $mercury;
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .ember-modal-dialog {
