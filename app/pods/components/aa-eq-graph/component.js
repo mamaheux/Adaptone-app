@@ -14,7 +14,7 @@ const GAIN_ZERO_VALUE = 0;
 const GAIN_ZERO_WIDTH = 1;
 const GAIN_ZERO_ZINDEX = 3;
 const MIN_GAIN_VALUE = -60;
-const MAX_GAIN_VALUE = 15;
+const MAX_GAIN_VALUE = 20;
 
 export default Component.extend({
   intl: service(),
@@ -63,8 +63,8 @@ export default Component.extend({
     // Fetch all amplitudes in a service here
 
     this.setEqGains();
-    // this.setChannelAmplitudes();
-    // this.setAddedChannelsAmplitudes();
+    this.setChannelAmplitudes();
+    this.setAddedChannelsAmplitudes();
 
     this.setChartOptions();
   },
