@@ -1,13 +1,20 @@
 import Component from '@ember/component';
-import {computed} from '@ember/object';
+import {observer} from '@ember/object';
 import {inject as service} from '@ember/service';
 import chartTheme from 'adaptone-front/constants/chart-theme';
 
+const CHART_INDEX = 0;
+const EQ_GAINS_SERIE_INDEX = 0;
+const AMPLITUDES_SERIE_INDEX = 1;
+const ADDED_AMPLITUDES_SERIE_INDEX = 2;
+
 const GRAPH_HEIGHT = '350px';
-const GAIN_TICK_INTERVAL = 3;
+const GAIN_TICK_INTERVAL = 5;
 const GAIN_ZERO_VALUE = 0;
 const GAIN_ZERO_WIDTH = 1;
 const GAIN_ZERO_ZINDEX = 3;
+const MIN_GAIN_VALUE = -60;
+const MAX_GAIN_VALUE = 15;
 
 export default Component.extend({
   intl: service(),
@@ -21,7 +28,48 @@ export default Component.extend({
   chartData: null,
   theme: chartTheme,
 
-  eqGains: computed('channelInfos.data.{paramEq,graphEq}.@each', 'isParametric', function() {
+  eqGains: null,
+  channelAmplitudes: null,
+  addedChannelsAmplitudes: null,
+
+  chart: null,
+
+  eqGainsChanged: observer('channelInfos.data.{paramEq,graphEq}.@each.{on,freq,q,gain}', 'isParametric', function() {
+    let chart = Highcharts.charts[CHART_INDEX];
+    this.setEqGains();
+
+    chart.series[EQ_GAINS_SERIE_INDEX].setData(this.get('eqGains'), true);
+  }),
+
+  channelAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
+    let chart = Highcharts.charts[CHART_INDEX];
+    this.setChannelAmplitudes();
+
+    chart.series[AMPLITUDES_SERIE_INDEX].setData(this.get('channelAmplitudes'), true);
+  }),
+
+  addedChannelsAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
+    let chart = Highcharts.charts[CHART_INDEX];
+    this.setAddedChannelsAmplitudes();
+
+    chart.series[ADDED_AMPLITUDES_SERIE_INDEX].setData(this.get('addedChannelsAmplitudes'), true);
+  }),
+
+  init() {
+    this._super(...arguments);
+
+    this.set('currentChannelId', this.get('channelInfos').data.channelId);
+
+    // Fetch all amplitudes in a service here
+
+    this.setEqGains();
+    //this.setChannelAmplitudes();
+    //this.setAddedChannelsAmplitudes();
+
+    this.setChartOptions();
+  },
+
+  setEqGains() {
     const channelInfos = this.get('channelInfos');
     let formattedData = [];
 
@@ -35,10 +83,10 @@ export default Component.extend({
       });
     }
 
-    return formattedData;
-  }),
+    this.set('eqGains', formattedData);
+  },
 
-  channelAmplitudes: computed('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
+  setChannelAmplitudes() {
     const amplitudes = this.get('amplitudes');
     const formattedData = [];
 
@@ -48,10 +96,10 @@ export default Component.extend({
       formattedData.push([point.freq, point.amplitude]);
     });
 
-    return formattedData;
-  }),
+    this.set('channelAmplitudes', formattedData);
+  },
 
-  addedChannelsAmplitudes: computed('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
+  setAddedChannelsAmplitudes() {
     const amplitudes = this.get('amplitudes');
     let formattedData = {};
 
@@ -69,242 +117,13 @@ export default Component.extend({
       return [Number(key), Number(formattedData[key])];
     });
 
-    return formattedData;
-  }),
-
-  init() {
-    this._super(...arguments);
-
-    this.set('channelInfos', {
-      seqId: 10,
-      data: {
-        channelId: 1,
-        channelName: "Master",
-        gain: 75,
-        volume: 100,
-        isMuted: false,
-        isSolo: false,
-        paramEq: [
-          {
-            id: 0,
-            on: true,
-            freq:  20,
-            q: 4.4,
-            gain: -6
-          },
-          {
-            id: 1,
-            on: true,
-            freq:  100,
-            q: 4.4,
-            gain: 3
-          },
-          {
-            id: 2,
-            on: true,
-            freq:  200,
-            q: 4.4,
-            gain: 4
-          },
-          {
-            id: 3,
-            on: true,
-            freq: 300,
-            q: 4.4,
-            gain: 5
-          },
-          {
-            id: 4,
-            on: true,
-            freq:  1000,
-            q: 4.4,
-            gain: 4
-          }
-        ],
-        graphEq: [
-          {
-            id: 0,
-            freq: 10,
-            value: -3
-          },
-          {
-            id: 0,
-            freq: 100,
-            value: 3
-          },
-          {
-            id: 0,
-            freq: 200,
-            value: 6
-          }
-        ]
-      }
-    }),
-    this.set('currentChannelId', 1);
-    this.set('amplitudes', [{
-      seqId: 12,
-      data: {
-        channelId: 1,
-        points: [
-          {
-            freq: 16,
-            amplitude: -6
-          },
-          {
-            freq: 32,
-            amplitude: 5
-          },
-          {
-            freq: 63,
-            amplitude: 6
-          },
-          {
-            freq: 125,
-            amplitude: 5
-          },
-          {
-            freq: 250,
-            amplitude: 6
-          },
-          {
-            freq: 500,
-            amplitude: -5
-          },
-          {
-            freq: 1000,
-            amplitude: 2
-          },
-          {
-            freq: 2000,
-            amplitude: 3
-          },
-          {
-            freq: 4000,
-            amplitude: -5
-          },
-          {
-            freq: 8000,
-            amplitude: -6
-          },
-          {
-            freq: 16000,
-            amplitude: -10
-          }
-        ]
-      }
-    },
-    {
-      seqId: 12,
-      data: {
-        channelId: 2,
-        points: [
-         {
-            freq: 16,
-            amplitude: -6
-          },
-          {
-            freq: 32,
-            amplitude: 5
-          },
-          {
-            freq: 63,
-            amplitude: 6
-          },
-          {
-            freq: 125,
-            amplitude: 5
-          },
-          {
-            freq: 250,
-            amplitude: 6
-          },
-          {
-            freq: 500,
-            amplitude: -5
-          },
-          {
-            freq: 1000,
-            amplitude: 2
-          },
-          {
-            freq: 2000,
-            amplitude: 3
-          },
-          {
-            freq: 4000,
-            amplitude: -5
-          },
-          {
-            freq: 8000,
-            amplitude: -6
-          },
-          {
-            freq: 16000,
-            amplitude: -10
-          }
-        ]
-      }
-    },
-      {
-      seqId: 12,
-      data: {
-        channelId: 3,
-        points: [
-         {
-            freq: 16,
-            amplitude: -6
-          },
-          {
-            freq: 32,
-            amplitude: 5
-          },
-          {
-            freq: 63,
-            amplitude: 6
-          },
-          {
-            freq: 125,
-            amplitude: 5
-          },
-          {
-            freq: 250,
-            amplitude: 6
-          },
-          {
-            freq: 500,
-            amplitude: -5
-          },
-          {
-            freq: 1000,
-            amplitude: 2
-          },
-          {
-            freq: 2000,
-            amplitude: 3
-          },
-          {
-            freq: 4000,
-            amplitude: -5
-          },
-          {
-            freq: 8000,
-            amplitude: -6
-          },
-          {
-            freq: 16000,
-            amplitude: -10
-          }
-        ]
-      }
-    }
-    ]);
-
-    this.setChartOptions();
+    this.set('addedChannelsAmplitudes', formattedData);
   },
 
   setChartOptions() {
     const chartOptions = {
       chart: {
+        animation: false,
         type: 'spline',
         height: GRAPH_HEIGHT
       },
@@ -322,6 +141,8 @@ export default Component.extend({
         title: {
           text: this.intl.t('eq-graph.axis.gain')
         },
+        min: MIN_GAIN_VALUE,
+        max: MAX_GAIN_VALUE,
         plotLines: [{
           value: GAIN_ZERO_VALUE,
           color: 'rgba(245, 245, 245, 0.3)',

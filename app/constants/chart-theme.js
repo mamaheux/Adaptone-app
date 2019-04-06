@@ -41,7 +41,7 @@ const chartTheme = {
       style: {
         color: '#f5f5f5',
         fontWeight: 'bold',
-        fontSize: '18px',
+        fontSize: '20px',
         fontFamily: 'Open Sans, sans-serif'
 
       }
@@ -62,7 +62,7 @@ const chartTheme = {
       style: {
         color: '#f5f5f5',
         fontWeight: 'bold',
-        fontSize: '18px',
+        fontSize: '20px',
         fontFamily: 'Open Sans, sans-serif'
       }
     }
