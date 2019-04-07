@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
 import Component from '@ember/component';
-import {observer} from '@ember/object';
+import {computed, observer} from '@ember/object';
 import {inject as service} from '@ember/service';
 import chartTheme from 'adaptone-front/constants/chart-theme';
 
@@ -22,56 +22,16 @@ export default Component.extend({
   intl: service(),
 
   isParametric: true,
-  currentChannelId: null,
-  channelInfos: null,
-  amplitudes: null,
 
   chartOptions: null,
   chartData: null,
   theme: chartTheme,
 
-  eqGains: null,
-  channelAmplitudes: null,
-  addedChannelsAmplitudes: null,
-
-  chart: null,
-
-  eqGainsChanged: observer('channelInfos.data.{paramEq,graphEq}.@each.{on,freq,q,gain}', 'isParametric', function() {
-    const chart = Highcharts.charts[CHART_INDEX];
-    this.setEqGains();
-
-    chart.series[EQ_GAINS_SERIE_INDEX].setData(this.get('eqGains'), true);
+  currentChannelId: computed('channelInfos.data.channelId', function() {
+    return this.channelInfos.data.channelId;
   }),
 
-  channelAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
-    const chart = Highcharts.charts[CHART_INDEX];
-    this.setChannelAmplitudes();
-
-    chart.series[AMPLITUDES_SERIE_INDEX].setData(this.get('channelAmplitudes'), true);
-  }),
-
-  addedChannelsAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
-    const chart = Highcharts.charts[CHART_INDEX];
-    this.setAddedChannelsAmplitudes();
-
-    chart.series[ADDED_AMPLITUDES_SERIE_INDEX].setData(this.get('addedChannelsAmplitudes'), true);
-  }),
-
-  init() {
-    this._super(...arguments);
-
-    this.set('currentChannelId', this.get('channelInfos').data.channelId);
-
-    // Fetch all amplitudes in a service here
-
-    this.setEqGains();
-    this.setChannelAmplitudes();
-    this.setAddedChannelsAmplitudes();
-
-    this.setChartOptions();
-  },
-
-  setEqGains() {
+  eqGains: computed('channelInfos', function() {
     const channelInfos = this.get('channelInfos');
     const formattedData = [];
 
@@ -85,10 +45,10 @@ export default Component.extend({
       });
     }
 
-    this.set('eqGains', formattedData);
-  },
+    return formattedData;
+  }),
 
-  setChannelAmplitudes() {
+  channelAmplitudes: computed('amplitudes', function() {
     const amplitudes = this.get('amplitudes');
     const formattedData = [];
 
@@ -98,10 +58,10 @@ export default Component.extend({
       formattedData.push([point.freq, point.amplitude]);
     });
 
-    this.set('channelAmplitudes', formattedData);
-  },
+    return formattedData;
+  }),
 
-  setAddedChannelsAmplitudes() {
+  addedChannelsAmplitudes: computed('amplitudes', function() {
     const amplitudes = this.get('amplitudes');
     let formattedData = {};
 
@@ -119,7 +79,34 @@ export default Component.extend({
       return [Number(key), Number(formattedData[key])];
     });
 
-    this.set('addedChannelsAmplitudes', formattedData);
+    return formattedData;
+  }),
+
+  eqGainsChanged: observer('channelInfos.data.{paramEq,graphEq}.@each.{on,freq,q,gain}', 'isParametric', function() {
+    const chart = Highcharts.charts[CHART_INDEX];
+    this.notifyPropertyChange('eqGains');
+
+    chart.series[EQ_GAINS_SERIE_INDEX].setData(this.get('eqGains'), true);
+  }),
+
+  channelAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
+    const chart = Highcharts.charts[CHART_INDEX];
+    this.notifyPropertyChange('channelAmplitudes');
+
+    chart.series[AMPLITUDES_SERIE_INDEX].setData(this.get('channelAmplitudes'), true);
+  }),
+
+  addedChannelsAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
+    const chart = Highcharts.charts[CHART_INDEX];
+    this.notifyPropertyChange('addedChannelsAmplitudes');
+
+    chart.series[ADDED_AMPLITUDES_SERIE_INDEX].setData(this.get('addedChannelsAmplitudes'), true);
+  }),
+
+  init() {
+    this._super(...arguments);
+
+    this.setChartOptions();
   },
 
   setChartOptions() {

@@ -39,7 +39,7 @@ module.exports = {
     'jsx-quotes': [2, 'prefer-double'],
     'key-spacing': [2, {beforeColon: false, afterColon: true}],
     'max-depth': [2, 3],
-    'max-nested-callbacks': [2, 2],
+    'max-nested-callbacks': [2, 3],
     'no-alert': 2,
     'no-console': 2,
     'no-dupe-args': 2,
