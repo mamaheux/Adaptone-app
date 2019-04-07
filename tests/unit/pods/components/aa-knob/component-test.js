@@ -3,12 +3,12 @@ import { describe, it, beforeEach } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import Service from '@ember/service';
 
-const retriveGestures = () => {
+const retrieveGestures = () => {
   return null;
 }
 
 const gesturesServiceStub = Service.extend({
-  retrieve: retriveGestures
+  retrieve: retrieveGestures
 });
 
 describe('Unit | Component | aa-knob', function() {
