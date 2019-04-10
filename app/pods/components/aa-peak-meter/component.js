@@ -57,7 +57,7 @@ export default Component.extend({
 
   renderPeakMeter(value = this.get('value')) {
     if (this.get('convertToDecibels')) {
-      value = DECIBEL_FACTOR*Math.log(value);
+      value = DECIBEL_FACTOR * Math.log(value);
     }
 
     const meterValue = {
