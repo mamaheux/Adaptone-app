@@ -25,7 +25,10 @@ describe('Unit | Component | aa-knob', function() {
       component.setProperties({
         min: 16,
         mid: 600,
-        max: 12000
+        max: 12000,
+        onValueChange: function() {
+          return 0;
+        }
       });
     });
 

@@ -3,14 +3,20 @@ import {observer} from '@ember/object';
 
 const DEFAULT_PEAK_FALL_DELAY = 2000;
 const DEFAULT_PEAK_FALL_DURATION = 500;
+const DECIBEL_FACTOR = 20;
+const NORMALIZED_MAXIMUM = 1;
+const NORMALIZED_MINIMUM = 0;
 
 export default Component.extend({
   max: null,
-  meterElements: null,
   min: null,
   redLimit: null,
-  value: null,
   yellowLimit: null,
+  value: null,
+
+  convertToDecibels: true,
+
+  meterElements: null,
 
   peakFallDelay: DEFAULT_PEAK_FALL_DELAY,
   peakFallDuration: DEFAULT_PEAK_FALL_DURATION,
@@ -27,6 +33,9 @@ export default Component.extend({
   },
 
   initializeMeterElements() {
+    this.set('yellowLimit', this.normalize(this.get('yellowLimit')));
+    this.set('redLimit', this.normalize(this.get('redLimit')));
+
     this.set('meterElements', {
       green: this.element.querySelector('.green'),
       yellow: this.element.querySelector('.yellow'),
@@ -47,6 +56,10 @@ export default Component.extend({
   },
 
   renderPeakMeter(value = this.get('value')) {
+    if (this.get('convertToDecibels')) {
+      value = DECIBEL_FACTOR * Math.log(value);
+    }
+
     const meterValue = {
       currentValue: value,
       peak: this.updatePeak(this.get('meterElements').peakParameters, value)
@@ -56,11 +69,11 @@ export default Component.extend({
   },
 
   drawPeakMeter(meterValue) {
-    const {
-      meterElements,
-      yellowLimit,
-      redLimit
-    } = this.getProperties('meterElements', 'yellowLimit', 'redLimit');
+    const meterElements = this.get('meterElements');
+    let {yellowLimit, redLimit} = this.getProperties('yellowLimit', 'redLimit');
+
+    yellowLimit = this.normalize(yellowLimit);
+    redLimit = this.normalize(redLimit);
 
     let value = meterValue.currentValue;
     value = this.normalize(value);
@@ -81,11 +94,12 @@ export default Component.extend({
       dom.red.style.width = 0;
     }
 
-    const peak = this.normalize(meterValue.peak.value);
-    dom.peak.style.left = this.formatValue(peak - dom.peak.style.width);
+    dom.peak.style.left = this.formatValue(meterValue.peak.value - dom.peak.style.width);
   },
 
   updatePeak(peak, value) {
+    value = this.normalize(value);
+
     const now = (new Date()).getTime();
 
     if (value > peak.value) {
@@ -112,16 +126,15 @@ export default Component.extend({
     const {max, min} = this.getProperties('max', 'min');
 
     if (value > max) {
-      return max;
+      return NORMALIZED_MAXIMUM;
     } else if (value < min || isNaN(value)) {
-      return min;
-    } else {
-      return value;
+      return NORMALIZED_MINIMUM;
     }
+
+    return (value - min) / (max - min);
   },
 
   formatValue(value) {
-    const ratio = this.get('meterElements').size / this.get('max');
-    return `${Math.round(value * ratio)}px`;
+    return `${Math.round(value * this.get('meterElements').size)}px`;
   }
 });
