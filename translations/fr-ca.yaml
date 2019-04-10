@@ -52,6 +52,7 @@ eq:
   q: Q
   gain: Gain (dB)
   gain-short: Gain
+  frequency-symbol: Hz
 channel-details:
   graphic: Graph
   parametric: Param

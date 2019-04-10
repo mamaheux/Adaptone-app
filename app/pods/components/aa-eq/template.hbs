@@ -79,13 +79,11 @@
             value=filter.value
             showValue=true
             valueTitle=(t 'eq.gain-short')
+            onSliderChange=(action "onGraphicFilterChange")
           }}
 
           <span class="slider-frequency">
-            {{filter.frequency}}
-          </span>
-          <span class="slider-name">
-            {{filter.name}}
+            {{filter.frequency}} {{t 'eq.frequency-symbol'}}
           </span>
         </div>
       {{/each-in}}
