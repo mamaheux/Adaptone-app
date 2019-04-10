@@ -83,24 +83,24 @@ describe('Unit | Component | aa-positions-map', function() {
         it('should assign the proper mic and speaker position and styles', () => {
           const expectedMicPositions = [
             {
-              x: 30,
-              y: 51,
-              style: htmlSafe('position:absolute;top:51px;left:30px'),
+              x: 28,
+              y: 47,
+              style: htmlSafe('position:absolute;top:47px;left:28px'),
               type: 'm'
             },
             {
-              x: 90,
-              y: 101,
-              style: htmlSafe('position:absolute;top:101px;left:90px'),
+              x: 84,
+              y: 95,
+              style: htmlSafe('position:absolute;top:95px;left:84px'),
               type: 'm'
             }
           ];
 
           const expectedSpeakerPositions = [
             {
-              x: 150,
-              y: 152,
-              style: htmlSafe('position:absolute;top:152px;left:150px'),
+              x: 140,
+              y: 142,
+              style: htmlSafe('position:absolute;top:142px;left:140px'),
               type: 's'
             }
           ];
