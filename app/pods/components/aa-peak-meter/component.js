@@ -69,7 +69,11 @@ export default Component.extend({
   },
 
   drawPeakMeter(meterValue) {
-    const {meterElements, yellowLimit, redLimit} = this.getProperties('meterElements', 'yellowLimit', 'redLimit');
+    const meterElements = this.get('meterElements');
+    let {yellowLimit, redLimit} = this.getProperties('yellowLimit', 'redLimit');
+
+    yellowLimit = this.normalize(yellowLimit);
+    redLimit = this.normalize(redLimit);
 
     let value = meterValue.currentValue;
     value = this.normalize(value);
