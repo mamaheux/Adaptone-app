@@ -218,7 +218,7 @@ export default Component.extend({
   },
 
   interpolateData() {
-    let interpolatedData = [];
+    const interpolatedData = [];
     const graphicFilters = this.get('graphicFilters');
 
     const firstBandFrequency = FIVE_BANDS_FREQUENCIES[0];
