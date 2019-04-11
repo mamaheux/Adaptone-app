@@ -61,6 +61,7 @@
     "heatmap.js": "^2.0.5",
     "highcharts": "^7.0.3",
     "loader.js": "^4.2.3",
+    "mathjs": "^5.9.0",
     "numjs": "^0.16.0",
     "sass": "^1.17.2",
     "ui-ember-slider": "^0.5.0"

@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import {set} from '@ember/object';
 import nj from 'numjs';
+import mathjs from 'mathjs';
 
 const CENTER_FREQUENCIES = [20, 25, 31.5, 40, 50, 63, 80, 100, 125, 160, 200, 250, 315, 400, 500, 630, 800, 1000, 1250, 1600, 2000, 2500, 3150, 4000, 5000, 6300, 8000, 10000, 12500, 16000, 20000];
 const FIVE_BANDS_FREQUENCIES = [60, 230, 910, 3000, 14000];
@@ -17,6 +18,11 @@ export default Component.extend({
   parametricFilters: null,
   graphicFilters: null,
   currentFilter: null,
+
+  filterCount: null,
+  sampleFrequency: null,
+
+  biquadCoefficients: null,
 
   init() {
     this._super(...arguments);
@@ -116,5 +122,118 @@ export default Component.extend({
       this.parametricFilters[0].isSelected = true;
       this.set('currentFilter', parametricFilters[0]);
     }
+  },
+
+  updateParametricEqDesigner(parameters) {
+    const filterCount = this.get('filterCount');
+    const biquadCoefficients = this.get('biquadCoefficients');
+
+    if (!this.get('filterCount') != parameters.length) {
+      designLowShelvingFilter(biquadCoefficients[0], parameters[0]);
+      designHighShelvingFilter(biquadCoefficients[filterCount - 1], parameters[filterCount - 1]);
+    }
+
+    parameters.forEach(parameter => {
+      designPeakFilter(parameter);
+    });
+  },
+
+  parametricEqDesignGainsDb(frequencies) {
+    const sampleFrequency = this.get('sampleFrequency');
+
+    const w = 2 * Math.PI / sampleFrequency;
+    const j = mathjs.complex(0, 1);
+
+    const jw = math.multiply(-j, w);
+    const jw2 = 2 * jw;
+
+    const h = nj.ones(frequencies.length);
+
+    this.get('biquadCoefficients').forEach(coefficient => {
+      h %= (coefficient.b0 + mathjs.multiply(coefficient.b1, jw) + mathjs.multiply(coefficient.b2 * jw2)) /
+      (1 + mathjs.multiply(coefficient.a1 * jw + mathjs.multiply(coefficient.a2, jw2)));
+    });
+
+    return nj.multiply(20, nj.log(nj.abs(h)));
+  },
+
+  designLowShelvingFilter(parameter) {
+    const biquadCoefficients = this.get('biquadCoefficients');
+
+    const k = Math.tan(Math.PI * parameter.cutoffFrequency) / sampleFrequency;
+    const v0 = Math.pow(10, parameter.gainDb / 20);
+    const root2 = 1 / parameter.Q;
+
+    if (v0 < 1) {
+      v0 = 1 / v0;
+    }
+
+    if (parameter.gainDb > 0) {
+      set(biquadCoefficients, 'b0', (1 + Math.sqrt(v0) * root2 * k + v0 * k * k) / (1 + root2 * k + k * k));
+      set(biquadCoefficients, 'b1', (2 * (v0 * k * k - 1)) / (1 + root2 * k + k * k));
+      set(biquadCoefficients, 'b2', (1 - Math.sqrt(v0) * root2 * k + v0 * k * k) / (1 + root2 * k + k * k));
+      set(biquadCoefficients, 'b3', (2 * (k * k - 1)) / (1 + root2 * k + k * k));
+      set(biquadCoefficients, 'b4', (1 - root2 * k + k * k) / (1 + root2 * k + k * k));
+    } else if (parameter.gainDb < 0) {
+      set(biquadCoefficients, 'b0', (1 + root2 * k + k * k) / (1 + root2 * Math.sqrt(v0) * k + v0 * k * k));
+      set(biquadCoefficients, 'b1', (2 * (k * k - 1)) / (1 + root2 * Math.sqrt(v0) * k + v0 * k * k));
+      set(biquadCoefficients, 'b2', (1 - root2 * k + k * k) / (1 + root2 * Math.sqrt(v0) * k + v0 * k * k));
+      set(biquadCoefficients, 'b3', (2 * (v0 * k * k - 1)) / (1 + root2 * Math.sqrt(v0) * k + v0 * k * k));
+      set(biquadCoefficients, 'b4', (1 - root2 * Math.sqrt(v0) * k + v0 * k * k) / (1 + root2 * Math.sqrt(v0) * k + v0 * k * k));
+    } else {
+      set(biquadCoefficients, 'b0', v0);
+      set(biquadCoefficients, 'b1', 0);
+      set(biquadCoefficients, 'b2', 0);
+      set(biquadCoefficients, 'b3', 0);
+      set(biquadCoefficients, 'b4', 0);
+    }
+  },
+
+  designHighShelvingFilter(parameter) {
+    const biquadCoefficients = this.get('biquadCoefficients');
+
+    const k = Math.tan(Math.PI * parameter.cutoffFrequency) / this.get('sampleFrequency');
+    const v0 = Math.pow(10, parameter.gainDb / 20);
+    const root2 = 1 / parameter.Q;
+
+    if (v0 < 1) {
+      v0 = 1 / v0;
+    }
+
+    if (parameter.gainDb > 0) {
+      set(biquadCoefficients, 'b0', (v0 + root2 * Math.sqrt(v0) * k + k * k) / (1 + root2 * k + k * k));
+      set(biquadCoefficients, 'b1', (2 * (k * k - v0)) / (1 + root2 * k + k * k));
+      set(biquadCoefficients, 'b2', (v0 - root2 * Math.sqrt(v0) * k + k * k) / (1 + root2 * k + k * k));
+      set(biquadCoefficients, 'b3', (2 * (k * k - 1)) / (1 + root2 * k + k * k));
+      set(biquadCoefficients, 'b4', (1 - root2 * k + k * k) / (1 + root2 * k + k * k));
+    } else if (parameter.gainDb < 0) {
+      set(biquadCoefficients, 'b0', (1 + root2 * k + k * k) / (v0 + root2 * Math.sqrt(v0) * k + k * k));
+      set(biquadCoefficients, 'b1', (2 * (k * k - 1)) / (v0 + root2 * Math.sqrt(v0) * k + k * k));
+      set(biquadCoefficients, 'b2', (1 - root2 * k + k * k) / (v0 + root2 * Math.sqrt(v0) * k + k * k));
+      set(biquadCoefficients, 'b3', (2 * ((k * k) / v0 - 1)) / (1 + root2 / Math.sqrt(v0) * k + (k * k) / v0));
+      set(biquadCoefficients, 'b4', (1 - root2 / Math.sqrt(v0) * k + (k * k) / v0) / (1 + root2 / Math.sqrt(v0) * k + (k * k) / v0));
+    } else {
+      set(biquadCoefficients, 'b0', v0);
+      set(biquadCoefficients, 'b1', 0);
+      set(biquadCoefficients, 'b2', 0);
+      set(biquadCoefficients, 'b3', 0);
+      set(biquadCoefficients, 'b4', 0);
+    }
+  },
+
+  designPeakFilter(parameter) {
+    const biquadCoefficients = this.get('biquadCoefficients');
+
+    const w_c = (2 * Math.PI * parameter.cutoffFrequency / this.get('sampleFrequency'));
+    const mu = Math.pow(10, parameter.gainDb / 20);
+    const k_q = 4 / (1 + mu) * Math.tan(w_c / (2 * parameter.Q));
+    const C_pk = (1 + k_q * mu) / (1 + k_q);
+
+    set(biquadCoefficients, 'b0', C_pk);
+    set(biquadCoefficients, 'b1', C_pk * (-2 * Math.cos(w_c) / (1 + k_q * mu)));
+    set(biquadCoefficients, 'b2', C_pk * (1 - k_q * mu) / (1 + k_q * mu));
+
+    set(biquadCoefficients, 'a1', -2 * Math.cos(w_c) / (1 + k_q));
+    set(biquadCoefficients, 'a2', -2 * (1 - k_q) / (1 + k_q));
   }
 });
