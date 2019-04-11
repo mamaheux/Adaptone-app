@@ -154,33 +154,87 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ## Inputs utilisateur
 
-### Channel infos
+Les gains ne sont pas en dB.
+
+### Changer le gain d'une entrée
 
 ```json
 {
   "seqId": 10,
   "data": {
-    "channelId": 1,
-    "channelName": "Master",
-    "gain": 75,
-    "volume": 100,
-    "isMuted": false,
-    "isSolo": false,
-    "paramEq": [
-      {
-        "id": 0,
-        "on": true,
-        "freq":  1000,
-        "q": 4.4,
-        "gain": 20
-      }
-    ],
-    "graphEq": [
-      {
-        "id": 0,
-        "value": 50
-      }
-    ]
+    "channelId": 0,
+    "gain": 1.2
+  }
+}
+```
+
+### Changer le gain des entrées
+
+```json
+{
+  "seqId": 11,
+  "data": {
+    "gains": [1.0, 1.2, 1.23]
+  }
+}
+```
+
+### Changer les gains de l'EQ d'une entrée
+
+```json
+{
+  "seqId": 12,
+  "data": {    
+    "channelId": 0,
+    "gains": [1.0, 1.2, 1.23]
+  }
+}
+```
+
+### Changer le volume d'une entrée dans le mixage principal
+
+```json
+{
+  "seqId": 13,
+  "data": {    
+    "channelId": 0,
+    "gain": 1.0
+  }
+}
+```
+
+### Changer le volume d'une entrée dans un mixage auxilière
+
+```json
+{
+  "seqId": 14,
+  "data": {    
+    "channelId": 0,
+    "auxiliaryId": 0,
+    "gain": 1.0
+  }
+}
+```
+
+### Changer les gains de l'EQ des sorties principales
+
+```json
+{
+  "seqId": 15,
+  "data": {
+    "gains": [1.0, 1.2, 1.23]
+  }
+}
+```
+
+### Changer les gains de l'EQ des sorties auxiliaires
+
+```json
+{
+  "seqId": 16,
+  "data": {  
+    "auxiliaryId": 0,
+    "gains": [1.0, 1.2, 1.23]
   }
 }
 ```
@@ -191,7 +245,7 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 
 ```json
 {
-  "seqId": 11,
+  "seqId": 17,
   "data": {
     "positions": [
       {
@@ -205,19 +259,40 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 }
 ```
 
-### Spectre sonore entrée
+### Spectre sonore des entrées
+
+L'amplitude est en dB.
 
 ```json
 {
-  "seqId": 12,
+  "seqId": 18,
   "data": {
-    "channelId": 1,
-    "points": [
+    "spectrums": [
       {
-        "freq": 500,
-        "amplitude": 4
+        "channelId": 0,
+        "points": [
+          {
+            "freq": 500,
+            "amplitude": 4
+          }
+        ]
       }
     ]
+  }
+}
+```
+
+### Niveaux sonores (peakmeter)
+
+Les niveaux sonores ne sont pas en dB.
+
+```json
+{
+  "seqId": 19,
+  "data": {
+    "inputAfterGain": [0.5, 1.5],
+    "inputAfterEq": [0.5, 1.5],
+    "outputAfterGain": [0.5, 1.5]
   }
 }
 ```
