@@ -7,7 +7,6 @@
 
 .graph-container {
   position: relative;
-  border: 2px solid $big-stone;
 }
 
 .header {
@@ -17,6 +16,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: $z-index-map-overlay;
 }
 
 .channel-name {
@@ -31,6 +31,7 @@
 
 .graph {
   height: 350px;
+  margin-top: 35px;
   width: 100%;
 }
 
