@@ -29,7 +29,7 @@ export default Component.extend(RecognizerMixin, {
 
     const halfDegValue = DEG_RANGE / 2;
     const firstHalfRange = mid - min;
-    const secondHalfRange = max - mid
+    const secondHalfRange = max - mid;
     let degValue;
 
     if (value <= mid) {
