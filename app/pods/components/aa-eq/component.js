@@ -1,3 +1,5 @@
+/* eslint-disable no-magic-numbers */
+
 import Component from '@ember/component';
 import {set} from '@ember/object';
 import mathjs from 'mathjs';
@@ -9,24 +11,29 @@ const SAMPLE_FREQUENCY = 44100;
 const FILTER_COUNT = 5;
 
 Number.prototype.between = function(a, b) {
-  let min = Math.min(a, b);
-  let max = Math.max(a, b);
+  const min = Math.min(a, b);
+  const max = Math.max(a, b);
 
   return this > min && this <= max;
 };
 
 export default Component.extend({
   isParametric: false,
+
   parametricFilters: null,
   graphicFilters: null,
   currentFilter: null,
 
-  biquadCoefficients: [{}, {}, {}, {}, {}],
+  graphicEqGraphValues: null,
+
+  biquadCoefficients: null,
 
   init() {
     this._super(...arguments);
 
     this._setGraphicFiltersFrequencies();
+    this._initializeBiquadCoefficients();
+    this.set('graphicEqGraphValues', {});
 
     if (this.get('isParametric')) this._setCurrentFilter();
   },
@@ -56,7 +63,7 @@ export default Component.extend({
     },
 
     onGraphicFilterChange() {
-      let interpolatedData = [];
+      const interpolatedData = [];
       const graphicFilters = this.get('graphicFilters');
 
       const firstBandFrequency = FIVE_BANDS_FREQUENCIES[0];
@@ -66,7 +73,7 @@ export default Component.extend({
       const fifthBandFrequency = FIVE_BANDS_FREQUENCIES[4];
 
       for (let i = 0; i < CENTER_FREQUENCIES.length; i++) {
-        let currentFrequency = CENTER_FREQUENCIES[i];
+        const currentFrequency = CENTER_FREQUENCIES[i];
 
         switch (true) {
           case currentFrequency <= firstBandFrequency:
@@ -104,8 +111,6 @@ export default Component.extend({
       }
     }
 
-    console.log(biquadCoefficients);
-
     this.parametricEqDesignGainsDb(CENTER_FREQUENCIES);
   },
 
@@ -119,7 +124,7 @@ export default Component.extend({
 
     let h = mathjs.ones(frequencies.length);
 
-    this.get('biquadCoefficients').forEach((coefficient, i) => {
+    this.get('biquadCoefficients').forEach(coefficient => {
       const a = mathjs.add(
         mathjs.add(
           coefficient.b0,
@@ -142,11 +147,13 @@ export default Component.extend({
       );
     });
 
+    const gains = mathjs.dotMultiply(20, mathjs.log10(mathjs.abs(h)));
 
-    //console.log(mathjs.dotMultiply(20, mathjs.log(mathjs.abs(h))));
+    // Send gains to the graph or the Jetson here
+    set(this.get('graphicEqGraphValues'), 'frequencies', frequencies);
+    set(this.get('graphicEqGraphValues'), 'gains', gains._data);
 
-
-    //return nj.multiply(20, nj.log(nj.abs(h)));
+    return gains;
   },
 
   designLowShelvingFilter(biquadCoefficients, parameter) {
@@ -210,17 +217,17 @@ export default Component.extend({
   },
 
   designPeakFilter(biquadCoefficients, parameter) {
-    const w_c = (2 * Math.PI * parameter.freq / SAMPLE_FREQUENCY);
+    const wC = 2 * Math.PI * parameter.freq / SAMPLE_FREQUENCY;
     const mu = Math.pow(10, parameter.gain / 20);
-    const k_q = 4 / (1 + mu) * Math.tan(w_c / (2 * parameter.q));
-    const C_pk = (1 + k_q * mu) / (1 + k_q);
+    const kQ = 4 / (1 + mu) * Math.tan(wC / (2 * parameter.q));
+    const cPk = (1 + kQ * mu) / (1 + kQ);
 
-    set(biquadCoefficients, 'b0', C_pk);
-    set(biquadCoefficients, 'b1', C_pk * (-2 * Math.cos(w_c) / (1 + k_q * mu)));
-    set(biquadCoefficients, 'b2', C_pk * (1 - k_q * mu) / (1 + k_q * mu));
+    set(biquadCoefficients, 'b0', cPk);
+    set(biquadCoefficients, 'b1', cPk * (-2 * Math.cos(wC) / (1 + kQ * mu)));
+    set(biquadCoefficients, 'b2', cPk * (1 - kQ * mu) / (1 + kQ * mu));
 
-    set(biquadCoefficients, 'a1', -2 * Math.cos(w_c) / (1 + k_q));
-    set(biquadCoefficients, 'a2', (1 - k_q) / (1 + k_q));
+    set(biquadCoefficients, 'a1', -2 * Math.cos(wC) / (1 + kQ));
+    set(biquadCoefficients, 'a2', (1 - kQ) / (1 + kQ));
   },
 
   _pushInterpolatedData(firstIndex, secondIndex, currentFrequency) {
@@ -237,7 +244,7 @@ export default Component.extend({
   },
 
   _setGraphicFiltersFrequencies() {
-    let graphicFilters = this.get('graphicFilters');
+    const graphicFilters = this.get('graphicFilters');
 
     graphicFilters.forEach((graphicFilter, index) => {
       set(graphicFilter, 'frequency', FIVE_BANDS_FREQUENCIES[index]);
@@ -254,4 +261,12 @@ export default Component.extend({
       this.set('currentFilter', parametricFilters[0]);
     }
   },
+
+  _initializeBiquadCoefficients() {
+    this.set('biquadCoefficients', []);
+
+    for (let i = 0; i < this.get('graphicFilters').length; i++) {
+      this.get('biquadCoefficients').addObject({});
+    }
+  }
 });
