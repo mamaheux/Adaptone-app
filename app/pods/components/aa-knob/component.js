@@ -27,11 +27,18 @@ export default Component.extend(RecognizerMixin, {
       value
     } = this.getProperties('min', 'mid', 'max', 'value');
 
+    const halfDegValue = DEG_RANGE / 2;
+    const firstHalfRange = mid - min;
+    const secondHalfRange = max - mid
+    let degValue;
+
     if (value <= mid) {
-      return (value / (mid - min)) * (DEG_RANGE / 2);
+      degValue = (value - min) / firstHalfRange * halfDegValue;
+    } else {
+      degValue = halfDegValue + (value - mid) / secondHalfRange * halfDegValue;
     }
 
-    return (value / (max - mid)) * (DEG_RANGE / 2) + (DEG_RANGE / 2);
+    return degValue;
   }),
 
   panMove(e) {
@@ -56,6 +63,10 @@ export default Component.extend(RecognizerMixin, {
     this._super(...arguments);
     this._setValue(this.get('degreesValue'));
   },
+
+  displayedValue: computed('value', function() {
+    return parseFloat(this.get('value')).toFixed(2);
+  }),
 
   valueChanged: observer('degreesValue', function() {
     this._setValue(this.get('degreesValue'));
@@ -83,7 +94,7 @@ export default Component.extend(RecognizerMixin, {
       }
     }
 
-    return Math.round(newValue);
+    return newValue;
   },
 
   _alignTop(degrees) {

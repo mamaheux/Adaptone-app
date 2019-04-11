@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   margin: 20px;
+  width: 100px;
 }
 
 .title {
@@ -87,25 +88,27 @@
   }
 }
 
-.label {
+.label-mid {
   font-family: $text-font-semibold;
   font-size: 18px;
   color: $big-stone;
-  position: absolute;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.bottom-label-container {
+  display: flex;
+  width: 100%;
+  margin-top: -15px;
+  justify-content: space-between;
+  font-family: $text-font-semibold;
+  font-size: 18px;
+  color: $big-stone;
   z-index: 3;
+}
 
-  &.min {
-    top: 82px;
-    left: 0;
-  }
-
-  &.mid {
-    top: -25px;
-    left: 35px;
-  }
-
-  &.max {
-    top: 82px;
-    left: 56px;
-  }
+.label-mid,
+.label-max {
+  flex: 1 1 50%;
 }
