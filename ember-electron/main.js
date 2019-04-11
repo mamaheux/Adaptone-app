@@ -1,5 +1,5 @@
 /* eslint-env node */
-const { app, BrowserWindow, ipcMain, Menu, protocol } = require('electron');
+const { app, BrowserWindow, protocol } = require('electron');
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
 
