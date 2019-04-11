@@ -97,12 +97,14 @@ export default Component.extend({
 
     if (FILTER_COUNT === parameters.length) {
       this.designLowShelvingFilter(biquadCoefficients[0], parameters[0]);
-      this.designHighShelvingFilter(biquadCoefficients[FILTER_COUNT - 1], parameters[FILTER_COUNT - 1]);
+      this.designHighShelvingFilter(biquadCoefficients[4], parameters[4]);
 
       for (let i = 1; i < parameters.length - 1; i++) {
         this.designPeakFilter(biquadCoefficients[i], parameters[i]);
       }
     }
+
+    console.log(biquadCoefficients);
 
     this.parametricEqDesignGainsDb(CENTER_FREQUENCIES);
   },
@@ -141,16 +143,20 @@ export default Component.extend({
     });
 
 
-    console.log(mathjs.dotMultiply(20, mathjs.log(mathjs.abs(h))));
+    //console.log(mathjs.dotMultiply(20, mathjs.log(mathjs.abs(h))));
 
 
     //return nj.multiply(20, nj.log(nj.abs(h)));
   },
 
   designLowShelvingFilter(biquadCoefficients, parameter) {
-    const k = Math.tan(Math.PI * parameter.freq) / SAMPLE_FREQUENCY;
+    const k = Math.tan((Math.PI * parameter.freq) / SAMPLE_FREQUENCY);
     let v0 = Math.pow(10, parameter.gain / 20);
     const root2 = 1 / parameter.q;
+
+    if (v0 < 1) {
+      v0 = 1 / v0;
+    }
 
     if (parameter.gain > 0) {
       set(biquadCoefficients, 'b0', (1 + Math.sqrt(v0) * root2 * k + v0 * k * k) / (1 + root2 * k + k * k));
@@ -174,7 +180,7 @@ export default Component.extend({
   },
 
   designHighShelvingFilter(biquadCoefficients, parameter) {
-    const k = Math.tan(Math.PI * parameter.freq) / SAMPLE_FREQUENCY;
+    const k = Math.tan((Math.PI * parameter.freq) / SAMPLE_FREQUENCY);
     let v0 = Math.pow(10, parameter.gain / 20);
     const root2 = 1 / parameter.q;
 
@@ -214,7 +220,7 @@ export default Component.extend({
     set(biquadCoefficients, 'b2', C_pk * (1 - k_q * mu) / (1 + k_q * mu));
 
     set(biquadCoefficients, 'a1', -2 * Math.cos(w_c) / (1 + k_q));
-    set(biquadCoefficients, 'a2', -2 * (1 - k_q) / (1 + k_q));
+    set(biquadCoefficients, 'a2', (1 - k_q) / (1 + k_q));
   },
 
   _pushInterpolatedData(firstIndex, secondIndex, currentFrequency) {
