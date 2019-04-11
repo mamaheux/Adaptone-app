@@ -36,11 +36,29 @@ describe('Unit | Component | aa-knob', function() {
       describe('degreesValue', () => {
         it('should return the normalized degree value from the value', () => {
           component.set('value', 16);
-          expect(Math.round(component.get('degreesValue'))).to.equal(4);
+          expect(Math.round(component.get('degreesValue'))).to.equal(0);
           component.set('value', 600);
-          expect(Math.round(component.get('degreesValue'))).to.equal(139);
+          expect(Math.round(component.get('degreesValue'))).to.equal(135);
           component.set('value', 1200);
-          expect(Math.round(component.get('degreesValue'))).to.equal(149);
+          expect(Math.round(component.get('degreesValue'))).to.equal(142);
+        });
+
+        it('should return the normalized degree value from the value on small ranges', () => {
+          component.setProperties({
+            min: 1,
+            mid: 2,
+            max: 4,
+            onValueChange: function() {
+              return 0;
+            }
+          });
+
+          component.set('value', 1);
+          expect(Math.round(component.get('degreesValue'))).to.equal(0);
+          component.set('value', 2);
+          expect(Math.round(component.get('degreesValue'))).to.equal(135);
+          component.set('value', 3);
+          expect(Math.round(component.get('degreesValue'))).to.equal(203);
         });
       });
     });
