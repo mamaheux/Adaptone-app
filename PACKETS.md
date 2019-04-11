@@ -16,10 +16,17 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 | 8  | [Relancer optimisation des positions](#relancer-optimisation-des-positions) |
 | 9  | [Confirmation finale](#confirmation-finale) |
 | *Inputs utilisateurs* |
-| 10  | [Channel infos](#channel-infos) |
+| 10  | [Changer le gain d'une entrée](#changer-le-gain-dune-entrée) |
+| 11  | [Changer le gain des entrées](#changer-le-gain-des-entrées) |
+| 12  | [Changer les gains de l'EQ d'une entrée](#changer-les-gains-de-leq-dune-entrée) |
+| 13  | [Changer le volume d'une entrée dans le mixage principal](#changer-le-volume-dune-entrée-dans-le-mixage-principal) |
+| 14  | [Changer le volume d'une entrée dans un mixage auxilière](#changer-le-volume-dune-entrée-dans-un-mixage-auxilière) |
+| 15  | [Changer les gains de l'EQ des sorties principales](#changer-les-gains-de-leq-des-sorties-principales) |
+| 16  | [Changer les gains de l'EQ d'une sortie auxiliaire](#changer-les-gains-de-leq-dune-sortie-auxiliaire) |
 | *Échanges de données* |
-| 11 | [Taux erreur](#taux-erreur) |
-| 12 | [Spectre sonore entrée](#spectre-sonore-entrée)
+| 17 | [Taux erreur](#taux-erreur) |
+| 18 | [Spectre sonore des entrées](#spectre-sonore-des-entrées) |
+| 19 | [Niveaux sonores (peakmeter)](#niveaux-sonores-peakmeter) |
 
 ## Étapes
 
@@ -184,7 +191,7 @@ Les gains ne sont pas en dB.
 ```json
 {
   "seqId": 12,
-  "data": {    
+  "data": {
     "channelId": 0,
     "gains": [1.0, 1.2, 1.23]
   }
@@ -196,7 +203,7 @@ Les gains ne sont pas en dB.
 ```json
 {
   "seqId": 13,
-  "data": {    
+  "data": {
     "channelId": 0,
     "gain": 1.0
   }
@@ -208,7 +215,7 @@ Les gains ne sont pas en dB.
 ```json
 {
   "seqId": 14,
-  "data": {    
+  "data": {
     "channelId": 0,
     "auxiliaryId": 0,
     "gain": 1.0
@@ -227,12 +234,12 @@ Les gains ne sont pas en dB.
 }
 ```
 
-### Changer les gains de l'EQ des sorties auxiliaires
+### Changer les gains de l'EQ d'une sortie auxiliaire
 
 ```json
 {
   "seqId": 16,
-  "data": {  
+  "data": {
     "auxiliaryId": 0,
     "gains": [1.0, 1.2, 1.23]
   }
