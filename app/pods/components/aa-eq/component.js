@@ -1,6 +1,7 @@
 /* eslint-disable no-magic-numbers */
 
 import Component from '@ember/component';
+import {computed} from '@ember/object';
 import {set} from '@ember/object';
 import mathjs from 'mathjs';
 
@@ -8,7 +9,6 @@ const CENTER_FREQUENCIES = [20, 25, 31.5, 40, 50, 63, 80, 100, 125, 160, 200, 25
 const FIVE_BANDS_FREQUENCIES = [60, 230, 910, 3000, 14000];
 
 const SAMPLE_FREQUENCY = 44100;
-const FILTER_COUNT = 5;
 
 Number.prototype.between = function(a, b) {
   const min = Math.min(a, b);
@@ -22,17 +22,34 @@ export default Component.extend({
 
   parametricFilters: null,
   graphicFilters: null,
-  currentFilter: null,
 
   graphicEqGraphValues: null,
 
-  biquadCoefficients: null,
+  biquadCoefficients: computed('graphicFilters', function() {
+    const coefficients = [];
+
+    for (let i = 0; i < this.get('graphicFilters').length; i++) {
+      coefficients.push({});
+    }
+
+    return coefficients;
+  }),
+
+  currentFilter: computed('parametricFilters', function() {
+    const parametricFilters = this.get('parametricFilters');
+    const selectedFilter = parametricFilters.find(filter => filter.isSelected === true);
+
+    if (selectedFilter) {
+      return selectedFilter;
+    } else {
+      this.parametricFilters[0].isSelected = true;
+      return this.parametricFilters[0];
+    }
+  }),
 
   init() {
     this._super(...arguments);
 
-    this._setGraphicFiltersFrequencies();
-    this._initializeBiquadCoefficients();
     this.set('graphicEqGraphValues', {});
 
     if (this.get('isParametric')) this._setCurrentFilter();
@@ -63,48 +80,18 @@ export default Component.extend({
     },
 
     onGraphicFilterChange() {
-      const interpolatedData = [];
-      const graphicFilters = this.get('graphicFilters');
+      const interpolatedData = this.interpolateData();
 
-      const firstBandFrequency = FIVE_BANDS_FREQUENCIES[0];
-      const secondBandFrequency = FIVE_BANDS_FREQUENCIES[1];
-      const thirdBandFrequency = FIVE_BANDS_FREQUENCIES[2];
-      const fourthBandFrequency = FIVE_BANDS_FREQUENCIES[3];
-      const fifthBandFrequency = FIVE_BANDS_FREQUENCIES[4];
-
-      for (let i = 0; i < CENTER_FREQUENCIES.length; i++) {
-        const currentFrequency = CENTER_FREQUENCIES[i];
-
-        switch (true) {
-          case currentFrequency <= firstBandFrequency:
-            interpolatedData[i] = [currentFrequency, graphicFilters[0].value];
-            break;
-          case currentFrequency.between(firstBandFrequency, secondBandFrequency):
-            interpolatedData[i] = this._pushInterpolatedData(0, 1, currentFrequency);
-            break;
-          case currentFrequency.between(secondBandFrequency, thirdBandFrequency):
-            interpolatedData[i] = this._pushInterpolatedData(1, 2, currentFrequency);
-            break;
-          case currentFrequency.between(thirdBandFrequency, fourthBandFrequency):
-            interpolatedData[i] = this._pushInterpolatedData(2, 3, currentFrequency);
-            break;
-          case currentFrequency.between(fourthBandFrequency, fifthBandFrequency):
-            interpolatedData[i] = this._pushInterpolatedData(3, 4, currentFrequency);
-            break;
-          case currentFrequency >= fifthBandFrequency:
-            interpolatedData[i] = [currentFrequency, graphicFilters[4].value];
-            break;
-        }
-      }
+      return interpolatedData;
     }
   },
 
   updateParametricEqDesigner(parameters) {
     const biquadCoefficients = this.get('biquadCoefficients');
 
-    if (FILTER_COUNT === parameters.length) {
+    if (this.get('graphicFilters').length === parameters.length) {
       this.designLowShelvingFilter(biquadCoefficients[0], parameters[0]);
-      this.designHighShelvingFilter(biquadCoefficients[4], parameters[4]);
+      this.designHighShelvingFilter(biquadCoefficients[parameters.length - 1], parameters[parameters.length - 1]);
 
       for (let i = 1; i < parameters.length - 1; i++) {
         this.designPeakFilter(biquadCoefficients[i], parameters[i]);
@@ -112,48 +99,6 @@ export default Component.extend({
     }
 
     this.parametricEqDesignGainsDb(CENTER_FREQUENCIES);
-  },
-
-  parametricEqDesignGainsDb(frequencies) {
-    const w = mathjs.divide(mathjs.multiply(2 * Math.PI, mathjs.matrix(frequencies)), SAMPLE_FREQUENCY);
-
-    const j = mathjs.complex(0, -1);
-
-    const jw = mathjs.multiply(j, w);
-    const jw2 = mathjs.multiply(2, jw);
-
-    let h = mathjs.ones(frequencies.length);
-
-    this.get('biquadCoefficients').forEach(coefficient => {
-      const a = mathjs.add(
-        mathjs.add(
-          coefficient.b0,
-          mathjs.multiply(
-            coefficient.b1,
-            mathjs.exp(jw)
-          )
-        ),
-        mathjs.multiply(coefficient.b2, mathjs.exp(jw2))
-      );
-
-      const b = mathjs.add(
-        mathjs.add(1, mathjs.multiply(coefficient.a1, mathjs.exp(jw))),
-        mathjs.multiply(coefficient.a2, mathjs.exp(jw2))
-      );
-
-      h = mathjs.dotMultiply(
-        h,
-        mathjs.dotDivide(a, b)
-      );
-    });
-
-    const gains = mathjs.dotMultiply(20, mathjs.log10(mathjs.abs(h)));
-
-    // Send gains to the graph or the Jetson here
-    set(this.get('graphicEqGraphValues'), 'frequencies', frequencies);
-    set(this.get('graphicEqGraphValues'), 'gains', gains._data);
-
-    return gains;
   },
 
   designLowShelvingFilter(biquadCoefficients, parameter) {
@@ -230,43 +175,97 @@ export default Component.extend({
     set(biquadCoefficients, 'a2', (1 - kQ) / (1 + kQ));
   },
 
-  _pushInterpolatedData(firstIndex, secondIndex, currentFrequency) {
+  parametricEqDesignGainsDb(frequencies) {
+    const w = mathjs.divide(mathjs.multiply(2 * Math.PI, mathjs.matrix(frequencies)), SAMPLE_FREQUENCY);
+
+    const j = mathjs.complex(0, -1);
+
+    const jw = mathjs.multiply(j, w);
+    const jw2 = mathjs.multiply(2, jw);
+
+    let h = mathjs.ones(frequencies.length);
+
+    this.get('biquadCoefficients').forEach(coefficient => {
+      const a = mathjs.add(
+        mathjs.add(
+          coefficient.b0,
+          mathjs.multiply(
+            coefficient.b1,
+            mathjs.exp(jw)
+          )
+        ),
+        mathjs.multiply(coefficient.b2, mathjs.exp(jw2))
+      );
+
+      const b = mathjs.add(
+        mathjs.add(1, mathjs.multiply(coefficient.a1, mathjs.exp(jw))),
+        mathjs.multiply(coefficient.a2, mathjs.exp(jw2))
+      );
+
+      h = mathjs.dotMultiply(
+        h,
+        mathjs.dotDivide(a, b)
+      );
+    });
+
+    const gains = mathjs.dotMultiply(20, mathjs.log10(mathjs.abs(h)));
+
+    // Send gains to the graph or the Jetson here
+    set(this.get('graphicEqGraphValues'), 'frequencies', frequencies);
+    set(this.get('graphicEqGraphValues'), 'gains', gains._data);
+
+    return gains;
+  },
+
+  interpolateData() {
+    let interpolatedData = [];
+    const graphicFilters = this.get('graphicFilters');
+
+    const firstBandFrequency = FIVE_BANDS_FREQUENCIES[0];
+    const secondBandFrequency = FIVE_BANDS_FREQUENCIES[1];
+    const thirdBandFrequency = FIVE_BANDS_FREQUENCIES[2];
+    const fourthBandFrequency = FIVE_BANDS_FREQUENCIES[3];
+    const fifthBandFrequency = FIVE_BANDS_FREQUENCIES[4];
+
+    for (let i = 0; i < CENTER_FREQUENCIES.length; i++) {
+      const currentFrequency = CENTER_FREQUENCIES[i];
+
+      switch (true) {
+        case currentFrequency <= firstBandFrequency:
+          interpolatedData[i] = [currentFrequency, graphicFilters[0].value];
+          break;
+        case currentFrequency.between(firstBandFrequency, secondBandFrequency):
+          interpolatedData[i] = this.pushInterpolatedData(0, 1, currentFrequency);
+          break;
+        case currentFrequency.between(secondBandFrequency, thirdBandFrequency):
+          interpolatedData[i] = this.pushInterpolatedData(1, 2, currentFrequency);
+          break;
+        case currentFrequency.between(thirdBandFrequency, fourthBandFrequency):
+          interpolatedData[i] = this.pushInterpolatedData(2, 3, currentFrequency);
+          break;
+        case currentFrequency.between(fourthBandFrequency, fifthBandFrequency):
+          interpolatedData[i] = this.pushInterpolatedData(3, 4, currentFrequency);
+          break;
+        case currentFrequency >= fifthBandFrequency:
+          interpolatedData[i] = [currentFrequency, graphicFilters[4].value];
+          break;
+      }
+    }
+
+    // Send interpolated data here
+    return interpolatedData;
+  },
+
+  pushInterpolatedData(firstIndex, secondIndex, currentFrequency) {
     const graphicFilters = this.get('graphicFilters');
 
     const xs = [FIVE_BANDS_FREQUENCIES[firstIndex], FIVE_BANDS_FREQUENCIES[secondIndex]];
     const ys = [graphicFilters[firstIndex].value, graphicFilters[secondIndex].value];
 
-    return [currentFrequency, this._linearInterpolation(xs, ys, currentFrequency)];
+    return [currentFrequency, this.linearInterpolation(xs, ys, currentFrequency)];
   },
 
-  _linearInterpolation(xs, ys, x) {
+  linearInterpolation(xs, ys, x) {
     return ys[0] + (x - xs[0]) * ((ys[1] - ys[0]) / (xs[1] - xs[0]));
-  },
-
-  _setGraphicFiltersFrequencies() {
-    const graphicFilters = this.get('graphicFilters');
-
-    graphicFilters.forEach((graphicFilter, index) => {
-      set(graphicFilter, 'frequency', FIVE_BANDS_FREQUENCIES[index]);
-    });
-  },
-
-  _setCurrentFilter() {
-    const parametricFilters = this.get('parametricFilters');
-    const selectedFilter = parametricFilters.find(filter => filter.isSelected === true);
-    if (selectedFilter) {
-      this.set('currentFilter', selectedFilter);
-    } else {
-      this.parametricFilters[0].isSelected = true;
-      this.set('currentFilter', parametricFilters[0]);
-    }
-  },
-
-  _initializeBiquadCoefficients() {
-    this.set('biquadCoefficients', []);
-
-    for (let i = 0; i < this.get('graphicFilters').length; i++) {
-      this.get('biquadCoefficients').addObject({});
-    }
   }
 });
