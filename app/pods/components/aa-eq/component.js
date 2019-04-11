@@ -92,38 +92,6 @@ export default Component.extend({
     }
   },
 
-  _pushInterpolatedData(firstIndex, secondIndex, currentFrequency) {
-    const graphicFilters = this.get('graphicFilters');
-
-    const xs = [FIVE_BANDS_FREQUENCIES[firstIndex], FIVE_BANDS_FREQUENCIES[secondIndex]];
-    const ys = [graphicFilters[firstIndex].value, graphicFilters[secondIndex].value];
-
-    return [currentFrequency, this._linearInterpolation(xs, ys, currentFrequency)];
-  },
-
-  _linearInterpolation(xs, ys, x) {
-    return ys[0] + (x - xs[0]) * ((ys[1] - ys[0]) / (xs[1] - xs[0]));
-  },
-
-  _setGraphicFiltersFrequencies() {
-    let graphicFilters = this.get('graphicFilters');
-
-    graphicFilters.forEach((graphicFilter, index) => {
-      set(graphicFilter, 'frequency', FIVE_BANDS_FREQUENCIES[index]);
-    });
-  },
-
-  _setCurrentFilter() {
-    const parametricFilters = this.get('parametricFilters');
-    const selectedFilter = parametricFilters.find(filter => filter.isSelected === true);
-    if (selectedFilter) {
-      this.set('currentFilter', selectedFilter);
-    } else {
-      this.parametricFilters[0].isSelected = true;
-      this.set('currentFilter', parametricFilters[0]);
-    }
-  },
-
   updateParametricEqDesigner(parameters) {
     const filterCount = this.get('filterCount');
     const biquadCoefficients = this.get('biquadCoefficients');
@@ -235,5 +203,37 @@ export default Component.extend({
 
     set(biquadCoefficients, 'a1', -2 * Math.cos(w_c) / (1 + k_q));
     set(biquadCoefficients, 'a2', -2 * (1 - k_q) / (1 + k_q));
-  }
+  },
+
+  _pushInterpolatedData(firstIndex, secondIndex, currentFrequency) {
+    const graphicFilters = this.get('graphicFilters');
+
+    const xs = [FIVE_BANDS_FREQUENCIES[firstIndex], FIVE_BANDS_FREQUENCIES[secondIndex]];
+    const ys = [graphicFilters[firstIndex].value, graphicFilters[secondIndex].value];
+
+    return [currentFrequency, this._linearInterpolation(xs, ys, currentFrequency)];
+  },
+
+  _linearInterpolation(xs, ys, x) {
+    return ys[0] + (x - xs[0]) * ((ys[1] - ys[0]) / (xs[1] - xs[0]));
+  },
+
+  _setGraphicFiltersFrequencies() {
+    let graphicFilters = this.get('graphicFilters');
+
+    graphicFilters.forEach((graphicFilter, index) => {
+      set(graphicFilter, 'frequency', FIVE_BANDS_FREQUENCIES[index]);
+    });
+  },
+
+  _setCurrentFilter() {
+    const parametricFilters = this.get('parametricFilters');
+    const selectedFilter = parametricFilters.find(filter => filter.isSelected === true);
+    if (selectedFilter) {
+      this.set('currentFilter', selectedFilter);
+    } else {
+      this.parametricFilters[0].isSelected = true;
+      this.set('currentFilter', parametricFilters[0]);
+    }
+  },
 });
