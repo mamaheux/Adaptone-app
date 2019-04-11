@@ -6,6 +6,8 @@ export default Component.extend({
   actions: {
     togglePower() {
       this.toggleProperty('isOn');
+
+      if (!this.get('isOn')) this.get('onChange')();
     }
   }
 });

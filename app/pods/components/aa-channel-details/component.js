@@ -35,6 +35,11 @@ export default Component.extend({
 
     onQChange(value) {
       return value;
+    },
+
+    onOnOffChange(filter) {
+      const filterToModify = this.get('channel').data.paramEq.find(f => f.id === filter.id);
+      Ember.set(filterToModify, 'gain', 0);
     }
   }
 });

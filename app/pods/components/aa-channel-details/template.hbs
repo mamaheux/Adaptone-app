@@ -12,7 +12,9 @@
   </div>
 
   <div class="graph">
-    {{aa-eq-graph}}
+    {{aa-eq-graph
+      channelInfos=this.channel
+    }}
   </div>
 </div>
 
@@ -37,6 +39,7 @@
     onFrequencyChange=(action "onFrequencyChange")
     onGainChange=(action "onGainChange")
     onQChange=(action "onQChange")
+    onOnOffChange=(action "onOnOffChange")
   }}
 </div>
 

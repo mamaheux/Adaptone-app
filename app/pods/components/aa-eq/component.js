@@ -42,7 +42,6 @@ export default Component.extend({
     if (selectedFilter) {
       return selectedFilter;
     } else {
-      this.parametricFilters[0].isSelected = true;
       return this.parametricFilters[0];
     }
   }),
@@ -51,8 +50,6 @@ export default Component.extend({
     this._super(...arguments);
 
     this.set('graphicEqGraphValues', {});
-
-    if (this.get('isParametric')) this._setCurrentFilter();
   },
 
   actions: {
@@ -83,6 +80,11 @@ export default Component.extend({
       const interpolatedData = this.interpolateData();
 
       return interpolatedData;
+    },
+
+    onOnOffChange(filter) {
+      this.get('onOnOffChange')(filter);
+      this.updateParametricEqDesigner(this.get('parametricFilters'));
     }
   },
 
