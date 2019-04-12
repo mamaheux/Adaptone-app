@@ -4,6 +4,8 @@ import {set} from '@ember/object';
 export default Component.extend({
   channel: null,
   isParametric: true,
+
+  parametricEqGraphValues: null,
   graphicEqGraphValues: null,
 
   userChannelVolume: 0,

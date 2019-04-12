@@ -22,11 +22,13 @@ Number.prototype.between = function(a, b) {
 };
 
 export default Component.extend({
+  graphicEqFreqs: null,
   isParametric: false,
 
   parametricFilters: null,
   graphicFilters: null,
 
+  parametricEqGraphValues: null,
   graphicEqGraphValues: null,
 
   biquadCoefficients: computed('graphicFilters', function() {
@@ -40,7 +42,11 @@ export default Component.extend({
   }),
 
   graphicFiltersChanged: observer('graphicFilters.@each.value', function() {
-    this.interpolateData();
+    // Send this to the Jetson
+    this.interpolateData(CENTER_FREQUENCIES);
+
+    // Send this to the graphic EQ graph
+    this.set('graphicEqGraphValues', this.interpolateData(this.getLogspaceFrequencies()));
   }),
 
   currentFilterChanged: observer('currentFilter', function() {
@@ -67,8 +73,15 @@ export default Component.extend({
     }
   }),
 
+  init() {
+    this._super(...arguments);
+
+    this.set('graphicEqFreqs', FIVE_BANDS_FREQUENCIES);
+  },
+
   didInsertElement() {
     this.updateParametricEqDesigner(this.get('parametricFilters'));
+    this.set('graphicEqGraphValues', this.interpolateData(this.getLogspaceFrequencies()));
 
     this._super(...arguments);
   },
@@ -119,12 +132,12 @@ export default Component.extend({
     this.parametricEqDesignGainsDb(CENTER_FREQUENCIES);
 
     // Send graphic EQ gains to the graphic EQ graph
-    const graphEqGraphFrequencies = this.getGraphEqGraphFrequencies(parameters);
-    const graphEqGraphGains = this.parametricEqDesignGainsDb(graphEqGraphFrequencies);
-    this.set('graphicEqGraphValues', []);
+    const logspaceFrequencies = this.getLogspaceFrequencies();
+    const parametricEqGraphGains = this.parametricEqDesignGainsDb(logspaceFrequencies);
+    this.set('parametricEqGraphValues', []);
 
-    graphEqGraphFrequencies.forEach((graphEqGraphFrequency, index) => {
-      this.get('graphicEqGraphValues').pushObject([graphEqGraphFrequency, graphEqGraphGains[index]]);
+    logspaceFrequencies.forEach((logspaceFrequency, index) => {
+      this.get('parametricEqGraphValues').pushObject([logspaceFrequency, parametricEqGraphGains[index]]);
     });
   },
 
@@ -240,7 +253,7 @@ export default Component.extend({
     return gains._data;
   },
 
-  interpolateData() {
+  interpolateData(frequencies) {
     const interpolatedData = [];
     const graphicFilters = this.get('graphicFilters');
 
@@ -250,8 +263,8 @@ export default Component.extend({
     const fourthBandFrequency = FIVE_BANDS_FREQUENCIES[3];
     const fifthBandFrequency = FIVE_BANDS_FREQUENCIES[4];
 
-    for (let i = 0; i < CENTER_FREQUENCIES.length; i++) {
-      const currentFrequency = CENTER_FREQUENCIES[i];
+    for (let i = 0; i < frequencies.length; i++) {
+      const currentFrequency = frequencies[i];
 
       switch (true) {
         case currentFrequency <= firstBandFrequency:
@@ -275,7 +288,6 @@ export default Component.extend({
       }
     }
 
-    // Send interpolated data here
     return interpolatedData;
   },
 
@@ -292,24 +304,16 @@ export default Component.extend({
     return ys[0] + (x - xs[0]) * ((ys[1] - ys[0]) / (xs[1] - xs[0]));
   },
 
-  getGraphEqGraphFrequencies(parameters) {
-    const fmin = Math.min.apply(Math, parameters.map(p => {
-      return p.freq;
-    }));
-
-    const fmax = Math.max.apply(Math, parameters.map(p => {
-      return p.freq;
-    }));
-
-    const numberOfDecades = Math.round(mathjs.log10(fmax / fmin));
+  getLogspaceFrequencies() {
+    const numberOfDecades = Math.round(mathjs.log10(MAX_FREQUENCY / MIN_FREQUENCY));
     const stepSize = mathjs.pow(10, 1 / FREQUENCIES_PER_DECADE);
 
     const frequencies = [];
     for (let i = 0; i < numberOfDecades * FREQUENCIES_PER_DECADE; i++) {
       if (i === 0) {
-        frequencies[i] = fmin;
+        frequencies[i] = MIN_FREQUENCY;
       } else if (i === numberOfDecades * FREQUENCIES_PER_DECADE - 1) {
-        frequencies[i] = fmax;
+        frequencies[i] = MAX_FREQUENCY;
       } else {
         frequencies[i] = frequencies[i - 1] * stepSize;
       }

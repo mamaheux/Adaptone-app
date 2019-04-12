@@ -14,8 +14,8 @@ const GAIN_TICK_INTERVAL = 5;
 const GAIN_ZERO_VALUE = 0;
 const GAIN_ZERO_WIDTH = 1;
 const GAIN_ZERO_ZINDEX = 3;
-const MIN_GAIN_VALUE = -60;
-const MAX_GAIN_VALUE = 20;
+const MIN_FREQUENCY_VALUE = 20;
+const MAX_FREQUENCY_VALUE = 20000;
 
 export default Component.extend({
   intl: service(),
@@ -24,6 +24,7 @@ export default Component.extend({
 
   amplitudes: null,
   channelInfos: null,
+  parametricEqValues: null,
   graphicEqValues: null,
 
   chartOptions: null,
@@ -34,14 +35,11 @@ export default Component.extend({
     return this.channelInfos.data.channelId;
   }),
 
-  eqGains: computed('channelInfos', function() {
-    const channelInfos = this.get('channelInfos');
+  eqGains: computed('isParametric', function() {
     let formattedData = [];
 
     if (this.get('isParametric')) {
-      channelInfos.data.paramEq.forEach(paramEq => {
-        formattedData.push([paramEq.freq, paramEq.gain]);
-      });
+      formattedData = this.get('parametricEqValues');
     } else {
       formattedData = this.get('graphicEqValues');
     }
@@ -91,7 +89,7 @@ export default Component.extend({
     }
   }),
 
-  eqGainsChanged: observer('channelInfos.data.{paramEq}.@each.{on,freq,q,gain}', 'isParametric', 'graphicEqValues', function() {
+  eqGainsChanged: observer('isParametric', 'parametricEqValues', 'graphicEqValues', function() {
     const chart = Highcharts.charts[Highcharts.charts.length - 1];
     this.notifyPropertyChange('eqGains');
 
@@ -138,15 +136,15 @@ export default Component.extend({
         type: 'logarithmic',
         title: {
           text: this.intl.t('eq-graph.axis.frequency')
-        }
+        },
+        min: MIN_FREQUENCY_VALUE,
+        max: MAX_FREQUENCY_VALUE
       },
       yAxis: {
         tickInterval: GAIN_TICK_INTERVAL,
         title: {
           text: this.intl.t('eq-graph.axis.gain')
         },
-        min: MIN_GAIN_VALUE,
-        max: MAX_GAIN_VALUE,
         plotLines: [{
           value: GAIN_ZERO_VALUE,
           color: 'rgba(245, 245, 245, 0.3)',
@@ -156,7 +154,14 @@ export default Component.extend({
       },
       tooltip: {
         headerFormat: '<b>{series.name}</b><br />',
-        pointFormat: `<b>${this.intl.t('eq-graph.tooltip.frequency')} :</b> {point.x} Hz <br /> <b>${this.intl.t('eq-graph.tooltip.gain')} :</b> {point.y} dB`
+        pointFormat: `<b>${this.intl.t('eq-graph.tooltip.frequency')} :</b> {point.x:,.0f} Hz <br /> <b>${this.intl.t('eq-graph.tooltip.gain')} :</b> {point.y:,.2f} dB`
+      },
+      plotOptions: {
+        spline: {
+          marker: {
+            enabled: false
+          }
+        }
       }
     };
 
