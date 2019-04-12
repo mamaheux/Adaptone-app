@@ -30,10 +30,10 @@
             {{t 'eq.frequency'}}
           </span>
           {{aa-knob
-            min=0
-            mid=600
-            max=20000
-            value=this.currentFilter.frequency
+            min=this.currentFilter.minFrequency
+            mid=this.currentFilter.midFrequency
+            max=this.currentFilter.maxFrequency
+            value=this.currentFilter.freq
             onValueChange=(action "onFrequencyChange")
           }}
         </div>

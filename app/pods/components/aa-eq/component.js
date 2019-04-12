@@ -11,6 +11,9 @@ const FREQUENCIES_PER_DECADE = 10;
 
 const SAMPLE_FREQUENCY = 44100;
 
+const MAX_FREQUENCY = 20000;
+const MIN_FREQUENCY = 0;
+
 Number.prototype.between = function(a, b) {
   const min = Math.min(a, b);
   const max = Math.max(a, b);
@@ -38,12 +41,12 @@ export default Component.extend({
 
   currentFilter: computed('parametricFilters', function() {
     const parametricFilters = this.get('parametricFilters');
-    const selectedFilter = parametricFilters.find(filter => filter.isSelected === true);
+    const selectedFilter = parametricFilters.findIndex(filter => filter.isSelected === true);
 
     if (selectedFilter) {
       return selectedFilter;
     } else {
-      return this.parametricFilters[0];
+      return parametricFilters[0];
     }
   }),
 
@@ -51,10 +54,39 @@ export default Component.extend({
     this.interpolateData();
   }),
 
+  currentFilterChanged: observer('currentFilter', function() {
+    const parametricFilters = this.get('parametricFilters');
+    let currentFilterIndex = parametricFilters.findIndex(filter => filter.isSelected === true);
+
+    if (currentFilterIndex === -1) {
+      set(parametricFilters[0], 'isSelected', true);
+      currentFilterIndex = 0;
+    }
+
+    if (currentFilterIndex === 0) {
+      set(this.currentFilter, 'maxFrequency', parametricFilters[currentFilterIndex + 1].freq);
+      set(this.currentFilter, 'midFrequency', (parametricFilters[currentFilterIndex + 1].freq - MIN_FREQUENCY) / 2);
+      set(this.currentFilter, 'minFrequency', MIN_FREQUENCY);
+    } else if (currentFilterIndex === parametricFilters.length - 1) {
+      set(this.currentFilter, 'maxFrequency', MAX_FREQUENCY);
+      set(this.currentFilter, 'midFrequency', (MAX_FREQUENCY - parametricFilters[currentFilterIndex - 1].freq) / 2);
+      set(this.currentFilter, 'minFrequency', parametricFilters[currentFilterIndex - 1].freq);
+    } else {
+      set(this.currentFilter, 'maxFrequency', parametricFilters[currentFilterIndex + 1].freq);
+      set(this.currentFilter, 'midFrequency', (parametricFilters[currentFilterIndex + 1].freq - parametricFilters[currentFilterIndex - 1].freq) / 2);
+      set(this.currentFilter, 'minFrequency', parametricFilters[currentFilterIndex - 1].freq);
+    }
+  }),
+
   init() {
     this._super(...arguments);
 
+    this.set('currentFilter', {});
     this.set('graphicEqGraphValues', []);
+  },
+
+  willRender() {
+    this.set('currentFilter', this.get('parametricFilters')[0]);
   },
 
   actions: {
