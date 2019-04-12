@@ -37,7 +37,7 @@ export default Component.extend({
         seqId: SequenceIds.END
       });
 
-      this.get('router').transitionTo('console-loading');
+      this.get('router').transitionTo('console');
     }
   }
 });
