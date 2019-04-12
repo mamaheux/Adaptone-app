@@ -2,6 +2,7 @@
 
 import Component from '@ember/component';
 import {computed, observer} from '@ember/object';
+import {debounce} from '@ember/runloop';
 import {set} from '@ember/object';
 import mathjs from 'mathjs';
 
@@ -13,6 +14,8 @@ const SAMPLE_FREQUENCY = 44100;
 
 const MAX_FREQUENCY = 20000;
 const MIN_FREQUENCY = 20;
+
+const DEBOUNCE_TIME = 5;
 
 Number.prototype.between = function(a, b) {
   const min = Math.min(a, b);
@@ -42,11 +45,7 @@ export default Component.extend({
   }),
 
   graphicFiltersChanged: observer('graphicFilters.@each.value', function() {
-    // Send this to the Jetson
-    this.interpolateData(CENTER_FREQUENCIES);
-
-    // Send this to the graphic EQ graph
-    this.set('graphicEqGraphValues', this.interpolateData(this.getLogspaceFrequencies()));
+    debounce(this, this.processInterpolatedData, DEBOUNCE_TIME);
   }),
 
   currentFilterChanged: observer('currentFilter', function() {
@@ -97,17 +96,17 @@ export default Component.extend({
 
     onFrequencyChange(value) {
       this.get('onFrequencyChange')(value);
-      this.updateParametricEqDesigner(this.get('parametricFilters'));
+      debounce(this, this.updateParametricEqDesigner, this.get('parametricFilters'), DEBOUNCE_TIME);
     },
 
     onGainChange(value) {
       this.get('onGainChange')(value);
-      this.updateParametricEqDesigner(this.get('parametricFilters'));
+      debounce(this, this.updateParametricEqDesigner, this.get('parametricFilters'), DEBOUNCE_TIME);
     },
 
     onQChange(value) {
       this.get('onQChange')(value);
-      this.updateParametricEqDesigner(this.get('parametricFilters'));
+      debounce(this, this.updateParametricEqDesigner, this.get('parametricFilters'), DEBOUNCE_TIME);
     },
 
     onOnOffChange(filter) {
@@ -320,5 +319,13 @@ export default Component.extend({
     }
 
     return frequencies;
+  },
+
+  processInterpolatedData() {
+    // Send this to the Jetson
+    this.interpolateData(CENTER_FREQUENCIES);
+
+    // Send this to the graphic EQ graph
+    this.set('graphicEqGraphValues', this.interpolateData(this.getLogspaceFrequencies()));
   }
 });

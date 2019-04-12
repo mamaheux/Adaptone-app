@@ -12,7 +12,7 @@ export default Component.extend({
         seqId: 10,
         data: {
           channelId: 1,
-          channelName: "Master",
+          channelName: 'Vocals',
           gain: 75,
           volume: 100,
           isMuted: false,
@@ -21,7 +21,59 @@ export default Component.extend({
             {
               id: 0,
               on: true,
-              freq:  1000,
+              freq: 1000,
+              q: 4.4,
+              gain: 20
+            }
+          ],
+          graphEq: [
+            {
+              id: 0,
+              value: 50
+            }
+          ]
+        }
+      },
+      {
+        seqId: 10,
+        data: {
+          channelId: 1,
+          channelName: 'Guitar',
+          gain: 40,
+          volume: 60,
+          isMuted: false,
+          isSolo: false,
+          paramEq: [
+            {
+              id: 0,
+              on: true,
+              freq: 1000,
+              q: 4.4,
+              gain: 20
+            }
+          ],
+          graphEq: [
+            {
+              id: 0,
+              value: 50
+            }
+          ]
+        }
+      },
+      {
+        seqId: 10,
+        data: {
+          channelId: 1,
+          channelName: 'Bass',
+          gain: 20,
+          volume: 10,
+          isMuted: false,
+          isSolo: false,
+          paramEq: [
+            {
+              id: 0,
+              on: true,
+              freq: 1000,
               q: 4.4,
               gain: 20
             }
@@ -38,16 +90,42 @@ export default Component.extend({
         seqId: 10,
         data: {
           channelId: 2,
-          channelName: "Bass",
-          gain: 60,
-          volume: 80,
+          channelName: 'Drum',
+          gain: 10,
+          volume: 40,
           isMuted: false,
           isSolo: false,
           paramEq: [
             {
               id: 0,
               on: true,
-              freq:  1000,
+              freq: 1000,
+              q: 4.4,
+              gain: 20
+            }
+          ],
+          graphEq: [
+            {
+              id: 0,
+              value: 50
+            }
+          ]
+        }
+      },
+      {
+        seqId: 10,
+        data: {
+          channelId: 1,
+          channelName: 'Master',
+          gain: 40,
+          volume: 60,
+          isMuted: false,
+          isSolo: false,
+          paramEq: [
+            {
+              id: 0,
+              on: true,
+              freq: 1000,
               q: 4.4,
               gain: 20
             }
@@ -119,6 +197,7 @@ export default Component.extend({
   actions: {
     onChannelVolumeChange(channel) {
       // Handle channel volume change here
+      // debounce(this, this.sendVolumeChange, channelVolume, DEBOUNCE_TIME)
       return channel;
     },
 

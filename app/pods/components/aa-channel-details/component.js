@@ -20,30 +20,30 @@ export default Component.extend({
       seqId: 10,
       data: {
         channelId: 1,
-        channelName: "Master",
-        gain: 75,
-        volume: 100,
+        channelName: 'Master',
+        gain: 6,
+        volume: 60,
         isMuted: false,
         isSolo: false,
         paramEq: [
           {
             id: 0,
             on: true,
-            freq:  100,
+            freq: 100,
             q: 1,
             gain: -10
           },
           {
             id: 1,
             on: true,
-            freq:  300,
+            freq: 300,
             q: 5,
             gain: 5
           },
           {
             id: 2,
             on: true,
-            freq:  800,
+            freq: 800,
             q: 5,
             gain: -8
           },
@@ -90,10 +90,12 @@ export default Component.extend({
 
   actions: {
     onVolumeChange(value) {
+      // debounce(this, this.sendVolumeChange, channelVolume, DEBOUNCE_TIME)
       return value;
     },
 
     onGainChange(value) {
+      // debounce(this, this.sendVolumeChange, channelVolume, DEBOUNCE_TIME)
       return value;
     },
 
@@ -106,10 +108,12 @@ export default Component.extend({
     },
 
     onFrequencyChange(value) {
+      // debounce(this, this.sendVolumeChange, channelVolume, DEBOUNCE_TIME)
       return value;
     },
 
     onQChange(value) {
+      // debounce(this, this.sendVolumeChange, channelVolume, DEBOUNCE_TIME)
       return value;
     },
 

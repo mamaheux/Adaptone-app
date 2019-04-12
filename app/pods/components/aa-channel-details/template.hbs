@@ -25,8 +25,8 @@
 <div class="eq-container">
   {{aa-volume-gain
     class="volume-gain-container"
-    volume=this.userChannelVolume
-    gain=this.userChannelGain
+    volume=this.channel.data.volume
+    gain=this.channel.data.gain
     isMute=this.channel.data.isMuted
     isSolo=this.channel.data.isSolo
     onVolumeChange=(action "onVolumeChange")
