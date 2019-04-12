@@ -9,10 +9,14 @@ const STEPS = 35;
 const ALIGN_TOP_DEGREES = 45;
 const SET_VALUE_DEGREES = 90;
 
+const FIXED_DECIMALS = 2;
+const ROUNDED_FIXED_DECIMALS = 0;
+
 export default Component.extend(RecognizerMixin, {
   recognizers: 'pan',
   value: 0,
   lastDragValue: 0,
+  isRounded: false,
 
   init() {
     this._super(...arguments);
@@ -65,7 +69,11 @@ export default Component.extend(RecognizerMixin, {
   },
 
   displayedValue: computed('value', function() {
-    return parseFloat(this.get('value')).toFixed(2);
+    let numberOfDecimals = FIXED_DECIMALS;
+
+    if (this.get('isRounded')) numberOfDecimals = ROUNDED_FIXED_DECIMALS;
+
+    return parseFloat(this.get('value')).toFixed(numberOfDecimals);
   }),
 
   valueChanged: observer('degreesValue', function() {
