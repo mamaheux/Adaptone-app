@@ -13,7 +13,9 @@
 
   <div class="graph">
     {{aa-eq-graph
+      isParametric=this.isParametric
       channelInfos=this.channel
+      graphicEqValues=this.graphicEqGraphValues
     }}
   </div>
 </div>
@@ -36,6 +38,7 @@
     isParametric=this.isParametric
     parametricFilters=this.channel.data.paramEq
     graphicFilters=this.channel.data.graphEq
+    graphicEqGraphValues=this.graphicEqGraphValues
     onFrequencyChange=(action "onFrequencyChange")
     onGainChange=(action "onGainChange")
     onQChange=(action "onQChange")
