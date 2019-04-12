@@ -67,10 +67,10 @@ export default Component.extend({
     }
   }),
 
-  init() {
-    this._super(...arguments);
+  didInsertElement() {
+    this.updateParametricEqDesigner(this.get('parametricFilters'));
 
-    this.set('graphicEqGraphValues', []);
+    this._super(...arguments);
   },
 
   actions: {
