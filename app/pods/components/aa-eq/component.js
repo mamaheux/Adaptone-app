@@ -126,8 +126,6 @@ export default Component.extend({
     graphEqGraphFrequencies.forEach((graphEqGraphFrequency, index) => {
       this.get('graphicEqGraphValues').pushObject([graphEqGraphFrequency, graphEqGraphGains[index]]);
     });
-
-    this.notifyPropertyChange('graphicEqGraphValues');
   },
 
   designLowShelvingFilter(biquadCoefficients, parameter) {
