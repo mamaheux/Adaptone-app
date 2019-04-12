@@ -10,6 +10,9 @@ export default Service.extend(Evented, {
       case SequenceIds.ERROR_RATES:
         this.trigger('error-rates', message.data);
         break;
+      case SequenceIds.PEAKMETER_LEVELS:
+        this.trigger('peakmeter-levels', message.data);
+        break;
       case SequenceIds.INPUT_SPECTRUM:
         this.trigger('input-spectrum', message.data);
         break;

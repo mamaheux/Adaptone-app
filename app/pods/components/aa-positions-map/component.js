@@ -12,8 +12,6 @@ export default Component.extend({
   speakerPositions: null,
 
   didInsertElement() {
-    this._super(...arguments);
-
     const canvas = this.element.querySelector('canvas');
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
@@ -22,6 +20,7 @@ export default Component.extend({
     this.setSpeakerPositions();
 
     this.adjustPositions(canvas);
+    this._super(...arguments);
   },
 
   maxima: computed('positions', function() {

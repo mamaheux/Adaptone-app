@@ -16,6 +16,13 @@
   margin-left: 5px;
 }
 
+.disconnected {
+  &.o-top,
+  &.o-bot {
+    fill: $torch-red;
+  }
+}
+
 .button {
   width: 12px;
   height: 12px;

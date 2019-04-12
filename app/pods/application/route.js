@@ -11,5 +11,9 @@ export default Route.extend({
     this.get('connection').createConnection(config.APP.WEBSOCKET_ADDRESS);
 
     return this.intl.setLocale('fr-ca');
+  },
+
+  afterModel() {
+    this.transitionTo('configs');
   }
 });

@@ -306,17 +306,17 @@ export default Component.extend({
 
   getGraphEqGraphFrequencies(parameters) {
     const fmin = Math.min.apply(Math, parameters.map(p => {
-      return p.freq
+      return p.freq;
     }));
 
     const fmax = Math.max.apply(Math, parameters.map(p => {
-      return p.freq
+      return p.freq;
     }));
 
-    const numberOfDecades = Math.round(mathjs.log10(fmax/fmin));
-    const stepSize = mathjs.pow(10, 1/FREQUENCIES_PER_DECADE);
+    const numberOfDecades = Math.round(mathjs.log10(fmax / fmin));
+    const stepSize = mathjs.pow(10, 1 / FREQUENCIES_PER_DECADE);
 
-    let frequencies = [];
+    const frequencies = [];
     for (let i = 0; i < numberOfDecades * FREQUENCIES_PER_DECADE; i++) {
       if (i === 0) {
         frequencies[i] = fmin;
