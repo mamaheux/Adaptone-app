@@ -83,10 +83,11 @@
             value=filter.value
             showValue=true
             valueTitle=(t 'eq.gain-short')
+            step=0.1
           }}
 
           <span class="slider-frequency">
-            {{filter.frequency}} {{t 'eq.frequency-symbol'}}
+            {{get this.graphicEqFreqs index}} {{t 'eq.frequency-symbol'}}
           </span>
         </div>
       {{/each-in}}

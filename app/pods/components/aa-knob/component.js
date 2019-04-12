@@ -5,7 +5,7 @@ import $ from 'jquery';
 
 const START_DEG = -225;
 const DEG_RANGE = 270;
-const STEPS = 35;
+const STEPS = 20;
 const ALIGN_TOP_DEGREES = 45;
 const SET_VALUE_DEGREES = 90;
 
