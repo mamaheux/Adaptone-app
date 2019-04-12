@@ -5,7 +5,6 @@ import {computed, observer} from '@ember/object';
 import {inject as service} from '@ember/service';
 import chartTheme from 'adaptone-front/constants/chart-theme';
 
-const CHART_INDEX = 0;
 const EQ_GAINS_SERIE_INDEX = 0;
 const AMPLITUDES_SERIE_INDEX = 1;
 const ADDED_AMPLITUDES_SERIE_INDEX = 2;
@@ -93,7 +92,7 @@ export default Component.extend({
   }),
 
   eqGainsChanged: observer('channelInfos.data.{paramEq}.@each.{on,freq,q,gain}', 'isParametric', 'graphicEqValues', function() {
-    const chart = Highcharts.charts[CHART_INDEX];
+    const chart = Highcharts.charts[Highcharts.charts.length - 1];
     this.notifyPropertyChange('eqGains');
 
     chart.series[EQ_GAINS_SERIE_INDEX].setData(this.get('eqGains'), true);
@@ -102,7 +101,7 @@ export default Component.extend({
   channelAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
     // TODO: Remove this condition
     if (this.get('amplitudes')) {
-      const chart = Highcharts.charts[CHART_INDEX];
+      const chart = Highcharts.charts[Highcharts.charts.length - 1];
       this.notifyPropertyChange('channelAmplitudes');
 
       chart.series[AMPLITUDES_SERIE_INDEX].setData(this.get('channelAmplitudes'), true);
@@ -112,7 +111,7 @@ export default Component.extend({
   addedChannelsAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
     // TODO: Remove this condition
     if (this.get('amplitudes')) {
-      const chart = Highcharts.charts[CHART_INDEX];
+      const chart = Highcharts.charts[Highcharts.charts.length - 1];
       this.notifyPropertyChange('addedChannelsAmplitudes');
 
       chart.series[ADDED_AMPLITUDES_SERIE_INDEX].setData(this.get('addedChannelsAmplitudes'), true);
