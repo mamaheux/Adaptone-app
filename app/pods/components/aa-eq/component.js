@@ -64,17 +64,17 @@ export default Component.extend({
     }
 
     if (currentFilterIndex === 0) {
-      set(this.currentFilter, 'maxFrequency', parametricFilters[currentFilterIndex + 1].freq);
-      set(this.currentFilter, 'midFrequency', (parametricFilters[currentFilterIndex + 1].freq - MIN_FREQUENCY) / 2);
+      set(this.currentFilter, 'maxFrequency', Math.round(parametricFilters[currentFilterIndex + 1].freq));
+      set(this.currentFilter, 'midFrequency', Math.round((parametricFilters[currentFilterIndex + 1].freq - MIN_FREQUENCY) / 2));
       set(this.currentFilter, 'minFrequency', MIN_FREQUENCY);
     } else if (currentFilterIndex === parametricFilters.length - 1) {
       set(this.currentFilter, 'maxFrequency', MAX_FREQUENCY);
-      set(this.currentFilter, 'midFrequency', (MAX_FREQUENCY - parametricFilters[currentFilterIndex - 1].freq) / 2);
-      set(this.currentFilter, 'minFrequency', parametricFilters[currentFilterIndex - 1].freq);
+      set(this.currentFilter, 'midFrequency', Math.round((MAX_FREQUENCY - parametricFilters[currentFilterIndex - 1].freq) / 2));
+      set(this.currentFilter, 'minFrequency', Math.round(parametricFilters[currentFilterIndex - 1].freq));
     } else {
-      set(this.currentFilter, 'maxFrequency', parametricFilters[currentFilterIndex + 1].freq);
-      set(this.currentFilter, 'midFrequency', (parametricFilters[currentFilterIndex + 1].freq - parametricFilters[currentFilterIndex - 1].freq) / 2);
-      set(this.currentFilter, 'minFrequency', parametricFilters[currentFilterIndex - 1].freq);
+      set(this.currentFilter, 'maxFrequency', Math.round(parametricFilters[currentFilterIndex + 1].freq));
+      set(this.currentFilter, 'midFrequency', Math.round((parametricFilters[currentFilterIndex + 1].freq - parametricFilters[currentFilterIndex - 1].freq) / 2));
+      set(this.currentFilter, 'minFrequency', Math.round(parametricFilters[currentFilterIndex - 1].freq));
     }
   }),
 
@@ -83,10 +83,6 @@ export default Component.extend({
 
     this.set('currentFilter', {});
     this.set('graphicEqGraphValues', []);
-  },
-
-  willRender() {
-    this.set('currentFilter', this.get('parametricFilters')[0]);
   },
 
   actions: {
