@@ -16,8 +16,6 @@ const GAIN_ZERO_WIDTH = 1;
 const GAIN_ZERO_ZINDEX = 3;
 const MIN_FREQUENCY_VALUE = 20;
 const MAX_FREQUENCY_VALUE = 20000;
-const MIN_GAIN_VALUE = -25;
-const MAX_GAIN_VALUE = 25;
 
 export default Component.extend({
   intl: service(),
