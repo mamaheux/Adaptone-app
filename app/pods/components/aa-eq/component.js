@@ -54,7 +54,6 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    set(this.get('parametricFilters')[0], 'isSelected', true);
     this.set('graphicEqGraphValues', []);
   },
 
