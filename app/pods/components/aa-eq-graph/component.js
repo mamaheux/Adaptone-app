@@ -37,16 +37,14 @@ export default Component.extend({
 
   eqGains: computed('channelInfos', function() {
     const channelInfos = this.get('channelInfos');
-    const formattedData = [];
+    let formattedData = [];
 
     if (this.get('isParametric')) {
       channelInfos.data.paramEq.forEach(paramEq => {
         formattedData.push([paramEq.freq, paramEq.gain]);
       });
     } else {
-      channelInfos.data.graphEq.forEach(graphEq => {
-        formattedData.push([graphEq.freq, graphEq.value]);
-      });
+      formattedData = this.get('graphicEqValues');
     }
 
     return formattedData;
@@ -94,7 +92,7 @@ export default Component.extend({
     }
   }),
 
-  eqGainsChanged: observer('channelInfos.data.{paramEq,graphEq}.@each.{on,freq,q,gain}', 'isParametric', function() {
+  eqGainsChanged: observer('channelInfos.data.{paramEq}.@each.{on,freq,q,gain}', 'isParametric', 'graphicEqValues', function() {
     const chart = Highcharts.charts[CHART_INDEX];
     this.notifyPropertyChange('eqGains');
 

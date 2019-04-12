@@ -1,12 +1,13 @@
 /* eslint-disable no-magic-numbers */
 
 import Component from '@ember/component';
-import {computed} from '@ember/object';
+import {computed, observer} from '@ember/object';
 import {set} from '@ember/object';
 import mathjs from 'mathjs';
 
 const CENTER_FREQUENCIES = [20, 25, 31.5, 40, 50, 63, 80, 100, 125, 160, 200, 250, 315, 400, 500, 630, 800, 1000, 1250, 1600, 2000, 2500, 3150, 4000, 5000, 6300, 8000, 10000, 12500, 16000, 20000];
 const FIVE_BANDS_FREQUENCIES = [60, 230, 910, 3000, 14000];
+const FREQUENCIES_PER_DECADE = 10;
 
 const SAMPLE_FREQUENCY = 44100;
 
@@ -46,10 +47,15 @@ export default Component.extend({
     }
   }),
 
+  graphicFiltersChanged: observer('graphicFilters.@each.value', function() {
+    this.interpolateData();
+  }),
+
   init() {
     this._super(...arguments);
 
-    this.set('graphicEqGraphValues', {});
+    set(this.get('parametricFilters')[0], 'isSelected', true);
+    this.set('graphicEqGraphValues', []);
   },
 
   actions: {
@@ -76,12 +82,6 @@ export default Component.extend({
       this.updateParametricEqDesigner(this.get('parametricFilters'));
     },
 
-    onGraphicFilterChange() {
-      const interpolatedData = this.interpolateData();
-
-      return interpolatedData;
-    },
-
     onOnOffChange(filter) {
       this.get('onOnOffChange')(filter);
       this.updateParametricEqDesigner(this.get('parametricFilters'));
@@ -100,7 +100,17 @@ export default Component.extend({
       }
     }
 
+    // Send graphic EQ gains to the Jetson
     this.parametricEqDesignGainsDb(CENTER_FREQUENCIES);
+
+    // Send graphic EQ gains to the graphic EQ graph
+    const graphEqGraphFrequencies = this.getGraphEqGraphFrequencies(parameters);
+    const graphEqGraphGains = this.parametricEqDesignGainsDb(graphEqGraphFrequencies);
+    this.set('graphicEqGraphValues', []);
+
+    graphEqGraphFrequencies.forEach((graphEqGraphFrequency, index) => {
+      this.get('graphicEqGraphValues').pushObject([graphEqGraphFrequency, graphEqGraphGains[index]]);
+    });
   },
 
   designLowShelvingFilter(biquadCoefficients, parameter) {
@@ -212,11 +222,7 @@ export default Component.extend({
 
     const gains = mathjs.dotMultiply(20, mathjs.log10(mathjs.abs(h)));
 
-    // Send gains to the graph or the Jetson here
-    set(this.get('graphicEqGraphValues'), 'frequencies', frequencies);
-    set(this.get('graphicEqGraphValues'), 'gains', gains._data);
-
-    return gains;
+    return gains._data;
   },
 
   interpolateData() {
@@ -269,5 +275,31 @@ export default Component.extend({
 
   linearInterpolation(xs, ys, x) {
     return ys[0] + (x - xs[0]) * ((ys[1] - ys[0]) / (xs[1] - xs[0]));
+  },
+
+  getGraphEqGraphFrequencies(parameters) {
+    const fmin = Math.min.apply(Math, parameters.map(p => {
+      return p.freq
+    }));
+
+    const fmax = Math.max.apply(Math, parameters.map(p => {
+      return p.freq
+    }));
+
+    const numberOfDecades = Math.round(mathjs.log10(fmax/fmin));
+    const stepSize = mathjs.pow(10, 1/FREQUENCIES_PER_DECADE);
+
+    let frequencies = [];
+    for (let i = 0; i < numberOfDecades * FREQUENCIES_PER_DECADE; i++) {
+      if (i === 0) {
+        frequencies[i] = fmin;
+      } else if (i === numberOfDecades * FREQUENCIES_PER_DECADE - 1) {
+        frequencies[i] = fmax;
+      } else {
+        frequencies[i] = frequencies[i - 1] * stepSize;
+      }
+    }
+
+    return frequencies;
   }
 });
