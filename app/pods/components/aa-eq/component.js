@@ -45,7 +45,7 @@ export default Component.extend({
 
   currentFilterChanged: observer('currentFilter', function() {
     const parametricFilters = this.get('parametricFilters');
-    let currentFilterIndex = parametricFilters.findIndex(filter => filter.isSelected === true);
+    let currentFilterIndex = parametricFilters.findIndex(filter => filter.id === this.currentFilter.id);
 
     if (currentFilterIndex === -1) {
       set(parametricFilters[0], 'isSelected', true);
