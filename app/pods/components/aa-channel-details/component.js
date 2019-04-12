@@ -4,13 +4,16 @@ import {observer} from '@ember/object';
 export default Component.extend({
   channel: null,
   isParametric: true,
+  graphicEqGraphValues: null,
 
   userChannelVolume: 0,
   userChannelGain: 0,
 
-  graphEqChange: observer('channel.data.graphEq.@each.value', function() {
-    return this.channel.data.graphEq;
-  }),
+  init() {
+    this._super(...arguments);
+
+    this.set('graphicEqGraphValues', {});
+  },
 
   actions: {
     onVolumeChange(value) {
@@ -35,6 +38,11 @@ export default Component.extend({
 
     onQChange(value) {
       return value;
+    },
+
+    onOnOffChange(filter) {
+      const filterToModify = this.get('channel').data.paramEq.find(f => f.id === filter.id);
+      Ember.set(filterToModify, 'gain', 0);
     }
   }
 });

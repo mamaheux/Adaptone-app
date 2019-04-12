@@ -23,6 +23,10 @@ export default Component.extend({
 
   isParametric: true,
 
+  amplitudes: null,
+  channelInfos: null,
+  graphicEqValues: null,
+
   chartOptions: null,
   chartData: null,
   theme: chartTheme,
@@ -33,16 +37,14 @@ export default Component.extend({
 
   eqGains: computed('channelInfos', function() {
     const channelInfos = this.get('channelInfos');
-    const formattedData = [];
+    let formattedData = [];
 
     if (this.get('isParametric')) {
       channelInfos.data.paramEq.forEach(paramEq => {
         formattedData.push([paramEq.freq, paramEq.gain]);
       });
     } else {
-      channelInfos.data.graphEq.forEach(graphEq => {
-        formattedData.push([graphEq.freq, graphEq.value]);
-      });
+      formattedData = this.get('graphicEqValues');
     }
 
     return formattedData;
@@ -50,39 +52,47 @@ export default Component.extend({
 
   channelAmplitudes: computed('amplitudes', function() {
     const amplitudes = this.get('amplitudes');
-    const formattedData = [];
 
-    const currentChannelAmplitudes = amplitudes.filter(amplitude => amplitude.data.channelId === this.get('currentChannelId'))[0];
+    // TODO: Remove this condition
+    if (amplitudes) {
+      const formattedData = [];
 
-    currentChannelAmplitudes.data.points.forEach(point => {
-      formattedData.push([point.freq, point.amplitude]);
-    });
+      const currentChannelAmplitudes = amplitudes.filter(amplitude => amplitude.data.channelId === this.get('currentChannelId'))[0];
 
-    return formattedData;
+      currentChannelAmplitudes.data.points.forEach(point => {
+        formattedData.push([point.freq, point.amplitude]);
+      });
+
+      return formattedData;
+    }
   }),
 
   addedChannelsAmplitudes: computed('amplitudes', function() {
     const amplitudes = this.get('amplitudes');
-    let formattedData = {};
 
-    amplitudes.filter(amplitude => amplitude.data.channelId !== this.get('currentChannelId')).forEach(amplitude => {
-      amplitude.data.points.forEach(point => {
-        if (formattedData[point.freq]) {
-          formattedData[point.freq] += point.amplitude;
-        } else {
-          formattedData[point.freq] = point.amplitude;
-        }
+    // TODO: Remove this condition
+    if (amplitudes) {
+      let formattedData = {};
+
+      amplitudes.filter(amplitude => amplitude.data.channelId !== this.get('currentChannelId')).forEach(amplitude => {
+        amplitude.data.points.forEach(point => {
+          if (formattedData[point.freq]) {
+            formattedData[point.freq] += point.amplitude;
+          } else {
+            formattedData[point.freq] = point.amplitude;
+          }
+        });
       });
-    });
 
-    formattedData = Object.keys(formattedData).map((key) => {
-      return [Number(key), Number(formattedData[key])];
-    });
+      formattedData = Object.keys(formattedData).map((key) => {
+        return [Number(key), Number(formattedData[key])];
+      });
 
-    return formattedData;
+      return formattedData;
+    }
   }),
 
-  eqGainsChanged: observer('channelInfos.data.{paramEq,graphEq}.@each.{on,freq,q,gain}', 'isParametric', function() {
+  eqGainsChanged: observer('channelInfos.data.{paramEq}.@each.{on,freq,q,gain}', 'isParametric', 'graphicEqValues', function() {
     const chart = Highcharts.charts[CHART_INDEX];
     this.notifyPropertyChange('eqGains');
 
@@ -90,17 +100,23 @@ export default Component.extend({
   }),
 
   channelAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
-    const chart = Highcharts.charts[CHART_INDEX];
-    this.notifyPropertyChange('channelAmplitudes');
+    // TODO: Remove this condition
+    if (this.get('amplitudes')) {
+      const chart = Highcharts.charts[CHART_INDEX];
+      this.notifyPropertyChange('channelAmplitudes');
 
-    chart.series[AMPLITUDES_SERIE_INDEX].setData(this.get('channelAmplitudes'), true);
+      chart.series[AMPLITUDES_SERIE_INDEX].setData(this.get('channelAmplitudes'), true);
+    }
   }),
 
   addedChannelsAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
-    const chart = Highcharts.charts[CHART_INDEX];
-    this.notifyPropertyChange('addedChannelsAmplitudes');
+    // TODO: Remove this condition
+    if (this.get('amplitudes')) {
+      const chart = Highcharts.charts[CHART_INDEX];
+      this.notifyPropertyChange('addedChannelsAmplitudes');
 
-    chart.series[ADDED_AMPLITUDES_SERIE_INDEX].setData(this.get('addedChannelsAmplitudes'), true);
+      chart.series[ADDED_AMPLITUDES_SERIE_INDEX].setData(this.get('addedChannelsAmplitudes'), true);
+    }
   }),
 
   init() {

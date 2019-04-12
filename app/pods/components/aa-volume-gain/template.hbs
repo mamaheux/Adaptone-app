@@ -1,5 +1,25 @@
 <div class="volume-gain">
   <div class="volume-gain-container">
+    <div class="gain-container">
+      {{aa-peak-meter
+        class="peak-meter"
+        min=-10
+        max=70
+        yellowLimit=20
+        redLimit=50
+        value=this.gain
+      }}
+
+      {{aa-slider
+        class="slider"
+        showValue=true
+        valueTitle=(t 'volume-gain.gain')
+        min=-10
+        value=this.gain
+        max=70
+      }}
+    </div>
+
     <div class="volume-container">
       {{aa-peak-meter
         class="peak-meter"
@@ -16,26 +36,6 @@
         valueTitle=(t 'volume-gain.volume')
         min=0
         value=this.volume
-        max=100
-      }}
-    </div>
-
-    <div class="gain-container">
-      {{aa-peak-meter
-        class="peak-meter"
-        min=0
-        max=100
-        yellowLimit=65
-        redLimit=85
-        value=this.gain
-      }}
-
-      {{aa-slider
-        class="slider"
-        showValue=true
-        valueTitle=(t 'volume-gain.gain')
-        min=0
-        value=this.gain
         max=100
       }}
     </div>

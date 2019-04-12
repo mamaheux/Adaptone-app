@@ -20,46 +20,49 @@
     <div class="parametric-filter-options">
       {{aa-power-button
         class="power-button"
-        isOn=this.currentFilter.isActive
+        isOn=this.currentFilter.on
+        onChange=(action "onOnOffChange" this.currentFilter)
       }}
 
-      <div class="knob">
-        <span class="knob-title">
-          {{t 'eq.frequency'}}
-        </span>
-        {{aa-knob
-          min=0
-          mid=600
-          max=20000
-          value=this.currentFilter.frequency
-          onValueChange=(action "onFrequencyChange")
-        }}
-      </div>
+      <div class="knobs-container {{unless this.currentFilter.on "disabled"}}">
+        <div class="knob">
+          <span class="knob-title">
+            {{t 'eq.frequency'}}
+          </span>
+          {{aa-knob
+            min=this.currentFilter.minFrequency
+            mid=this.currentFilter.midFrequency
+            max=this.currentFilter.maxFrequency
+            value=this.currentFilter.freq
+            onValueChange=(action "onFrequencyChange")
+          }}
+        </div>
 
-      <div class="knob">
-        <span class="knob-title">
-          {{t 'eq.q'}}
-        </span>
-        {{aa-knob
-          min=0.5
-          mid=2
-          max=5
-          value=this.currentFilter.q
-          onValueChange=(action "onQChange")
-        }}
-      </div>
+        <div class="knob">
+          <span class="knob-title">
+            {{t 'eq.q'}}
+          </span>
+          {{aa-knob
+            min=0.5
+            mid=2
+            max=5
+            value=this.currentFilter.q
+            onValueChange=(action "onQChange")
+          }}
+        </div>
 
-      <div class="knob">
-        <span class="knob-title">
-          {{t 'eq.gain'}}
-        </span>
-        {{aa-knob
-          min=-12
-          mid=0
-          max=12
-          value=this.currentFilter.gain
-          onValueChange=(action "onGainChange")
-        }}
+        <div class="knob">
+          <span class="knob-title">
+            {{t 'eq.gain'}}
+          </span>
+          {{aa-knob
+            min=-12
+            mid=0
+            max=12
+            value=this.currentFilter.gain
+            onValueChange=(action "onGainChange")
+          }}
+        </div>
       </div>
     </div>
   {{/if}}
@@ -79,7 +82,6 @@
             value=filter.value
             showValue=true
             valueTitle=(t 'eq.gain-short')
-            onSliderChange=(action "onGraphicFilterChange")
           }}
 
           <span class="slider-frequency">

@@ -149,7 +149,16 @@ describe('Unit | Component | aa-eq', function () {
 
       const gains = component.parametricEqDesignGainsDb(frequencies);
 
-      expect(gains._data).to.deep.equal(expectedGains);
+      expect(gains).to.deep.equal(expectedGains);
+    });
+  });
+
+  describe('getGraphEqGraphFrequencies', () => {
+    it('should return the proper frequencies for a given range', () => {
+      const frequencies = component.getGraphEqGraphFrequencies(component.get('parametricFilters'));
+      const expectedFrequencies = [100,125.89254117941672,158.48931924611136,199.526231496888,251.18864315095806,316.227766016838,398.1071705534974,501.18723362727246,630.9573444801935,794.3282347242819,1000.0000000000005,1258.9254117941678,1584.8931924611143,1995.2623149688807,2511.8864315095816,3162.2776601683813,3981.071705534975,5011.872336272726,6309.573444801937,8000];
+
+      expect(frequencies).to.deep.equal(expectedFrequencies);
     });
   });
 });
