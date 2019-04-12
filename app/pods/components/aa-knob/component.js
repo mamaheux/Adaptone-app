@@ -18,11 +18,6 @@ export default Component.extend(RecognizerMixin, {
   lastDragValue: 0,
   isRounded: false,
 
-  init() {
-    this._super(...arguments);
-    this.set('value', this.get('min'));
-  },
-
   degreesValue: computed('value', 'min', 'mid', 'max', function() {
     const {
       min,
