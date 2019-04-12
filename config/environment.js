@@ -24,7 +24,8 @@ module.exports = function(environment) {
       },
       LOCAL_STORAGE: {
         SESSION_NAMESPACE: 'adaptone-session'
-      }
+      },
+      WEBSOCKET_ADDRESS: 'wss://echo.websocket.org'
     }
   };
 
