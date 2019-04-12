@@ -39,17 +39,6 @@ export default Component.extend({
     return coefficients;
   }),
 
-  currentFilter: computed('parametricFilters', function() {
-    const parametricFilters = this.get('parametricFilters');
-    const selectedFilter = parametricFilters.findIndex(filter => filter.isSelected === true);
-
-    if (selectedFilter) {
-      return selectedFilter;
-    } else {
-      return parametricFilters[0];
-    }
-  }),
-
   graphicFiltersChanged: observer('graphicFilters.@each.value', function() {
     this.interpolateData();
   }),
@@ -81,7 +70,6 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    this.set('currentFilter', {});
     this.set('graphicEqGraphValues', []);
   },
 
