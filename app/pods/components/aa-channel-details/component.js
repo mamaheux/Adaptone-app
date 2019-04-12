@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import {observer} from '@ember/object';
+import {set} from '@ember/object';
 
 export default Component.extend({
   channel: null,
@@ -42,7 +42,7 @@ export default Component.extend({
 
     onOnOffChange(filter) {
       const filterToModify = this.get('channel').data.paramEq.find(f => f.id === filter.id);
-      Ember.set(filterToModify, 'gain', 0);
+      set(filterToModify, 'gain', 0);
     }
   }
 });
