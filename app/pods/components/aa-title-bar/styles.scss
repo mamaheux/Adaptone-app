@@ -17,8 +17,8 @@
 }
 
 .disconnected {
-  &.o-top,
-  &.o-bot {
+  .o-top,
+  .o-bot {
     fill: $torch-red;
   }
 }

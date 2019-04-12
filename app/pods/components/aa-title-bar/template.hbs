@@ -1,4 +1,4 @@
-{{inline-svg "assets/images/topbar_logo.svg" class="logo {{if this.isConnected 'connected' 'disconnected'}}"}}
+{{inline-svg "assets/images/topbar_logo.svg" class=(if this.isConnected 'logo connected' 'logo disconnected')}}
 
 <div class="window-controls">
   {{inline-svg "assets/images/minimize.svg" class="button minimize"}}
