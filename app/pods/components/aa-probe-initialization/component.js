@@ -7,13 +7,8 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    this.get('packetDispatcher').one('positions', this._routeToConfirmPositions, this);
-  },
-
-  _routeToConfirmPositions(data) {
-    this.get('router').transitionTo('probe-positions')
-      .then((probePositionRoute) => {
-        probePositionRoute.set('controller.model.positions', data.positions);
-      });
+    this.get('packetDispatcher').one('positions', (data) => {
+      this.get('router').transitionTo('probe-positions', {queryParams: {positions: JSON.stringify(data.firstSymmetryPositions)}});
+    });
   }
 });

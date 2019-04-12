@@ -41,7 +41,8 @@ export default Component.extend({
         data: configuration
       });
 
-      this._routeStep(configuration.step);
+      this.get('router').transitionTo('console');
+      //this._routeStep(configuration.step);
     }
   },
 

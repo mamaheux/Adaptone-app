@@ -12,13 +12,6 @@ export default Component.extend({
 
   isOptimizing: false,
 
-  _routeToConfirmOptimization(data) {
-    this.get('router').transitionTo('optimal-positions')
-      .then((probeOptimizationRoute) => {
-        probeOptimizationRoute.set('controller.model.positions', data.positions);
-      });
-  },
-
   actions: {
     startOptimization() {
       this.set('isOptimizing', true);
@@ -27,7 +20,9 @@ export default Component.extend({
         seqId: SequenceIds.OPTIMIZE_POS
       });
 
-      this.get('packetDispatcher').one('optimized-positions', this._routeToConfirmOptimization, this);
+      this.get('packetDispatcher').one('optimized-positions', (data) => {
+        this.get('router').transitionTo('optimal-positions', {queryParams: {positions: JSON.stringify(data.positions)}});
+      });
     },
 
     loadConsole() {
@@ -36,7 +31,7 @@ export default Component.extend({
 
       this.get('fileSystem').editConfiguration(configuration);
       this.get('session').set('configuration', configuration);
-      this.router.transitionTo('console-loading');
+      this.router.transitionTo('console');
     }
   }
 });

@@ -21,6 +21,9 @@ export default Component.extend({
   actions: {
     saveConfig() {
       this.configuration.step = steps['probe-positioning'];
+      this.set('configuration.monitorsNumber', +this.configuration.monitorsNumber);
+      this.set('configuration.speakersNumber', +this.configuration.speakersNumber);
+      this.set('configuration.probesNumber', +this.configuration.probesNumber);
 
       this.get('fileSystem').writeNewConfiguration(this.configuration);
       this.get('session').set('configuration', this.configuration);
