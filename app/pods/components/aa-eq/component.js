@@ -12,7 +12,7 @@ const FREQUENCIES_PER_DECADE = 10;
 const SAMPLE_FREQUENCY = 44100;
 
 const MAX_FREQUENCY = 20000;
-const MIN_FREQUENCY = 0;
+const MIN_FREQUENCY = 1;
 
 Number.prototype.between = function(a, b) {
   const min = Math.min(a, b);
