@@ -1,7 +1,13 @@
 import Component from '@ember/component';
-import {set} from '@ember/object';
+import {inject as service} from '@ember/service';
+import {debounce} from '@ember/runloop';
+
+import SequenceIds from 'adaptone-front/constants/sequence-ids';
+
+const DEBOUNCE_TIME = 20;
 
 export default Component.extend({
+  connection: service('connection'),
   isParametric: true,
 
   parametricEqGraphValues: null,
@@ -12,12 +18,28 @@ export default Component.extend({
 
   actions: {
     onVolumeChange(value) {
-      // debounce(this, this.sendVolumeChange, channelVolume, DEBOUNCE_TIME)
+      const message = {
+        seqId: SequenceIds.CHANGE_MAIN_VOLUME_INPUT,
+        data: {
+          channelId: this.get('channel').data.channelId,
+          gain: value
+        }
+      };
+
+      debounce(this, this.get('connection').sendMessage, message, DEBOUNCE_TIME);
       return value;
     },
 
     onGainChange(value) {
-      // debounce(this, this.sendVolumeChange, channelVolume, DEBOUNCE_TIME)
+      const message = {
+        seqId: SequenceIds.CHANGE_INPUT_GAIN,
+        data: {
+          channelId: this.get('channel').data.channelId,
+          gain: value
+        }
+      };
+
+      debounce(this, this.get('connection').sendMessage, message, DEBOUNCE_TIME);
       return value;
     },
 
@@ -27,21 +49,6 @@ export default Component.extend({
 
     onIsSoloChange(value) {
       return value;
-    },
-
-    onFrequencyChange(value) {
-      // debounce(this, this.sendVolumeChange, channelVolume, DEBOUNCE_TIME)
-      return value;
-    },
-
-    onQChange(value) {
-      // debounce(this, this.sendVolumeChange, channelVolume, DEBOUNCE_TIME)
-      return value;
-    },
-
-    onOnOffChange(filter) {
-      const filterToModify = this.get('channel').data.paramEq.find(f => f.id === filter.id);
-      set(filterToModify, 'gain', 0);
     }
   }
 });

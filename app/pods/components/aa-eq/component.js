@@ -4,7 +4,10 @@ import Component from '@ember/component';
 import {computed, observer} from '@ember/object';
 import {debounce} from '@ember/runloop';
 import {set} from '@ember/object';
+import {inject as service} from '@ember/service';
+
 import mathjs from 'mathjs';
+import SequenceIds from 'adaptone-front/constants/sequence-ids';
 
 const CENTER_FREQUENCIES = [20, 25, 31.5, 40, 50, 63, 80, 100, 125, 160, 200, 250, 315, 400, 500, 630, 800, 1000, 1250, 1600, 2000, 2500, 3150, 4000, 5000, 6300, 8000, 10000, 12500, 16000, 20000];
 const FIVE_BANDS_FREQUENCIES = [60, 230, 910, 3000, 14000];
@@ -15,7 +18,8 @@ const SAMPLE_FREQUENCY = 44100;
 const MAX_FREQUENCY = 20000;
 const MIN_FREQUENCY = 20;
 
-const DEBOUNCE_TIME = 5;
+const DESIGNER_DEBOUNCE_TIME = 5;
+const SEND_MESSAGE_DEBOUNCE_TIME = 20;
 
 Number.prototype.between = function(a, b) {
   const min = Math.min(a, b);
@@ -25,6 +29,9 @@ Number.prototype.between = function(a, b) {
 };
 
 export default Component.extend({
+  connection: service('connection'),
+
+  channelId: null,
   graphicEqFreqs: null,
   isParametric: false,
 
@@ -45,7 +52,7 @@ export default Component.extend({
   }),
 
   graphicFiltersChanged: observer('graphicFilters.@each.value', function() {
-    debounce(this, this.processInterpolatedData, DEBOUNCE_TIME);
+    debounce(this, this.processInterpolatedData, DESIGNER_DEBOUNCE_TIME);
   }),
 
   currentFilterChanged: observer('currentFilter', function() {
@@ -94,23 +101,20 @@ export default Component.extend({
       this.set('currentFilter', selectedFilter);
     },
 
-    onFrequencyChange(value) {
-      this.get('onFrequencyChange')(value);
-      debounce(this, this.updateParametricEqDesigner, this.get('parametricFilters'), DEBOUNCE_TIME);
+    onFrequencyChange() {
+      debounce(this, this.updateParametricEqDesigner, this.get('parametricFilters'), DESIGNER_DEBOUNCE_TIME);
     },
 
-    onGainChange(value) {
-      this.get('onGainChange')(value);
-      debounce(this, this.updateParametricEqDesigner, this.get('parametricFilters'), DEBOUNCE_TIME);
+    onGainChange() {
+      debounce(this, this.updateParametricEqDesigner, this.get('parametricFilters'), DESIGNER_DEBOUNCE_TIME);
     },
 
-    onQChange(value) {
-      this.get('onQChange')(value);
-      debounce(this, this.updateParametricEqDesigner, this.get('parametricFilters'), DEBOUNCE_TIME);
+    onQChange() {
+      debounce(this, this.updateParametricEqDesigner, this.get('parametricFilters'), DESIGNER_DEBOUNCE_TIME);
     },
 
     onOnOffChange(filter) {
-      this.get('onOnOffChange')(filter);
+      set(filter, 'gain', 0);
       this.updateParametricEqDesigner(this.get('parametricFilters'));
     }
   },
@@ -128,7 +132,7 @@ export default Component.extend({
     }
 
     // Send graphic EQ gains to the Jetson
-    this.parametricEqDesignGainsDb(CENTER_FREQUENCIES);
+    this.sendEqGainsToJetson(this.parametricEqDesignGainsDb(CENTER_FREQUENCIES));
 
     // Send graphic EQ gains to the graphic EQ graph
     const logspaceFrequencies = this.getLogspaceFrequencies();
@@ -323,9 +327,28 @@ export default Component.extend({
 
   processInterpolatedData() {
     // Send this to the Jetson
-    this.interpolateData(CENTER_FREQUENCIES);
+    const interpolatedCenterFrequenciesGains = [];
+    const centerFrequenciesGains = this.interpolateData(CENTER_FREQUENCIES);
+
+    for (let i = 0; i < centerFrequenciesGains.length; i++) {
+      interpolatedCenterFrequenciesGains.push(centerFrequenciesGains[i][1]);
+    }
+
+    debounce(this, this.sendEqGainsToJetson, interpolatedCenterFrequenciesGains, SEND_MESSAGE_DEBOUNCE_TIME);
 
     // Send this to the graphic EQ graph
     this.set('graphicEqGraphValues', this.interpolateData(this.getLogspaceFrequencies()));
+  },
+
+  sendEqGainsToJetson(gains) {
+    const message = {
+      seqId: SequenceIds.CHANGE_INPUT_EQ_GAIN,
+      data: {
+        channelId: this.get('channelId'),
+        gains
+      }
+    };
+
+    debounce(this, this.get('connection').sendMessage, message, SEND_MESSAGE_DEBOUNCE_TIME);
   }
 });
