@@ -72,10 +72,8 @@ export default Component.extend({
     const meterElements = this.get('meterElements');
     let {yellowLimit, redLimit} = this.getProperties('yellowLimit', 'redLimit');
 
-    if (yellowLimit > NORMALIZED_MAXIMUM || redLimit > NORMALIZED_MAXIMUM) {
-      yellowLimit = this.normalize(yellowLimit);
-      redLimit = this.normalize(redLimit);
-    }
+    yellowLimit = this.normalize(yellowLimit);
+    redLimit = this.normalize(redLimit);
 
     let value = meterValue.currentValue;
     value = this.normalize(value);

@@ -10,7 +10,6 @@
   {{#each-in this.channels as |index channel|}}
     {{aa-channel
       channel=channel
-      onChannelVolumeChange=(action "onChannelVolumeChange" channel.data)
       onChannelMuteChange=(action "onChannelMuteChange" channel.data)
       onChannelSoloChange=(action "onChannelSoloChange" channel.data)
     }}

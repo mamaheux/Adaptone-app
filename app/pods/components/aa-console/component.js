@@ -1,364 +1,17 @@
 import Component from '@ember/component';
+import {inject as service} from '@ember/service';
+import {later} from '@ember/runloop';
 
 export default Component.extend({
+  connection: service('connection'),
+
   channels: null,
   positions: null,
 
   init() {
     this._super(...arguments);
 
-    this.set('channels', [
-      {
-        seqId: 10,
-        data: {
-          channelId: 1,
-          channelName: 'Vocals',
-          gain: 75,
-          volume: 100,
-          isMuted: false,
-          isSolo: false,
-          paramEq: [
-            {
-              id: 0,
-              on: true,
-              freq: 100,
-              q: 1,
-              gain: -10
-            },
-            {
-              id: 1,
-              on: true,
-              freq: 300,
-              q: 5,
-              gain: 5
-            },
-            {
-              id: 2,
-              on: true,
-              freq: 800,
-              q: 5,
-              gain: -8
-            },
-            {
-              id: 3,
-              on: true,
-              freq: 1500,
-              q: 5,
-              gain: 12
-            },
-            {
-              id: 4,
-              on: true,
-              freq: 8000,
-              q: 1,
-              gain: 2
-            }
-          ],
-          graphEq: [
-            {
-              id: 0,
-              value: -3
-            },
-            {
-              id: 0,
-              value: 3
-            },
-            {
-              id: 0,
-              value: 6
-            },
-            {
-              id: 0,
-              value: 8
-            },
-            {
-              id: 0,
-              value: 10
-            }
-          ]
-        }
-      },
-      {
-        seqId: 10,
-        data: {
-          channelId: 1,
-          channelName: 'Guitar',
-          gain: 40,
-          volume: 60,
-          isMuted: false,
-          isSolo: false,
-          paramEq: [
-            {
-              id: 0,
-              on: true,
-              freq: 100,
-              q: 1,
-              gain: -10
-            },
-            {
-              id: 1,
-              on: true,
-              freq: 300,
-              q: 5,
-              gain: 5
-            },
-            {
-              id: 2,
-              on: true,
-              freq: 800,
-              q: 5,
-              gain: -8
-            },
-            {
-              id: 3,
-              on: true,
-              freq: 1500,
-              q: 5,
-              gain: 12
-            },
-            {
-              id: 4,
-              on: true,
-              freq: 8000,
-              q: 1,
-              gain: 2
-            }
-          ],
-          graphEq: [
-            {
-              id: 0,
-              value: -3
-            },
-            {
-              id: 0,
-              value: 3
-            },
-            {
-              id: 0,
-              value: 6
-            },
-            {
-              id: 0,
-              value: 8
-            },
-            {
-              id: 0,
-              value: 10
-            }
-          ]
-        }
-      },
-      {
-        seqId: 10,
-        data: {
-          channelId: 1,
-          channelName: 'Bass',
-          gain: 20,
-          volume: 10,
-          isMuted: false,
-          isSolo: false,
-          paramEq: [
-            {
-              id: 0,
-              on: true,
-              freq: 100,
-              q: 1,
-              gain: -10
-            },
-            {
-              id: 1,
-              on: true,
-              freq: 300,
-              q: 5,
-              gain: 5
-            },
-            {
-              id: 2,
-              on: true,
-              freq: 800,
-              q: 5,
-              gain: -8
-            },
-            {
-              id: 3,
-              on: true,
-              freq: 1500,
-              q: 5,
-              gain: 12
-            },
-            {
-              id: 4,
-              on: true,
-              freq: 8000,
-              q: 1,
-              gain: 2
-            }
-          ],
-          graphEq: [
-            {
-              id: 0,
-              value: -3
-            },
-            {
-              id: 0,
-              value: 3
-            },
-            {
-              id: 0,
-              value: 6
-            },
-            {
-              id: 0,
-              value: 8
-            },
-            {
-              id: 0,
-              value: 10
-            }
-          ]
-        }
-      },
-      {
-        seqId: 10,
-        data: {
-          channelId: 2,
-          channelName: 'Drum',
-          gain: 10,
-          volume: 40,
-          isMuted: false,
-          isSolo: false,
-          paramEq: [
-            {
-              id: 0,
-              on: true,
-              freq: 100,
-              q: 1,
-              gain: -10
-            },
-            {
-              id: 1,
-              on: true,
-              freq: 300,
-              q: 5,
-              gain: 5
-            },
-            {
-              id: 2,
-              on: true,
-              freq: 800,
-              q: 5,
-              gain: -8
-            },
-            {
-              id: 3,
-              on: true,
-              freq: 1500,
-              q: 5,
-              gain: 12
-            },
-            {
-              id: 4,
-              on: true,
-              freq: 8000,
-              q: 1,
-              gain: 2
-            }
-          ],
-          graphEq: [
-            {
-              id: 0,
-              value: -3
-            },
-            {
-              id: 0,
-              value: 3
-            },
-            {
-              id: 0,
-              value: 6
-            },
-            {
-              id: 0,
-              value: 8
-            },
-            {
-              id: 0,
-              value: 10
-            }
-          ]
-        }
-      },
-      {
-        seqId: 10,
-        data: {
-          channelId: 1,
-          channelName: 'Master',
-          gain: 40,
-          volume: 60,
-          isMuted: false,
-          isSolo: false,
-          paramEq: [
-            {
-              id: 0,
-              on: true,
-              freq: 100,
-              q: 1,
-              gain: -10
-            },
-            {
-              id: 1,
-              on: true,
-              freq: 300,
-              q: 5,
-              gain: 5
-            },
-            {
-              id: 2,
-              on: true,
-              freq: 800,
-              q: 5,
-              gain: -8
-            },
-            {
-              id: 3,
-              on: true,
-              freq: 1500,
-              q: 5,
-              gain: 12
-            },
-            {
-              id: 4,
-              on: true,
-              freq: 8000,
-              q: 1,
-              gain: 2
-            }
-          ],
-          graphEq: [
-            {
-              id: 0,
-              value: -3
-            },
-            {
-              id: 0,
-              value: 3
-            },
-            {
-              id: 0,
-              value: 6
-            },
-            {
-              id: 0,
-              value: 8
-            },
-            {
-              id: 0,
-              value: 10
-            }
-          ]
-        }
-      }
-    ]);
+    later(this, this.initJetson, 500);
 
     this.set('positions', {
       seqId: 11,
@@ -415,12 +68,6 @@ export default Component.extend({
   },
 
   actions: {
-    onChannelVolumeChange(channel) {
-      // Handle channel volume change here
-      // debounce(this, this.sendVolumeChange, channelVolume, DEBOUNCE_TIME)
-      return channel;
-    },
-
     onChannelMuteChange(channel) {
       // Handle channel mute change here
       return channel;
@@ -429,6 +76,67 @@ export default Component.extend({
     onChannelSoloChange(channel) {
       // Handle channel solo change here
       return channel;
+    }
+  },
+
+  initJetson() {
+    let messages = [];
+
+    messages.push({
+      seqId: 11,
+      data: {
+        gains: [3.0, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      }
+    });
+
+    messages.push({
+      seqId: 13,
+      data: {
+        channelId: 0,
+        gain: 1.0
+      }
+    });
+
+    messages.push({
+      seqId: 13,
+      data: {
+        channelId: 1,
+        gain: 1.0
+      }
+    });
+
+    messages.push({
+      seqId: 17,
+      data: {
+        gain: 1.0
+      }
+    });
+
+    messages.push({
+      seqId: 12,
+      data: {
+        channelId: 0,
+        gain: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      }
+    });
+
+    messages.push({
+      seqId: 12,
+      data: {
+        channelId: 1,
+        gain: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      }
+    });
+
+    messages.push({
+      seqId: 15,
+      data: {
+        gain: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      }
+    });
+
+    for (let i = 0; i < messages.length; i++) {
+      this.get('connection').sendMessage(messages[i]);
     }
   }
 });

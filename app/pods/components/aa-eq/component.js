@@ -349,6 +349,6 @@ export default Component.extend({
       }
     };
 
-    debounce(this, this.get('connection').sendMessage, message, SEND_MESSAGE_DEBOUNCE_TIME);
+    debounce(this.get('connection'), this.get('connection').sendMessage, message, SEND_MESSAGE_DEBOUNCE_TIME);
   }
 });

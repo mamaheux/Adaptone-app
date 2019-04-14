@@ -8,13 +8,31 @@ const DEBOUNCE_TIME = 20;
 
 export default Component.extend({
   connection: service('connection'),
+  packetDispatcher: service('packet-dispatcher'),
+
   isParametric: true,
 
   parametricEqGraphValues: null,
   graphicEqGraphValues: null,
 
+  inputAfterGain: null,
+  inputAfterEq: null,
+
   userChannelVolume: 0,
   userChannelGain: 0,
+
+  didInsertElement() {
+    this.get('packetDispatcher').on('peakmeter-levels', (data) => {
+      this.set('inputAfterGain', data.inputAfterGain[this.get('channel').data.channelId]);
+      this.set('inputAfterEq', data.inputAfterEq[this.get('channel').data.channelId] * this.get('channel').data.volume / 100);
+    });
+
+    this._super(...arguments);
+  },
+
+  willDestroyElement() {
+      this.get('packetDispatcher').off('peakmeter-levels');
+  },
 
   actions: {
     onVolumeChange(value) {
@@ -26,7 +44,7 @@ export default Component.extend({
         }
       };
 
-      debounce(this, this.get('connection').sendMessage, message, DEBOUNCE_TIME);
+      debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
       return value;
     },
 
@@ -39,7 +57,7 @@ export default Component.extend({
         }
       };
 
-      debounce(this, this.get('connection').sendMessage, message, DEBOUNCE_TIME);
+      debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
       return value;
     },
 
