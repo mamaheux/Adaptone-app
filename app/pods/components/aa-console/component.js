@@ -301,9 +301,37 @@ export default Component.extend({
             {
               id: 0,
               on: true,
-              freq: 1000,
-              q: 4.4,
-              gain: 20
+              freq: 100,
+              q: 1,
+              gain: -10
+            },
+            {
+              id: 1,
+              on: true,
+              freq: 300,
+              q: 5,
+              gain: 5
+            },
+            {
+              id: 2,
+              on: true,
+              freq: 800,
+              q: 5,
+              gain: -8
+            },
+            {
+              id: 3,
+              on: true,
+              freq: 1500,
+              q: 5,
+              gain: 12
+            },
+            {
+              id: 4,
+              on: true,
+              freq: 8000,
+              q: 1,
+              gain: 2
             }
           ],
           graphEq: [
