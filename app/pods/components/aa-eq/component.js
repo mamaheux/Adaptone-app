@@ -341,6 +341,7 @@ export default Component.extend({
   },
 
   sendEqGainsToJetson(gains) {
+    gains = gains.map(gain => Math.pow(10, gain / 20));
     const message = {
       seqId: SequenceIds.CHANGE_INPUT_EQ_GAIN,
       data: {
