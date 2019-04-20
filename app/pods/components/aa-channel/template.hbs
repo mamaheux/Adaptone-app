@@ -1,8 +1,8 @@
 <div class="channel">
   <div class="name">
-    <div class="input">{{this.name}}</div>
+    <div class="input">{{this.channel.data.channelName}}</div>
     <div class="details">
-      {{#link-to "channel-details" (query-params channelId=this.channelId)}}
+      {{#link-to "channel-details" (query-params channel=this.stringifiedChannel)}}
         ...
       {{/link-to}}
     </div>
@@ -11,9 +11,8 @@
   <div class="meter-container">
     {{aa-slider
       min=0
-      value=this.volume
+      value=this.channel.data.volume
       max=100
-      onSliderChange=this.onChannelVolumeChange
       step=1
     }}
 
@@ -22,7 +21,6 @@
       max=100
       yellowLimit=65
       redLimit=85
-      value=this.volume
       class="peak-meter"
     }}
   </div>
@@ -30,13 +28,13 @@
   <div class="button-container">
     {{aa-toggle-button
       class="toggle-button"
-      isActive=this.isMuted
+      isActive=this.channel.data.isMuted
       text="M"
       onButtonClick=this.onChannelMuteChange
     }}
     {{aa-toggle-button
       class="toggle-button"
-      isActive=this.isSolo
+      isActive=this.channel.data.isSolo
       text="S"
       onButtonClick=this.onChannelSoloChange
     }}

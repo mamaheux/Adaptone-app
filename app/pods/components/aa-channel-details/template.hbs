@@ -25,8 +25,10 @@
 <div class="eq-container">
   {{aa-volume-gain
     class="volume-gain-container"
-    volume=this.userChannelVolume
-    gain=this.userChannelGain
+    volume=this.channel.data.volume
+    gain=this.channel.data.gain
+    inputAfterGain=this.inputAfterGain
+    inputAfterEq=this.inputAfterEq
     isMute=this.channel.data.isMuted
     isSolo=this.channel.data.isSolo
     onVolumeChange=(action "onVolumeChange")
@@ -36,15 +38,12 @@
   }}
 
   {{aa-eq
+    channelId=this.channel.data.channelId
     isParametric=this.isParametric
     parametricFilters=this.channel.data.paramEq
     graphicFilters=this.channel.data.graphEq
     parametricEqGraphValues=this.parametricEqGraphValues
     graphicEqGraphValues=this.graphicEqGraphValues
-    onFrequencyChange=(action "onFrequencyChange")
-    onGainChange=(action "onGainChange")
-    onQChange=(action "onQChange")
-    onOnOffChange=(action "onOnOffChange")
   }}
 </div>
 

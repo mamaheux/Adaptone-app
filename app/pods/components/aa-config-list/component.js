@@ -42,7 +42,7 @@ export default Component.extend({
       });
 
       this.get('router').transitionTo('console');
-      //this._routeStep(configuration.step);
+      this._routeStep(configuration.step);
     }
   },
 

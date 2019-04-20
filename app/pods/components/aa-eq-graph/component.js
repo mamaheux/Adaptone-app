@@ -169,14 +169,6 @@ export default Component.extend({
       {
         name: this.intl.t('eq-graph.series.eq-gain'),
         data: this.get('eqGains')
-      },
-      {
-        name: this.intl.t('eq-graph.series.channel-amplitudes'),
-        data: this.get('channelAmplitudes')
-      },
-      {
-        name: this.intl.t('eq-graph.series.channels-amplitudes'),
-        data: this.get('addedChannelsAmplitudes')
       }
     ];
 

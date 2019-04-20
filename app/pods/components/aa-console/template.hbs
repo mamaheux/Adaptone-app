@@ -9,11 +9,7 @@
 <div class="channels">
   {{#each-in this.channels as |index channel|}}
     {{aa-channel
-      name=channel.data.channelName
-      volume=channel.data.volume
-      isMuted=channel.data.isMuted
-      isSolo=channel.data.isSolo
-      onChannelVolumeChange=(action "onChannelVolumeChange" channel.data)
+      channel=channel
       onChannelMuteChange=(action "onChannelMuteChange" channel.data)
       onChannelSoloChange=(action "onChannelSoloChange" channel.data)
     }}

@@ -30,8 +30,8 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
-    width: 1064,
-    height: 768,
+    width: 1300,
+    height: 850,
     frame: false
   });
 

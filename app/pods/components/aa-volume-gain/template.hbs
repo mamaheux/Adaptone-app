@@ -5,9 +5,9 @@
         class="peak-meter"
         min=-100
         max=0
-        yellowLimit=20
-        redLimit=50
-        value=this.gain
+        yellowLimit=-30
+        redLimit=-10
+        value=this.inputAfterGain
       }}
 
       {{aa-slider
@@ -26,9 +26,9 @@
         class="peak-meter"
         min=-100
         max=0
-        yellowLimit=65
-        redLimit=85
-        value=this.volume
+        yellowLimit=-30
+        redLimit=-10
+        value=this.inputAfterEq
       }}
 
       {{aa-slider

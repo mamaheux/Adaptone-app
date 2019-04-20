@@ -1,15 +1,17 @@
 import Component from '@ember/component';
+import {inject as service} from '@ember/service';
 
 export default Component.extend({
+  connection: service('connection'),
+
   channels: null,
   positions: null,
 
-  actions: {
-    onChannelVolumeChange(channel) {
-      // Handle channel volume change here
-      return channel;
-    },
+  init() {
+    this._super(...arguments);
+  },
 
+  actions: {
     onChannelMuteChange(channel) {
       // Handle channel mute change here
       return channel;
