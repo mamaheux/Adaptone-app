@@ -31,7 +31,7 @@ export default Component.extend({
   },
 
   willDestroyElement() {
-      this.get('packetDispatcher').off('peakmeter-levels');
+    this.get('packetDispatcher').off('peakmeter-levels');
   },
 
   actions: {
