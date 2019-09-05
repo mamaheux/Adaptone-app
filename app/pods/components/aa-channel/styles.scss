@@ -8,6 +8,7 @@
 }
 
 .name {
+  position: relative;
   display: flex;
   flex-direction: row;
 }
@@ -16,7 +17,6 @@
   font-family: $text-font-semibold;
   font-size: 16px;
   color: $big-stone;
-  width: 60px;
   border: none;
   background-color: $silver;
   margin: 10px 0 0 5px;
@@ -24,7 +24,9 @@
 }
 
 .details {
-  margin-right: 10px;
+  position: absolute;
+  top: 0;
+  right: 10px;
   transform: rotate(-90deg);
 
   & > a {
