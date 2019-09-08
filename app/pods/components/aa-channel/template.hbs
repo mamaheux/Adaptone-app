@@ -1,9 +1,9 @@
 <div class="channel">
   <div class="name">
-    <div class="input">{{this.channel.data.channelName}}</div>
+    <div class="input" contenteditable="true">{{this.channel.data.channelName}}</div>
     <div class="details">
       {{#link-to "channel-details" (query-params channel=this.stringifiedChannel)}}
-        ...
+        {{inline-svg "assets/images/external-link-icon.svg" class="link-icon"}}
       {{/link-to}}
     </div>
   </div>
