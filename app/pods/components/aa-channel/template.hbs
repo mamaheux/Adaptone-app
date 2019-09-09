@@ -1,9 +1,13 @@
 <div class="channel">
   <div class="name">
-    <div class="input">{{this.channel.data.channelName}}</div>
+    {{input
+      class="input"
+      type="text"
+      value=(mut this.channel.data.channelName)
+    }}
     <div class="details">
       {{#link-to "channel-details" (query-params channel=this.stringifiedChannel)}}
-        ...
+        {{inline-svg "assets/images/external-link-icon.svg" class="link-icon"}}
       {{/link-to}}
     </div>
   </div>

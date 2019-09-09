@@ -299,7 +299,7 @@ Les gains ne sont pas en dB.
 
 ### Spectre sonore des entrées
 
-L'amplitude est en dB.
+L'amplitude n'est pas en dB.
 
 ```json
 {
