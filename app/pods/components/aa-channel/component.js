@@ -29,20 +29,20 @@ export default Component.extend({
   }),
 
   channelVolumeChanged: observer('channel.data.volume', function() {
-      const formattedVolume = this.get('channel').data.volume / 100;
+    const formattedVolume = this.get('channel').data.volume / 100;
 
-      const seqId = this._getVolumeSequenceId();
+    const seqId = this._getVolumeSequenceId();
 
-      const message = {
-        seqId,
-        data: {
-          auxiliaryId: this.get('channel').data.auxiliaryId,
-          channelId: this.get('channel').data.channelId,
-          gain: formattedVolume
-        }
-      };
+    const message = {
+      seqId,
+      data: {
+        auxiliaryId: this.get('channel').data.auxiliaryId,
+        channelId: this.get('channel').data.channelId,
+        gain: formattedVolume
+      }
+    };
 
-      debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
+    debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
   }),
 
   stringifiedChannel: computed('channel', function() {

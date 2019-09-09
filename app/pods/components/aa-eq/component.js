@@ -365,6 +365,6 @@ export default Component.extend({
     if (this.get('isAuxiliaryOutput')) return SequenceIds.CHANGE_AUX_EQ_OUTPUT_GAINS;
     if (this.get('isMasterOutput')) return SequenceIds.CHANGE_MAIN_EQ_OUTPUT_GAINS;
 
-    return SequenceIds.CHANGE_INPUT_EQ_GAIN
+    return SequenceIds.CHANGE_INPUT_EQ_GAIN;
   }
 });
