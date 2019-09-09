@@ -14,9 +14,9 @@
 
 .input {
   font-family: $text-font-semibold;
-  font-size: 16px;
+  font-size: 14px;
   color: $big-stone;
-  width: 60px;
+  width: 65px;
   border: none;
   background-color: $silver;
   margin: 10px 0 0 5px;
@@ -24,14 +24,16 @@
 }
 
 .details {
-  margin-right: 10px;
-  transform: rotate(-90deg);
+  display: flex;
 
   & > a {
     text-decoration: none;
     font-size: 34px;
     font-family: $text-font-bold;
     color: $big-stone;
+    margin: 10px 0 0 5px;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -76,4 +78,8 @@
     }
   }
   margin-left: 5px;
+}
+
+.link-icon {
+  width: 14px;
 }
