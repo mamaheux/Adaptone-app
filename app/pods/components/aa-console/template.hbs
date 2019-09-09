@@ -6,12 +6,48 @@
   class="heat-map"
 }}
 
-<div class="channels">
-  {{#each-in this.channels as |index channel|}}
-    {{aa-channel
-      channel=channel
-      onChannelMuteChange=(action "onChannelMuteChange" channel.data)
-      onChannelSoloChange=(action "onChannelSoloChange" channel.data)
-    }}
-  {{/each-in}}
+<div class="container">
+  <div class="inputs">
+    <div class="channels">
+      {{#each-in this.channels.master.data.inputs as |index channel|}}
+        {{aa-channel
+          channel=channel
+          onChannelMuteChange=(action "onChannelMuteChange" channel.data)
+          onChannelSoloChange=(action "onChannelSoloChange" channel.data)
+        }}
+      {{/each-in}}
+    </div>
+
+    <div class="channels">
+      {{#each-in this.channels.auxiliaries as |index auxiliary|}}
+        {{#each-in auxiliary.data.inputs as |index channel|}}
+          {{aa-channel
+            channel=channel
+            onChannelMuteChange=(action "onChannelMuteChange" channel.data)
+            onChannelSoloChange=(action "onChannelSoloChange" channel.data)
+          }}
+        {{/each-in}}
+      {{/each-in}}
+    </div>
+  </div>
+
+  <div class="ports">
+    <div class="channels">
+      {{aa-channel
+        channel=this.channels.master
+        onChannelMuteChange=(action "onChannelMuteChange" this.channels.master.data)
+        onChannelSoloChange=(action "onChannelSoloChange" this.channels.master.data)
+      }}
+    </div>
+
+    <div class="channels">
+      {{#each-in this.channels.auxiliaries as |index channel|}}
+        {{aa-channel
+          channel=channel
+          onChannelMuteChange=(action "onChannelMuteChange" channel.data)
+          onChannelSoloChange=(action "onChannelSoloChange" channel.data)
+        }}
+      {{/each-in}}
+    </div>
+  </div>
 </div>

@@ -29,6 +29,12 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 | 19 | [Taux erreur](#taux-erreur) |
 | 20 | [Spectre sonore des entrées](#spectre-sonore-des-entrées) |
 | 21 | [Niveaux sonores (peakmeter)](#niveaux-sonores-peakmeter) |
+| *Structure d'un channel* |
+| 22 | [Mère](#structure-mère) |
+| 23 | [Master](#structure-master) |
+| 24 | [Auxiliaire](#structure-auxiliaire) |
+| 25 | [Entrée master](#structure-entrée-master) |
+| 26 | [Entrée auxiliaire](#structure-entrée-auxiliaire) |
 
 ## Étapes
 
@@ -212,7 +218,7 @@ Les gains ne sont pas en dB.
 }
 ```
 
-### Changer le volume d'une entrée dans un mixage auxilière
+### Changer le volume d'une entrée dans un mixage auxiliaire
 
 ```json
 {
@@ -325,6 +331,78 @@ Les niveaux sonores ne sont pas en dB.
     "inputAfterGain": [0.5, 1.5],
     "inputAfterEq": [0.5, 1.5],
     "outputAfterGain": [0.5, 1.5]
+  }
+}
+```
+
+## Structure d'un channel
+
+### Structure mère
+```json
+{
+  "master": master,
+  "auxiliaries": []
+}
+```
+
+### Structure Master
+```json
+{
+  "data": {
+    "channelId": 0,
+    "auxiliaryId": null,
+    "channelName": "Master",
+    "gain": 3.00,
+    "volume": 50,
+    "isMuted": false,
+    "isSolo": false,
+    "inputs": []
+  }
+}
+```
+
+### Structure auxiliaire
+```json
+{
+  "data": {
+    "channelId": 1,
+    "auxiliaryId": 1,
+    "channelName": "Aux 1",
+    "gain": 3.00,
+    "volume": 50,
+    "isMuted": false,
+    "isSolo": false,
+    "inputs": []
+  }
+}
+```
+
+### Structure entrée Master
+```json
+{
+  "data": {
+    "channelId": 2,
+    "auxiliaryId": null,
+    "channelName": "Input 1",
+    "gain": 3.00,
+    "volume": 50,
+    "isMuted": false,
+    "isSolo": false
+  }
+}
+```
+
+### Structure entrée auxiliaire
+```json
+{
+  "data": {
+    "channelId": 3,
+    "auxiliaryId": 1,
+    "channelName": "Input 2",
+    "gain": 3.00,
+    "volume": 50,
+    "isMuted": false,
+    "isSolo": false
   }
 }
 ```

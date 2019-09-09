@@ -32,6 +32,7 @@ export default Component.extend({
   connection: service('connection'),
 
   channelId: null,
+  auxiliaryId: null,
   graphicEqFreqs: null,
   isParametric: false,
 
@@ -40,6 +41,9 @@ export default Component.extend({
 
   parametricEqGraphValues: null,
   graphicEqGraphValues: null,
+
+  isMasterOutput: false,
+  isAuxiliaryOutput: false,
 
   biquadCoefficients: computed('graphicFilters', function() {
     const coefficients = [];
@@ -342,14 +346,25 @@ export default Component.extend({
 
   sendEqGainsToJetson(gains) {
     gains = gains.map(gain => Math.pow(10, gain / 20));
+
+    const seqId = this._getEqGainsSequenceId();
+
     const message = {
-      seqId: SequenceIds.CHANGE_INPUT_EQ_GAIN,
+      seqId,
       data: {
+        auxiliaryId: this.get('auxiliaryId'),
         channelId: this.get('channelId'),
         gains
       }
     };
 
     debounce(this.get('connection'), this.get('connection').sendMessage, message, SEND_MESSAGE_DEBOUNCE_TIME);
+  },
+
+  _getEqGainsSequenceId() {
+    if (this.get('isAuxiliaryOutput')) return SequenceIds.CHANGE_AUX_EQ_OUTPUT_GAINS;
+    if (this.get('isMasterOutput')) return SequenceIds.CHANGE_MAIN_EQ_OUTPUT_GAINS;
+
+    return SequenceIds.CHANGE_INPUT_EQ_GAIN;
   }
 });

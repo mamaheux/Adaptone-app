@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import {computed} from '@ember/object';
 import {inject as service} from '@ember/service';
 import {debounce} from '@ember/runloop';
 
@@ -21,6 +22,24 @@ export default Component.extend({
   userChannelVolume: 0,
   userChannelGain: 0,
 
+  isAuxiliary: computed('channel.data.auxiliaryId', function() {
+    if (this.get('channel').data.auxiliaryId !== null) return true;
+
+    return false;
+  }),
+
+  isAuxiliaryOutput: computed('channel.data.{auxiliaryId,inputs}', function() {
+    if (this.get('channel').data.auxiliaryId !== null && this.get('channel').data.inputs !== undefined) return true;
+
+    return false;
+  }),
+
+  isMasterOutput: computed('channel.data.{auxiliaryId,inputs}', function() {
+    if (this.get('channel').data.auxiliaryId === null && this.get('channel').data.inputs !== undefined) return true;
+
+    return false;
+  }),
+
   didInsertElement() {
     this.get('packetDispatcher').on('peakmeter-levels', (data) => {
       this.set('inputAfterGain', data.inputAfterGain[this.get('channel').data.channelId]);
@@ -36,9 +55,12 @@ export default Component.extend({
 
   actions: {
     onVolumeChange(value) {
+      const seqId = this._getVolumeSequenceId();
+
       const message = {
-        seqId: SequenceIds.CHANGE_MAIN_VOLUME_INPUT,
+        seqId,
         data: {
+          auxiliaryId: this.get('channel').data.auxiliaryId,
           channelId: this.get('channel').data.channelId,
           gain: value
         }
@@ -68,5 +90,13 @@ export default Component.extend({
     onIsSoloChange(value) {
       return value;
     }
+  },
+
+  _getVolumeSequenceId() {
+    if (this.get('isAuxiliaryOutput')) return SequenceIds.CHANGE_AUX_VOLUME_OUTPUT;
+    if (this.get('isMasterOutput')) return SequenceIds.CHANGE_MAIN_VOLUME_OUTPUT;
+    if (this.get('isAuxiliary')) return SequenceIds.CHANGE_AUX_VOLUME_INPUT;
+
+    return SequenceIds.CHANGE_MAIN_VOLUME_INPUT;
   }
 });

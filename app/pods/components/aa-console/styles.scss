@@ -5,11 +5,24 @@
   flex-direction: column;
 }
 
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
 .heat-map {
   border: 3px solid $big-stone;
 }
 
 .channels {
   display: flex;
-  flex-direction: row;
+}
+
+.inputs {
+  display: flex;
+}
+
+.ports {
+  display: flex;
 }
