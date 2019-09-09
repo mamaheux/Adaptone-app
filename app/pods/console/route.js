@@ -10,6 +10,7 @@ export default Route.extend({
             auxiliaryId: null,
             channelName: 'Input 1',
             gain: 3.00,
+            volume: 50,
             isMuted: false,
             isSolo: false,
             paramEq: [
@@ -79,6 +80,7 @@ export default Route.extend({
             auxiliaryId: null,
             channelName: 'Input 2',
             gain: 3.00,
+            volume: 50,
             isMuted: false,
             isSolo: false,
             paramEq: [
@@ -151,6 +153,7 @@ export default Route.extend({
             auxiliaryId: 1,
             channelName: 'Input 3',
             gain: 3.00,
+            volume: 50,
             isMuted: false,
             isSolo: false,
             paramEq: [
@@ -220,6 +223,7 @@ export default Route.extend({
             auxiliaryId: 1,
             channelName: 'Input 4',
             gain: 3.00,
+            volume: 50,
             isMuted: false,
             isSolo: false,
             paramEq: [
@@ -428,7 +432,7 @@ export default Route.extend({
               ]
             }
           }
-        ]
+        ];
 
         this.controllerFor('console').set('channels', {
           master,

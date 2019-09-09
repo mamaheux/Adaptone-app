@@ -29,6 +29,8 @@ export default Component.extend({
   }),
 
   channelVolumeChanged: observer('channel.data.volume', function() {
+      const formattedVolume = this.get('channel').data.volume / 100;
+
       const seqId = this._getVolumeSequenceId();
 
       const message = {
@@ -36,7 +38,7 @@ export default Component.extend({
         data: {
           auxiliaryId: this.get('channel').data.auxiliaryId,
           channelId: this.get('channel').data.channelId,
-          gain: this.get('channel').data.volume
+          gain: formattedVolume
         }
       };
 
