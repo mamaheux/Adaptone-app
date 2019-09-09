@@ -32,7 +32,7 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({
     width: 1300,
     height: 850,
-    frame: false
+    frame: true
   });
 
   // If you want to open up dev tools programmatically, call
