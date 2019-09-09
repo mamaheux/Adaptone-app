@@ -7,7 +7,7 @@
     }}
     <div class="details">
       {{#link-to "channel-details" (query-params channel=this.stringifiedChannel)}}
-        {{inline-svg "assets/images/external-link-icon.svg" class="link-icon"}}
+        {{inline-svg "assets/images/arrow-icon.svg" class="link-icon"}}
       {{/link-to}}
     </div>
   </div>
@@ -25,7 +25,7 @@
       max=100
       yellowLimit=65
       redLimit=85
-      class="peak-meter"
+      value=this.channel.data.volume
     }}
   </div>
 

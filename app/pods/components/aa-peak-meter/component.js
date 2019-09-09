@@ -33,15 +33,12 @@ export default Component.extend({
   },
 
   initializeMeterElements() {
-    this.set('yellowLimit', this.normalize(this.get('yellowLimit')));
-    this.set('redLimit', this.normalize(this.get('redLimit')));
-
     this.set('meterElements', {
       green: this.element.querySelector('.green'),
       yellow: this.element.querySelector('.yellow'),
       red: this.element.querySelector('.red'),
       peak: this.element.querySelector('.peak'),
-      size: this.element.querySelector('.peak-meter').clientWidth,
+      size: this.element.querySelector('.peak-meter').clientHeight,
       peakParameters: {
         value: 0,
         lastTime: 0,
@@ -51,8 +48,8 @@ export default Component.extend({
       }
     });
 
-    this.get('meterElements').yellow.style.left = this.formatValue(this.get('yellowLimit'));
-    this.get('meterElements').red.style.left = this.formatValue(this.get('redLimit'));
+    this.get('meterElements').yellow.style.bottom = this.formatValue(this.normalize(this.get('yellowLimit')));
+    this.get('meterElements').red.style.bottom = this.formatValue(this.normalize(this.get('redLimit')));
   },
 
   renderPeakMeter(value = this.get('value')) {
@@ -80,21 +77,21 @@ export default Component.extend({
 
     const dom = meterElements;
 
-    dom.green.style.width = this.formatValue(value);
+    dom.green.style.height = this.formatValue(value);
 
     if (value > yellowLimit) {
-      dom.yellow.style.width = this.formatValue(value - yellowLimit);
+      dom.yellow.style.height = this.formatValue(value - yellowLimit);
     } else {
-      dom.yellow.style.width = 0;
+      dom.yellow.style.height = 0;
     }
 
     if (value > redLimit) {
-      dom.red.style.width = this.formatValue(value - redLimit);
+      dom.red.style.height = this.formatValue(value - redLimit);
     } else {
-      dom.red.style.width = 0;
+      dom.red.style.height = 0;
     }
 
-    dom.peak.style.left = this.formatValue(meterValue.peak.value - dom.peak.style.width);
+    dom.peak.style.bottom = this.formatValue(meterValue.peak.value - dom.peak.style.height);
   },
 
   updatePeak(peak, value) {

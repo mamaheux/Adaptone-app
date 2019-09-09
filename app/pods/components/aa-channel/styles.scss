@@ -27,8 +27,8 @@
 .details {
   display: flex;
   position: absolute;
-  top: 10px;
-  right: 12px;
+  top: 6px;
+  right: 8px;
   transform: rotate(-90deg);
 
   & > a {
@@ -67,24 +67,8 @@
   margin: 10px 0 10px 10px;
 }
 
-.peak-meter {
-  & > .peak-meter {
-    position: relative;
-    top: 95px;
-    right: 90px;
-    height: 25px;
-    width: 210px;
-  }
-
-  & > .peak-meter-part {
-    &.peak {
-      width: 2px;
-      height: 25px;
-    }
-  }
-  margin-left: 5px;
-}
-
 .link-icon {
-  width: 14px;
+  width: 24px;
+  transform: rotate(-90deg);
+  fill: $big-stone;
 }
