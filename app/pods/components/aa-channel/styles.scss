@@ -3,8 +3,11 @@
 .channel {
   background-color: $silver;
   border: 1.5px solid $big-stone;
-  border-top: none;
   width: 97px;
+
+  &.output {
+    background-color: $silver-chalice;
+  }
 }
 
 .name {
@@ -19,7 +22,7 @@
   color: $big-stone;
   width: 65px;
   border: none;
-  background-color: $silver;
+  background-color: transparent;;
   margin: 10px 0 0 5px;
   text-align: center;
 }
