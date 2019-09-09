@@ -5,10 +5,9 @@ export default Route.extend({
       if (this.controllerFor('console').get('channels') === null) {
         const masterInputs = [
         {
-          seqId: 10,
           data: {
             channelId: 2,
-            portId: 0,
+            auxiliaryId: null,
             channelName: 'Input 1',
             gain: 3.00,
             isMuted: false,
@@ -75,10 +74,9 @@ export default Route.extend({
           }
         },
         {
-          seqId: 10,
           data: {
             channelId: 3,
-            portId: 0,
+            auxiliaryId: null,
             channelName: 'Input 2',
             gain: 3.00,
             isMuted: false,
@@ -147,11 +145,10 @@ export default Route.extend({
 
         const auxInputs = [
         {
-          seqId: 10,
           portId: 1,
           data: {
             channelId: 4,
-            portId: 1,
+            auxiliaryId: 1,
             channelName: 'Input 3',
             gain: 3.00,
             isMuted: false,
@@ -218,10 +215,9 @@ export default Route.extend({
           }
         },
         {
-          seqId: 10,
           data: {
             channelId: 5,
-            portId: 1,
+            auxiliaryId: 1,
             channelName: 'Input 4',
             gain: 3.00,
             isMuted: false,
@@ -289,9 +285,9 @@ export default Route.extend({
         }];
 
         const master = {
-          seqId: 10,
           data: {
             channelId: 0,
+            auxiliaryId: null,
             channelName: 'Master',
             gain: 3.00,
             volume: 50,
@@ -362,9 +358,9 @@ export default Route.extend({
 
         const auxiliaries = [
           {
-            seqId: 10,
             data: {
               channelId: 1,
+              auxiliaryId: 1,
               channelName: 'Aux 1',
               gain: 3.00,
               volume: 50,
