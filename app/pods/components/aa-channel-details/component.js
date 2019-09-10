@@ -10,6 +10,7 @@ const DEBOUNCE_TIME = 20;
 export default Component.extend({
   connection: service('connection'),
   packetDispatcher: service('packet-dispatcher'),
+  session: service('session'),
 
   isParametric: true,
 
@@ -53,7 +54,32 @@ export default Component.extend({
     this.get('packetDispatcher').off('peakmeter-levels');
   },
 
+  _updateSessionConfiguration() {
+    const configuration = this.get('session').get('configuration');
+    const {channel, isAuxiliary, isAuxiliaryOutput, isMasterOutput} = this.getProperties('channel', 'isAuxiliary', 'isAuxiliaryOutput', 'isMasterOutput');
+
+    if (isAuxiliaryOutput) {
+      const auxIndex = configuration.channels.auxiliaries.findIndex(aux => aux.data.auxiliaryId === channel.data.auxiliaryId);
+      configuration.channels.auxiliaries[auxIndex] = channel;
+    } else if (isMasterOutput) {
+      configuration.channels.master = channel;
+    } else if (isAuxiliary) {
+      const auxIndex = configuration.channels.auxiliaries.findIndex(aux => aux.data.auxiliaryId === channel.data.auxiliaryId);
+      const inputIndex = configuration.channels.auxiliaries[auxIndex].data.inputs.findIndex(input => input.data.channelId === channel.data.channelId);
+      configuration.channels.auxiliaries[auxIndex].data.inputs[inputIndex] = channel;
+    } else {
+      const inputIndex = configuration.channels.master.data.inputs.findIndex(input => input.data.channelId === channel.data.channelId);
+      configuration.channels.master.data.inputs[inputIndex] = channel;
+    }
+
+    this.get('session').set('configuration', configuration);
+  },
+
   actions: {
+    onEqChange() {
+      this._updateSessionConfiguration();
+    },
+
     onVolumeChange(value) {
       const seqId = this._getVolumeSequenceId();
 
@@ -67,6 +93,7 @@ export default Component.extend({
       };
 
       debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
+      this._updateSessionConfiguration();
       return value;
     },
 
@@ -80,14 +107,18 @@ export default Component.extend({
       };
 
       debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
+      this._updateSessionConfiguration();
+
       return value;
     },
 
     onIsMutedChange(value) {
+      this._updateSessionConfiguration();
       return value;
     },
 
     onIsSoloChange(value) {
+      this._updateSessionConfiguration();
       return value;
     }
   },

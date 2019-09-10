@@ -3,6 +3,7 @@ import {inject as service} from '@ember/service';
 
 export default Component.extend({
   connection: service('connection'),
+  session: service('session'),
 
   channels: null,
   positions: null,
@@ -65,15 +66,28 @@ export default Component.extend({
     });
   },
 
+  _updateSessionConfiguration() {
+    const configuration = this.get('session').get('configuration');
+    const channelsData = this.get('channels');
+
+    configuration.channels = channelsData;
+
+    this.get('session').set('configuration', configuration);
+  },
+
   actions: {
-    onChannelMuteChange(channel) {
+    onChannelMuteChange(_) {
+      this._updateSessionConfiguration();
       // Handle channel mute change here
-      return channel;
     },
 
-    onChannelSoloChange(channel) {
+    onChannelSoloChange(_) {
+      this._updateSessionConfiguration();
       // Handle channel solo change here
-      return channel;
+    },
+
+    onVolumeChange(_) {
+      this._updateSessionConfiguration();
     }
   }
 });
