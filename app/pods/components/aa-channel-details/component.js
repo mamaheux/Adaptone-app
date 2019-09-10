@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import {computed} from '@ember/object';
 import {inject as service} from '@ember/service';
 import {debounce} from '@ember/runloop';
+import {set} from '@ember/object';
 
 import SequenceIds from 'adaptone-front/constants/sequence-ids';
 
@@ -62,7 +63,7 @@ export default Component.extend({
       const auxIndex = configuration.channels.auxiliaries.findIndex(aux => aux.data.auxiliaryId === channel.data.auxiliaryId);
       configuration.channels.auxiliaries[auxIndex] = channel;
     } else if (isMasterOutput) {
-      configuration.channels.master = channel;
+      set(configuration.channels, 'master', channel);
     } else if (isAuxiliary) {
       const auxIndex = configuration.channels.auxiliaries.findIndex(aux => aux.data.auxiliaryId === channel.data.auxiliaryId);
       const inputIndex = configuration.channels.auxiliaries[auxIndex].data.inputs.findIndex(input => input.data.channelId === channel.data.channelId);

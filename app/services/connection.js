@@ -38,8 +38,6 @@ export default Service.extend({
     socket.off('open', this._openHandler);
     socket.off('message', this._messageHandler);
     socket.off('close', this._closeHandler);
-
-    ipcRenderer.off('close-connection');
   },
 
   _openHandler() {
