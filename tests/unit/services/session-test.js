@@ -64,4 +64,25 @@ describe('Unit | Services | session', () => {
       expect(localStorage.getItem(config.APP.LOCAL_STORAGE.SESSION_NAMESPACE)).to.be.null;
     });
   });
+
+  describe('dumpSessionInFile', () => {
+    beforeEach(function() {
+      service = this.subject();
+      localStorage.setItem(config.APP.LOCAL_STORAGE.SESSION_NAMESPACE, JSON.stringify(configuration));
+    });
+
+    afterEach(() => {
+      localStorage.removeItem(config.APP.LOCAL_STORAGE.SESSION_NAMESPACE);
+    });
+
+    it('should edit the configuration from the one in session', () => {
+      const newConfig = configuration;
+      newConfig.name = "NewOne";
+
+      service.set('configuration', newConfig);
+      service.dumpSessionInFile();
+
+      expect(localStorage.getItem(config.APP.LOCAL_STORAGE.SESSION_NAMESPACE)).to.deep.equal(JSON.stringify(newConfig));
+    });
+  });
 });

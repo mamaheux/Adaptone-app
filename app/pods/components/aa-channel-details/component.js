@@ -120,6 +120,10 @@ export default Component.extend({
     onIsSoloChange(value) {
       this._updateSessionConfiguration();
       return value;
+    },
+
+    saveConfiguration() {
+      this.get('session').dumpSessionInFile();
     }
   },
 

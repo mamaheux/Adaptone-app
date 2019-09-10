@@ -88,6 +88,10 @@ export default Component.extend({
 
     onVolumeChange(_) {
       this._updateSessionConfiguration();
+    },
+
+    saveConfiguration() {
+      this.get('session').dumpSessionInFile();
     }
   }
 });

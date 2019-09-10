@@ -56,6 +56,8 @@ eq:
 channel-details:
   graphic: Graph
   parametric: Param
+console:
+  save: Sauvegarder
 volume-gain:
   volume: vol
   gain: gain

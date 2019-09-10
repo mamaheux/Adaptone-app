@@ -54,3 +54,10 @@
 {{#link-to 'console'}}
   {{inline-svg "assets/images/arrow-icon.svg" class="arrow-icon"}}
 {{/link-to}}
+
+<button
+  class="save-button"
+  onClick={{action "saveConfiguration"}}
+>
+  {{t 'console.save'}}
+</button>
