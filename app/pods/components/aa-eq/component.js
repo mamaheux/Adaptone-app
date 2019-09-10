@@ -117,6 +117,10 @@ export default Component.extend({
       debounce(this, this.updateParametricEqDesigner, this.get('parametricFilters'), DESIGNER_DEBOUNCE_TIME);
     },
 
+    triggerEqChange() {
+      this.get('eqChange')();
+    },
+
     onOnOffChange(filter) {
       set(filter, 'gain', 0);
       this.updateParametricEqDesigner(this.get('parametricFilters'));
@@ -124,6 +128,8 @@ export default Component.extend({
   },
 
   updateParametricEqDesigner(parameters) {
+    this.get('eqChange')();
+
     const biquadCoefficients = this.get('biquadCoefficients');
 
     if (this.get('graphicFilters').length === parameters.length) {
