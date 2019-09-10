@@ -17,3 +17,22 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.top-container {
+  position: relative;
+}
+
+.save-button {
+  width: 120px;
+  color: #fff;
+  background-color: $blue-ribbon;
+  border: none;
+  border-radius: 5px;
+  font-family: $text-font-semibold;
+  font-size: 12px;
+  text-align: center;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 6px 20px;
+}

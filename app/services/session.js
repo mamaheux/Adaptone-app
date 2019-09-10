@@ -25,6 +25,11 @@ export default Service.extend({
     this.set('configuration', configuration);
   },
 
+  dumpSessionInFile() {
+    const configuration = this.get('configuration');
+    this.get('fileSystem').editConfiguration(configuration);
+  },
+
   remove() {
     const session = config.APP.LOCAL_STORAGE.SESSION_NAMESPACE;
     localStorage.removeItem(session);

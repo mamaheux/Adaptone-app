@@ -9,6 +9,13 @@
       rightValue=(t 'channel-details.parametric')
       isActive=this.isParametric
     }}
+
+      <button
+        class="save-button"
+        onClick={{action "saveConfiguration"}}
+      >
+        {{t 'console.save'}}
+      </button>
   </div>
 
   <div class="graph">
