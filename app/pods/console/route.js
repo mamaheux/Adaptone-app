@@ -7,7 +7,7 @@ export default Route.extend({
   model(params) {
     const configuration = this.get('session').get('configuration');
 
-    if (configuration.channels !== null) {
+    if (configuration.channels !== undefined) {
       this.controllerFor('console').set('channels', configuration.channels);
     } else {
       const masterInputs = [
