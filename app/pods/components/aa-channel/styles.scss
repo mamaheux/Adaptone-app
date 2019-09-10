@@ -3,8 +3,11 @@
 .channel {
   background-color: $silver;
   border: 1.5px solid $big-stone;
-  border-top: none;
   width: 97px;
+
+  &.output {
+    background-color: $silver-chalice;
+  }
 }
 
 .name {
@@ -19,7 +22,7 @@
   color: $big-stone;
   width: 65px;
   border: none;
-  background-color: $silver;
+  background-color: transparent;;
   margin: 10px 0 0 5px;
   text-align: center;
 }
@@ -27,8 +30,8 @@
 .details {
   display: flex;
   position: absolute;
-  top: 10px;
-  right: 12px;
+  top: 6px;
+  right: 8px;
   transform: rotate(-90deg);
 
   & > a {
@@ -67,24 +70,8 @@
   margin: 10px 0 10px 10px;
 }
 
-.peak-meter {
-  & > .peak-meter {
-    position: relative;
-    top: 95px;
-    right: 90px;
-    height: 25px;
-    width: 210px;
-  }
-
-  & > .peak-meter-part {
-    &.peak {
-      width: 2px;
-      height: 25px;
-    }
-  }
-  margin-left: 5px;
-}
-
 .link-icon {
-  width: 14px;
+  width: 24px;
+  transform: rotate(-90deg);
+  fill: $big-stone;
 }

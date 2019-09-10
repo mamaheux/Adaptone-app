@@ -2,7 +2,6 @@
 
 .volume-gain {
   margin-top: 10px;
-  max-width: 300px;
 }
 
 .volume-gain-container {
@@ -11,37 +10,19 @@
   margin-bottom: 20px;
 }
 
-.volume-container {
-  margin-left: 40px;
-  max-width: 100px;
-}
-
-.gain-container {
-  margin-left: 20px;
-  max-width: 120px;
-}
-
-.peak-meter {
-  & > .peak-meter {
-    position: relative;
-    top: 115px;
-    right: 130px;
-    height: 15px;
-    width: 210px;
-  }
-
-  & > .peak-meter-part {
-    &.peak {
-      width: 2px;
-      height: 15px;
-    }
-  }
+.container {
+  display: flex;
+  margin-right: 50px;
 }
 
 .slider {
   & > .value-container {
     height: 80px;
   }
+}
+
+.peak-meter {
+  margin-right: 7px;
 }
 
 .button-container {

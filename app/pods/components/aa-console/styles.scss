@@ -7,8 +7,6 @@
 
 .container {
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
 }
 
 .heat-map {
@@ -17,12 +15,5 @@
 
 .channels {
   display: flex;
-}
-
-.inputs {
-  display: flex;
-}
-
-.ports {
-  display: flex;
+  flex-wrap: wrap;
 }

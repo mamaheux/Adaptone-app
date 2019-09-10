@@ -1,17 +1,16 @@
 @import 'app/styles/variables.scss';
 
 .peak-meter {
-  transform: rotate(-90deg);
-  width: 250px;
-  height: 25px;
+  width: 25px;
+  height: 210px;
   border: none;
   position: relative;
   background: $wild-sand;
 }
 
 .peak-meter-part {
+  width: 100%;
   position: absolute;
-  top: 0;
   bottom: 0;
 
   &.green {
@@ -28,8 +27,8 @@
 
   &.peak {
     content: '';
-    width: 2px;
-    height: 25px;
+    width: 25px;
+    height: 2px;
     background-color: $big-stone;
   }
 }
