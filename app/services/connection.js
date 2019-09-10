@@ -1,5 +1,8 @@
 import Service, {inject as service} from '@ember/service';
 import {later} from '@ember/runloop';
+import config from 'adaptone-front/config/environment';
+
+const {ipcRenderer} = requireNode('electron');
 
 export default Service.extend({
   websockets: service('websockets'),
@@ -14,10 +17,17 @@ export default Service.extend({
     socket.on('message', this._messageHandler, this);
     socket.on('close', this._closeHandler, this);
 
+    ipcRenderer.on('close-connection', () => {
+      if (this.get('isConnected')) {
+        this.disconnect(config.APP.WEBSOCKET_ADDRESS);
+      }
+    });
+
     this.set('socketRef', socket);
   },
 
   disconnect(address) {
+    this.set('isConnected', false);
     this._cleanup();
     this.get('websockets').closeSocketFor(address);
   },
@@ -28,6 +38,8 @@ export default Service.extend({
     socket.off('open', this._openHandler);
     socket.off('message', this._messageHandler);
     socket.off('close', this._closeHandler);
+
+    ipcRenderer.off('close-connection');
   },
 
   _openHandler() {
