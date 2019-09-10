@@ -18,17 +18,21 @@
   flex-wrap: wrap;
 }
 
+.top-container {
+  position: relative;
+}
+
 .save-button {
-  width: 180px;
+  width: 120px;
   color: #fff;
   background-color: $blue-ribbon;
   border: none;
   border-radius: 5px;
   font-family: $text-font-semibold;
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  padding: 10px 40px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 6px 20px;
 }

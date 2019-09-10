@@ -1,10 +1,19 @@
-{{aa-heat-map
-  max=0.15
-  min=0
-  radius=250
-  positions=this.positions.data.positions
-  class="heat-map"
-}}
+<div class="top-container">
+  {{aa-heat-map
+    max=0.15
+    min=0
+    radius=250
+    positions=this.positions.data.positions
+    class="heat-map"
+  }}
+
+  <button
+    class="save-button"
+    onClick={{action "saveConfiguration"}}
+  >
+    {{t 'console.save'}}
+  </button>
+</div>
 
 <div class="channels">
   {{#each-in this.channels.master.data.inputs as |index channel|}}
@@ -45,10 +54,3 @@
     }}
   {{/each-in}}
 </div>
-
-<button
-  class="save-button"
-  onClick={{action "saveConfiguration"}}
->
-  {{t 'console.save'}}
-</button>
