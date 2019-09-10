@@ -65,6 +65,11 @@ app.on('ready', () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  mainWindow.on('close', (e) => {
+    mainWindow.webContents.send('save-application-session');
+    mainWindow.webContents.send('close-connection');
+  });
 });
 
 // Handle an unhandled error in the main thread

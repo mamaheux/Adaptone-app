@@ -8,6 +8,7 @@ const {remote} = requireNode('electron');
 
 export default Component.extend({
   connection: service('connection'),
+  session: service('session'),
 
   didRender() {
     this._super(...arguments);
@@ -32,6 +33,7 @@ export default Component.extend({
 
     $('.close').on('click', () => {
       run(() => {
+        this.get('session').dumpSessionInFile();
         this.get('connection').disconnect(config.APP.WEBSOCKET_ADDRESS);
         remote.app.quit();
       });
