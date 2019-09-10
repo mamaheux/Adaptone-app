@@ -1,8 +1,15 @@
 import Route from '@ember/routing/route';
+import {inject as service} from '@ember/service';
 
 export default Route.extend({
+  session: service('session'),
+
   model(params) {
-    if (this.controllerFor('console').get('channels') === null) {
+    const configuration = this.get('session').get('configuration');
+
+    if (configuration.channels !== undefined) {
+      this.controllerFor('console').set('channels', configuration.channels);
+    } else {
       const masterInputs = [
         {
           data: {
@@ -438,8 +445,8 @@ export default Route.extend({
         master,
         auxiliaries
       });
-
-      return params;
     }
+
+    return params;
   }
 });
