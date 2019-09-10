@@ -118,7 +118,7 @@ export default Component.extend({
     },
 
     triggerEqChange() {
-      this.get('eqChange')();
+      this.get('onEqChange')();
     },
 
     onOnOffChange(filter) {
@@ -128,7 +128,7 @@ export default Component.extend({
   },
 
   updateParametricEqDesigner(parameters) {
-    this.get('eqChange')();
+    this.get('onEqChange')();
 
     const biquadCoefficients = this.get('biquadCoefficients');
 

@@ -66,7 +66,6 @@ export default Component.extend({
     } else if (isAuxiliary) {
       const auxIndex = configuration.channels.auxiliaries.findIndex(aux => aux.data.auxiliaryId === channel.data.auxiliaryId);
       const inputIndex = configuration.channels.auxiliaries[auxIndex].data.inputs.findIndex(input => input.data.channelId === channel.data.channelId);
-
       configuration.channels.auxiliaries[auxIndex].data.inputs[inputIndex] = channel;
     } else {
       const inputIndex = configuration.channels.master.data.inputs.findIndex(input => input.data.channelId === channel.data.channelId);
@@ -94,7 +93,7 @@ export default Component.extend({
       };
 
       debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
-      debounce(this, this._updateSessionConfiguration, DEBOUNCE_TIME);
+      this._updateSessionConfiguration();
       return value;
     },
 
@@ -108,7 +107,7 @@ export default Component.extend({
       };
 
       debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
-      debounce(this, this._updateSessionConfiguration, DEBOUNCE_TIME);
+      this._updateSessionConfiguration();
 
       return value;
     },

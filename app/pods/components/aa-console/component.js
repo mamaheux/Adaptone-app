@@ -1,8 +1,5 @@
 import Component from '@ember/component';
 import {inject as service} from '@ember/service';
-import {debounce} from '@ember/runloop';
-
-const DEBOUNCE_TIME = 20;
 
 export default Component.extend({
   connection: service('connection'),
@@ -90,7 +87,7 @@ export default Component.extend({
     },
 
     onVolumeChange(_) {
-      debounce(this, this._updateSessionConfiguration, DEBOUNCE_TIME);
+      this._updateSessionConfiguration();
     }
   }
 });
