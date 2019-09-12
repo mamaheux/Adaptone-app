@@ -48,7 +48,7 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
     "name": "super nom",
     "inputChannelIds": [1, 2, 3, 5],
     "speakersNumber": 4,
-    "auxiliaryChannelIds": [6, 7, 8, 9]
+    "auxiliaryChannelIds": [6, 7, 8, 9],
     "positions": [
       {
         "x": 140,
