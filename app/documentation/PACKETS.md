@@ -46,9 +46,9 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
   "data": {
     "id": 10,
     "name": "super nom",
-    "monitorsNumber": 5,
+    "inputChannelIds": [1, 2, 3, 5],
     "speakersNumber": 4,
-    "probesNumber": 8,
+    "auxiliaryChannelIds": [6, 7, 8, 9]
     "positions": [
       {
         "x": 140,
@@ -69,9 +69,8 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
     "id": 10,
     "name": "super nom",
     "inputChannelIds": [1, 2, 3, 5],
-    "masterChannelIds": 0,    
     "speakersNumber": 4,
-    "auxiliaryChannelIds": [6, 7, 8,9]
+    "auxiliaryChannelIds": [6, 7, 8, 9]
   }
 }
 ```
