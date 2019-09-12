@@ -234,7 +234,7 @@ Les gains ne sont pas en dB.
   "seqId": 14,
   "data": {
     "channelId": 0,
-    "auxiliaryId": 0,
+    "auxiliaryChannelId": 0,
     "gain": 1.0
   }
 }
