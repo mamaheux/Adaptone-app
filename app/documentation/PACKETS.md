@@ -31,10 +31,11 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 | 21 | [Niveaux sonores (peakmeter)](#niveaux-sonores-peakmeter) |
 | *Structure d'un channel* |
 | 22 | [Mère](#structure-mère) |
-| 23 | [Master](#structure-master) |
-| 24 | [Auxiliaire](#structure-auxiliaire) |
-| 25 | [Entrée master](#structure-entrée-master) |
-| 26 | [Entrée auxiliaire](#structure-entrée-auxiliaire) |
+| 23 | [Entrée](#structure-entrée) |
+| 24 | [Master](#structure-master) |
+| 25 | [Auxiliaire](#structure-auxiliaire) |
+| 26 | [Entrée master](#structure-entrée-master) |
+| 27 | [Entrée auxiliaire](#structure-entrée-auxiliaire) |
 
 ## Étapes
 
@@ -340,8 +341,27 @@ Les niveaux sonores ne sont pas en dB.
 ### Structure mère
 ```json
 {
+  "inputs": [],
   "master": master,
   "auxiliaries": []
+}
+```
+
+### Structure entrée
+```json
+{
+  "data": {
+    "channelId": 1,
+    "auxiliaryChannelId": null,
+    "channelName": "Input 1",
+    "gain": 3.00,
+    "volume": 50,   
+    "paramEq": [],
+    "graphEq": [],
+    "isMuted": false,
+    "isSolo": false,
+
+  }
 }
 ```
 
@@ -351,9 +371,12 @@ Les niveaux sonores ne sont pas en dB.
   "data": {
     "channelId": 0,
     "auxiliaryChannelId": null,
+    "isMasterOutput": true,
     "channelName": "Master",
     "gain": 3.00,
     "volume": 50,
+    "paramEq": [],
+    "graphEq": [],
     "isMuted": false,
     "isSolo": false,
     "inputs": []
@@ -367,9 +390,12 @@ Les niveaux sonores ne sont pas en dB.
   "data": {
     "channelId": 1,
     "auxiliaryChannelId": 1,
+    "isAuxiliaryOutput": true,
     "channelName": "Aux 1",
     "gain": 3.00,
     "volume": 50,
+    "paramEq": [],
+    "graphEq": [],
     "isMuted": false,
     "isSolo": false,
     "inputs": []
@@ -381,11 +407,10 @@ Les niveaux sonores ne sont pas en dB.
 ```json
 {
   "data": {
-    "channelId": 2,
+    "channelId": 1,
     "auxiliaryChannelId": null,
-    "channelName": "Input 1",
+    "isMasterInput": true,
     "gain": 3.00,
-    "volume": 50,
     "isMuted": false,
     "isSolo": false
   }
@@ -396,11 +421,10 @@ Les niveaux sonores ne sont pas en dB.
 ```json
 {
   "data": {
-    "channelId": 3,
+    "channelId": 2,
     "auxiliaryChannelId": 1,
-    "channelName": "Input 2",
+    "isAuxiliaryInput": true,
     "gain": 3.00,
-    "volume": 50,
     "isMuted": false,
     "isSolo": false
   }
