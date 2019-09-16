@@ -32,7 +32,7 @@ export default Component.extend({
   connection: service('connection'),
 
   channelId: null,
-  auxiliaryId: null,
+  auxiliaryChannelId: null,
   graphicEqFreqs: null,
   isParametric: false,
 
@@ -358,7 +358,7 @@ export default Component.extend({
     const message = {
       seqId,
       data: {
-        auxiliaryId: this.get('auxiliaryId'),
+        auxiliaryChannelId: this.get('auxiliaryChannelId'),
         channelId: this.get('channelId'),
         gains
       }

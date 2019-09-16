@@ -10,20 +10,20 @@ const DEBOUNCE_TIME = 20;
 export default Component.extend({
   connection: service('connection'),
 
-  isAuxiliary: computed('channel.data.auxiliaryId', function() {
-    if (this.get('channel').data.auxiliaryId !== null) return true;
+  isAuxiliaryInput: computed('channel.data.isAuxiliaryInput', function() {
+    if (this.get('channel').data.isAuxiliaryInput === true) return true;
 
     return false;
   }),
 
-  isAuxiliaryOutput: computed('channel.data.{auxiliaryId,inputs}', function() {
-    if (this.get('channel').data.auxiliaryId !== null && this.get('channel').data.inputs !== undefined) return true;
+  isAuxiliaryOutput: computed('channel.data.isAuxiliaryOutput', function() {
+    if (this.get('channel').data.isAuxiliaryOutput === true) return true;
 
     return false;
   }),
 
-  isMasterOutput: computed('channel.data.{auxiliaryId,inputs}', function() {
-    if (this.get('channel').data.auxiliaryId === null && this.get('channel').data.inputs !== undefined) return true;
+  isMasterOutput: computed('channel.data.isMasterOutput', function() {
+    if (this.get('channel').data.isMasterOutput === true) return true;
 
     return false;
   }),
@@ -52,7 +52,7 @@ export default Component.extend({
   _getVolumeSequenceId() {
     if (this.get('isAuxiliaryOutput')) return SequenceIds.CHANGE_AUX_VOLUME_OUTPUT;
     if (this.get('isMasterOutput')) return SequenceIds.CHANGE_MAIN_VOLUME_OUTPUT;
-    if (this.get('isAuxiliary')) return SequenceIds.CHANGE_AUX_VOLUME_INPUT;
+    if (this.get('isAuxiliaryInput')) return SequenceIds.CHANGE_AUX_VOLUME_INPUT;
 
     return SequenceIds.CHANGE_MAIN_VOLUME_INPUT;
   }

@@ -1,18 +1,18 @@
 @import 'app/styles/variables.scss';
 
-.volume-gain {
+.gain {
   margin-top: 10px;
 }
 
-.volume-gain-container {
+.gain-container {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   margin-bottom: 20px;
 }
 
 .container {
   display: flex;
-  margin-right: 50px;
 }
 
 .slider {
