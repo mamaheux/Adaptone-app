@@ -7,7 +7,7 @@ export default Route.extend({
   model(params) {
     const configuration = this.get('session').get('configuration');
 
-    if (configuration.channels === undefined) {
+    if (configuration.channels !== undefined) {
       this.controllerFor('console').set('channels', configuration.channels);
     } else {
       const inputs = [
@@ -299,6 +299,7 @@ export default Route.extend({
           data: {
             channelId: 2,
             auxiliaryChannelId: null,
+            isMasterInput: true,
             channelName: 'Master input 1',
             gain: 3.00,
             isMuted: false,
@@ -309,6 +310,7 @@ export default Route.extend({
           data: {
             channelId: 3,
             auxiliaryChannelId: null,
+            isMasterInput: true,
             channelName: 'Master input 2',
             gain: 3.00,
             isMuted: false,
@@ -322,6 +324,7 @@ export default Route.extend({
           data: {
             channelId: 4,
             auxiliaryChannelId: 1,
+            isAuxInput: true,
             channelName: 'Aux 1 input 3',
             gain: 3.00,
             isMuted: false,
@@ -332,6 +335,7 @@ export default Route.extend({
           data: {
             channelId: 5,
             auxiliaryChannelId: 1,
+            isAuxInput: true,
             channelName: 'Aux 1 input 4',
             gain: 3.00,
             isMuted: false,
