@@ -45,7 +45,7 @@ export default Component.extend({
   didInsertElement() {
     this.get('packetDispatcher').on('peakmeter-levels', (data) => {
       this.set('inputAfterGain', data.inputAfterGain[this.get('channel').data.channelId]);
-      this.set('inputAfterEq', data.inputAfterEq[this.get('channel').data.channelId] * this.get('channel').data.gain);
+      this.set('inputAfterEq', data.inputAfterEq[this.get('channel').data.channelId] * this.get('channel').data.volume / 100);
     });
 
     this._super(...arguments);
@@ -79,23 +79,6 @@ export default Component.extend({
   actions: {
     onEqChange() {
       this._updateSessionConfiguration();
-    },
-
-    onVolumeChange(value) {
-      const seqId = this._getVolumeSequenceId();
-
-      const message = {
-        seqId,
-        data: {
-          auxiliaryChannelId: this.get('channel').data.auxiliaryChannelId,
-          channelId: this.get('channel').data.channelId,
-          gain: value
-        }
-      };
-
-      debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
-      this._updateSessionConfiguration();
-      return value;
     },
 
     onGainChange(value) {
