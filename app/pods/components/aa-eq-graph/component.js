@@ -19,10 +19,10 @@ const MAX_FREQUENCY_VALUE = 20000;
 
 export default Component.extend({
   intl: service(),
+  packetDispatcher: service('packet-dispatcher'),
 
   isParametric: true,
 
-  amplitudes: null,
   channelInfos: null,
   parametricEqValues: null,
   graphicEqValues: null,
@@ -30,6 +30,8 @@ export default Component.extend({
   chartOptions: null,
   chartData: null,
   theme: chartTheme,
+
+  spectrums: null,
 
   currentChannelId: computed('channelInfos.data.channelId', function() {
     return this.channelInfos.data.channelId;
@@ -47,79 +49,168 @@ export default Component.extend({
     return formattedData;
   }),
 
-  channelAmplitudes: computed('amplitudes', function() {
-    const amplitudes = this.get('amplitudes');
+  channelSpectrums: computed('spectrums.[]', function() {
+    const spectrums = this.get('spectrums');
 
-    // TODO: Remove this condition
-    if (amplitudes) {
-      const formattedData = [];
+    if (!spectrums) return;
 
-      const currentChannelAmplitudes = amplitudes.filter(amplitude => amplitude.data.channelId === this.get('currentChannelId'))[0];
+    const formattedData = [];
 
-      currentChannelAmplitudes.data.points.forEach(point => {
-        formattedData.push([point.freq, point.amplitude]);
-      });
+    const currentChannelSpectrums = spectrums.filter(spectrum => spectrum.channelId === this.get('currentChannelId'))[0];
 
-      return formattedData;
-    }
+    currentChannelSpectrums.points.forEach(point => {
+      formattedData.push([point.freq, point.amplitude]);
+    });
+
+    return formattedData;
   }),
 
-  addedChannelsAmplitudes: computed('amplitudes', function() {
-    const amplitudes = this.get('amplitudes');
+  addedChannelsSpectrums: computed('spectrums.[]', function() {
+    const spectrums = this.get('spectrums');
 
-    // TODO: Remove this condition
-    if (amplitudes) {
-      let formattedData = {};
+    if (!spectrums) return;
 
-      amplitudes.filter(amplitude => amplitude.data.channelId !== this.get('currentChannelId')).forEach(amplitude => {
-        amplitude.data.points.forEach(point => {
-          if (formattedData[point.freq]) {
-            formattedData[point.freq] += point.amplitude;
-          } else {
-            formattedData[point.freq] = point.amplitude;
-          }
-        });
+    let formattedData = {};
+
+    spectrums.filter(spectrum => spectrum.channelId !== this.get('currentChannelId')).forEach(spectrum => {
+      spectrum.points.forEach(point => {
+        if (formattedData[point.freq]) {
+          formattedData[point.freq] += point.amplitude;
+        } else {
+          formattedData[point.freq] = point.amplitude;
+        }
       });
+    });
 
-      formattedData = Object.keys(formattedData).map((key) => {
-        return [Number(key), Number(formattedData[key])];
-      });
+    formattedData = Object.keys(formattedData).map((key) => {
+      return [Number(key), Number(formattedData[key])];
+    });
 
-      return formattedData;
-    }
+    return formattedData;
   }),
 
   eqGainsChanged: observer('isParametric', 'parametricEqValues', 'graphicEqValues', function() {
     const chart = Highcharts.charts[Highcharts.charts.length - 1];
+
+    if (!chart) return;
+
     this.notifyPropertyChange('eqGains');
 
     chart.series[EQ_GAINS_SERIE_INDEX].setData(this.get('eqGains'), true);
   }),
 
-  channelAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
-    // TODO: Remove this condition
-    if (this.get('amplitudes')) {
-      const chart = Highcharts.charts[Highcharts.charts.length - 1];
-      this.notifyPropertyChange('channelAmplitudes');
+  spectrumsChanged: observer('spectrums.[].points.[].{freq,amplitude}', 'currentChannelId', function() {
+    const chart = Highcharts.charts[Highcharts.charts.length - 1];
 
-      chart.series[AMPLITUDES_SERIE_INDEX].setData(this.get('channelAmplitudes'), true);
-    }
-  }),
+    if (!chart) return;
 
-  addedChannelsAmplitudesChanged: observer('amplitudes.data.points.@each.amplitude', 'currentChannelId', function() {
-    // TODO: Remove this condition
-    if (this.get('amplitudes')) {
-      const chart = Highcharts.charts[Highcharts.charts.length - 1];
-      this.notifyPropertyChange('addedChannelsAmplitudes');
+    this.notifyPropertyChange('channelSpectrums');
+    this.notifyPropertyChange('addedChannelsSpectrums');
 
-      chart.series[ADDED_AMPLITUDES_SERIE_INDEX].setData(this.get('addedChannelsAmplitudes'), true);
-    }
+    chart.series[AMPLITUDES_SERIE_INDEX].setData(this.get('channelSpectrums'), true);
+    chart.series[ADDED_AMPLITUDES_SERIE_INDEX].setData(this.get('addedChannelsSpectrums'), true);
   }),
 
   init() {
     this._super(...arguments);
 
     this.setChartOptions();
+  },
+
+  didRender() {
+    this._super(...arguments);
+
+    this.get('packetDispatcher').on('input-spectrum', (data) => {
+      this.set('spectrums', data.spectrums);
+    });
+
+    // TODO : Remove this fake data
+    this.set('spectrums', [
+      {
+        channelId: 2,
+        points: [
+          {
+            freq: 500,
+            amplitude: 4
+          },
+          {
+            freq: 1000,
+            amplitude: 1
+          },
+          {
+            freq: 2000,
+            amplitude: -8
+          },
+          {
+            freq: 4000,
+            amplitude: -2
+          }
+        ]
+      },
+      {
+        channelId: 3,
+        points: [
+          {
+            freq: 500,
+            amplitude: 1
+          },
+          {
+            freq: 1000,
+            amplitude: 7
+          },
+          {
+            freq: 2000,
+            amplitude: -6
+          },
+          {
+            freq: 4000,
+            amplitude: 0
+          }
+        ]
+      },
+      {
+        channelId: 4,
+        points: [
+          {
+            freq: 500,
+            amplitude: -1
+          },
+          {
+            freq: 1000,
+            amplitude: -3
+          },
+          {
+            freq: 2000,
+            amplitude: -12
+          },
+          {
+            freq: 4000,
+            amplitude: -5
+          }
+        ]
+      },
+      {
+        channelId: 5,
+        points: [
+          {
+            freq: 500,
+            amplitude: 6
+          },
+          {
+            freq: 1000,
+            amplitude: 1
+          },
+          {
+            freq: 2000,
+            amplitude: -3
+          },
+          {
+            freq: 4000,
+            amplitude: 2
+          }
+        ]
+      }
+    ]);
   },
 
   setChartOptions() {
@@ -169,6 +260,14 @@ export default Component.extend({
       {
         name: this.intl.t('eq-graph.series.eq-gain'),
         data: this.get('eqGains')
+      },
+      {
+        name: this.intl.t('eq-graph.series.channel-spectrums'),
+        data: this.get('channelSpectrums')
+      },
+      {
+        name: this.intl.t('eq-graph.series.channels-spectrums'),
+        data: this.get('addedChannelsSpectrums')
       }
     ];
 
