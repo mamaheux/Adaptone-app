@@ -47,9 +47,9 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
   "data": {
     "id": 10,
     "name": "super nom",
-    "monitorsNumber": 5,
+    "inputChannelIds": [1, 2, 3, 5],
     "speakersNumber": 4,
-    "probesNumber": 8,
+    "auxiliaryChannelIds": [6, 7, 8, 9],
     "positions": [
       {
         "x": 140,
@@ -69,9 +69,9 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
   "data": {
     "id": 10,
     "name": "super nom",
-    "monitorsNumber": 5,
+    "inputChannelIds": [1, 2, 3, 5],
     "speakersNumber": 4,
-    "probesNumber": 8
+    "auxiliaryChannelIds": [6, 7, 8, 9]
   }
 }
 ```
@@ -190,7 +190,16 @@ Les gains ne sont pas en dB.
 {
   "seqId": 11,
   "data": {
-    "gains": [1.0, 1.2, 1.23]
+    "gains": [
+      {
+        "channelId": 1,
+        "gain" : 0.2
+      },      
+      {
+        "channelId": 5,
+        "gain" : 0.2
+      }
+    ]
   }
 }
 ```
@@ -249,7 +258,7 @@ Les gains ne sont pas en dB.
 {
   "seqId": 16,
   "data": {
-    "auxiliaryChannelId": 0,
+    "channelId": 0,
     "gains": [1.0, 1.2, 1.23]
   }
 }
@@ -272,7 +281,7 @@ Les gains ne sont pas en dB.
 {
   "seqId": 18,
   "data": {
-    "auxiliaryChannelId": 0,
+    "channelId": 0,
     "gain": 1.0
   }
 }
@@ -329,9 +338,36 @@ Les niveaux sonores ne sont pas en dB.
 {
   "seqId": 21,
   "data": {
-    "inputAfterGain": [0.5, 1.5],
-    "inputAfterEq": [0.5, 1.5],
-    "outputAfterGain": [0.5, 1.5]
+    "inputAfterGain": [
+      {
+        "channelId": 1,
+        "level": 0.1
+      },
+      {
+        "channelId": 2,
+        "level": 0.3
+      }
+    ],
+    "inputAfterEq": [
+      {
+        "channelId": 1,
+        "level": 0.1
+      },
+      {
+        "channelId": 2,
+        "level": 0.3
+      }
+    ],
+    "outputAfterGain": [
+      {
+        "channelId": 1,
+        "level": 0.1
+      },
+      {
+        "channelId": 2,
+        "level": 0.3
+      }
+    ]
   }
 }
 ```
