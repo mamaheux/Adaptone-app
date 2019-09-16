@@ -106,17 +106,14 @@ export default Component.extend({
     },
 
     onFrequencyChange() {
-      this.get('onEqChange')();
       debounce(this, this.updateParametricEqDesigner, this.get('parametricFilters'), DESIGNER_DEBOUNCE_TIME);
     },
 
     onGainChange() {
-      this.get('onEqChange')();
       debounce(this, this.updateParametricEqDesigner, this.get('parametricFilters'), DESIGNER_DEBOUNCE_TIME);
     },
 
     onQChange() {
-      this.get('onEqChange')();
       debounce(this, this.updateParametricEqDesigner, this.get('parametricFilters'), DESIGNER_DEBOUNCE_TIME);
     },
 
