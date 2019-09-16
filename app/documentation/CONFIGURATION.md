@@ -13,7 +13,7 @@
     "master": {
       "data": {
         "channelId": 0,
-        "auxiliaryId": null,
+        "auxiliaryChannelId": null,
         "channelName": "Master",
         "gain": 3.00,
         "volume": 50,
@@ -23,7 +23,7 @@
           {
             "data": {
               "channelId": 2,
-              "auxiliaryId": null,
+              "auxiliaryChannelId": null,
               "channelName": "Input 1",
               "gain": 3.00,
               "volume": 50,
@@ -68,7 +68,7 @@
       {
         "data": {
           "channelId": 1,
-          "auxiliaryId": 1,
+          "auxiliaryChannelId": 1,
           "channelName": "Aux 1",
           "gain": 3.00,
           "volume": 50,
@@ -79,7 +79,7 @@
               "portId": 1,
               "data": {
                 "channelId": 4,
-                "auxiliaryId": 1,
+                "auxiliaryChannelId": 1,
                 "channelName": "Input 3",
                 "gain": 3.00,
                 "volume": 50,

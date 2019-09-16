@@ -10,20 +10,20 @@ const DEBOUNCE_TIME = 20;
 export default Component.extend({
   connection: service('connection'),
 
-  isAuxiliary: computed('channel.data.auxiliaryId', function() {
-    if (this.get('channel').data.auxiliaryId !== null) return true;
+  isAuxiliary: computed('channel.data.auxiliaryChannelId', function() {
+    if (this.get('channel').data.auxiliaryChannelId !== null) return true;
 
     return false;
   }),
 
-  isAuxiliaryOutput: computed('channel.data.{auxiliaryId,inputs}', function() {
-    if (this.get('channel').data.auxiliaryId !== null && this.get('channel').data.inputs !== undefined) return true;
+  isAuxiliaryOutput: computed('channel.data.{auxiliaryChannelId,inputs}', function() {
+    if (this.get('channel').data.auxiliaryChannelId !== null && this.get('channel').data.inputs !== undefined) return true;
 
     return false;
   }),
 
-  isMasterOutput: computed('channel.data.{auxiliaryId,inputs}', function() {
-    if (this.get('channel').data.auxiliaryId === null && this.get('channel').data.inputs !== undefined) return true;
+  isMasterOutput: computed('channel.data.{auxiliaryChannelId,inputs}', function() {
+    if (this.get('channel').data.auxiliaryChannelId === null && this.get('channel').data.inputs !== undefined) return true;
 
     return false;
   }),

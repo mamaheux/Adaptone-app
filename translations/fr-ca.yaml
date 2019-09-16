@@ -58,7 +58,7 @@ channel-details:
   parametric: Param
 console:
   save: Sauvegarder
-volume-gain:
+gain:
   volume: vol
   gain: gain
   mute: Mute

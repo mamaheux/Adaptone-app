@@ -225,7 +225,7 @@ Les gains ne sont pas en dB.
   "seqId": 14,
   "data": {
     "channelId": 0,
-    "auxiliaryId": 0,
+    "auxiliaryChannelId": 0,
     "gain": 1.0
   }
 }
@@ -248,7 +248,7 @@ Les gains ne sont pas en dB.
 {
   "seqId": 16,
   "data": {
-    "auxiliaryId": 0,
+    "auxiliaryChannelId": 0,
     "gains": [1.0, 1.2, 1.23]
   }
 }
@@ -271,7 +271,7 @@ Les gains ne sont pas en dB.
 {
   "seqId": 18,
   "data": {
-    "auxiliaryId": 0,
+    "auxiliaryChannelId": 0,
     "gain": 1.0
   }
 }
@@ -350,7 +350,7 @@ Les niveaux sonores ne sont pas en dB.
 {
   "data": {
     "channelId": 0,
-    "auxiliaryId": null,
+    "auxiliaryChannelId": null,
     "channelName": "Master",
     "gain": 3.00,
     "volume": 50,
@@ -366,7 +366,7 @@ Les niveaux sonores ne sont pas en dB.
 {
   "data": {
     "channelId": 1,
-    "auxiliaryId": 1,
+    "auxiliaryChannelId": 1,
     "channelName": "Aux 1",
     "gain": 3.00,
     "volume": 50,
@@ -382,7 +382,7 @@ Les niveaux sonores ne sont pas en dB.
 {
   "data": {
     "channelId": 2,
-    "auxiliaryId": null,
+    "auxiliaryChannelId": null,
     "channelName": "Input 1",
     "gain": 3.00,
     "volume": 50,
@@ -397,7 +397,7 @@ Les niveaux sonores ne sont pas en dB.
 {
   "data": {
     "channelId": 3,
-    "auxiliaryId": 1,
+    "auxiliaryChannelId": 1,
     "channelName": "Input 2",
     "gain": 3.00,
     "volume": 50,

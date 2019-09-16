@@ -16,24 +16,14 @@
 </div>
 
 <div class="channels">
-  {{#each-in this.channels.master.data.inputs as |index channel|}}
+  {{#each-in this.channels.inputs as |index channel|}}
     {{aa-channel
       channel=channel
       onChannelMuteChange=(action "onChannelMuteChange" channel.data)
       onChannelSoloChange=(action "onChannelSoloChange" channel.data)
       onVolumeChange=(action "onVolumeChange" channel.data)
+      isOutput=false
     }}
-  {{/each-in}}
-
-  {{#each-in this.channels.auxiliaries as |index auxiliary|}}
-    {{#each-in auxiliary.data.inputs as |index channel|}}
-      {{aa-channel
-        channel=channel
-        onChannelMuteChange=(action "onChannelMuteChange" channel.data)
-        onChannelSoloChange=(action "onChannelSoloChange" channel.data)
-        onVolumeChange=(action "onVolumeChange" channel.data)
-      }}
-    {{/each-in}}
   {{/each-in}}
 
   {{aa-channel
