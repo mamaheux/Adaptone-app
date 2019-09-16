@@ -72,5 +72,5 @@ eq-graph:
     gain: Gain
   series:
     eq-gain: Gains de l'EQ
-    channel-amplitudes: Amplitude du canal
-    channels-amplitudes: Amplitudes des canaux ajoutés
+    channel-spectrums: Spectre de l'entrée
+    channels-spectrums: Spectres additionnés des autres entrées

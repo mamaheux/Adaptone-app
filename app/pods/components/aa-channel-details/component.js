@@ -63,8 +63,8 @@ export default Component.extend({
 
   _updateSessionConfiguration() {
     const configuration = this.get('session').get('configuration');
-    const {channel, isAuxiliaryInput, isMasterInput, isAuxiliaryOutput, isMasterOutput} =
-      this.getProperties('channel', 'isAuxiliaryInput', 'isMasterInput', 'isAuxiliaryOutput', 'isMasterOutput');
+    const {channel, isAuxiliaryInput, isMasterInput, isAuxiliaryOutput, isMasterOutput}
+      = this.getProperties('channel', 'isAuxiliaryInput', 'isMasterInput', 'isAuxiliaryOutput', 'isMasterOutput');
 
     if (isAuxiliaryOutput) {
       const auxIndex = configuration.channels.auxiliaries.findIndex(aux => aux.data.auxiliaryChannelId === channel.data.auxiliaryChannelId);
