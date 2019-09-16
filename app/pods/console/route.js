@@ -347,6 +347,7 @@ export default Route.extend({
         data: {
           channelId: 0,
           auxiliaryChannelId: null,
+          isMasterOutput: true,
           channelName: 'Master',
           gain: 3.00,
           volume: 50,
@@ -420,6 +421,7 @@ export default Route.extend({
           data: {
             channelId: 1,
             auxiliaryChannelId: 1,
+            isAuxiliaryOutput: true,
             channelName: 'Aux 1',
             gain: 3.00,
             volume: 50,
