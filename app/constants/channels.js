@@ -312,7 +312,7 @@ const auxInputs = [
     data: {
       channelId: 4,
       auxiliaryChannelId: 1,
-      isAuxInput: true,
+      isAuxiliaryInput : true,
       channelName: 'Aux 1 input 3',
       gain: 3.00,
       isMuted: false,
@@ -323,7 +323,7 @@ const auxInputs = [
     data: {
       channelId: 5,
       auxiliaryChannelId: 1,
-      isAuxInput: true,
+      isAuxiliaryInput : true,
       channelName: 'Aux 1 input 4',
       gain: 3.00,
       isMuted: false,
