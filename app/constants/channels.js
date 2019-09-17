@@ -1,8 +1,8 @@
-const masterInputs = [
+const inputs = [
   {
     data: {
       channelId: 1,
-      auxiliaryId: null,
+      auxiliaryChannelId: null,
       channelName: 'Input 1',
       gain: 3.00,
       volume: 50,
@@ -72,7 +72,7 @@ const masterInputs = [
   {
     data: {
       channelId: 2,
-      auxiliaryId: null,
+      auxiliaryChannelId: null,
       channelName: 'Input 2',
       gain: 3.00,
       volume: 50,
@@ -138,15 +138,12 @@ const masterInputs = [
         }
       ]
     }
-  }
-];
-
-const auxInputs = [
+  },
   {
     portId: 1,
     data: {
       channelId: 3,
-      auxiliaryId: 1,
+      auxiliaryChannelId: 1,
       channelName: 'Input 3',
       gain: 3.00,
       volume: 50,
@@ -216,7 +213,7 @@ const auxInputs = [
   {
     data: {
       channelId: 4,
-      auxiliaryId: 1,
+      auxiliaryChannelId: 1,
       channelName: 'Input 4',
       gain: 3.00,
       volume: 50,
@@ -285,10 +282,60 @@ const auxInputs = [
   }
 ];
 
+const masterInputs = [
+  {
+    data: {
+      channelId: 2,
+      auxiliaryChannelId: null,
+      isMasterInput: true,
+      channelName: 'Master input 1',
+      gain: 3.00,
+      isMuted: false,
+      isSolo: false
+    }
+  },
+  {
+    data: {
+      channelId: 3,
+      auxiliaryChannelId: null,
+      isMasterInput: true,
+      channelName: 'Master input 2',
+      gain: 3.00,
+      isMuted: false,
+      isSolo: false
+    }
+  }];
+
+const auxInputs = [
+  {
+    portId: 1,
+    data: {
+      channelId: 4,
+      auxiliaryChannelId: 1,
+      isAuxInput: true,
+      channelName: 'Aux 1 input 3',
+      gain: 3.00,
+      isMuted: false,
+      isSolo: false
+    }
+  },
+  {
+    data: {
+      channelId: 5,
+      auxiliaryChannelId: 1,
+      isAuxInput: true,
+      channelName: 'Aux 1 input 4',
+      gain: 3.00,
+      isMuted: false,
+      isSolo: false
+    }
+  }];
+
 const master = {
   data: {
     channelId: 0,
-    auxiliaryId: null,
+    auxiliaryChannelId: null,
+    isMasterOutput: true,
     channelName: 'Master',
     gain: 3.00,
     volume: 50,
@@ -359,8 +406,9 @@ const master = {
 
 const auxiliaryTemplate = {
   data: {
-    channelId: 1,
-    auxiliaryId: 1,
+    channelId: 5,
+    auxiliaryChannelId: 1,
+    isAuxiliaryOutput: true,
     channelName: 'Aux 1',
     gain: 3.00,
     volume: 50,
@@ -430,6 +478,7 @@ const auxiliaryTemplate = {
 };
 
 const Channels = {
+  inputs,
   master,
   auxiliaryTemplate
 };

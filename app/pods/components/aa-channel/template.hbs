@@ -38,11 +38,13 @@
       onButtonClick=this.onChannelMuteChange
     }}
 
-    {{aa-toggle-button
-      class="toggle-button"
-      isActive=this.channel.data.isSolo
-      text="S"
-      onButtonClick=this.onChannelSoloChange
-    }}
+    {{#unless this.isOutput}}
+      {{aa-toggle-button
+        class="toggle-button"
+        isActive=this.channel.data.isSolo
+        text="S"
+        onButtonClick=this.onChannelSoloChange
+      }}
+    {{/unless}}
   </div>
 </div>

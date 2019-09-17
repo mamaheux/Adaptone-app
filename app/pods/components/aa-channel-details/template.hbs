@@ -30,22 +30,24 @@
 
 
 <div class="eq-container">
-  {{aa-volume-gain
-    class="volume-gain-container"
-    volume=this.channel.data.volume
-    gain=this.channel.data.gain
-    inputAfterGain=this.inputAfterGain
-    inputAfterEq=this.inputAfterEq
-    isMute=this.channel.data.isMuted
-    isSolo=this.channel.data.isSolo
-    onVolumeChange=(action "onVolumeChange")
-    onGainChange=(action "onGainChange")
-    onIsMutedChange=(action "onIsMutedChange")
-    onIsSoloChange=(action "onIsSoloChange")
-  }}
+  {{#unless this.isAuxiliaryOutput}}
+    {{#unless this.isMasterOutput}}
+      {{aa-gain
+        class="gain-container"
+        gain=this.channel.data.gain
+        inputAfterGain=this.inputAfterGain
+        inputAfterEq=this.inputAfterEq
+        isMute=this.channel.data.isMuted
+        isSolo=this.channel.data.isSolo
+        onGainChange=(action "onGainChange")
+        onIsMutedChange=(action "onIsMutedChange")
+        onIsSoloChange=(action "onIsSoloChange")
+      }}
+    {{/unless}}
+  {{/unless}}
 
   {{aa-eq
-    auxiliaryId=this.channel.data.auxiliaryId
+    auxiliaryChannelId=this.channel.data.auxiliaryChannelId
     channelId=this.channel.data.channelId
     isParametric=this.isParametric
     parametricFilters=this.channel.data.paramEq
@@ -53,7 +55,7 @@
     parametricEqGraphValues=this.parametricEqGraphValues
     graphicEqGraphValues=this.graphicEqGraphValues
     isMasterOutput=this.isMasterOutput
-    isAuxiliaryOutput=this.isAuxiliary
+    isAuxiliaryOutput=this.isAuxiliaryOutput
     onEqChange=(action "onEqChange")
   }}
 </div>
