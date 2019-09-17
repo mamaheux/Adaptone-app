@@ -66,9 +66,11 @@ app.on('ready', () => {
     mainWindow = null;
   });
 
-  mainWindow.on('close', (e) => {
+  mainWindow.on('close', () => {
     mainWindow.webContents.send('save-application-session');
     mainWindow.webContents.send('close-connection');
+    mainWindow = null;
+    app.quit();
   });
 });
 
