@@ -20,9 +20,9 @@
   background-color: $big-stone;
   color: #fff;
   font-family: $text-font-semibold;
-  font-size: 24px;
+  font-size: 18px;
   border-radius: 0 4px 4px 0;
-  padding: 2px 8px;
+  padding: 2px 12px;
   margin-right: 15px;
 }
 
@@ -74,4 +74,30 @@
   text-align: center;
   padding: 6px 20px;
   margin-right: 5px;
+}
+
+.tabs-container {
+  display: flex;
+  padding: 5px 20px;
+}
+
+.tab {
+  color: $big-stone;
+  border-radius: 5px 5px 0 0;
+  font-family: $text-font-semibold;
+  font-size: 18px;
+  padding: 6px 20px;
+  transition: 0.3s ease;
+  transition-property: background-color, color;
+
+  &.active {
+    background-color: $big-stone;
+    color: #fff;
+  }
+}
+
+.input-volumes-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
 }
