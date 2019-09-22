@@ -4,7 +4,8 @@
   display: flex;
   color: $big-stone;
   font-family: $text-font-semibold;
-  font-size: 22px;
+  font-size: 16px;
+  margin-top: 5px;
 }
 
 $width: 40px;
@@ -50,7 +51,7 @@ input[type='checkbox'] {
 
 .card {
   display: inline-block;
-  margin: (($height * 1.4 - $height) / 2) + 5px;
+  margin: ($height / 4) (($height * 1.4 - $height) / 2) + 5px (($height * 1.4 - $height) / 2) + 5px;
   width: $width;
   height: $height;
   text-align: center;

@@ -24,6 +24,9 @@ export default Component.extend({
   userChannelVolume: 0,
   userChannelGain: 0,
 
+  isEqVisible: true,
+  isInputVolumeVisible: false,
+
   isAuxiliaryInput: computed('channel.data.isAuxiliaryInput', function() {
     if (this.get('channel').data.isAuxiliaryInput === true) return true;
 
@@ -118,6 +121,31 @@ export default Component.extend({
 
     saveConfiguration() {
       this.get('session').dumpSessionInFile();
+    },
+
+    onEqTabClick() {
+      this.set('isInputVolumeVisible', false);
+      this.set('isEqVisible', true);
+    },
+
+    onInputVolumeTabClick() {
+      this.set('isEqVisible', false);
+      this.set('isInputVolumeVisible', true);
+    },
+
+    onInputChannelMuteChange(_) {
+      this._updateSessionConfiguration();
+      // Handle channel mute change here
+    },
+
+    onInputChannelSoloChange(_) {
+      this._updateSessionConfiguration();
+      // Handle channel solo change here
+    },
+
+    onInputChannelVolumeChange(_) {
+      this._updateSessionConfiguration();
+      // Handle volume change here
     }
   },
 
