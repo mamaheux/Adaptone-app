@@ -9,6 +9,13 @@ const FIVE_BANDS_FREQUENCIES = [60, 230, 910, 3000, 14000];
 const MAX_FREQUENCY = 20000;
 const MIN_FREQUENCY = 20;
 
+Number.prototype.between = function(a, b) {
+  const min = Math.min(a, b);
+  const max = Math.max(a, b);
+
+  return this > min && this <= max;
+};
+
 export default Service.extend({
   interpolateData(frequencies, graphicFilters) {
     const interpolatedData = [];

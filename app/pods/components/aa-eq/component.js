@@ -17,13 +17,6 @@ const MIN_FREQUENCY = 20;
 const DESIGNER_DEBOUNCE_TIME = 5;
 const SEND_MESSAGE_DEBOUNCE_TIME = 20;
 
-Number.prototype.between = function(a, b) {
-  const min = Math.min(a, b);
-  const max = Math.max(a, b);
-
-  return this > min && this <= max;
-};
-
 export default Component.extend({
   connection: service('connection'),
   filterDesigner: service('filter-designer'),
