@@ -24,6 +24,8 @@ export default Component.extend({
   userChannelVolume: 0,
   userChannelGain: 0,
 
+  hasNewChanges: false,
+
   isEqVisible: true,
   isInputVolumeVisible: false,
 
@@ -54,6 +56,7 @@ export default Component.extend({
     });
 
     this._super(...arguments);
+    this.set('hasNewChanges', false);
   },
 
   willDestroyElement() {
@@ -83,6 +86,7 @@ export default Component.extend({
     }
 
     this.get('session').set('configuration', configuration);
+    this.set('hasNewChanges', true);
   },
 
   actions: {
@@ -117,6 +121,7 @@ export default Component.extend({
 
     saveConfiguration() {
       this.get('session').dumpSessionInFile();
+      this.set('hasNewChanges', false);
     },
 
     onEqTabClick() {

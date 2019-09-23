@@ -29,12 +29,12 @@
         isActive=this.isParametric
       }}
 
-        <button
-          class="save-button"
-          onClick={{action "saveConfiguration"}}
-        >
-          {{t 'console.save'}}
-        </button>
+      <button
+        class="save-button  {{if this.hasNewChanges 'dirty'}}"
+        onClick={{action "saveConfiguration"}}
+      >
+        {{t 'console.save'}}
+      </button>
     </div>
 
     <div class="graph">
