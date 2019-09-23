@@ -7,6 +7,7 @@ export default Component.extend({
 
   channels: null,
   positions: null,
+  newChanges: false,
 
   init() {
     this._super(...arguments);
@@ -73,6 +74,7 @@ export default Component.extend({
     configuration.channels = channelsData;
 
     this.get('session').set('configuration', configuration);
+    this.set('newChanges', true);
   },
 
   actions: {
@@ -92,6 +94,7 @@ export default Component.extend({
 
     saveConfiguration() {
       this.get('session').dumpSessionInFile();
+      this.set('newChanges', false);
     }
   }
 });

@@ -64,8 +64,8 @@
 
 .save-button {
   width: 120px;
-  color: #fff;
-  background-color: $blue-ribbon;
+  color: $big-stone;
+  background-color: #fff;
   border: none;
   border-radius: 5px;
   font-family: $text-font-semibold;
@@ -74,4 +74,9 @@
   text-align: center;
   padding: 6px 20px;
   margin-right: 5px;
+}
+
+.dirty {
+  color: #fff;
+  background-color: $blue-ribbon;
 }
