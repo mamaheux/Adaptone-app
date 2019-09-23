@@ -20,22 +20,24 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 | 11  | [Changer le gain des entrées](#changer-le-gain-des-entrées) |
 | 12  | [Changer les gains de l'EQ d'une entrée](#changer-les-gains-de-leq-dune-entrée) |
 | 13  | [Changer le volume d'une entrée dans le mixage principal](#changer-le-volume-dune-entrée-dans-le-mixage-principal) |
-| 14  | [Changer le volume d'une entrée dans un mixage auxilière](#changer-le-volume-dune-entrée-dans-un-mixage-auxilière) |
-| 15  | [Changer les gains de l'EQ des sorties principales](#changer-les-gains-de-leq-des-sorties-principales) |
-| 16  | [Changer les gains de l'EQ d'une sortie auxiliaire](#changer-les-gains-de-leq-dune-sortie-auxiliaire) |
-| 17  | [Changer le volume des sorties principales](#changer-le-volume-des-sorties-principales) |
-| 18  | [Changer le volume d'une sortie auxiliaire](#changer-le-volume-dune-sortie-auxiliaire) |
+| 14  | [Change le volume des entrées dans le mixage principal](#changer-le-volume-des-entrées-dans-le-mixage-pricipal) |
+| 15  | [Changer le volume d'une entrée dans un mixage auxilière](#changer-le-volume-dune-entrée-dans-un-mixage-auxilière) |
+| 16  | [Changer le volume des entrées dans un mixage auxilière](#changer-le-volume-des-entrées-dans-un-mixage-auxilière) |
+| 17  | [Changer les gains de l'EQ des sorties principales](#changer-les-gains-de-leq-des-sorties-principales) |
+| 18  | [Changer les gains de l'EQ d'une sortie auxiliaire](#changer-les-gains-de-leq-dune-sortie-auxiliaire) |
+| 19  | [Changer le volume des sorties principales](#changer-le-volume-des-sorties-principales) |
+| 20  | [Changer le volume d'une sortie auxiliaire](#changer-le-volume-dune-sortie-auxiliaire) |
 | *Échanges de données* |
-| 19 | [Taux erreur](#taux-erreur) |
-| 20 | [Spectre sonore des entrées](#spectre-sonore-des-entrées) |
-| 21 | [Niveaux sonores (peakmeter)](#niveaux-sonores-peakmeter) |
+| 21 | [Taux erreur](#taux-erreur) |
+| 22 | [Spectre sonore des entrées](#spectre-sonore-des-entrées) |
+| 23 | [Niveaux sonores (peakmeter)](#niveaux-sonores-peakmeter) |
 | *Structure d'un channel* |
-| 22 | [Mère](#structure-mère) |
-| 23 | [Entrée](#structure-entrée) |
-| 24 | [Master](#structure-master) |
-| 25 | [Auxiliaire](#structure-auxiliaire) |
-| 26 | [Entrée master](#structure-entrée-master) |
-| 27 | [Entrée auxiliaire](#structure-entrée-auxiliaire) |
+| 24 | [Mère](#structure-mère) |
+| 25 | [Entrée](#structure-entrée) |
+| 26 | [Master](#structure-master) |
+| 27 | [Auxiliaire](#structure-auxiliaire) |
+| 28 | [Entrée master](#structure-entrée-master) |
+| 29 | [Entrée auxiliaire](#structure-entrée-auxiliaire) |
 
 ## Étapes
 
@@ -228,11 +230,31 @@ Les gains ne sont pas en dB.
 }
 ```
 
-### Changer le volume d'une entrée dans un mixage auxiliaire
+### Changer le volume des entrées dans le mixage pricipal
 
 ```json
 {
   "seqId": 14,
+  "data": {
+    "gains": [
+      {
+        "channelId": 1,
+        "gain" : 0.2
+      },      
+      {
+        "channelId": 5,
+        "gain" : 0.2
+      }
+    ]
+  }
+}
+```
+
+### Changer le volume d'une entrée dans un mixage auxiliaire
+
+```json
+{
+  "seqId": 15,
   "data": {
     "channelId": 0,
     "auxiliaryChannelId": 0,
@@ -241,11 +263,31 @@ Les gains ne sont pas en dB.
 }
 ```
 
+### Changer le volume des entrées dans un mixage auxilière
+
+```json
+{
+  "seqId": 16,
+  "data": {
+    "gains": [
+      {
+        "channelId": 1,
+        "gain" : 0.2
+      },      
+      {
+        "channelId": 5,
+        "gain" : 0.2
+      }
+    ]
+  }
+}
+```
+
 ### Changer les gains de l'EQ des sorties principales
 
 ```json
 {
-  "seqId": 15,
+  "seqId": 17,
   "data": {
     "gains": [1.0, 1.2, 1.23]
   }
@@ -256,7 +298,7 @@ Les gains ne sont pas en dB.
 
 ```json
 {
-  "seqId": 16,
+  "seqId": 18,
   "data": {
     "channelId": 0,
     "gains": [1.0, 1.2, 1.23]
@@ -268,7 +310,7 @@ Les gains ne sont pas en dB.
 
 ```json
 {
-  "seqId": 17,
+  "seqId": 19,
   "data": {
     "gain": 1.0
   }
@@ -279,7 +321,7 @@ Les gains ne sont pas en dB.
 
 ```json
 {
-  "seqId": 18,
+  "seqId": 20,
   "data": {
     "channelId": 0,
     "gain": 1.0
@@ -293,7 +335,7 @@ Les gains ne sont pas en dB.
 
 ```json
 {
-  "seqId": 19,
+  "seqId": 21,
   "data": {
     "positions": [
       {
@@ -313,7 +355,7 @@ L'amplitude n'est pas en dB.
 
 ```json
 {
-  "seqId": 20,
+  "seqId": 22,
   "data": {
     "spectrums": [
       {
@@ -336,7 +378,7 @@ Les niveaux sonores ne sont pas en dB.
 
 ```json
 {
-  "seqId": 21,
+  "seqId": 23,
   "data": {
     "inputAfterGain": [
       {

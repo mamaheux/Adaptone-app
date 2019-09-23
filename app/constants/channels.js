@@ -310,7 +310,7 @@ const auxInputs = [
   {
     portId: 1,
     data: {
-      channelId: 4,
+      channelId: 1,
       auxiliaryChannelId: 1,
       isAuxiliaryInput: true,
       channelName: 'Aux 1 input 3',
@@ -321,7 +321,7 @@ const auxInputs = [
   },
   {
     data: {
-      channelId: 5,
+      channelId: 2,
       auxiliaryChannelId: 1,
       isAuxiliaryInput: true,
       channelName: 'Aux 1 input 4',
