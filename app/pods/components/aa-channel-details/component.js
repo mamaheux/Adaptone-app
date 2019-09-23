@@ -24,14 +24,10 @@ export default Component.extend({
   userChannelVolume: 0,
   userChannelGain: 0,
 
-<<<<<<< HEAD
   hasNewChanges: false,
-=======
-  newChanges: false,
 
   isEqVisible: true,
   isInputVolumeVisible: false,
->>>>>>> 0cfed7c00611fd7d3105d8d6bf5eacb1f6974e8d
 
   isAuxiliaryInput: computed('channel.data.isAuxiliaryInput', function() {
     if (this.get('channel').data.isAuxiliaryInput === true) return true;
