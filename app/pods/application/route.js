@@ -14,6 +14,6 @@ export default Route.extend({
   },
 
   afterModel() {
-    this.transitionTo('configs');
+    this.transitionTo('console');
   }
 });

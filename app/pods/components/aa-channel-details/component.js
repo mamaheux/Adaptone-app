@@ -24,7 +24,7 @@ export default Component.extend({
   userChannelVolume: 0,
   userChannelGain: 0,
 
-  newChanges: false,
+  hasNewChanges: false,
 
   isAuxiliaryInput: computed('channel.data.isAuxiliaryInput', function() {
     if (this.get('channel').data.isAuxiliaryInput === true) return true;
@@ -57,7 +57,7 @@ export default Component.extend({
     });
 
     this._super(...arguments);
-    this.set('newChanges', false);
+    this.set('hasNewChanges', false);
   },
 
   willDestroyElement() {
@@ -87,7 +87,7 @@ export default Component.extend({
     }
 
     this.get('session').set('configuration', configuration);
-    this.set('newChanges', true);
+    this.set('hasNewChanges', true);
   },
 
   actions: {
@@ -122,7 +122,7 @@ export default Component.extend({
 
     saveConfiguration() {
       this.get('session').dumpSessionInFile();
-      this.set('newChanges', false);
+      this.set('hasNewChanges', false);
     }
   },
 

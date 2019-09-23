@@ -8,7 +8,7 @@
   }}
 
   <button
-    class="save-button {{if newChanges 'dirty'}}"
+    class="save-button {{if this.hasNewChanges 'dirty'}}"
     onClick={{action "saveConfiguration"}}
   >
     {{t 'console.save'}}
