@@ -11,21 +11,15 @@ export default Component.extend({
   connection: service('connection'),
 
   isAuxiliaryInput: computed('channel.data.isAuxiliaryInput', function() {
-    if (this.get('channel').data.isAuxiliaryInput === true) return true;
-
-    return false;
+    return this.get('channel').data.isAuxiliaryInput === true;
   }),
 
   isAuxiliaryOutput: computed('channel.data.isAuxiliaryOutput', function() {
-    if (this.get('channel').data.isAuxiliaryOutput === true) return true;
-
-    return false;
+    return this.get('channel').data.isAuxiliaryOutput === true;
   }),
 
   isMasterOutput: computed('channel.data.isMasterOutput', function() {
-    if (this.get('channel').data.isMasterOutput === true) return true;
-
-    return false;
+    return this.get('channel').data.isMasterOutput === true;
   }),
 
   channelVolumeChanged: observer('channel.data.volume', function() {
