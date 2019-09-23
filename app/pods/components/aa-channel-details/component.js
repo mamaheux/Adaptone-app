@@ -28,27 +28,23 @@ export default Component.extend({
   isInputVolumeVisible: false,
 
   isAuxiliaryInput: computed('channel.data.isAuxiliaryInput', function() {
-    if (this.get('channel').data.isAuxiliaryInput === true) return true;
-
-    return false;
+    return this.get('channel').data.isAuxiliaryInput === true;
   }),
 
   isMasterInput: computed('channel.data.isMasterInput', function() {
-    if (this.get('channel').data.isMasterInput === true) return true;
-
-    return false;
+    return this.get('channel').data.isMasterInput === true;
   }),
 
   isAuxiliaryOutput: computed('channel.data.isAuxiliaryOutput', function() {
-    if (this.get('channel').data.isAuxiliaryOutput === true) return true;
-
-    return false;
+    return this.get('channel').data.isAuxiliaryOutput === true;
   }),
 
   isMasterOutput: computed('channel.data.isMasterOutput', function() {
-    if (this.get('channel').data.isMasterOutput === true) return true;
+    return this.get('channel').data.isMasterOutput === true;
+  }),
 
-    return false;
+  isOutput: computed('channel.data.{isMasterOutput,isAuxiliaryOutput}', function() {
+    return this.get('channel').data.isMasterOutput === true || this.get('channel').data.isAuxiliaryOutput === true;
   }),
 
   didInsertElement() {

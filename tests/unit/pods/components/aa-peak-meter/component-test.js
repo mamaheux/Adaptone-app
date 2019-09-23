@@ -27,7 +27,7 @@ describe('Unit | Component | aa-peak-meter', function() {
       },
       peak: {
         style: {
-          width: 0.1
+          height: 0.1
         }
       },
       size: 100,
@@ -151,10 +151,10 @@ describe('Unit | Component | aa-peak-meter', function() {
 
       component.drawPeakMeter(meterValue);
 
-      expect(component.get('meterElements').green.style.width).to.equal('90px');
-      expect(component.get('meterElements').yellow.style.width).to.equal('40px');
-      expect(component.get('meterElements').red.style.width).to.equal('10px');
-      expect(component.get('meterElements').peak.style.left).to.equal('90px');
+      expect(component.get('meterElements').green.style.height).to.equal('90px');
+      expect(component.get('meterElements').yellow.style.height).to.equal('40px');
+      expect(component.get('meterElements').red.style.height).to.equal('10px');
+      expect(component.get('meterElements').peak.style.bottom).to.equal('90px');
     });
   });
 });
