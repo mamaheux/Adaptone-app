@@ -52,7 +52,7 @@ export default Component.extend({
   channelSpectrums: computed('spectrums.[]', function() {
     const spectrums = this.get('spectrums');
 
-    if (!spectrums) return;
+    if (!spectrums || this.get('isOutput')) return;
 
     const formattedData = [];
 
@@ -68,7 +68,7 @@ export default Component.extend({
   addedChannelsSpectrums: computed('spectrums.[]', function() {
     const spectrums = this.get('spectrums');
 
-    if (!spectrums) return;
+    if (!spectrums || this.get('isOutput')) return;
 
     let formattedData = {};
 

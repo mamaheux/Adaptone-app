@@ -51,6 +51,12 @@ export default Component.extend({
     return false;
   }),
 
+  isOutput: computed('channel.data.{isMasterOutput,isAuxiliaryOutput}', function() {
+    if (this.get('channel').data.isMasterOutput || this.get('channel').data.isAuxiliaryOutput) return true;
+
+    return false;
+  }),
+
   didInsertElement() {
     this.get('packetDispatcher').on('peakmeter-levels', (data) => {
       this.set('inputAfterGain', data.inputAfterGain[this.get('channel').data.channelId]);
