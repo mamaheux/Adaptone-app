@@ -1,14 +1,33 @@
-<div class="graph-container">
-  <div class="header">
-    <div class="channel-name">
-      {{this.channel.data.channelName}}
+{{#if this.isAuxiliaryOutput}}
+  <div class="tabs-container">
+    <div
+      class="tab {{if this.isEqVisible 'active'}}"
+      onClick={{action 'onEqTabClick'}}
+    >
+      {{t 'channel-details.tabs.eq'}}
     </div>
 
-    {{aa-toggle
-      leftValue=(t 'channel-details.graphic')
-      rightValue=(t 'channel-details.parametric')
-      isActive=this.isParametric
-    }}
+    <div
+      class="tab {{if this.isInputVolumeVisible 'active'}}"
+      onClick={{action 'onInputVolumeTabClick'}}
+    >
+      {{t 'channel-details.tabs.input-volumes'}}
+    </div>
+  </div>
+{{/if}}
+
+{{#if this.isEqVisible}}
+  <div class="graph-container">
+    <div class="header">
+      <div class="channel-name">
+        {{this.channel.data.channelName}}
+      </div>
+
+      {{aa-toggle
+        leftValue=(t 'channel-details.graphic')
+        rightValue=(t 'channel-details.parametric')
+        isActive=this.isParametric
+      }}
 
       <button
         class="save-button  {{if newChanges 'dirty'}}"
@@ -16,49 +35,64 @@
       >
         {{t 'console.save'}}
       </button>
+    </div>
+
+    <div class="graph">
+      {{aa-eq-graph
+        isParametric=this.isParametric
+        channelInfos=this.channel
+        parametricEqValues=this.parametricEqGraphValues
+        graphicEqValues=this.graphicEqGraphValues
+      }}
+    </div>
   </div>
 
-  <div class="graph">
-    {{aa-eq-graph
+
+  <div class="eq-container">
+    {{#unless this.isAuxiliaryOutput}}
+      {{#unless this.isMasterOutput}}
+        {{aa-gain
+          class="gain-container"
+          gain=this.channel.data.gain
+          inputAfterGain=this.inputAfterGain
+          inputAfterEq=this.inputAfterEq
+          isMute=this.channel.data.isMuted
+          isSolo=this.channel.data.isSolo
+          onGainChange=(action "onGainChange")
+          onIsMutedChange=(action "onIsMutedChange")
+          onIsSoloChange=(action "onIsSoloChange")
+        }}
+      {{/unless}}
+    {{/unless}}
+
+    {{aa-eq
+      auxiliaryChannelId=this.channel.data.auxiliaryChannelId
+      channelId=this.channel.data.channelId
       isParametric=this.isParametric
-      channelInfos=this.channel
-      parametricEqValues=this.parametricEqGraphValues
-      graphicEqValues=this.graphicEqGraphValues
+      parametricFilters=this.channel.data.paramEq
+      graphicFilters=this.channel.data.graphEq
+      parametricEqGraphValues=this.parametricEqGraphValues
+      graphicEqGraphValues=this.graphicEqGraphValues
+      isMasterOutput=this.isMasterOutput
+      isAuxiliaryOutput=this.isAuxiliaryOutput
+      onEqChange=(action "onEqChange")
     }}
   </div>
-</div>
+{{/if}}
 
-
-<div class="eq-container">
-  {{#unless this.isAuxiliaryOutput}}
-    {{#unless this.isMasterOutput}}
-      {{aa-gain
-        class="gain-container"
-        gain=this.channel.data.gain
-        inputAfterGain=this.inputAfterGain
-        inputAfterEq=this.inputAfterEq
-        isMute=this.channel.data.isMuted
-        isSolo=this.channel.data.isSolo
-        onGainChange=(action "onGainChange")
-        onIsMutedChange=(action "onIsMutedChange")
-        onIsSoloChange=(action "onIsSoloChange")
+{{#if this.isInputVolumeVisible}}
+  <div class="input-volumes-container">
+    {{#each-in this.channel.data.inputs as |index channel|}}
+      {{aa-channel
+        channel=channel
+        onChannelMuteChange=(action "onInputChannelMuteChange" channel.data)
+        onChannelSoloChange=(action "onInputChannelSoloChange" channel.data)
+        onVolumeChange=(action "onInputChannelVolumeChange" channel.data)
+        isOutput=false
       }}
-    {{/unless}}
-  {{/unless}}
-
-  {{aa-eq
-    auxiliaryChannelId=this.channel.data.auxiliaryChannelId
-    channelId=this.channel.data.channelId
-    isParametric=this.isParametric
-    parametricFilters=this.channel.data.paramEq
-    graphicFilters=this.channel.data.graphEq
-    parametricEqGraphValues=this.parametricEqGraphValues
-    graphicEqGraphValues=this.graphicEqGraphValues
-    isMasterOutput=this.isMasterOutput
-    isAuxiliaryOutput=this.isAuxiliaryOutput
-    onEqChange=(action "onEqChange")
-  }}
-</div>
+    {{/each-in}}
+  </div>
+{{/if}}
 
 {{#link-to 'console'}}
   {{inline-svg "assets/images/arrow-icon.svg" class="arrow-icon"}}
