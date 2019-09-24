@@ -21,7 +21,8 @@
       channel=channel
       onChannelMuteChange=(action "onChannelMuteChange" channel.data)
       onChannelSoloChange=(action "onChannelSoloChange" channel.data)
-      onVolumeChange=(action "onVolumeChange" channel.data)
+      onVolumeChange=(action "onVolumeChange")
+      masterInputs=this.channels.master.data.inputs
       isOutput=false
     }}
   {{/each-in}}

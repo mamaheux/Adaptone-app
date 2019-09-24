@@ -87,8 +87,8 @@
       {{aa-channel
         channel=channel
         onChannelMuteChange=(action "onInputChannelMuteChange" channel.data)
-        onChannelSoloChange=(action "onInputChannelSoloChange" channel.data)
-        onVolumeChange=(action "onInputChannelVolumeChange" channel.data)
+        onChannelSoloChange=(action "onInputChannelSoloChange")
+        onVolumeChange=(action "onInputChannelVolumeChange" channel.data.gain)
         isOutput=false
       }}
     {{/each-in}}

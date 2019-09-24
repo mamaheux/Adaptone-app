@@ -5,8 +5,7 @@ import {computed} from '@ember/object';
 import SequenceIds from 'adaptone-front/constants/sequence-ids';
 
 const DEBOUNCE_TIME = 20;
-const CHANNEL_VOLUME_MAX_VALUE = 100;
-const CHANNEL_GAIN_MAX_VALUE = 12;
+const CHANNEL_GAIN_MAX_VALUE = 100;
 
 export default Component.extend({
   connection: service('connection'),
@@ -77,16 +76,17 @@ export default Component.extend({
   allChannels: computed('channels', function() {
     const channels = this.get('channels');
 
-    const auxInputs = channels.auxiliaries.flatMap(auxiliary => {
-      return auxiliary.data.inputs;
-    });
-
-    return [channels.master, ...channels.master.data.inputs, ...channels.auxiliaries, ...auxInputs];
+    return [channels.master, ...channels.master.data.inputs, ...channels.auxiliaries];
   }),
 
   _updateSessionConfiguration() {
     const configuration = this.get('session').get('configuration');
     const channelsData = this.get('channels');
+
+    channelsData.master.data.inputs.forEach(cd => {
+      cd.data.isMuted = channelsData.inputs.find(i => i.data.channelId == cd.data.channelId).data.isMuted;
+      cd.data.isSolo = channelsData.inputs.find(i => i.data.channelId == cd.data.channelId).data.isSolo;
+    });
 
     configuration.channels = channelsData;
 
@@ -111,9 +111,8 @@ export default Component.extend({
       this._updateSessionConfiguration();
 
       const seqId = this._getGainSequenceId(channel, false);
-      let gain = channel.isMuted ? 0 : channel.volume / CHANNEL_VOLUME_MAX_VALUE;
+      let gain = channel.isMuted ? 0 : channel.gain / CHANNEL_GAIN_MAX_VALUE;
 
-      // On à pas l'info de isSolo dans les channels nestés donc ça fonctionne pas
       if (this.get('allChannels').some(c => c.data.isSolo
         && c.data.channelId !== channel.channelId
         && c.data.isAuxiliaryInput === channel.isAuxiliaryInput
@@ -138,22 +137,20 @@ export default Component.extend({
       const seqId = this._getGainSequenceId(channel, true);
       const channels = this.get('allChannels');
 
-      const gains = channels.map(channel => {
-        // Faut utiliser le gain des channels nestés
-        let gain = channel.data.volume / CHANNEL_VOLUME_MAX_VALUE;
+      const gains = channels.map(currentChannel => {
+        let gain = currentChannel.data.gain / CHANNEL_GAIN_MAX_VALUE;
 
-        // Mais ici les solo des channels pas nestés
         if (channels.some(c => c.data.isSolo
-          && c.data.channelId !== channel.channelId
-          && c.data.isAuxiliaryInput === channel.isAuxiliaryInput
-          && c.data.isMasterInput === channel.isMasterInput
-          && c.data.isMasterOutput === channel.isMasterOutput
-          && c.data.isAuxiliaryOutput === channel.isAuxiliaryOutput)) gain = 0;
-        if (channel.data.isSolo) gain = channel.data.volume / CHANNEL_VOLUME_MAX_VALUE;
-        if (channel.data.isMuted) gain = 0;
+          && c.data.channelId !== currentChannel.data.channelId
+          && c.data.isAuxiliaryInput === currentChannel.data.isAuxiliaryInput
+          && c.data.isMasterInput === currentChannel.data.isMasterInput
+          && c.data.isMasterOutput === currentChannel.data.isMasterOutput
+          && c.data.isAuxiliaryOutput === currentChannel.data.isAuxiliaryOutput)) gain = 0;
+        if (currentChannel.data.isSolo) gain = currentChannel.data.gain / CHANNEL_GAIN_MAX_VALUE;
+        if (currentChannel.data.isMuted) gain = 0;
 
         return {
-          channelId: channel.data.channelId,
+          channelId: currentChannel.data.channelId,
           gain
         };
       });

@@ -22,19 +22,42 @@ export default Component.extend({
     return this.get('channel').data.isMasterOutput === true;
   }),
 
-  channelVolumeChanged: observer('channel.data.volume', function() {
-    const formattedVolume = this.get('channel').data.volume / 100;
+  gainValue: computed('masterInputs', function() {
+    const {masterInputs, channel} = this.getProperties('masterInputs', 'channel');
 
+    let gain = channel.data.gain;
+
+    if (masterInputs) {
+      const masterInput = masterInputs.find(m => m.data.channelId === channel.data.channelId);
+      gain = masterInput.data.gain;
+    }
+
+    return gain;
+  }),
+
+  channelVolumeChanged: observer('gainValue', function() {
+    const gainValue = this.get('gainValue');
     const seqId = this._getVolumeSequenceId();
+    const channelId = this.get('channel').data.channelId;
 
     const message = {
       seqId,
       data: {
         auxiliaryId: this.get('channel').data.auxiliaryId,
-        channelId: this.get('channel').data.channelId,
-        gain: formattedVolume
+        channelId: channelId,
+        gain: gainValue / 100
       }
     };
+
+    const masterInputs = this.get('masterInputs');
+    if (masterInputs) {
+      masterInputs.find(mi => mi.data.channelId === channelId).data.gain = gainValue;
+      this.set('masterInputs', masterInputs);
+    } else {
+      const channel = this.get('channel');
+      channel.data.gain = gainValue;
+      this.set('channel', channel);
+    }
 
     debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
   }),
