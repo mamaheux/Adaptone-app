@@ -36,9 +36,9 @@ export default Component.extend({
   }),
 
   channelGainChanged: observer('gainValue', function() {
-    const gainValue = this.get('gainValue');
+    const {channel, masterInputs, gainValue} = this.getProperties('channel', 'masterInputs', 'gainValue');
     const seqId = this._getGainSequenceId();
-    const channelId = this.get('channel').data.channelId;
+    const channelId = channel.data.channelId;
 
     const formattedGain = gainValue / 100;
 
@@ -50,17 +50,15 @@ export default Component.extend({
       }
     };
 
-    const masterInputs = this.get('masterInputs');
-
     if (masterInputs) {
       masterInputs.find(mi => mi.data.channelId === channelId).data.gain = gainValue;
       this.set('masterInputs', masterInputs);
     } else {
-      const channel = this.get('channel');
-
-      channel.data.gain = gainValue;
-      this.set('channel', channel);
+      this.set('channel.data.gain', gainValue);
     }
+
+    if (channel.data.isMuted) return;
+    if (!channel.data.isSolo && masterInputs && masterInputs.some(mi => mi.data.channelId !== channelId && mi.data.isSolo === true)) return;
 
     debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
   }),
