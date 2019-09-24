@@ -10,6 +10,7 @@ const CHANNEL_GAIN_MAX_VALUE = 100;
 export default Component.extend({
   connection: service('connection'),
   session: service('session'),
+  packetDispatcher: service('packet-dispatcher'),
 
   channels: null,
   positions: null,
@@ -18,7 +19,10 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    // TODO : Remove this but leave it in for now as it makes testing the whole app easier
+    const configuration = this.get('session').get('configuration');
+    this.set('positions', configuration.positions);
+
+    //This is only needed to debug the application
     this.set('positions', {
       seqId: 11,
       data: {
@@ -73,6 +77,18 @@ export default Component.extend({
     });
   },
 
+  didInsertElement() {
+    this.get('packetDispatcher').on('error-rates', (data) => {
+      this.set('positions', data.positions);
+    });
+
+    this._super(...arguments);
+  },
+
+  willDestroyElement() {
+    this.get('packetDispatcher').off('error-rates');
+  },
+
   allChannels: computed('channels', function() {
     const channels = this.get('channels');
 
@@ -84,8 +100,8 @@ export default Component.extend({
     const channelsData = this.get('channels');
 
     channelsData.master.data.inputs.forEach(cd => {
-      cd.data.isMuted = channelsData.inputs.find(i => i.data.channelId == cd.data.channelId).data.isMuted;
-      cd.data.isSolo = channelsData.inputs.find(i => i.data.channelId == cd.data.channelId).data.isSolo;
+      cd.data.isMuted = channelsData.inputs.find(i => i.data.channelId === cd.data.channelId).data.isMuted;
+      cd.data.isSolo = channelsData.inputs.find(i => i.data.channelId === cd.data.channelId).data.isSolo;
     });
 
     configuration.channels = channelsData;

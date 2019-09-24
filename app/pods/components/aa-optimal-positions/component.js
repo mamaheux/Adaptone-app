@@ -29,6 +29,7 @@ export default Component.extend({
     confirmPositions() {
       const configuration = this.get('session').get('configuration');
       configuration.step = steps['console-loading:'];
+      configuration.positions = this.get('positions');
 
       this.get('fileSystem').editConfiguration(configuration);
       this.get('session').set('configuration', configuration);
