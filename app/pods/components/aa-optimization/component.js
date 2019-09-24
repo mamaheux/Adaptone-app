@@ -10,6 +10,7 @@ export default Component.extend({
   connection: service('connection'),
   packetDispatcher: service('packet-dispatcher'),
 
+  positions: null,
   isOptimizing: false,
 
   actions: {
@@ -21,6 +22,7 @@ export default Component.extend({
       });
 
       this.get('packetDispatcher').one('optimized-positions', (data) => {
+        this.set('positions', data.positions);
         this.get('router').transitionTo('optimal-positions', {queryParams: {positions: JSON.stringify(data.positions)}});
       });
     },
@@ -28,6 +30,7 @@ export default Component.extend({
     loadConsole() {
       const configuration = this.get('session').get('configuration');
       configuration.step = steps['console-loading:'];
+      configuration.positions = this.get('positions');
 
       this.get('fileSystem').editConfiguration(configuration);
       this.get('session').set('configuration', configuration);
