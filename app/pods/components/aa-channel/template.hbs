@@ -15,10 +15,10 @@
   <div class="meter-container">
     {{aa-slider
       min=0
-      value=this.channel.data.volume
+      value=(mut gainValue)
       max=100
       step=1
-      onSliderChanged=this.onVolumeChange
+      onSliderChanged=this.onGainChange
     }}
 
     {{aa-peak-meter
@@ -26,7 +26,6 @@
       max=100
       yellowLimit=65
       redLimit=85
-      value=this.channel.data.volume
     }}
   </div>
 

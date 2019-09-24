@@ -39,9 +39,10 @@ export default Component.extend({
 
       const auxiliaries = auxiliaryChannelIds.map((auxId, index) => {
         const auxiliary = Channels.auxiliaryTemplate;
-        auxiliary.channelId = auxId;
-        auxiliary.auxiliaryChannelId = index;
-        auxiliary.channelName = `Aux ${auxId}`;
+        auxiliary.data.channelId = auxId;
+        auxiliary.data.auxiliaryChannelId = index;
+        auxiliary.data.channelName = `Aux ${auxId}`;
+        auxiliary.data.inputs.forEach(i => i.data.auxiliaryChannelId = auxId);
 
         return auxiliary;
       });

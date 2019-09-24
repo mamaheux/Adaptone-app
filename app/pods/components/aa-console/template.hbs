@@ -21,7 +21,8 @@
       channel=channel
       onChannelMuteChange=(action "onChannelMuteChange" channel.data)
       onChannelSoloChange=(action "onChannelSoloChange" channel.data)
-      onVolumeChange=(action "onVolumeChange" channel.data)
+      onGainChange=(action "onGainChange")
+      masterInputs=this.channels.master.data.inputs
       isOutput=false
     }}
   {{/each-in}}
@@ -30,7 +31,7 @@
     channel=this.channels.master
     onChannelMuteChange=(action "onChannelMuteChange" this.channels.master.data)
     onChannelSoloChange=(action "onChannelSoloChange" this.channels.master.data)
-    onVolumeChange=(action "onVolumeChange" channel.data)
+    onGainChange=(action "onGainChange" channel.data)
     isOutput=true
   }}
 
@@ -39,7 +40,7 @@
       channel=channel
       onChannelMuteChange=(action "onChannelMuteChange" channel.data)
       onChannelSoloChange=(action "onChannelSoloChange" channel.data)
-      onVolumeChange=(action "onVolumeChange" channel.data)
+      onGainChange=(action "onGainChange" channel.data)
       isOutput=true
     }}
   {{/each-in}}

@@ -22,19 +22,44 @@ export default Component.extend({
     return this.get('channel').data.isMasterOutput === true;
   }),
 
-  channelVolumeChanged: observer('channel.data.volume', function() {
-    const formattedVolume = this.get('channel').data.volume / 100;
+  gainValue: computed('masterInputs', function() {
+    const {masterInputs, channel} = this.getProperties('masterInputs', 'channel');
 
-    const seqId = this._getVolumeSequenceId();
+    let gain = channel.data.gain;
+
+    if (masterInputs) {
+      const masterInput = masterInputs.find(m => m.data.channelId === channel.data.channelId);
+      gain = masterInput.data.gain;
+    }
+
+    return gain;
+  }),
+
+  channelGainChanged: observer('gainValue', function() {
+    const gainValue = this.get('gainValue');
+    const seqId = this._getGainSequenceId();
+    const channelId = this.get('channel').data.channelId;
 
     const message = {
       seqId,
       data: {
         auxiliaryId: this.get('channel').data.auxiliaryId,
-        channelId: this.get('channel').data.channelId,
-        gain: formattedVolume
+        channelId: channelId,
+        gain: gainValue / 100
       }
     };
+
+    const masterInputs = this.get('masterInputs');
+
+    if (masterInputs) {
+      masterInputs.find(mi => mi.data.channelId === channelId).data.gain = gainValue;
+      this.set('masterInputs', masterInputs);
+    } else {
+      const channel = this.get('channel');
+
+      channel.data.gain = gainValue;
+      this.set('channel', channel);
+    }
 
     debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
   }),
@@ -43,7 +68,7 @@ export default Component.extend({
     return JSON.stringify(this.channel);
   }),
 
-  _getVolumeSequenceId() {
+  _getGainSequenceId() {
     if (this.get('isAuxiliaryOutput')) return SequenceIds.CHANGE_AUX_VOLUME_OUTPUT;
     if (this.get('isMasterOutput')) return SequenceIds.CHANGE_MAIN_VOLUME_OUTPUT;
     if (this.get('isAuxiliaryInput')) return SequenceIds.CHANGE_AUX_VOLUME_INPUT;
