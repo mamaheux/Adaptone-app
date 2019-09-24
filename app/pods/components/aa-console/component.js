@@ -22,7 +22,7 @@ export default Component.extend({
     const configuration = this.get('session').get('configuration');
     this.set('positions', configuration.positions);
 
-    //This is only needed to debug the application
+    // TODO : Remove this but leave it in for now as it makes testing the whole app easier
     this.set('positions', {
       seqId: 11,
       data: {
