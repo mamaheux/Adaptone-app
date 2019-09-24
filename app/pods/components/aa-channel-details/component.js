@@ -8,6 +8,8 @@ import SequenceIds from 'adaptone-front/constants/sequence-ids';
 
 const DEBOUNCE_TIME = 20;
 const MAX_GAIN_VALUE = 12;
+const DECIBEL_CONVERT = 10;
+const DECIBEL_FACTOR = 20;
 
 export default Component.extend({
   connection: service('connection'),
@@ -96,16 +98,19 @@ export default Component.extend({
     },
 
     onGainChange(value) {
+      this._updateSessionConfiguration();
+
+      const ratioGain = Math.pow(DECIBEL_CONVERT, value / DECIBEL_FACTOR);
+
       const message = {
         seqId: SequenceIds.CHANGE_INPUT_GAIN,
         data: {
           channelId: this.get('channel').data.channelId,
-          gain: value
+          gain: ratioGain
         }
       };
 
       debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
-      this._updateSessionConfiguration();
 
       return value;
     },
@@ -137,6 +142,7 @@ export default Component.extend({
 
     onInputChannelMuteChange(channel) {
       this._updateSessionConfiguration();
+
       let gain = channel.gain;
 
       if (channel.isMuted) gain = 0;
@@ -174,20 +180,6 @@ export default Component.extend({
         seqId: SequenceIds.CHANGE_AUX_VOLUME_INPUTS,
         data: {
           gains
-        }
-      };
-
-      debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
-    },
-
-    onInputChannelGainChange(value) {
-      this._updateSessionConfiguration();
-
-      const message = {
-        seqId: this._getGainSequenceId(),
-        data: {
-          channelId: this.get('channel').data.channelId,
-          gain: value / MAX_GAIN_VALUE
         }
       };
 
