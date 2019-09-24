@@ -84,8 +84,8 @@ export default Component.extend({
     const channelsData = this.get('channels');
 
     channelsData.master.data.inputs.forEach(cd => {
-      cd.data.isMuted = channelsData.inputs.find(i => i.data.channelId == cd.data.channelId).data.isMuted;
-      cd.data.isSolo = channelsData.inputs.find(i => i.data.channelId == cd.data.channelId).data.isSolo;
+      cd.data.isMuted = channelsData.inputs.find(i => i.data.channelId === cd.data.channelId).data.isMuted;
+      cd.data.isSolo = channelsData.inputs.find(i => i.data.channelId === cd.data.channelId).data.isSolo;
     });
 
     configuration.channels = channelsData;
