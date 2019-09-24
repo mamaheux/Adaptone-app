@@ -160,7 +160,7 @@ export default Component.extend({
       const gains = channelInputs.map(c => {
         let gain = c.data.gain;
 
-        if (channelInputs.some(channelInput => channelInput.data.isSolo && channelInput.data.channelId !== c.data.channelId)) gain = 0;
+        if (channelInputs.some(channelInput => channelInput.data.isSolo)) gain = 0;
         if (c.data.isSolo) gain = c.data.gain;
         if (c.data.isMuted) gain = 0;
 
@@ -180,11 +180,11 @@ export default Component.extend({
       debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
     },
 
-    onInputChannelVolumeChange(value) {
+    onInputChannelGainChange(value) {
       this._updateSessionConfiguration();
 
       const message = {
-        seqId: this._getVolumeSequenceId(),
+        seqId: this._getGainSequenceId(),
         data: {
           channelId: this.get('channel').data.channelId,
           gain: value / MAX_GAIN_VALUE
@@ -195,7 +195,7 @@ export default Component.extend({
     }
   },
 
-  _getVolumeSequenceId() {
+  _getGainSequenceId() {
     if (this.get('isAuxiliaryOutput')) return SequenceIds.CHANGE_AUX_VOLUME_OUTPUT;
     if (this.get('isMasterOutput')) return SequenceIds.CHANGE_MAIN_VOLUME_OUTPUT;
     if (this.get('isAuxiliaryInput')) return SequenceIds.CHANGE_AUX_VOLUME_INPUT;

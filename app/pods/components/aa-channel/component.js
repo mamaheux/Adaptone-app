@@ -35,9 +35,9 @@ export default Component.extend({
     return gain;
   }),
 
-  channelVolumeChanged: observer('gainValue', function() {
+  channelGainChanged: observer('gainValue', function() {
     const gainValue = this.get('gainValue');
-    const seqId = this._getVolumeSequenceId();
+    const seqId = this._getGainSequenceId();
     const channelId = this.get('channel').data.channelId;
 
     const message = {
@@ -50,11 +50,13 @@ export default Component.extend({
     };
 
     const masterInputs = this.get('masterInputs');
+
     if (masterInputs) {
       masterInputs.find(mi => mi.data.channelId === channelId).data.gain = gainValue;
       this.set('masterInputs', masterInputs);
     } else {
       const channel = this.get('channel');
+
       channel.data.gain = gainValue;
       this.set('channel', channel);
     }
@@ -66,7 +68,7 @@ export default Component.extend({
     return JSON.stringify(this.channel);
   }),
 
-  _getVolumeSequenceId() {
+  _getGainSequenceId() {
     if (this.get('isAuxiliaryOutput')) return SequenceIds.CHANGE_AUX_VOLUME_OUTPUT;
     if (this.get('isMasterOutput')) return SequenceIds.CHANGE_MAIN_VOLUME_OUTPUT;
     if (this.get('isAuxiliaryInput')) return SequenceIds.CHANGE_AUX_VOLUME_INPUT;

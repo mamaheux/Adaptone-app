@@ -165,7 +165,7 @@ export default Component.extend({
       debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
     },
 
-    onVolumeChange(_) {
+    onGainChange(_) {
       this._updateSessionConfiguration();
     },
 
