@@ -62,6 +62,8 @@
           onGainChange=(action "onGainChange")
           onIsMutedChange=(action "onIsMutedChange")
           onIsSoloChange=(action "onIsSoloChange")
+          minValue=-12
+          maxValue=12
         }}
       {{/unless}}
     {{/unless}}
@@ -88,7 +90,6 @@
         channel=channel
         onChannelMuteChange=(action "onInputChannelMuteChange" channel.data)
         onChannelSoloChange=(action "onInputChannelSoloChange")
-        onGainChange=(action "onInputChannelGainChange" channel.data.gain)
         isOutput=false
       }}
     {{/each-in}}

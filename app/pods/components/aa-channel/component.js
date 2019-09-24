@@ -40,12 +40,13 @@ export default Component.extend({
     const seqId = this._getGainSequenceId();
     const channelId = this.get('channel').data.channelId;
 
+    const formattedGain = gainValue / 100;
+
     const message = {
       seqId,
       data: {
-        auxiliaryId: this.get('channel').data.auxiliaryId,
-        channelId: channelId,
-        gain: gainValue / 100
+        channelId,
+        gain: formattedGain
       }
     };
 
