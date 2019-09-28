@@ -270,6 +270,7 @@ Les gains ne sont pas en dB.
 {
   "seqId": 16,
   "data": {
+    "auxiliaryChannelId": 0,
     "gains": [
       {
         "channelId": 1,
