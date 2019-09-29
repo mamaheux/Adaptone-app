@@ -144,6 +144,10 @@ export default Component.extend({
     this._super(...arguments);
   },
 
+  willDestroyElement() {
+    this.get('packetDispatcher').off('peakmeter-levels');
+  },
+
   _getGainSequenceId() {
     if (this.get('isAuxiliaryOutput')) return SequenceIds.CHANGE_AUX_VOLUME_OUTPUT;
     if (this.get('isMasterOutput')) return SequenceIds.CHANGE_MAIN_VOLUME_OUTPUT;
