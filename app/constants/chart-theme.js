@@ -8,6 +8,8 @@ const chartTheme = {
         [1, '#003c80']
       ]
     },
+    borderColor: '#153244',
+    borderWidth: 2,
     className: 'dark-container',
     plotBackgroundColor: 'rgba(255, 255, 255, .1)',
     plotBorderColor: '#f5f5f5',
