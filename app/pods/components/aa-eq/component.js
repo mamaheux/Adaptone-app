@@ -78,6 +78,10 @@ export default Component.extend({
     this._super(...arguments);
 
     this.set('graphicEqFreqs', FIVE_BANDS_FREQUENCIES);
+
+    // Manually set the selected filter to the first parametric filter
+    // in order to correctly initialize the currentFilter
+    this.updateSelectedFilter(this.get('parametricFilters')[0]);
   },
 
   didInsertElement() {
@@ -90,11 +94,7 @@ export default Component.extend({
 
   actions: {
     onFilterClick(selectedFilter) {
-      const previouslySelectedFilter = this.get('parametricFilters').find(filter => filter.isSelected === true);
-      if (previouslySelectedFilter) set(previouslySelectedFilter, 'isSelected', false);
-
-      set(selectedFilter, 'isSelected', true);
-      this.set('currentFilter', selectedFilter);
+      this.updateSelectedFilter(selectedFilter);
     },
 
     onFrequencyChange() {
@@ -117,6 +117,14 @@ export default Component.extend({
       set(filter, 'gain', 0);
       this.updateParametricEqDesigner(this.get('parametricFilters'));
     }
+  },
+
+  updateSelectedFilter(selectedFilter) {
+    const previouslySelectedFilter = this.get('parametricFilters').find(filter => filter.isSelected === true);
+    if (previouslySelectedFilter) set(previouslySelectedFilter, 'isSelected', false);
+
+    set(selectedFilter, 'isSelected', true);
+    this.set('currentFilter', selectedFilter);
   },
 
   updateParametricEqDesigner(parameters) {

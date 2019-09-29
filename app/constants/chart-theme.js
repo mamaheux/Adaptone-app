@@ -2,14 +2,12 @@ const chartTheme = {
   colors: ['#006eee', '#ee9700', '#bd3cda', '#00ee7f', '#eed200', '#ee0038'],
   chart: {
     backgroundColor: {
-      linearGradient: {x1: 0, y1: 0, x2: 3, y2: 3},
+      linearGradient: {x1: 0, y1: 0, x2: 1, y2: 1},
       stops: [
-        [0, '#153244)'],
-        [1, '#006eee']
+        [0, '#000'],
+        [1, '#003c80']
       ]
     },
-    borderColor: '#153244',
-    borderWidth: 2,
     className: 'dark-container',
     plotBackgroundColor: 'rgba(255, 255, 255, .1)',
     plotBorderColor: '#f5f5f5',

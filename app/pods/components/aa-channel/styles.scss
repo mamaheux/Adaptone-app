@@ -1,13 +1,33 @@
 @import 'app/styles/variables.scss';
 
 .channel {
+  position: relative;
   background-color: $silver;
-  border: 1.5px solid $big-stone;
+  border: 2px solid $big-stone;
   width: 97px;
+  margin: 5px 3px 0 3px;
 
   &.output {
-    background-color: $silver-chalice;
+    background-color: $big-stone;
+    border: 2px solid $silver-chalice;
+
+    .input {
+      color: $wild-sand;
+    }
+
+    .link-icon {
+      fill: $wild-sand;
+    }
+
+    .slider-selection {
+      background: $silver;
+    }
+
+    .slider-handle {
+      background-color: $wild-sand;
+    }
   }
+
 }
 
 .name {

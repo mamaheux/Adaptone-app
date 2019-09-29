@@ -10,12 +10,28 @@
 }
 
 .heat-map {
-  border: 3px solid $big-stone;
+  border-width: 0 2px 5px;
+  border-style: solid;
+  border-color: $big-stone;
+  margin-bottom: 3px;
 }
 
 .channels {
   display: flex;
+  align-items: flex-start;
+  padding-left: 70px;
+}
+
+.inputs {
+  display: flex;
   flex-wrap: wrap;
+  flex: 0 0 50%;
+}
+
+.outputs {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 0 1 50%;
 }
 
 .top-container {
