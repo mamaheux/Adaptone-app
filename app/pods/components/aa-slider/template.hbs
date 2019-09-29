@@ -1,17 +1,13 @@
-{{ui-slider
-  value=value
-  min=min
-  max=max
-  step=this.step
-  orientation='vertical'
-  tooltip='hide'
-  disabled=false
-  reversed=true
-  focus=false
-  naturalArrowKeys=false
-  immediateResponse=true
-  changed=this.onSliderChanged
-}}
+<div class="wrap">
+  <input
+    type="range"
+    min="{{min}}"
+    max="{{max}}"
+    step="{{step}}"
+    value="{{value}}"
+    style={{rangeStyle}}
+  />
+</div>
 
 {{#if showValue}}
   <div class="value-container">

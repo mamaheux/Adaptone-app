@@ -1,5 +1,11 @@
 @import "app/styles/variables.scss";
 
+$track-width: 15.5em;
+$track-height: .25em;
+$thumb-dimensions: 1.5em;
+$track-color: $tangerine;
+$fill-color: $blue-ribbon;
+
 & {
   display: flex;
   align-items: center;
@@ -30,32 +36,55 @@
   height: 1px;
 }
 
-.slider {
-  margin: 2px 10px;
+.wrap {
+	float: left;
+	position: relative;
+	margin: 2px 10px;
+  width: $thumb-dimensions;
+  height: 100%;
 }
 
-.slider.slider-vertical .slider-track {
-  width: 5px;
-}
+[type='range'] {
+	&, &::-webkit-slider-thumb {
+		-webkit-appearance: none;
+  }
 
-.slider.slider-vertical .slider-tick, .slider.slider-vertical .slider-handle {
-  margin-left: -10px;
-}
+  &:focus {
+    outline: none;
+  }
 
-.slider-vertical {
-  width: 10px;
-}
+  --range: calc(var(--max) - var(--min));
+	--ratio: calc((var(--val) - var(--min)) / var(--range));
+	--sx: calc(0.5 * #{$thumb-dimensions} + var(--ratio) * (100% - #{$thumb-dimensions}));
+	position: absolute;
+  top: 50%;
+  left: 50%;
+	margin: 0;
+	padding: 0;
+  width: $track-width;
+  height: $thumb-dimensions;
+	transform: translate(-50%, -50%)
+		rotate(-90deg);
+	background: transparent;
 
-.slider-selection {
-  background: $blue-ribbon;
-}
+	&::-webkit-slider-runnable-track {
+		box-sizing: border-box;
+    border: none;
+    width: $track-width;
+    height: $track-height;
+    border-radius: 10px;
+    background: linear-gradient($fill-color, $fill-color)
+      0 / var(--sx) 100% no-repeat $track-color
+	}
 
-.slider-track-high {
-  background: $tangerine;
-}
-
-.slider-handle {
-  border-radius: 50% 50% 0;
-  transform: rotate(315deg);
-  background: $big-stone;
+	&::-webkit-slider-thumb {
+		margin-top: 0.5 * ($track-height - $thumb-dimensions);
+		box-sizing: border-box;
+    border: none;
+    width: $thumb-dimensions;
+    height: $thumb-dimensions;
+    border-radius: 50% 50% 0;
+    transform: rotate(45deg);
+    background: $big-stone;
+	}
 }
