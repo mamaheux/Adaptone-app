@@ -21,8 +21,7 @@ export default Component.extend({
   parametricEqGraphValues: null,
   graphicEqGraphValues: null,
 
-  inputAfterGain: null,
-  inputAfterEq: null,
+  peakMeterValue: null,
 
   userChannelVolume: 0,
   userChannelGain: 0,
@@ -53,10 +52,43 @@ export default Component.extend({
   }),
 
   didInsertElement() {
-    this.get('packetDispatcher').on('peakmeter-levels', (data) => {
-      this.set('inputAfterGain', data.inputAfterGain[this.get('channel').data.channelId]);
-      this.set('inputAfterEq', data.inputAfterEq[this.get('channel').data.channelId] * this.get('channel').data.gain / 100);
-    });
+    const currentChannelId = this.get('channel').data.channelId;
+
+    // Since we only have peak meters for the inputs in channel details,
+    // we only set the inputAfterEq for those
+    if (!this.get('isOutput')) {
+      this.get('packetDispatcher').on('peakmeter-levels', (data) => {
+        if (!data) return;
+
+        this.set('peakMeterValue', data.inputAfterGain.find(input => input.channelId === currentChannelId).level);
+      });
+
+      // TODO : Remove this test data later
+      const peakMeterTestValues = {
+        data: {
+          inputAfterGain: [
+            {
+              channelId: 1,
+              level: 0.1
+            },
+            {
+              channelId: 2,
+              level: 0.3
+            },
+            {
+              channelId: 3,
+              level: 0.2
+            },
+            {
+              channelId: 4,
+              level: 0.8
+            }
+          ]
+        }
+      };
+
+      this.set('peakMeterValue', peakMeterTestValues.data.inputAfterGain.find(input => input.channelId === currentChannelId).level);
+    }
 
     this._super(...arguments);
     this.set('hasNewChanges', false);
