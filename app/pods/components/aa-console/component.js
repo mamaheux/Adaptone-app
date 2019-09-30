@@ -181,7 +181,7 @@ export default Component.extend({
       debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
     },
 
-    onGainChange(_) {
+    onGainChange() {
       this._updateSessionConfiguration();
     },
 

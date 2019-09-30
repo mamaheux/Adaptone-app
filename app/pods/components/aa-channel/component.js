@@ -57,6 +57,10 @@ export default Component.extend({
       this.set('channel.data.gain', gainValue);
     }
 
+    if (this.get('onGainChange')) {
+      this.get('onGainChange')();
+    }
+
     if (channel.data.isMuted) return;
     if (!channel.data.isSolo && masterInputs && masterInputs.some(mi => mi.data.channelId !== channelId && mi.data.isSolo === true)) return;
 

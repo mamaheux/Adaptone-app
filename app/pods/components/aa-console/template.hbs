@@ -31,7 +31,7 @@
     channel=this.channels.master
     onChannelMuteChange=(action "onChannelMuteChange" this.channels.master.data)
     onChannelSoloChange=(action "onChannelSoloChange" this.channels.master.data)
-    onGainChange=(action "onGainChange" channel.data)
+    onGainChange=(action "onGainChange")
     isOutput=true
   }}
 
@@ -40,7 +40,7 @@
       channel=channel
       onChannelMuteChange=(action "onChannelMuteChange" channel.data)
       onChannelSoloChange=(action "onChannelSoloChange" channel.data)
-      onGainChange=(action "onGainChange" channel.data)
+      onGainChange=(action "onGainChange")
       isOutput=true
     }}
   {{/each-in}}
