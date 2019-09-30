@@ -1,33 +1,35 @@
-{{#if this.isAuxiliaryOutput}}
-  <div class="tabs-container">
-    <div
-      class="tab {{if this.isEqVisible 'active'}}"
-      onClick={{action 'onEqTabClick'}}
-    >
-      {{t 'channel-details.tabs.eq'}}
+<div class="graph-container">
+  <div class="header">
+    <div class="channel-name">
+      {{this.channel.data.channelName}}
     </div>
 
-    <div
-      class="tab {{if this.isInputVolumeVisible 'active'}}"
-      onClick={{action 'onInputVolumeTabClick'}}
-    >
-      {{t 'channel-details.tabs.input-volumes'}}
-    </div>
-  </div>
-{{/if}}
+    {{#if this.isAuxiliaryOutput}}
+      <div class="tabs-container">
+        <div
+          class="tab {{if this.isEqVisible 'active'}}"
+          onClick={{action 'onEqTabClick'}}
+        >
+          {{t 'channel-details.tabs.eq'}}
+        </div>
 
-{{#if this.isEqVisible}}
-  <div class="graph-container">
-    <div class="header">
-      <div class="channel-name">
-        {{this.channel.data.channelName}}
+        <div
+          class="tab {{if this.isInputVolumeVisible 'active'}}"
+          onClick={{action 'onInputVolumeTabClick'}}
+        >
+          {{t 'channel-details.tabs.input-volumes'}}
+        </div>
       </div>
+    {{/if}}
 
-      {{aa-toggle
-        leftValue=(t 'channel-details.graphic')
-        rightValue=(t 'channel-details.parametric')
-        isActive=this.isParametric
-      }}
+    <div class="header-end">
+      {{#if this.isEqVisible}}
+        {{aa-toggle
+          leftValue=(t 'channel-details.graphic')
+          rightValue=(t 'channel-details.parametric')
+          isActive=this.isParametric
+        }}
+      {{/if}}
 
       <button
         class="save-button  {{if this.hasNewChanges 'dirty'}}"
@@ -36,7 +38,10 @@
         {{t 'console.save'}}
       </button>
     </div>
+  </div>
 
+
+  {{#if this.isEqVisible}}
     <div class="graph">
       {{aa-eq-graph
         isParametric=this.isParametric
@@ -46,9 +51,10 @@
         isOutput=this.isOutput
       }}
     </div>
-  </div>
+  {{/if}}
+</div>
 
-
+{{#if this.isEqVisible}}
   <div class="eq-container">
     {{#unless this.isAuxiliaryOutput}}
       {{#unless this.isMasterOutput}}

@@ -16,6 +16,8 @@ const GAIN_ZERO_WIDTH = 1;
 const GAIN_ZERO_ZINDEX = 3;
 const MIN_FREQUENCY_VALUE = 20;
 const MAX_FREQUENCY_VALUE = 20000;
+const SOFT_MIN_GAIN_VALUE = -15;
+const SOFT_MAX_GAIN_VALUE = -15;
 
 export default Component.extend({
   intl: service(),
@@ -216,7 +218,6 @@ export default Component.extend({
   setChartOptions() {
     const chartOptions = {
       chart: {
-        animation: false,
         type: 'spline',
         height: GRAPH_HEIGHT
       },
@@ -241,7 +242,9 @@ export default Component.extend({
           color: 'rgba(245, 245, 245, 0.3)',
           width: GAIN_ZERO_WIDTH,
           zIndex: GAIN_ZERO_ZINDEX
-        }]
+        }],
+        softMin: SOFT_MIN_GAIN_VALUE,
+        softMax: SOFT_MAX_GAIN_VALUE
       },
       tooltip: {
         headerFormat: '<b>{series.name}</b><br />',

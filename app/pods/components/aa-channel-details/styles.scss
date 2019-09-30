@@ -11,19 +11,22 @@
 
 .header {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
+  background-color: #000;
   z-index: $z-index-map-overlay;
+  background-image: linear-gradient(90deg, #000, #001022, #001c3d)
 }
 
 .channel-name {
   background-color: $big-stone;
   color: #fff;
   font-family: $text-font-semibold;
-  font-size: 18px;
-  border-radius: 0 4px 4px 0;
+  font-size: 20px;
+  border-radius: 4px 4px 0 0;
   padding: 2px 12px;
-  margin-right: 15px;
+  margin: 0 15px 0 10px;
+  z-index: $z-index-map-overlay;
 }
 
 .graph {
@@ -45,7 +48,7 @@
     content: '';
     position: absolute;
     top: 20px;
-    right: 0;
+    right: -70px;
     width: 1px;
     height: 85%;
     background-color: $big-stone
@@ -62,18 +65,23 @@
   transform: rotate(180deg);
 }
 
+.header-end {
+  display: flex;
+  align-items: flex-end;
+  margin-left: auto;
+}
+
 .save-button {
   width: 120px;
   color: $big-stone;
   background-color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 5px 5px 0 0;
   font-family: $text-font-semibold;
-  margin-left: auto;
   font-size: 12px;
   text-align: center;
   padding: 6px 20px;
-  margin-right: 5px;
+  margin: 0 5px 0 20px;
 }
 
 .dirty {
@@ -83,15 +91,19 @@
 
 .tabs-container {
   display: flex;
-  padding: 5px 20px;
+  padding-top: 5px;
 }
 
 .tab {
-  color: $big-stone;
+  margin-right: 2px;
+  color: #fff;
+  border-width: 2px 2px 0 2px;
+  border-style: solid;
+  border-color: $big-stone;
   border-radius: 5px 5px 0 0;
   font-family: $text-font-semibold;
-  font-size: 18px;
-  padding: 6px 20px;
+  font-size: 16px;
+  padding: 4px 20px;
   transition: 0.3s ease;
   transition-property: background-color, color;
 

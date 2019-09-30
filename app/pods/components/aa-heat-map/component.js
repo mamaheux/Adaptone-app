@@ -4,9 +4,9 @@ import h337 from 'heatmap.js';
 const MIC_ICON_X_OFFSET = 15;
 const MIC_ICON_Y_OFFSET = 20;
 
-const GREEN_GRADIENT_COLOR = '#00ee7f';
-const YELLOW_GRADIENT_COLOR = '#eed200';
-const RED_GRADIENT_COLOR = '#ee0038';
+const GREEN_GRADIENT_COLOR = '#09131a';
+const YELLOW_GRADIENT_COLOR = '#00254f';
+const RED_GRADIENT_COLOR = '#006eee';
 
 export default PositionsMap.extend({
   radius: null,
