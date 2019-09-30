@@ -53,6 +53,7 @@ export default Component.extend({
       seqId,
       data: {
         channelId,
+        auxiliaryChannelId: channel.data.auxiliaryChannelId || null,
         gain: formattedGain
       }
     };
