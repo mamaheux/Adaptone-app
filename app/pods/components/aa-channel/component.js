@@ -128,14 +128,12 @@ export default Component.extend({
             {
               channelId: 0,
               level: 0.6
-            },
-            {
-              channelId: 8,
-              level: 0.7
             }
           ]
         }
       };
+
+      if (currentChannelId !== 0) return;
 
       this.set('peakMeterValue',
         peakMeterTestValues.data.outputAfterGain.find(input => input.channelId === currentChannelId).level);

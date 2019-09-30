@@ -326,7 +326,7 @@ const auxInputs = [
       channelId: 1,
       auxiliaryChannelId: 1,
       isAuxiliaryInput: true,
-      channelName: 'Aux 1 input 3',
+      channelName: 'Input 1',
       gain: 3.00,
       isMuted: false,
       isSolo: false
@@ -337,7 +337,7 @@ const auxInputs = [
       channelId: 2,
       auxiliaryChannelId: 1,
       isAuxiliaryInput: true,
-      channelName: 'Aux 1 input 4',
+      channelName: 'Input 2',
       gain: 3.00,
       isMuted: false,
       isSolo: false
@@ -348,7 +348,7 @@ const auxInputs = [
       channelId: 3,
       auxiliaryChannelId: 1,
       isAuxiliaryInput: true,
-      channelName: 'Aux 1 input 3',
+      channelName: 'Input 3',
       gain: 3.00,
       isMuted: false,
       isSolo: false
@@ -359,7 +359,7 @@ const auxInputs = [
       channelId: 4,
       auxiliaryChannelId: 1,
       isAuxiliaryInput: true,
-      channelName: 'Aux 1 input 4',
+      channelName: 'Input 4',
       gain: 3.00,
       isMuted: false,
       isSolo: false
