@@ -7,6 +7,15 @@ const {ipcRenderer} = requireNode('electron');
 export default Service.extend({
   fileSystem: service('file-system'),
 
+  init() {
+    this._super(...arguments);
+
+    ipcRenderer.on('save-application-session', () => {
+      const config = this.get('configuration');
+      this.get('fileSystem').editConfiguration(config);
+    });
+  },
+
   configuration: computed({
     get() {
       const configuration = localStorage.getItem(config.APP.LOCAL_STORAGE.SESSION_NAMESPACE);
@@ -17,11 +26,6 @@ export default Service.extend({
 
     set(_, configuration) {
       localStorage.setItem(config.APP.LOCAL_STORAGE.SESSION_NAMESPACE, JSON.stringify(configuration));
-
-      ipcRenderer.on('save-application-session', () => {
-        const config = this.get('configuration');
-        this.get('fileSystem').editConfiguration(config);
-      });
 
       return configuration;
     }
