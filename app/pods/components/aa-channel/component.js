@@ -73,10 +73,6 @@ export default Component.extend({
     debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
   }),
 
-  stringifiedChannel: computed('channel', function() {
-    return JSON.stringify(this.channel);
-  }),
-
   didInsertElement() {
     const currentChannelId = this.get('channel').data.channelId;
     const currentChannelGain = this.get('gainValue') / 100;
@@ -155,5 +151,11 @@ export default Component.extend({
     if (this.get('isAuxiliaryInput')) return SequenceIds.CHANGE_AUX_VOLUME_INPUT;
 
     return SequenceIds.CHANGE_MAIN_VOLUME_INPUT;
+  },
+
+  actions: {
+    onShowChannelDetailsClick() {
+      this.get('showChannelDetails')(this.get('channel'));
+    }
   }
 });

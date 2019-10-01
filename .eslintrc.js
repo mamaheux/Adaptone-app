@@ -27,7 +27,7 @@ module.exports = {
     'comma-dangle': [2, 'never'],
     'comma-spacing': [2, {before: false, after: true}],
     'comma-style': [2, 'last'],
-    complexity: [2, 10],
+    complexity: [2, 15],
     'consistent-this': [0, 'self'],
     curly: [2, 'multi-line'],
     'dot-notation': 2,

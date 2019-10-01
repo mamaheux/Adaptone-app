@@ -6,6 +6,8 @@ import SequenceIds from 'adaptone-front/constants/sequence-ids';
 
 const DEBOUNCE_TIME = 20;
 const CHANNEL_GAIN_MAX_VALUE = 100;
+const DECIBEL_CONVERT = 10;
+const DECIBEL_FACTOR = 20;
 
 export default Component.extend({
   connection: service('connection'),
@@ -15,6 +17,14 @@ export default Component.extend({
   channels: null,
   positions: null,
   hasNewChanges: false,
+  isChannelDetailsVisible: false,
+  currentChannel: null,
+
+  allChannels: computed('channels', function() {
+    const channels = this.get('channels');
+
+    return [channels.master, ...channels.master.data.inputs, ...channels.auxiliaries];
+  }),
 
   init() {
     this._super(...arguments);
@@ -89,12 +99,6 @@ export default Component.extend({
     this.get('packetDispatcher').off('error-rates');
   },
 
-  allChannels: computed('channels', function() {
-    const channels = this.get('channels');
-
-    return [channels.master, ...channels.master.data.inputs, ...channels.auxiliaries];
-  }),
-
   _updateSessionConfiguration() {
     const configuration = this.get('session').get('configuration');
     const channelsData = this.get('channels');
@@ -111,6 +115,11 @@ export default Component.extend({
   },
 
   _getGainSequenceId(channel, isSoloChange) {
+    if (channel.isAuxiliaryInput === undefined
+      && channel.isMasterInput === undefined
+      && channel.isMasterOutput === undefined
+      && channel.isAuxiliaryOutput === undefined) return SequenceIds.CHANGE_INPUT_GAIN;
+
     const currentChannel = this.get('allChannels').find(c => c.data.channelId === channel.channelId).data;
 
     if (currentChannel.isAuxiliaryInput === true && isSoloChange) return SequenceIds.CHANGE_AUX_VOLUME_INPUTS;
@@ -127,7 +136,9 @@ export default Component.extend({
       this._updateSessionConfiguration();
 
       const seqId = this._getGainSequenceId(channel, false);
-      let gain = channel.isMuted ? 0 : channel.gain / CHANNEL_GAIN_MAX_VALUE;
+
+      let gain = channel.isMuted ? 0 : Math.pow(DECIBEL_CONVERT, channel.gain / DECIBEL_FACTOR);
+      if (seqId !== SequenceIds.CHANGE_INPUT_GAIN) gain = channel.isMuted ? 0 : channel.gain / CHANNEL_GAIN_MAX_VALUE;
 
       if (this.get('allChannels').some(c => c.data.isSolo
         && c.data.channelId !== channel.channelId
@@ -147,14 +158,14 @@ export default Component.extend({
       debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
     },
 
-    onChannelSoloChange(channel) {
+    onChannelSoloChange() {
       this._updateSessionConfiguration();
 
-      const seqId = this._getGainSequenceId(channel, true);
-      const channels = this.get('allChannels');
+      const seqId = SequenceIds.CHANGE_INPUTS_GAIN;
+      const channels = this.get('channels').inputs;
 
       const gains = channels.map(currentChannel => {
-        let gain = currentChannel.data.gain / CHANNEL_GAIN_MAX_VALUE;
+        let gain = Math.pow(DECIBEL_CONVERT, currentChannel.data.gain / DECIBEL_FACTOR);
 
         if (channels.some(c => c.data.isSolo
           && c.data.channelId !== currentChannel.data.channelId
@@ -162,7 +173,7 @@ export default Component.extend({
           && c.data.isMasterInput === currentChannel.data.isMasterInput
           && c.data.isMasterOutput === currentChannel.data.isMasterOutput
           && c.data.isAuxiliaryOutput === currentChannel.data.isAuxiliaryOutput)) gain = 0;
-        if (currentChannel.data.isSolo) gain = currentChannel.data.gain / CHANNEL_GAIN_MAX_VALUE;
+        if (currentChannel.data.isSolo) gain = Math.pow(DECIBEL_CONVERT, currentChannel.data.gain / DECIBEL_FACTOR);
         if (currentChannel.data.isMuted) gain = 0;
 
         return {
@@ -188,6 +199,16 @@ export default Component.extend({
     saveConfiguration() {
       this.get('session').dumpSessionInFile();
       this.set('hasNewChanges', false);
+    },
+
+    showChannelDetails(channel) {
+      this.set('currentChannel', channel);
+      this.set('isChannelDetailsVisible', true);
+    },
+
+    hideChannelDetails() {
+      this.set('currentChannel', null);
+      this.set('isChannelDetailsVisible', false);
     }
   }
 });

@@ -5,11 +5,9 @@
       type="text"
       value=(mut this.channel.data.channelName)
     }}
-    <div class="details">
-      {{#link-to "channel-details" (query-params channel=this.stringifiedChannel)}}
-        {{inline-svg "assets/images/arrow-icon.svg" class="link-icon"}}
-      {{/link-to}}
-    </div>
+    <a class="details" onClick={{action 'onShowChannelDetailsClick'}}>
+      {{inline-svg "assets/images/arrow-icon.svg" class="link-icon"}}
+    </a>
   </div>
 
   <div class="meter-container">
