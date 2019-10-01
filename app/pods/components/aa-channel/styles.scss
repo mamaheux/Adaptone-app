@@ -20,12 +20,8 @@
       fill: $wild-sand;
     }
 
-    .slider-selection {
-      background: $silver;
-    }
-
-    .slider-handle {
-      background-color: $wild-sand;
+    [type='range']::-webkit-slider-thumb {
+      background: $wild-sand;
     }
 
     &::before {
