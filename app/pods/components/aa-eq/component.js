@@ -18,6 +18,8 @@ const DESIGNER_DEBOUNCE_TIME = 5;
 const SEND_MESSAGE_DEBOUNCE_TIME = 20;
 
 export default Component.extend({
+  fileSystem: service('file-system'),
+  session: service('session'),
   connection: service('connection'),
   filterDesigner: service('filter-designer'),
   interpolator: service('interpolator'),
@@ -199,6 +201,25 @@ export default Component.extend({
     };
 
     debounce(this.get('connection'), this.get('connection').sendMessage, message, SEND_MESSAGE_DEBOUNCE_TIME);
+
+    // Use the gains to update the configuration correctly
+    this._updateEqGainsConfig(gains);
+  },
+
+  _updateEqGainsConfig(gains) {
+    const channelId = this.get('channelId');
+    const configuration = this.get('session').get('configuration');
+
+    if (this.get('isAuxiliaryOutput')) {
+      configuration.channels.auxiliaries.find(aux => aux.data.channelId == channelId).data.eqGains = gains;
+    } else if (this.get('isMasterOutput')) {
+      configuration.channels.master.data.eqGains = gains;
+    } else {
+      configuration.channels.inputs.find(input => input.data.channelId == channelId).data.eqGains = gains;
+    }
+
+    this.get('fileSystem').editConfiguration(configuration);
+    this.get('session').set('configuration', configuration);
   },
 
   _getEqGainsSequenceId() {

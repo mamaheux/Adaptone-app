@@ -1,5 +1,5 @@
 const SequenceIds = {
-  CONFIG_CHOICE: 0,
+  CONFIG_INIT: 0, // Not used anymore, see 24
   INITIAL_PARAMS: 1,
   RUN_INIT: 2,
   CONFIRM_POS: 3,
@@ -22,7 +22,8 @@ const SequenceIds = {
   CHANGE_AUX_VOLUME_OUTPUT: 20,
   ERROR_RATE: 21,
   INPUT_SPECTRUM: 22,
-  PEAKMETER_LEVELS: 23
+  PEAKMETER_LEVELS: 23,
+  CONFIG_CHOICE: 24
 };
 
 export default SequenceIds;

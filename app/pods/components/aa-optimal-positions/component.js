@@ -38,6 +38,11 @@ export default Component.extend({
         seqId: SequenceIds.END
       });
 
+      this.get('connection').sendMessage({
+        seqId: SequenceIds.CONFIG_CHOICE,
+        data: configuration
+      });
+
       this.get('router').transitionTo('console');
     }
   }

@@ -32,6 +32,11 @@ export default Component.extend({
       configuration.step = steps['console-loading:'];
       configuration.positions = this.get('positions');
 
+      this.get('connection').sendMessage({
+        seqId: SequenceIds.CONFIG_CHOICE,
+        data: configuration
+      });
+
       this.get('fileSystem').editConfiguration(configuration);
       this.get('session').set('configuration', configuration);
       this.router.transitionTo('console');
