@@ -58,6 +58,11 @@ export default Service.extend({
   },
 
   sendMessage(message) {
-    this.get('socketRef').send(JSON.stringify(message));
+    try {
+      this.get('socketRef').send(JSON.stringify(message));
+    } catch (_) {
+      // Catch everything to prevent useless error spamming/random crashing
+      // when the connection has not properly been established
+    }
   }
 });

@@ -10,6 +10,9 @@ const WRITE_IN_SESSION_DEBOUNCE_TIME = 50;
 
 export default Component.extend({
   connection: service('connection'),
+  packetDispatcher: service('packet-dispatcher'),
+
+  peakMeterValue: null,
 
   isAuxiliaryInput: computed('channel.data.isAuxiliaryInput', function() {
     return this.get('channel').data.isAuxiliaryInput === true;
@@ -21,6 +24,10 @@ export default Component.extend({
 
   isMasterOutput: computed('channel.data.isMasterOutput', function() {
     return this.get('channel').data.isMasterOutput === true;
+  }),
+
+  isOutput: computed('channel.data.{isMasterOutput,isAuxiliaryOutput}', function() {
+    return this.get('channel').data.isMasterOutput === true || this.get('channel').data.isAuxiliaryOutput === true;
   }),
 
   gainValue: computed('masterInputs', function() {
@@ -47,6 +54,7 @@ export default Component.extend({
       seqId,
       data: {
         channelId,
+        auxiliaryChannelId: channel.data.auxiliaryChannelId || null,
         gain: formattedGain
       }
     };
@@ -68,6 +76,78 @@ export default Component.extend({
   stringifiedChannel: computed('channel', function() {
     return JSON.stringify(this.channel);
   }),
+
+  didInsertElement() {
+    const currentChannelId = this.get('channel').data.channelId;
+    const currentChannelGain = this.get('gainValue') / 100;
+
+    if (!this.get('isOutput')) {
+      // For the input peak meter, we have to multiply the channel's gain with the inputAfterEq level
+      this.get('packetDispatcher').on('peakmeter-levels', (data) => {
+        if (!data) return;
+
+        this.set('peakMeterValue',
+          data.inputAfterEq.find(input => input.channelId === currentChannelId).level * currentChannelGain);
+      });
+
+      // TODO : Remove everything below this later
+      const peakMeterTestValues = {
+        data: {
+          inputAfterEq: [
+            {
+              channelId: 1,
+              level: 0.6
+            },
+            {
+              channelId: 2,
+              level: 1
+            },
+            {
+              channelId: 3,
+              level: 0.8
+            },
+            {
+              channelId: 4,
+              level: 0.4
+            }
+          ]
+        }
+      };
+
+      this.set('peakMeterValue',
+        peakMeterTestValues.data.inputAfterEq.find(input => input.channelId === currentChannelId).level * currentChannelGain);
+    } else {
+      this.get('packetDispatcher').on('peakmeter-levels', (data) => {
+        if (!data) return;
+
+        this.set('peakMeterValue',
+          data.outputAfterGain.find(input => input.channelId === currentChannelId).level);
+      });
+
+      // TODO : Remove everything below this later
+      const peakMeterTestValues = {
+        data: {
+          outputAfterGain: [
+            {
+              channelId: 0,
+              level: 0.6
+            }
+          ]
+        }
+      };
+
+      if (currentChannelId !== 0) return;
+
+      this.set('peakMeterValue',
+        peakMeterTestValues.data.outputAfterGain.find(input => input.channelId === currentChannelId).level);
+    }
+
+    this._super(...arguments);
+  },
+
+  willDestroyElement() {
+    this.get('packetDispatcher').off('peakmeter-levels');
+  },
 
   _getGainSequenceId() {
     if (this.get('isAuxiliaryOutput')) return SequenceIds.CHANGE_AUX_VOLUME_OUTPUT;

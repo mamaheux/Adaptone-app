@@ -4,6 +4,7 @@ import Configuration from 'adaptone-front/models/configuration';
 import steps from 'adaptone-front/models/steps';
 import SequenceIds from 'adaptone-front/constants/sequence-ids';
 import Channels from 'adaptone-front/constants/channels';
+import {copy} from '@ember/object/internals';
 
 const INPUT_COUNT = 4;
 
@@ -38,10 +39,11 @@ export default Component.extend({
       this.currentChannelId += auxiliaryChannelIds.length;
 
       const auxiliaries = auxiliaryChannelIds.map((auxId, index) => {
-        const auxiliary = Channels.auxiliaryTemplate;
+        const auxiliary = copy(Channels.auxiliaryTemplate, true);
+
         auxiliary.data.channelId = auxId;
         auxiliary.data.auxiliaryChannelId = index;
-        auxiliary.data.channelName = `Aux ${auxId}`;
+        auxiliary.data.channelName = `Aux ${index + 1}`;
         auxiliary.data.inputs.forEach(i => i.data.auxiliaryChannelId = auxId);
 
         return auxiliary;
