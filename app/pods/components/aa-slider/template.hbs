@@ -1,7 +1,7 @@
 <div class="wrap">
   <input
     type="range"
-    mouseUp={{this.onSliderChanged}}
+    oninput={{action "updateValue" value="target.value"}}
     min="{{min}}"
     max="{{max}}"
     step="{{step}}"

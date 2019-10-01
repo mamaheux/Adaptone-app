@@ -8,7 +8,9 @@ export default Component.extend({
     return htmlSafe(`--min: ${min}; --max: ${max}; --val: ${value}`);
   }),
 
-  input(e) {
-    this.set('value', e.target.value);
+  actions: {
+    updateValue(value) {
+      this.set('value', value);
+    }
   }
 });
