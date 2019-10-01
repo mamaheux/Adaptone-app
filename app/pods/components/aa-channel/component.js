@@ -6,6 +6,7 @@ import {debounce} from '@ember/runloop';
 import SequenceIds from 'adaptone-front/constants/sequence-ids';
 
 const DEBOUNCE_TIME = 20;
+const WRITE_IN_SESSION_DEBOUNCE_TIME = 50;
 
 export default Component.extend({
   connection: service('connection'),
@@ -68,6 +69,7 @@ export default Component.extend({
     if (channel.data.isMuted) return;
     if (!channel.data.isSolo && masterInputs && masterInputs.some(mi => mi.data.channelId !== channelId && mi.data.isSolo === true)) return;
 
+    debounce(this, this.onGainChange, WRITE_IN_SESSION_DEBOUNCE_TIME);
     debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
   }),
 
