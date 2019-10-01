@@ -1,51 +1,63 @@
-<div class="top-container">
-  {{aa-heat-map
-    max=0.15
-    min=0
-    radius=250
-    positions=this.positions.data.positions
-    class="heat-map"
+{{#if this.isChannelDetailsVisible}}
+  {{aa-channel-details
+    channel=this.currentChannel
+    hideChannelDetails=(action "hideChannelDetails")
+    onChannelMuteChange=(action "onChannelMuteChange")
+    onChannelSoloChange=(action "onChannelSoloChange")
   }}
-
-  <button
-    class="save-button {{if this.hasNewChanges 'dirty'}}"
-    onClick={{action "saveConfiguration"}}
-  >
-    {{t 'console.save'}}
-  </button>
-</div>
-
-<div class="channels">
-  <div class="inputs">
-    {{#each-in this.channels.inputs as |index channel|}}
-      {{aa-channel
-        channel=channel
-        onChannelMuteChange=(action "onChannelMuteChange" channel.data)
-        onChannelSoloChange=(action "onChannelSoloChange" channel.data)
-        onGainChange=(action "onGainChange")
-        masterInputs=this.channels.master.data.inputs
-        isOutput=false
-      }}
-    {{/each-in}}
-  </div>
-
-  <div class="outputs">
-    {{aa-channel
-      channel=this.channels.master
-      onChannelMuteChange=(action "onChannelMuteChange" this.channels.master.data)
-      onChannelSoloChange=(action "onChannelSoloChange" this.channels.master.data)
-      onGainChange=(action "onGainChange" channel.data)
-      isOutput=true
+{{else}}
+  <div class="top-container">
+    {{aa-heat-map
+      max=0.15
+      min=0
+      radius=250
+      positions=this.positions.data.positions
+      class="heat-map"
     }}
 
-    {{#each-in this.channels.auxiliaries as |index channel|}}
+    <button
+      class="save-button {{if this.hasNewChanges 'dirty'}}"
+      onClick={{action "saveConfiguration"}}
+    >
+      {{t 'console.save'}}
+    </button>
+  </div>
+
+  <div class="channels">
+    <div class="inputs">
+      {{#each-in this.channels.inputs as |index channel|}}
+        {{aa-channel
+          channel=channel
+          onChannelMuteChange=(action "onChannelMuteChange" channel.data)
+          onChannelSoloChange=(action "onChannelSoloChange" channel.data)
+          onGainChange=(action "onGainChange")
+          masterInputs=this.channels.master.data.inputs
+          isOutput=false
+          showChannelDetails=(action "showChannelDetails")
+        }}
+      {{/each-in}}
+    </div>
+
+    <div class="outputs">
       {{aa-channel
-        channel=channel
-        onChannelMuteChange=(action "onChannelMuteChange" channel.data)
-        onChannelSoloChange=(action "onChannelSoloChange" channel.data)
+        channel=this.channels.master
+        onChannelMuteChange=(action "onChannelMuteChange" this.channels.master.data)
+        onChannelSoloChange=(action "onChannelSoloChange" this.channels.master.data)
         onGainChange=(action "onGainChange" channel.data)
         isOutput=true
+        showChannelDetails=(action "showChannelDetails")
       }}
-    {{/each-in}}
+
+      {{#each-in this.channels.auxiliaries as |index channel|}}
+        {{aa-channel
+          channel=channel
+          onChannelMuteChange=(action "onChannelMuteChange" channel.data)
+          onChannelSoloChange=(action "onChannelSoloChange" channel.data)
+          onGainChange=(action "onGainChange" channel.data)
+          isOutput=true
+          showChannelDetails=(action "showChannelDetails")
+        }}
+      {{/each-in}}
+    </div>
   </div>
-</div>
+{{/if}}

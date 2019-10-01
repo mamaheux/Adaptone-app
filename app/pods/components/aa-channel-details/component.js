@@ -147,14 +147,14 @@ export default Component.extend({
       return value;
     },
 
-    onIsMutedChange(value) {
+    onIsMutedChange() {
+      this.get('onChannelMuteChange')(this.get('channel').data);
       this._updateSessionConfiguration();
-      return value;
     },
 
-    onIsSoloChange(value) {
+    onIsSoloChange() {
+      this.get('onChannelSoloChange')(this.get('channel').data);
       this._updateSessionConfiguration();
-      return value;
     },
 
     saveConfiguration() {

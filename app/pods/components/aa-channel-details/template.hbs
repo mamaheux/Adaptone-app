@@ -62,7 +62,7 @@
           class="gain-container"
           gain=this.channel.data.gain
           peakMeterValue=this.peakMeterValue
-          isMute=this.channel.data.isMuted
+          isMuted=this.channel.data.isMuted
           isSolo=this.channel.data.isSolo
           onGainChange=(action "onGainChange")
           onIsMutedChange=(action "onIsMutedChange")
@@ -101,6 +101,6 @@
   </div>
 {{/if}}
 
-{{#link-to 'console'}}
+<a onClick={{this.hideChannelDetails}}>
   {{inline-svg "assets/images/arrow-icon.svg" class="arrow-icon"}}
-{{/link-to}}
+</a>
