@@ -51,6 +51,22 @@ export default Component.extend({
     return this.get('channel').data.isMasterOutput === true || this.get('channel').data.isAuxiliaryOutput === true;
   }),
 
+  init() {
+    this._super(...arguments);
+
+    const ratioGain = Math.pow(DECIBEL_CONVERT, this.get('channel').data.gain / DECIBEL_FACTOR);
+
+    const message = {
+      seqId: SequenceIds.CHANGE_INPUT_GAIN,
+      data: {
+        channelId: this.get('channel').data.channelId,
+        gain: ratioGain
+      }
+    };
+
+    this.get('connection').sendMessage(message);
+  },
+
   didInsertElement() {
     const currentChannelId = this.get('channel').data.channelId;
 
@@ -62,32 +78,6 @@ export default Component.extend({
 
         this.set('peakMeterValue', data.inputAfterGain.find(input => input.channelId === currentChannelId).level);
       });
-
-      // TODO : Remove this test data later
-      const peakMeterTestValues = {
-        data: {
-          inputAfterGain: [
-            {
-              channelId: 1,
-              level: 0.1
-            },
-            {
-              channelId: 2,
-              level: 0.3
-            },
-            {
-              channelId: 3,
-              level: 0.2
-            },
-            {
-              channelId: 4,
-              level: 0.8
-            }
-          ]
-        }
-      };
-
-      this.set('peakMeterValue', peakMeterTestValues.data.inputAfterGain.find(input => input.channelId === currentChannelId).level);
     }
 
     this._super(...arguments);

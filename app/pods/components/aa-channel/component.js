@@ -33,11 +33,11 @@ export default Component.extend({
   gainValue: computed('masterInputs', function() {
     const {masterInputs, channel} = this.getProperties('masterInputs', 'channel');
 
-    let gain = channel.data.gain;
+    let gain = channel.data.gain * 100;
 
     if (masterInputs) {
       const masterInput = masterInputs.find(m => m.data.channelId === channel.data.channelId);
-      gain = masterInput.data.gain;
+      gain = masterInput.data.gain * 100;
     }
 
     return gain;
@@ -60,10 +60,10 @@ export default Component.extend({
     };
 
     if (masterInputs) {
-      masterInputs.find(mi => mi.data.channelId === channelId).data.gain = gainValue;
+      masterInputs.find(mi => mi.data.channelId === channelId).data.gain = formattedGain;
       this.set('masterInputs', masterInputs);
     } else {
-      this.set('channel.data.gain', gainValue);
+      this.set('channel.data.gain', formattedGain);
     }
 
     if (channel.data.isMuted) return;
@@ -75,43 +75,17 @@ export default Component.extend({
 
   didInsertElement() {
     const currentChannelId = this.get('channel').data.channelId;
-    const currentChannelGain = this.get('gainValue') / 100;
 
     if (!this.get('isOutput')) {
       // For the input peak meter, we have to multiply the channel's gain with the inputAfterEq level
       this.get('packetDispatcher').on('peakmeter-levels', (data) => {
         if (!data) return;
+        
+        const currentChannelGain = this.get('gainValue') / 100;
 
         this.set('peakMeterValue',
           data.inputAfterEq.find(input => input.channelId === currentChannelId).level * currentChannelGain);
       });
-
-      // TODO : Remove everything below this later
-      const peakMeterTestValues = {
-        data: {
-          inputAfterEq: [
-            {
-              channelId: 1,
-              level: 0.6
-            },
-            {
-              channelId: 2,
-              level: 1
-            },
-            {
-              channelId: 3,
-              level: 0.8
-            },
-            {
-              channelId: 4,
-              level: 0.4
-            }
-          ]
-        }
-      };
-
-      this.set('peakMeterValue',
-        peakMeterTestValues.data.inputAfterEq.find(input => input.channelId === currentChannelId).level * currentChannelGain);
     } else {
       this.get('packetDispatcher').on('peakmeter-levels', (data) => {
         if (!data) return;
@@ -119,23 +93,6 @@ export default Component.extend({
         this.set('peakMeterValue',
           data.outputAfterGain.find(input => input.channelId === currentChannelId).level);
       });
-
-      // TODO : Remove everything below this later
-      const peakMeterTestValues = {
-        data: {
-          outputAfterGain: [
-            {
-              channelId: 0,
-              level: 0.6
-            }
-          ]
-        }
-      };
-
-      if (currentChannelId !== 0) return;
-
-      this.set('peakMeterValue',
-        peakMeterTestValues.data.outputAfterGain.find(input => input.channelId === currentChannelId).level);
     }
 
     this._super(...arguments);

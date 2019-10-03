@@ -10,7 +10,7 @@ export default Component.extend({
 
   actions: {
     updateValue(value) {
-      this.set('value', value);
+      this.set('value', +value);
     }
   }
 });

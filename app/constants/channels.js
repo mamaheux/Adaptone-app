@@ -288,7 +288,7 @@ const masterInputs = [
       channelId: 1,
       auxiliaryChannelId: null,
       isMasterInput: true,
-      gain: 3.00,
+      gain: 0,
       isMuted: false,
       isSolo: false
     }
@@ -298,7 +298,7 @@ const masterInputs = [
       channelId: 2,
       auxiliaryChannelId: null,
       isMasterInput: true,
-      gain: 3.00,
+      gain: 0,
       isMuted: false,
       isSolo: false
     }
@@ -308,7 +308,7 @@ const masterInputs = [
       channelId: 3,
       auxiliaryChannelId: null,
       isMasterInput: true,
-      gain: 3.00,
+      gain: 0,
       isMuted: false,
       isSolo: false
     }
@@ -318,7 +318,7 @@ const masterInputs = [
       channelId: 4,
       auxiliaryChannelId: null,
       isMasterInput: true,
-      gain: 3.00,
+      gain: 0,
       isMuted: false,
       isSolo: false
     }
@@ -331,7 +331,7 @@ const auxInputs = [
       auxiliaryChannelId: 1,
       isAuxiliaryInput: true,
       channelName: 'Input 1',
-      gain: 3.00,
+      gain: 0,
       isMuted: false,
       isSolo: false
     }
@@ -342,7 +342,7 @@ const auxInputs = [
       auxiliaryChannelId: 1,
       isAuxiliaryInput: true,
       channelName: 'Input 2',
-      gain: 3.00,
+      gain: 0,
       isMuted: false,
       isSolo: false
     }
@@ -353,7 +353,7 @@ const auxInputs = [
       auxiliaryChannelId: 1,
       isAuxiliaryInput: true,
       channelName: 'Input 3',
-      gain: 3.00,
+      gain: 0,
       isMuted: false,
       isSolo: false
     }
@@ -364,7 +364,7 @@ const auxInputs = [
       auxiliaryChannelId: 1,
       isAuxiliaryInput: true,
       channelName: 'Input 4',
-      gain: 3.00,
+      gain: 0,
       isMuted: false,
       isSolo: false
     }
@@ -376,7 +376,7 @@ const master = {
     auxiliaryChannelId: null,
     isMasterOutput: true,
     channelName: 'Master',
-    gain: 3.00,
+    gain: 0,
     isMuted: false,
     isSolo: false,
     inputs: masterInputs,
@@ -449,7 +449,7 @@ const auxiliaryTemplate = {
     auxiliaryChannelId: 1,
     isAuxiliaryOutput: true,
     channelName: 'Aux 1',
-    gain: 3.00,
+    gain: 0,
     isMuted: false,
     isSolo: false,
     inputs: auxInputs,
