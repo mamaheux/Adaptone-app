@@ -3,9 +3,11 @@ import {observer} from '@ember/object';
 
 const DEFAULT_PEAK_FALL_DELAY = 2000;
 const DEFAULT_PEAK_FALL_DURATION = 500;
-const DECIBEL_FACTOR = 20;
 const NORMALIZED_MAXIMUM = 1;
 const NORMALIZED_MINIMUM = 0;
+const DB_FACTOR = 20;
+
+const convertToDb = (value) => DB_FACTOR * Math.log10(value);
 
 export default Component.extend({
   max: null,
@@ -56,7 +58,7 @@ export default Component.extend({
     if (this.get('convertToDecibels')) {
       if (value === 0) return;
 
-      value = DECIBEL_FACTOR * Math.log10(value);
+      value = convertToDb(value);
     }
 
     const meterValue = {

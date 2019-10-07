@@ -7,6 +7,7 @@ import SequenceIds from 'adaptone-front/constants/sequence-ids';
 
 const DEBOUNCE_TIME = 20;
 const WRITE_IN_SESSION_DEBOUNCE_TIME = 50;
+const GAIN_MAX_VALUE = 100;
 
 export default Component.extend({
   connection: service('connection'),
@@ -33,11 +34,11 @@ export default Component.extend({
   gainValue: computed('masterInputs', function() {
     const {masterInputs, channel} = this.getProperties('masterInputs', 'channel');
 
-    let gain = channel.data.gain * 100;
+    let gain = channel.data.gain * GAIN_MAX_VALUE;
 
     if (masterInputs) {
       const masterInput = masterInputs.find(m => m.data.channelId === channel.data.channelId);
-      gain = masterInput.data.gain * 100;
+      gain = masterInput.data.gain * GAIN_MAX_VALUE;
     }
 
     return gain;
@@ -48,7 +49,7 @@ export default Component.extend({
     const seqId = this._getGainSequenceId();
     const channelId = channel.data.channelId;
 
-    const formattedGain = gainValue / 100;
+    const formattedGain = gainValue / GAIN_MAX_VALUE;
 
     const message = {
       seqId,
@@ -80,8 +81,8 @@ export default Component.extend({
       // For the input peak meter, we have to multiply the channel's gain with the inputAfterEq level
       this.get('packetDispatcher').on('peakmeter-levels', (data) => {
         if (!data) return;
-        
-        const currentChannelGain = this.get('gainValue') / 100;
+
+        const currentChannelGain = this.get('gainValue') / GAIN_MAX_VALUE;
 
         this.set('peakMeterValue',
           data.inputAfterEq.find(input => input.channelId === currentChannelId).level * currentChannelGain);

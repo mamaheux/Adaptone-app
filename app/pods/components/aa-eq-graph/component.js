@@ -16,8 +16,9 @@ const GAIN_ZERO_WIDTH = 1;
 const GAIN_ZERO_ZINDEX = 3;
 const MIN_FREQUENCY_VALUE = 20;
 const MAX_FREQUENCY_VALUE = 20000;
-const SOFT_MIN_GAIN_VALUE = -150;
-const SOFT_MAX_GAIN_VALUE = 50;
+const DB_FACTOR = 20;
+
+const convertToDb = (value) => DB_FACTOR * Math.log10(value);
 
 export default Component.extend({
   intl: service(),
@@ -69,8 +70,8 @@ export default Component.extend({
     currentChannelSpectrums.points = currentChannelSpectrums.points.slice(1);
     currentChannelSpectrums.points.forEach(point => {
       if (point.amplitude === 0) return;
-      formattedData.push([point.freq, 20*Math.log10(point.amplitude)]);
-    });6
+      formattedData.push([point.freq, convertToDb(point.amplitude)]);
+    });
 
     return formattedData;
   }),
@@ -89,9 +90,9 @@ export default Component.extend({
         if (point.amplitude === 0) return;
 
         if (formattedData[point.freq]) {
-          formattedData[point.freq] += 20*Math.log10(point.amplitude);
+          formattedData[point.freq] += convertToDb(point.amplitude);
         } else {
-          formattedData[point.freq] = 20*Math.log10(point.amplitude);
+          formattedData[point.freq] = convertToDb(point.amplitude);
         }
       });
     });

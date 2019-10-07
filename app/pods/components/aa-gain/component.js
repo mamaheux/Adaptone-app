@@ -5,7 +5,6 @@ import {observer} from '@ember/object';
 
 export default Component.extend({
   gainChanged: observer('gain', function() {
-    console.log(this.gain);
     this.onGainChange(this.gain);
   }),
 
