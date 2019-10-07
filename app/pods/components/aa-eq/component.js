@@ -211,11 +211,11 @@ export default Component.extend({
     const configuration = this.get('session').get('configuration');
 
     if (this.get('isAuxiliaryOutput')) {
-      configuration.channels.auxiliaries.find(aux => aux.data.channelId == channelId).data.eqGains = gains;
+      configuration.channels.auxiliaries.find(aux => aux.data.channelId === channelId).data.eqGains = gains;
     } else if (this.get('isMasterOutput')) {
       configuration.channels.master.data.eqGains = gains;
     } else {
-      configuration.channels.inputs.find(input => input.data.channelId == channelId).data.eqGains = gains;
+      configuration.channels.inputs.find(input => input.data.channelId === channelId).data.eqGains = gains;
     }
 
     this.get('fileSystem').editConfiguration(configuration);

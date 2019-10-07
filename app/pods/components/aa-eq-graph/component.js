@@ -16,8 +16,9 @@ const GAIN_ZERO_WIDTH = 1;
 const GAIN_ZERO_ZINDEX = 3;
 const MIN_FREQUENCY_VALUE = 20;
 const MAX_FREQUENCY_VALUE = 20000;
-const SOFT_MIN_GAIN_VALUE = -15;
-const SOFT_MAX_GAIN_VALUE = -15;
+const DB_FACTOR = 20;
+
+const convertToDb = (value) => DB_FACTOR * Math.log10(value);
 
 export default Component.extend({
   intl: service(),
@@ -42,10 +43,16 @@ export default Component.extend({
   eqGains: computed('isParametric', function() {
     let formattedData = [];
 
+    let {parametricEqValues, graphicEqValues} = this.getProperties('parametricEqValues', 'graphicEqValues');
+
+    if (!parametricEqValues || !graphicEqValues) return;
+
     if (this.get('isParametric')) {
-      formattedData = this.get('parametricEqValues');
+      parametricEqValues = parametricEqValues.slice(1);
+      formattedData = parametricEqValues;
     } else {
-      formattedData = this.get('graphicEqValues');
+      graphicEqValues = graphicEqValues.slice(1);
+      formattedData = graphicEqValues;
     }
 
     return formattedData;
@@ -60,8 +67,10 @@ export default Component.extend({
 
     const currentChannelSpectrums = spectrums.filter(spectrum => spectrum.channelId === this.get('currentChannelId'))[0];
 
+    currentChannelSpectrums.points = currentChannelSpectrums.points.slice(1);
     currentChannelSpectrums.points.forEach(point => {
-      formattedData.push([point.freq, point.amplitude]);
+      if (point.amplitude === 0) return;
+      formattedData.push([point.freq, convertToDb(point.amplitude)]);
     });
 
     return formattedData;
@@ -75,11 +84,15 @@ export default Component.extend({
     let formattedData = {};
 
     spectrums.filter(spectrum => spectrum.channelId !== this.get('currentChannelId')).forEach(spectrum => {
+      spectrum.points = spectrum.points.slice(1);
+
       spectrum.points.forEach(point => {
+        if (point.amplitude === 0) return;
+
         if (formattedData[point.freq]) {
-          formattedData[point.freq] += point.amplitude;
+          formattedData[point.freq] += convertToDb(point.amplitude);
         } else {
-          formattedData[point.freq] = point.amplitude;
+          formattedData[point.freq] = convertToDb(point.amplitude);
         }
       });
     });
@@ -123,101 +136,20 @@ export default Component.extend({
     this._super(...arguments);
 
     this.get('packetDispatcher').on('input-spectrum', (data) => {
+      if (!data) return;
+
       this.set('spectrums', data.spectrums);
     });
+  },
 
-    // TODO : Remove this fake data
-    this.set('spectrums', [
-      {
-        channelId: 2,
-        points: [
-          {
-            freq: 500,
-            amplitude: 4
-          },
-          {
-            freq: 1000,
-            amplitude: 1
-          },
-          {
-            freq: 2000,
-            amplitude: -8
-          },
-          {
-            freq: 4000,
-            amplitude: -2
-          }
-        ]
-      },
-      {
-        channelId: 3,
-        points: [
-          {
-            freq: 500,
-            amplitude: 1
-          },
-          {
-            freq: 1000,
-            amplitude: 7
-          },
-          {
-            freq: 2000,
-            amplitude: -6
-          },
-          {
-            freq: 4000,
-            amplitude: 0
-          }
-        ]
-      },
-      {
-        channelId: 4,
-        points: [
-          {
-            freq: 500,
-            amplitude: -1
-          },
-          {
-            freq: 1000,
-            amplitude: -3
-          },
-          {
-            freq: 2000,
-            amplitude: -12
-          },
-          {
-            freq: 4000,
-            amplitude: -5
-          }
-        ]
-      },
-      {
-        channelId: 5,
-        points: [
-          {
-            freq: 500,
-            amplitude: 6
-          },
-          {
-            freq: 1000,
-            amplitude: 1
-          },
-          {
-            freq: 2000,
-            amplitude: -3
-          },
-          {
-            freq: 4000,
-            amplitude: 2
-          }
-        ]
-      }
-    ]);
+  willDestroyElement() {
+    this.get('packetDispatcher').off('input-spectrum');
   },
 
   setChartOptions() {
     const chartOptions = {
       chart: {
+        animation: false,
         type: 'spline',
         height: GRAPH_HEIGHT
       },
@@ -242,15 +174,18 @@ export default Component.extend({
           color: 'rgba(245, 245, 245, 0.3)',
           width: GAIN_ZERO_WIDTH,
           zIndex: GAIN_ZERO_ZINDEX
-        }],
-        softMin: SOFT_MIN_GAIN_VALUE,
-        softMax: SOFT_MAX_GAIN_VALUE
+        }]
       },
       tooltip: {
         headerFormat: '<b>{series.name}</b><br />',
         pointFormat: `<b>${this.intl.t('eq-graph.tooltip.frequency')} :</b> {point.x:,.0f} Hz <br /> <b>${this.intl.t('eq-graph.tooltip.gain')} :</b> {point.y:,.2f} dB`
       },
       plotOptions: {
+        series: {
+          animation: {
+            duration: 50
+          }
+        },
         spline: {
           marker: {
             enabled: false

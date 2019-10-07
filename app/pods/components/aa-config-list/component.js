@@ -42,7 +42,8 @@ export default Component.extend({
       });
 
       this.get('router').transitionTo('console');
-      this._routeStep(configuration.step);
+      // TODO: Re-enable this when we actually want to navigate through the steps
+      // this._routeStep(configuration.step);
     }
   },
 
