@@ -17,8 +17,13 @@ const GAIN_ZERO_ZINDEX = 3;
 const MIN_FREQUENCY_VALUE = 20;
 const MAX_FREQUENCY_VALUE = 20000;
 const DB_FACTOR = 20;
+const MAX_DB_VALUE = 20;
+const MIN_DB_VALUE = -20;
+const NORMALIZED_MAX_DB_VALUE = 15;
+const NORMALIZED_MIN_DB_VALUE = -15;
 
 const convertToDb = (value) => DB_FACTOR * Math.log10(value);
+const normalizeValue = (value) => (value - NORMALIZED_MIN_DB_VALUE) / (NORMALIZED_MAX_DB_VALUE - NORMALIZED_MIN_DB_VALUE);
 
 export default Component.extend({
   intl: service(),
@@ -68,9 +73,11 @@ export default Component.extend({
     const currentChannelSpectrums = spectrums.filter(spectrum => spectrum.channelId === this.get('currentChannelId'))[0];
 
     currentChannelSpectrums.points = currentChannelSpectrums.points.slice(1);
+
     currentChannelSpectrums.points.forEach(point => {
       if (point.amplitude === 0) return;
-      formattedData.push([point.freq, convertToDb(point.amplitude)]);
+
+      formattedData.push([point.freq, normalizeValue(convertToDb(point.amplitude))]);
     });
 
     return formattedData;
@@ -90,9 +97,9 @@ export default Component.extend({
         if (point.amplitude === 0) return;
 
         if (formattedData[point.freq]) {
-          formattedData[point.freq] += convertToDb(point.amplitude);
+          formattedData[point.freq] += normalizeValue(convertToDb(point.amplitude));
         } else {
-          formattedData[point.freq] = convertToDb(point.amplitude);
+          formattedData[point.freq] = normalizeValue(convertToDb(point.amplitude));
         }
       });
     });
@@ -174,7 +181,9 @@ export default Component.extend({
           color: 'rgba(245, 245, 245, 0.3)',
           width: GAIN_ZERO_WIDTH,
           zIndex: GAIN_ZERO_ZINDEX
-        }]
+        }],
+        min: MIN_DB_VALUE,
+        max: MAX_DB_VALUE
       },
       tooltip: {
         headerFormat: '<b>{series.name}</b><br />',
