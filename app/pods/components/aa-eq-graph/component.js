@@ -98,15 +98,15 @@ export default Component.extend({
         if (point.amplitude === 0) return;
 
         if (formattedData[point.freq]) {
-          formattedData[point.freq] += normalizeValue(convertToDb(point.amplitude));
+          formattedData[point.freq] += point.amplitude;
         } else {
-          formattedData[point.freq] = normalizeValue(convertToDb(point.amplitude));
+          formattedData[point.freq] = point.amplitude;
         }
       });
     });
 
     formattedData = Object.keys(formattedData).map((key) => {
-      return [Number(key), Number(formattedData[key])];
+      return [Number(key), normalizeValue(convertToDb(Number(formattedData[key])))];
     });
 
     return formattedData;
