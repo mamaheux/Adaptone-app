@@ -17,13 +17,14 @@ const GAIN_ZERO_ZINDEX = 3;
 const MIN_FREQUENCY_VALUE = 20;
 const MAX_FREQUENCY_VALUE = 20000;
 const DB_FACTOR = 20;
-const MAX_DB_VALUE = 20;
-const MIN_DB_VALUE = -20;
+const MAX_DB_VALUE = 25;
+const MIN_DB_VALUE = -30;
 const NORMALIZED_MAX_DB_VALUE = 15;
 const NORMALIZED_MIN_DB_VALUE = -15;
+const GAIN_FACTOR = 8;
 
 const convertToDb = (value) => DB_FACTOR * Math.log10(value);
-const normalizeValue = (value) => (value - NORMALIZED_MIN_DB_VALUE) / (NORMALIZED_MAX_DB_VALUE - NORMALIZED_MIN_DB_VALUE);
+const normalizeValue = (value) => ((value - NORMALIZED_MIN_DB_VALUE) / (NORMALIZED_MAX_DB_VALUE - NORMALIZED_MIN_DB_VALUE)) * GAIN_FACTOR;
 
 export default Component.extend({
   intl: service(),
