@@ -21,11 +21,11 @@ export default PositionsMap.extend({
   },
 
   generateHeatMap(canvasWrapper) {
-    const micPositions = this.get('micPositions');
+    const {micPositions, radius} = this.getProperties('micPositions', 'radius');
     const config = {
       container: canvasWrapper,
       backgroundColor: GREEN_GRADIENT_COLOR,
-      radius: this.get('radius'),
+      radius,
       gradient: {
         0: GREEN_GRADIENT_COLOR,
         0.5: YELLOW_GRADIENT_COLOR,
@@ -34,9 +34,11 @@ export default PositionsMap.extend({
     };
 
     const heatMap = h337.create(config);
+    const {min, max} = this.getProperties('min', 'max');
+
     heatMap.setData({
-      max: this.get('max'),
-      min: this.get('min'),
+      max,
+      min,
       data: []
     });
 

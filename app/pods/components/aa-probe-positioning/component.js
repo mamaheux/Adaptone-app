@@ -14,12 +14,13 @@ export default Component.extend({
       const configuration = this.get('session').get('configuration');
       configuration.step = steps['probe-initialization'];
 
-      this.get('fileSystem').editConfiguration(configuration);
       this.get('session').set('configuration', configuration);
 
       this.get('connection').sendMessage({
         seqId: SequenceIds.RUN_INIT
       });
+
+      this.get('fileSystem').editConfiguration(configuration);
 
       this.get('router').transitionTo('probe-initialization');
     }

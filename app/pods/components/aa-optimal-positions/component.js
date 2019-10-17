@@ -16,12 +16,13 @@ export default Component.extend({
       const configuration = this.get('session').get('configuration');
       configuration.step = steps.optimization;
 
-      this.get('fileSystem').editConfiguration(configuration);
       this.get('session').set('configuration', configuration);
 
       this.get('connection').sendMessage({
         seqId: SequenceIds.RERUN_OPTIMIZATION
       });
+
+      this.get('fileSystem').editConfiguration(configuration);
 
       this.get('router').transitionTo('optimization');
     },
@@ -30,8 +31,6 @@ export default Component.extend({
       const configuration = this.get('session').get('configuration');
       configuration.step = steps['console-loading:'];
       configuration.positions = this.get('positions');
-
-      this.get('fileSystem').editConfiguration(configuration);
       this.get('session').set('configuration', configuration);
 
       this.get('connection').sendMessage({
@@ -42,6 +41,8 @@ export default Component.extend({
         seqId: SequenceIds.CONFIG_CHOICE,
         data: configuration
       });
+
+      this.get('fileSystem').editConfiguration(configuration);
 
       this.get('router').transitionTo('console');
     }
