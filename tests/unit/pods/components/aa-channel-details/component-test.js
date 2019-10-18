@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {describe, it, beforeEach} from 'mocha';
+import {afterEach, describe, it, beforeEach} from 'mocha';
 import {setupTest} from 'ember-mocha';
 import Channels from 'adaptone-front/constants/channels';
 
@@ -7,9 +7,10 @@ describe('Unit | Component | aa-channel-details', function() {
   setupTest();
 
   let component;
-  let hideChannelDetailsSpy = sinon.spy();
-  let onChannelMuteChangeSpy = sinon.spy();
-  let onChannelSoloChangeSpy = sinon.spy();
+  const hideChannelDetailsSpy = sinon.spy();
+  const onChannelMuteChangeSpy = sinon.spy();
+  const onChannelSoloChangeSpy = sinon.spy();
+  const originalDebounce = Ember.run.debounce;
   
   beforeEach(function() {
     const channel = {
@@ -93,6 +94,13 @@ describe('Unit | Component | aa-channel-details', function() {
     Ember.run.debounce = function(target, func, arg, _) {
       func.call(target, arg);
     }
+  });
+
+  afterEach(function() {
+    Ember.run.debounce = originalDebounce;
+    hideChannelDetailsSpy.resetHistory();
+    onChannelMuteChangeSpy.resetHistory();
+    onChannelSoloChangeSpy.resetHistory();
   });
 
   describe('computed', () => {
