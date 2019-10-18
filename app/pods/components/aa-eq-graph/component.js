@@ -70,7 +70,6 @@ export default Component.extend({
     if (!spectrums || this.get('isOutput')) return;
 
     const formattedData = [];
-
     const currentChannelSpectrums = spectrums.filter(spectrum => spectrum.channelId === this.get('currentChannelId'))[0];
 
     currentChannelSpectrums.points = currentChannelSpectrums.points.slice(1);
@@ -204,18 +203,19 @@ export default Component.extend({
       }
     };
 
+    const {eqGains, channelSpectrums, addedChannelsSpectrums} = this.getProperties('eqGains', 'channelSpectrums', 'addedChannelsSpectrums');
     const chartData = [
       {
         name: this.intl.t('eq-graph.series.eq-gain'),
-        data: this.get('eqGains')
+        data: eqGains
       },
       {
         name: this.intl.t('eq-graph.series.channel-spectrums'),
-        data: this.get('channelSpectrums')
+        data: channelSpectrums
       },
       {
         name: this.intl.t('eq-graph.series.channels-spectrums'),
-        data: this.get('addedChannelsSpectrums')
+        data: addedChannelsSpectrums
       }
     ];
 

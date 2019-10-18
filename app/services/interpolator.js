@@ -1,7 +1,5 @@
 /* eslint-disable no-magic-numbers */
-
 import Service from '@ember/service';
-
 import mathjs from 'mathjs';
 
 const FREQUENCIES_PER_DECADE = 10;

@@ -190,12 +190,13 @@ export default Component.extend({
     gains = gains.map(gain => Math.pow(10, gain / 20));
 
     const seqId = this._getEqGainsSequenceId();
+    const {auxiliaryChannelId, channelId} = this.getProperties('auxiliaryChannelId', 'channelId');
 
     const message = {
       seqId,
       data: {
-        auxiliaryChannelId: this.get('auxiliaryChannelId'),
-        channelId: this.get('channelId'),
+        auxiliaryChannelId,
+        channelId,
         gains
       }
     };

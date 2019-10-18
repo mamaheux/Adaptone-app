@@ -1,8 +1,10 @@
 import Component from '@ember/component';
 import {observer} from '@ember/object';
+import {cancel, later} from '@ember/runloop';
 
 const DEFAULT_PEAK_FALL_DELAY = 2000;
 const DEFAULT_PEAK_FALL_DURATION = 500;
+const IDLE_DELAY = 1000;
 const NORMALIZED_MAXIMUM = 1;
 const NORMALIZED_MINIMUM = 0;
 const DB_FACTOR = 20;
@@ -19,12 +21,26 @@ export default Component.extend({
   convertToDecibels: true,
 
   meterElements: null,
+  timerInformation: null,
 
   peakFallDelay: DEFAULT_PEAK_FALL_DELAY,
   peakFallDuration: DEFAULT_PEAK_FALL_DURATION,
 
   valueChanged: observer('value', function() {
+    // Cancel the idle update timer
+    const timerInformation = this.get('timerInformation');
+    if (timerInformation) {
+      cancel(timerInformation);
+    }
+
     this.renderPeakMeter(this.get('meterValue'));
+
+    // Set a timer to update if we stop receiving data
+    const newTimerInfo = later(this, function() {
+      this.renderPeakMeter(this.get('meterValue'));
+    }, IDLE_DELAY);
+
+    this.set('timerInformation', newTimerInfo);
   }),
 
   didInsertElement() {
@@ -76,9 +92,7 @@ export default Component.extend({
     yellowLimit = this.normalize(yellowLimit);
     redLimit = this.normalize(redLimit);
 
-    let value = meterValue.currentValue;
-    value = this.normalize(value);
-
+    const value = this.normalize(meterValue.currentValue);
     const dom = meterElements;
 
     dom.green.style.height = this.formatValue(value);
