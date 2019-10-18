@@ -51,15 +51,6 @@ export default Component.extend({
 
     const formattedGain = gainValue / GAIN_MAX_VALUE;
 
-    const message = {
-      seqId,
-      data: {
-        channelId,
-        auxiliaryChannelId: channel.data.auxiliaryChannelId || null,
-        gain: formattedGain
-      }
-    };
-
     if (masterInputs) {
       masterInputs.find(mi => mi.data.channelId === channelId).data.gain = formattedGain;
       this.set('masterInputs', masterInputs);
@@ -69,6 +60,15 @@ export default Component.extend({
 
     if (channel.data.isMuted) return;
     if (!channel.data.isSolo && masterInputs && masterInputs.some(mi => mi.data.channelId !== channelId && mi.data.isSolo === true)) return;
+
+    const message = {
+      seqId,
+      data: {
+        channelId,
+        auxiliaryChannelId: channel.data.auxiliaryChannelId || null,
+        gain: formattedGain
+      }
+    };
 
     debounce(this, this.onGainChange, WRITE_IN_SESSION_DEBOUNCE_TIME);
     debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
