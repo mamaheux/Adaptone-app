@@ -41,7 +41,7 @@ describe('Unit | Component | aa-eq-graph', function() {
           },
           {
             freq: 4000,
-            amplitude: 2
+            amplitude: 0
           }
         ]
       },
@@ -160,11 +160,10 @@ describe('Unit | Component | aa-eq-graph', function() {
 
     describe('channelSpectrums', () => {
       describe('when the channel is not an output', () => {
-        it('should return the correctly formatted, normalized and decibel current channel spectrum', () => {
+        it('should return the correctly formatted, normalized and decibel current channel spectrum without 0 amplitudes', () => {
           const expectedSpectrumData = [
             [1000, 5.6054933102079],
-            [2000, 8.8164799306237],
-            [4000, 5.6054933102079]
+            [2000, 8.8164799306237]
           ];
 
           expect(component.get('channelSpectrums')).to.deep.equal(expectedSpectrumData);
