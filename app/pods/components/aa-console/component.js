@@ -1,10 +1,8 @@
 import Component from '@ember/component';
 import {inject as service} from '@ember/service';
-import {debounce} from '@ember/runloop';
 import {computed} from '@ember/object';
 import SequenceIds from 'adaptone-front/constants/sequence-ids';
 
-const DEBOUNCE_TIME = 20;
 const CHANNEL_GAIN_MAX_VALUE = 100;
 const DECIBEL_CONVERT = 10;
 const DECIBEL_FACTOR = 20;
@@ -155,7 +153,7 @@ export default Component.extend({
         }
       };
 
-      debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
+      this.get('connection').sendMessage(message);
     },
 
     onChannelSoloChange() {
@@ -170,9 +168,7 @@ export default Component.extend({
         if (channels.some(c => c.data.isSolo
           && c.data.channelId !== currentChannel.data.channelId
           && c.data.isAuxiliaryInput === currentChannel.data.isAuxiliaryInput
-          && c.data.isMasterInput === currentChannel.data.isMasterInput
-          && c.data.isMasterOutput === currentChannel.data.isMasterOutput
-          && c.data.isAuxiliaryOutput === currentChannel.data.isAuxiliaryOutput)) gain = 0;
+          && c.data.isMasterInput === currentChannel.data.isMasterInput)) gain = 0;
         if (currentChannel.data.isSolo) gain = Math.pow(DECIBEL_CONVERT, currentChannel.data.gain / DECIBEL_FACTOR);
         if (currentChannel.data.isMuted) gain = 0;
 
@@ -189,7 +185,7 @@ export default Component.extend({
         }
       };
 
-      debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
+      this.get('connection').sendMessage(message);
     },
 
     onGainChange() {
