@@ -28,17 +28,19 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 | 19  | [Changer le volume des sorties principales](#changer-le-volume-des-sorties-principales) |
 | 20  | [Changer le volume d'une sortie auxiliaire](#changer-le-volume-dune-sortie-auxiliaire) |
 | 24  | [Charger une configuration](#charger-une-configuration) |
+| 25  | [Écouter une sonde](#écouter-une-sonde) |
+| 26  | [Arrêt de l'écoute d'une sonde](#arrêt-de-lécoute-dune-sonde) |
 | *Échanges de données* |
 | 21 | [Taux erreur](#taux-erreur) |
 | 22 | [Spectre sonore des entrées](#spectre-sonore-des-entrées) |
 | 23 | [Niveaux sonores (peakmeter)](#niveaux-sonores-peakmeter) |
 | *Structure d'un channel* |
-| 24 | [Mère](#structure-mère) |
-| 25 | [Entrée](#structure-entrée) |
-| 26 | [Master](#structure-master) |
-| 27 | [Auxiliaire](#structure-auxiliaire) |
-| 28 | [Entrée master](#structure-entrée-master) |
-| 29 | [Entrée auxiliaire](#structure-entrée-auxiliaire) |
+| * | [Mère](#structure-mère) |
+| * | [Entrée](#structure-entrée) |
+| * | [Master](#structure-master) |
+| * | [Auxiliaire](#structure-auxiliaire) |
+| * | [Entrée master](#structure-entrée-master) |
+| * | [Entrée auxiliaire](#structure-entrée-auxiliaire) |
 
 ## Étapes
 
@@ -492,6 +494,25 @@ Les niveaux sonores ne sont pas en dB.
     "speakersNumber": 4,
     "auxiliaryChannelIds": [6, 7, 8, 9],
   }
+}
+```
+
+### Écouter une sonde
+
+```json
+{
+  "seqId": 25,
+  "data": {
+    "probeId": 0
+  }
+}
+```
+
+### Arrêt de l'écoute d'une sonde
+
+```json
+{
+  "seqId": 26
 }
 ```
 

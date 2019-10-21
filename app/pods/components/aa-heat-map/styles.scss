@@ -27,3 +27,9 @@
   height: 40px;
   fill: $wild-sand;
 }
+
+.selected {
+  .microphone {
+    fill: $tangerine;
+  }
+}
