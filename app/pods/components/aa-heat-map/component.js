@@ -1,5 +1,8 @@
 import PositionsMap from '../aa-positions-map/component';
 import h337 from 'heatmap.js';
+import {inject as service} from '@ember/service';
+import {set} from '@ember/object';
+import SequenceIds from 'adaptone-front/constants/sequence-ids';
 
 const MIC_ICON_X_OFFSET = 15;
 const MIC_ICON_Y_OFFSET = 20;
@@ -9,6 +12,9 @@ const YELLOW_GRADIENT_COLOR = '#00254f';
 const RED_GRADIENT_COLOR = '#006eee';
 
 export default PositionsMap.extend({
+  connection: service('connection'),
+  probeStatePersister: service('probe-state-persister'),
+
   radius: null,
   max: null,
   min: null,
@@ -42,12 +48,48 @@ export default PositionsMap.extend({
       data: []
     });
 
+    const probeState = this.get('probeStatePersister').get('state');
+
     micPositions.forEach(micPosition => {
+      if (probeState) {
+        const probe = probeState.find(p => p.id === micPosition.id);
+        set(micPosition, 'selected', probe && probe.selected);
+      }
+
       heatMap.addData({
         x: micPosition.x + MIC_ICON_X_OFFSET,
         y: micPosition.y + MIC_ICON_Y_OFFSET,
         value: micPosition.errorRate
       });
     });
+  },
+
+  actions: {
+    selectMicrophone(microphone) {
+      const micPositions = this.get('micPositions');
+
+      micPositions.forEach(micPosition => {
+        const selected = (microphone.id === micPosition.id) && !microphone.selected;
+        set(micPosition, 'selected', selected);
+
+        if (selected) {
+          this.get('connection').sendMessage({
+            seqId: SequenceIds.PROBE_LISTEN,
+            data: {
+              probeId: microphone.id
+            }
+          });
+        }
+      });
+
+      if (!microphone.selected) {
+        this.get('connection').sendMessage({
+          seqId: SequenceIds.STOP_PROBE_LISTEN
+        });
+      }
+
+      this.set('micPositions', micPositions);
+      this.get('probeStatePersister').set('state', micPositions);
+    }
   }
 });

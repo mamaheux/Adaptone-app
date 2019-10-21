@@ -51,30 +51,35 @@ export default Component.extend({
             type: 's'
           },
           {
+            id: 0,
             x: 5,
             y: 10,
             type: 'm',
             errorRate: 0.12
           },
           {
+            id: 1,
             x: 10,
             y: 15,
             type: 'm',
             errorRate: 0.09
           },
           {
+            id: 2,
             x: 30,
             y: 30,
             type: 'm',
             errorRate: 0.07
           },
           {
+            id: 3,
             x: 50,
             y: 15,
             type: 'm',
             errorRate: 0.09
           },
           {
+            id: 4,
             x: 80,
             y: 30,
             type: 'm',

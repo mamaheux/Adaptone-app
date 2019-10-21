@@ -2,7 +2,7 @@
   <canvas class="canvas"></canvas>
   <div class="overlay">
     {{#each this.micPositions as |micPosition|}}
-      <div style={{micPosition.style}}>
+      <div class="{{if micPosition.selected "selected"}}" style={{micPosition.style}} {{action "selectMicrophone" micPosition on="mouseUp"}}>
        {{inline-svg "assets/images/microphone-icon.svg" class="microphone"}}
       </div>
     {{/each}}

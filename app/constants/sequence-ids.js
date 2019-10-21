@@ -23,7 +23,9 @@ const SequenceIds = {
   ERROR_RATE: 21,
   INPUT_SPECTRUM: 22,
   PEAKMETER_LEVELS: 23,
-  CONFIG_CHOICE: 24
+  CONFIG_CHOICE: 24,
+  PROBE_LISTEN: 25,
+  STOP_PROBE_LISTEN: 26
 };
 
 export default SequenceIds;
