@@ -81,7 +81,7 @@ export default Component.extend({
 
     this.set('graphicEqFreqs', FIVE_BANDS_FREQUENCIES);
 
-    this.initializeFirstParametricFilter();
+    this._initializeFirstParametricFilter();
   },
 
   didInsertElement() {
@@ -119,7 +119,7 @@ export default Component.extend({
     }
   },
 
-  initializeFirstParametricFilter() {
+  _initializeFirstParametricFilter() {
     // Manually set the selected filter to the first parametric filter
     // and the max, mid and min frequencies in order to correctly initialize
     // the currentFilter and the corresponding knob
@@ -204,10 +204,10 @@ export default Component.extend({
     debounce(this.get('connection'), this.get('connection').sendMessage, message, SEND_MESSAGE_DEBOUNCE_TIME);
 
     // Use the gains to update the configuration correctly
-    this._updateEqGainsConfig(gains);
+    this.updateEqGainsConfig(gains);
   },
 
-  _updateEqGainsConfig(gains) {
+  updateEqGainsConfig(gains) {
     const channelId = this.get('channelId');
     const configuration = this.get('session').get('configuration');
 
