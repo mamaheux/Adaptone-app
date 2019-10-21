@@ -243,7 +243,7 @@ describe('Unit | Component | aa-channel-details', function() {
       });
     });
 
-    describe('onIsMutedChange', () => {
+    describe('onChannelMuteChange', () => {
       it('should call onChannelMuteChange and update session configuration', () => {
         const updateSessionConfigurationSpy = sinon.spy();
         component._updateSessionConfiguration = updateSessionConfigurationSpy;
@@ -254,7 +254,7 @@ describe('Unit | Component | aa-channel-details', function() {
       });
     });
     
-    describe('onIsSoloChange', () => {
+    describe('onChannelSoloChange', () => {
       it('should call onChannelSoloChange and update session configuration', () => {
         const updateSessionConfigurationSpy = sinon.spy();
         component._updateSessionConfiguration = updateSessionConfigurationSpy;

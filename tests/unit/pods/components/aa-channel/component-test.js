@@ -305,5 +305,5 @@ describe('Unit | Component | aa-channel', function() {
         expect(showChannelDetailsSpy.calledOnce).to.be.true;
       });
     });
-  })
+  });
 });
