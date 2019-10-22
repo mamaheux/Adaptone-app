@@ -7,6 +7,7 @@ import {set} from '@ember/object';
 import SequenceIds from 'adaptone-front/constants/sequence-ids';
 
 const DEBOUNCE_TIME = 20;
+const WRITE_IN_SESSION_DEBOUNCE_TIME = 20;
 const MAX_GAIN_VALUE = 12;
 const DECIBEL_CONVERT = 10;
 const DECIBEL_FACTOR = 20;
@@ -120,7 +121,7 @@ export default Component.extend({
     },
 
     onGainChange(value) {
-      this._updateSessionConfiguration();
+      debounce(this, this._updateSessionConfiguration, WRITE_IN_SESSION_DEBOUNCE_TIME);
 
       const ratioGain = Math.pow(DECIBEL_CONVERT, value / DECIBEL_FACTOR);
 
