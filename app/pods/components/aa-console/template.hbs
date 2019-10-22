@@ -1,4 +1,4 @@
-{{#if this.isChannelDetailsVisible}}
+{{#liquid-if this.isChannelDetailsVisible class="channel-details-transition"}}
   {{aa-channel-details
     channel=this.currentChannel
     hideChannelDetails=(action "hideChannelDetails")
@@ -60,4 +60,4 @@
       {{/each-in}}
     </div>
   </div>
-{{/if}}
+{{/liquid-if}}

@@ -1,4 +1,4 @@
-{{#if this.isParametric}}
+{{#liquid-if this.isParametric class="eq-type-transition"}}
   <div class="parametric-filters">
     <span class="title">
       {{t 'eq.title'}}
@@ -94,4 +94,4 @@
       {{/each-in}}
     </div>
   </div>
-{{/if}}
+{{/liquid-if}}
