@@ -6,7 +6,7 @@ import {debounce} from '@ember/runloop';
 import SequenceIds from 'adaptone-front/constants/sequence-ids';
 
 const DEBOUNCE_TIME = 20;
-const WRITE_IN_SESSION_DEBOUNCE_TIME = 50;
+const WRITE_IN_SESSION_DEBOUNCE_TIME = 20;
 const GAIN_MAX_VALUE = 100;
 
 export default Component.extend({
@@ -45,6 +45,8 @@ export default Component.extend({
   }),
 
   channelGainChanged: observer('gainValue', function() {
+    debounce(this, this.onGainChange, WRITE_IN_SESSION_DEBOUNCE_TIME);
+
     const {channel, masterInputs, gainValue} = this.getProperties('channel', 'masterInputs', 'gainValue');
     const seqId = this._getGainSequenceId();
     const channelId = channel.data.channelId;
@@ -70,7 +72,6 @@ export default Component.extend({
       }
     };
 
-    debounce(this, this.onGainChange, WRITE_IN_SESSION_DEBOUNCE_TIME);
     debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
   }),
 
