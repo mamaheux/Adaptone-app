@@ -5,6 +5,8 @@ const protocolServe = require('electron-protocol-serve');
 
 let mainWindow = null;
 
+app.setPath('userData', app.getPath('userData').replace(/Electron/i, app.getName()));
+
 // Registering a protocol & schema to serve our Ember application
 protocol.registerStandardSchemes(['serve'], { secure: true });
 protocolServe({
