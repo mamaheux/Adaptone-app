@@ -61,6 +61,7 @@
     "eslint-plugin-ember": "^5.0.0",
     "heatmap.js": "^2.0.5",
     "highcharts": "^7.0.3",
+    "liquid-fire": "^0.31.0",
     "loader.js": "^4.2.3",
     "mathjs": "^5.9.0",
     "sass": "^1.17.2"
