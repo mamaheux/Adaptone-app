@@ -9,7 +9,7 @@
   width: 24px;
   height: 24px;
   position: fixed;
-  top: 6px;
+  top: 4px;
   right: 6px;
 }
 
@@ -39,7 +39,7 @@
   flex-direction: column;
   padding-top: 10px;
   color: $mercury;
-  font-family: $text-font-semibold;
+  font-family: $title-font-regular;
   font-size: 18px;
 }
 
@@ -69,7 +69,6 @@
 
 .option {
   min-width: 140px;
-  text-align: center;
 }
 
 .ember-burger-menu > .bm-outlet > .bm-content {

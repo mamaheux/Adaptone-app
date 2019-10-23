@@ -30,14 +30,14 @@
 }
 
 .graph {
-  height: 350px;
+  height: 420px;
   width: 100%;
 }
 
 .eq-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  padding: 20px 50px;
   justify-content: space-around;
 }
 
@@ -47,10 +47,10 @@
   &::after {
     content: '';
     position: absolute;
-    top: 20px;
-    right: -70px;
+    top: 30px;
+    right: -40px;
     width: 1px;
-    height: 85%;
+    height: 70%;
     background-color: $big-stone
   }
 }

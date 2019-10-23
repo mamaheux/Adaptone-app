@@ -47,10 +47,9 @@ power-button:
   on: On
   off: Off
 eq:
-  title: EQ
-  frequency: FREQ (Hz)
+  frequency: Frequency
   q: Q
-  gain: Gain (dB)
+  gain: Gain
   gain-short: Gain
   frequency-symbol: Hz
 channel-details:
