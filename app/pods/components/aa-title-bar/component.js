@@ -38,5 +38,11 @@ export default Component.extend({
         remote.app.quit();
       });
     });
+  },
+
+  willDestroyElement() {
+    $('.minimize').off('click');
+    $('.maximize').off('click');
+    $('.close').off('click');
   }
 });

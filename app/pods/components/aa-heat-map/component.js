@@ -3,6 +3,8 @@ import h337 from 'heatmap.js';
 import {inject as service} from '@ember/service';
 import {set} from '@ember/object';
 import SequenceIds from 'adaptone-front/constants/sequence-ids';
+import $ from 'jquery';
+import {run} from '@ember/runloop';
 
 const MIC_ICON_X_OFFSET = 15;
 const MIC_ICON_Y_OFFSET = 20;
@@ -24,6 +26,17 @@ export default PositionsMap.extend({
 
     const canvasWrapper = this.element.querySelector('.canvas-wrapper');
     this.generateHeatMap(canvasWrapper);
+
+    $(window).on('resize', () => {
+      run(() => {
+        this.generateHeatMap(canvasWrapper);
+      });
+    });
+  },
+
+  willDestroyElement() {
+    this.get('packetDispatcher').off('error-rates');
+    $(window).off('resize');
   },
 
   generateHeatMap(canvasWrapper) {
