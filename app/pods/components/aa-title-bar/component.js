@@ -44,5 +44,5 @@ export default Component.extend({
     $('.minimize').off('click');
     $('.maximize').off('click');
     $('.close').off('click');
-  },
+  }
 });
