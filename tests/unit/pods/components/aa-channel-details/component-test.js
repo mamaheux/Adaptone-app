@@ -264,17 +264,6 @@ describe('Unit | Component | aa-channel-details', function() {
         expect(onChannelSoloChangeSpy.calledOnce).to.be.true;
       });
     });
-        
-    describe('saveConfiguration', () => {
-      it('should dump session in file and set hasNewChanges to false', () => {
-        const dumpSessionInFileSpy = sinon.spy();
-        component.session.dumpSessionInFile = dumpSessionInFileSpy;
-        component.send('saveConfiguration');
-
-        expect(dumpSessionInFileSpy.calledOnce).to.be.true;
-        expect(component.get('hasNewChanges')).to.be.false;
-      });
-    });
             
     describe('onEqTabClick', () => {
       it('should set isInputVolumeVisible to false and isEqVisible to true', () => {
