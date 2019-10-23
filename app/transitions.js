@@ -16,13 +16,6 @@ export default function() {
   );
 
   this.transition(
-    this.hasClass('channel-details-transition'),
-    this.toValue(true),
-    this.use('toUp', {duration: ANIMATION_DURATION}),
-    this.reverse('toDown', {duration: ANIMATION_DURATION})
-  );
-
-  this.transition(
     this.hasClass('eq-type-transition'),
     this.toValue(true),
     this.use('crossFade', {duration: ANIMATION_DURATION}),
