@@ -237,19 +237,7 @@ describe('Unit | Component | aa-console', function() {
         expect(updateSessionConfigurationSpy.calledOnce).to.be.true;
       });
     });
-    
-    describe('saveConfiguration', () => {
-      it('should save the configuration and set hasNewChanges to false', () => {
-        const sessionSpy = sinon.spy();
-        component.session.dumpSessionInFile = sessionSpy;
 
-        component.send('saveConfiguration');
-
-        expect(sessionSpy.calledOnce).to.be.true;
-        expect(component.get('hasNewChanges')).to.be.false;
-      });
-    });
-    
     describe('showChannelDetails', () => {
       it('should set the correct current channel and set isChannelDetailsVisible to true', () => {
         const channel = component.get('channels').inputs.objectAt(0).data;

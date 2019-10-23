@@ -236,14 +236,14 @@ describe('Unit | Component | aa-channel', function() {
       });
 
       describe('when the channel is muted', () => {
-        it('should not send any message to the connection or to the onGainChange function', () => {
+        it('should not send any message to the connection but should call the onGainChange function', () => {
           const connectionSpy = sinon.spy();
           component.connection.sendMessage = connectionSpy;
 
           component.set('channel.data.isMuted', true);
           component.set('gainValue', 50);
 
-          expect(onGainChangeSpy.called).to.be.false;
+          expect(onGainChangeSpy.called).to.be.true;
           expect(connectionSpy.called).to.be.false;
         });
       });
@@ -283,13 +283,13 @@ describe('Unit | Component | aa-channel', function() {
         });
         
         describe('when the channel is not solo', () => {
-          it('should not send any message to the connection or the onGainChange function', () => {
+          it('should not send any message to the connection but should call the onGainChange function', () => {
             const connectionSpy = sinon.spy();
             component.connection.sendMessage = connectionSpy;
 
             component.set('gainValue', 66);
 
-            expect(onGainChangeSpy.called).to.be.false;
+            expect(onGainChangeSpy.called).to.be.true;
             expect(connectionSpy.called).to.be.false;
           });
         });
