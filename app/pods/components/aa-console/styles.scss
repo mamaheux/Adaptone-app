@@ -38,22 +38,8 @@
   position: relative;
 }
 
-.save-button {
-  width: 120px;
-  color: $big-stone;
-  background-color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-family: $text-font-semibold;
-  font-size: 12px;
-  text-align: center;
+.sidebar {
   position: absolute;
   top: 5px;
   right: 5px;
-  padding: 6px 20px;
-}
-
-.dirty {
-  color: #fff;
-  background-color: $blue-ribbon;
 }
