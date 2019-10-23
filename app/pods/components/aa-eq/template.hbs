@@ -1,9 +1,5 @@
 {{#liquid-if this.isParametric class="eq-type-transition"}}
   <div class="parametric-filters">
-    <span class="title">
-      {{t 'eq.title'}}
-    </span>
-
     <div class="parametric-filter-buttons-container">
       {{#each-in this.parametricFilters as |index filter|}}
         <button
@@ -69,10 +65,6 @@
   {{/if}}
 {{else}}
   <div class="graphic-filters">
-    <span class="title">
-      {{t 'eq.title'}}
-    </span>
-
     <div class="graphic-filter-options">
       {{#each-in this.graphicFilters as |index filter|}}
         <div class="slider-container">

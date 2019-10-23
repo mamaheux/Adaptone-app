@@ -28,6 +28,8 @@
 }
 
 .button-wrapper {
+  margin-top: 15px;
+
   &.active {
     >.power-off-icon {
       fill: $blue-ribbon;

@@ -4,17 +4,12 @@
   position: relative;
 }
 
-.title {
-  font-family: $text-font-semibold;
-  font-size: 30px;
-  color: $big-stone;
-  margin-right: 120px;
-}
-
 .parametric-filters {
   display: flex;
+  justify-content: center;
   flex-direction: row;
   position: relative;
+  width: 700px;
 
   &::after {
     content: '';
@@ -23,28 +18,26 @@
     right: 0;
     margin: 0 auto;
     bottom: -25px;
-    width: 100%;
+    width: 90%;
     border-bottom: 1px solid $big-stone;
-    background: $big-stone;
   }
 }
 
 .graphic-filters {
   display: flex;
   flex-direction: column;
+  width: 700px;
 }
 
 .parametric-filter-buttons-container {
   display: flex;
   flex-direction: row;
-  margin-top: 30px;
 }
 
 .parametric-filter-button {
   border: none;
   margin-right: 30px;
   border-radius: 4px;
-  margin-top: 40px;
   padding: 5px 30px;
   color: $big-stone;
   font-family: $text-font-semibold;
@@ -67,17 +60,18 @@
   flex-direction: row;
   align-items: center;
   margin-top: 40px;
+  margin-left: 50px;
 }
 
 .graphic-filter-options {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 13px;
 }
 
 .power-button {
   margin-right: 40px;
+  margin-bottom: 30px;
 }
 
 .knob {
@@ -105,7 +99,6 @@
   font-family: $text-font-semibold;
   color: $big-stone;
   font-size: 18px;
-  margin-top: 15px;
 }
 
 .knobs-container {

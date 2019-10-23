@@ -1,11 +1,11 @@
 <div class="text-wrapper">
-  <p class="text {{if this.isOn "active"}}">
+  <div class="text {{if this.isOn "active"}}">
     {{t 'power-button.on'}}
-  </p>
+  </div>
 
-  <p class="text">
+  <div class="text {{unless this.isOn "active"}}">
     {{t 'power-button.off'}}
-  </p>
+  </div>
 </div>
 
 <div
