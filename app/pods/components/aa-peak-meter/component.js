@@ -66,8 +66,8 @@ export default Component.extend({
       }
     });
 
-    this.get('meterElements').yellow.style.bottom = this.formatValue(this.normalize(this.get('yellowLimit')));
-    this.get('meterElements').red.style.bottom = this.formatValue(this.normalize(this.get('redLimit')));
+    this.get('meterElements').yellow.style.bottom = this.formatValue(this.normalize(this.get('yellowLimit') - 1));
+    this.get('meterElements').red.style.bottom = this.formatValue(this.normalize(this.get('redLimit') - 1));
   },
 
   renderPeakMeter(value = this.get('value')) {
@@ -95,19 +95,29 @@ export default Component.extend({
     const value = this.normalize(meterValue.currentValue);
     const dom = meterElements;
 
-    dom.green.style.height = this.formatValue(value);
+    const formattedGreenValue = this.formatValue(value);
+    let formattedYellowValue;
+    let formattedRedValue;
 
     if (value > yellowLimit) {
-      dom.yellow.style.height = this.formatValue(value - yellowLimit);
+      formattedYellowValue = this.formatValue(value - yellowLimit);
     } else {
-      dom.yellow.style.height = 0;
+      formattedYellowValue = '0px';
     }
 
     if (value > redLimit) {
-      dom.red.style.height = this.formatValue(value - redLimit);
+      formattedRedValue = this.formatValue(value - redLimit);
     } else {
-      dom.red.style.height = 0;
+      formattedRedValue = '0px';
     }
+
+    const greenHeight = formattedGreenValue.substring(0, formattedGreenValue.length - 2);
+    const yellowHeight = formattedYellowValue.substring(0, formattedYellowValue.length - 2);
+    const redHeight = formattedRedValue.substring(0, formattedRedValue.length - 2);
+
+    dom.green.style.height = `${+greenHeight - +yellowHeight}px`;
+    dom.yellow.style.height = `${+yellowHeight - +redHeight}px`;
+    dom.red.style.height = `${+redHeight}px`;
 
     dom.peak.style.bottom = this.formatValue(meterValue.peak.value - dom.peak.style.height);
   },

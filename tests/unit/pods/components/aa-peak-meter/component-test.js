@@ -151,8 +151,8 @@ describe('Unit | Component | aa-peak-meter', function() {
 
       component.drawPeakMeter(meterValue);
 
-      expect(component.get('meterElements').green.style.height).to.equal('90px');
-      expect(component.get('meterElements').yellow.style.height).to.equal('40px');
+      expect(component.get('meterElements').green.style.height).to.equal('50px');
+      expect(component.get('meterElements').yellow.style.height).to.equal('30px');
       expect(component.get('meterElements').red.style.height).to.equal('10px');
       expect(component.get('meterElements').peak.style.bottom).to.equal('90px');
     });

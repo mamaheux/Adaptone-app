@@ -3,9 +3,9 @@
 .peak-meter {
   width: 25px;
   height: 210px;
-  border: none;
+  border: 1px solid $big-stone;
   position: relative;
-  background: $wild-sand;
+  background: #fff;
 }
 
 .peak-meter-part {
@@ -14,11 +14,11 @@
   bottom: 0;
 
   &.green {
-    background-color: $spring-green;
+    background: linear-gradient(0deg, $spring-green, $gold);
   }
 
   &.yellow {
-    background-color: $gold;
+    background: linear-gradient(0deg, $gold, $torch-red);
   }
 
   &.red {
