@@ -14,7 +14,6 @@ export default Component.extend({
 
   channels: null,
   positions: null,
-  hasNewChanges: false,
   isChannelDetailsVisible: false,
   currentChannel: null,
 
@@ -114,7 +113,6 @@ export default Component.extend({
     configuration.channels = channelsData;
 
     this.get('session').set('configuration', configuration);
-    this.set('hasNewChanges', true);
   },
 
   _getGainSequenceId(channel, isSoloChange) {
@@ -195,11 +193,6 @@ export default Component.extend({
 
     onGainChange() {
       this._updateSessionConfiguration();
-    },
-
-    saveConfiguration() {
-      this.get('session').dumpSessionInFile();
-      this.set('hasNewChanges', false);
     },
 
     showChannelDetails(channel) {

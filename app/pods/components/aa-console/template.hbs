@@ -14,13 +14,6 @@
       positions=this.positions.data.positions
       class="heat-map"
     }}
-
-    <button
-      class="save-button {{if this.hasNewChanges 'dirty'}}"
-      onClick={{action "saveConfiguration"}}
-    >
-      {{t 'console.save'}}
-    </button>
   </div>
 
   <div class="channels">

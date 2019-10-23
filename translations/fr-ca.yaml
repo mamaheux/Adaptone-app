@@ -77,3 +77,6 @@ eq-graph:
     eq-gain: Gains de l'EQ
     channel-spectrums: Spectre de l'entrée
     channels-spectrums: Spectres additionnés des autres entrées
+sidebar:
+  main-menu: Menu principal
+  close: Quitter

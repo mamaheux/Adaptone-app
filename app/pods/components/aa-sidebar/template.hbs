@@ -1,0 +1,27 @@
+{{#burger-menu animation="slide" position="right" width=225 height=225 as |burger|}}
+  {{#burger.menu itemTagName="div" dismissOnItemClick=true as |menu|}}
+    <div class="burger-list">
+      {{#menu.item}}
+        <a onClick={{action 'goToConfigs'}}>
+          {{inline-svg "assets/images/arrow-icon.svg" class="icon"}}
+          <div class="option">{{t 'sidebar.main-menu'}}</div>
+        </a>
+      {{/menu.item}}
+
+      {{#menu.item}}
+        <a onClick={{action 'closeApp'}}>
+          {{inline-svg "assets/images/sign-out.svg" class="icon icon-close"}}
+          <div class="option">{{t 'sidebar.close'}}</div>
+        </a>
+      {{/menu.item}}
+    </div>
+  {{/burger.menu}}
+
+  {{#burger.outlet}}
+    <a {{action burger.state.actions.open}} class="menu-toggle">
+      {{inline-svg "assets/images/bars-solid.svg" class="bars-icon"}}
+    </a>
+
+    {{outlet}}
+  {{/burger.outlet}}
+{{/burger-menu}}
