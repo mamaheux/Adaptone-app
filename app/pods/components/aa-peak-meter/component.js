@@ -37,7 +37,22 @@ export default Component.extend({
 
     // Set a timer to update if we stop receiving data
     const newTimerInfo = later(this, function() {
-      this.renderPeakMeter(this.get('meterValue'));
+      const min = this.get('min');
+      const peak = {
+        value: 0,
+        lastTime: 0,
+        falling: null,
+        fallDuration: this.get('peakFallDuration'),
+        delay: this.get('peakFallDelay')
+      };
+
+      const meterValue = {
+        currentValue: min,
+        peak
+      };
+
+      this.drawPeakMeter(meterValue);
+      this.updatePeak(peak, min);
     }, IDLE_DELAY);
 
     this.set('timerInformation', newTimerInfo);
