@@ -201,7 +201,6 @@ export default Component.extend({
     },
 
     hideChannelDetails() {
-      this.set('currentChannel', null);
       this.set('isChannelDetailsVisible', false);
     }
   }
