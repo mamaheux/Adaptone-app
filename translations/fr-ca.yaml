@@ -79,3 +79,5 @@ eq-graph:
 sidebar:
   main-menu: Menu principal
   close: Quitter
+heat-map:
+  error-rate: d'erreur

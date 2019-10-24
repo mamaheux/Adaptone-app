@@ -26,6 +26,7 @@
   width: 30px;
   height: 40px;
   fill: $wild-sand;
+  cursor: pointer;
 }
 
 .selected {
@@ -86,5 +87,33 @@
     border-width: 0.02em;
     top: -1.3em;
     left: -1.3em;
+  }
+}
+
+.tooltip-pane {
+  top: 50%;
+  left: 100%;
+  margin-left: 10px;
+  transform: translate(0, -50%);
+  padding: 5px 10px;
+  color: $big-stone;
+  background-color: $mercury;
+  font-family: $text-font-semibold;
+  font-size: 18px;
+  position: absolute;
+  border-radius: 2px;
+  z-index: 10;
+  box-sizing: border-box;
+  box-shadow: 0 1px 8px rgba(black, .5);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.8s;
+  white-space: nowrap;
+}
+
+.tooltip:hover {
+  .tooltip-pane {
+    visibility: visible;
+    opacity: 1;
   }
 }
