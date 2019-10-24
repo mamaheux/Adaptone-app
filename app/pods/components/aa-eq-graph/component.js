@@ -208,16 +208,19 @@ export default Component.extend({
       {
         name: this.intl.t('eq-graph.series.eq-gain'),
         data: eqGains
-      },
-      {
+      }
+    ];
+
+    if (!this.get('isOutput')) {
+      chartData.push({
         name: this.intl.t('eq-graph.series.channel-spectrums'),
         data: channelSpectrums
       },
       {
         name: this.intl.t('eq-graph.series.channels-spectrums'),
         data: addedChannelsSpectrums
-      }
-    ];
+      });
+    }
 
     this.set('chartOptions', chartOptions);
     this.set('chartData', chartData);

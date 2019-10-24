@@ -35,7 +35,6 @@ export default PositionsMap.extend({
   },
 
   willDestroyElement() {
-    this.get('packetDispatcher').off('error-rates');
     $(window).off('resize');
   },
 
