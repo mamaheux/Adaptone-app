@@ -2,14 +2,18 @@
   <canvas class="canvas"></canvas>
   <div class="overlay">
     {{#each this.micPositions as |micPosition|}}
-      <div class="{{if micPosition.selected "selected sonar"}}" style={{micPosition.style}} {{action "selectMicrophone" micPosition on="mouseUp"}}>
-       {{inline-svg "assets/images/microphone-icon.svg" class="microphone"}}
+      <div class="{{if micPosition.selected "selected sonar"}} tooltip" style={{micPosition.style}} {{action "selectMicrophone" micPosition on="mouseUp"}}>
+        {{inline-svg "assets/images/microphone-icon.svg" class="microphone"}}
+
+        <div class="tooltip-pane">
+          {{percentage micPosition.errorRate 2}} {{t 'heat-map.error-rate'}}
+        </div>
       </div>
     {{/each}}
 
     {{#each this.speakerPositions as |speakerPosition|}}
       <div style={{speakerPosition.style}}>
-       {{inline-svg "assets/images/speaker-icon.svg" class="speaker"}}
+        {{inline-svg "assets/images/speaker-icon.svg" class="speaker"}}
       </div>
     {{/each}}
   </div>
