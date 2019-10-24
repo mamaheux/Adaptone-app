@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import {computed, set} from '@ember/object';
 import {htmlSafe} from '@ember/template';
+import {copy} from '@ember/object/internals';
 
 // Constants
 const MIC_TYPE = 'm';
@@ -12,14 +13,7 @@ export default Component.extend({
   speakerPositions: null,
 
   didInsertElement() {
-    const canvas = this.element.querySelector('canvas');
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
-
-    this.setMicPositions();
-    this.setSpeakerPositions();
-
-    this.adjustPositions(canvas);
+    this._computePositions();
     this._super(...arguments);
   },
 
@@ -58,10 +52,23 @@ export default Component.extend({
   },
 
   setMicPositions() {
-    this.set('micPositions', this.get('positions').filter(position => position.type === MIC_TYPE));
+    const micPositions = this.get('positions').filter(position => position.type === MIC_TYPE);
+    this.set('micPositions', copy(micPositions, true));
   },
 
   setSpeakerPositions() {
-    this.set('speakerPositions', this.get('positions').filter(position => position.type === SPEAKER_TYPE));
+    const speakerPositions = this.get('positions').filter(position => position.type === SPEAKER_TYPE);
+    this.set('speakerPositions', copy(speakerPositions, true));
+  },
+
+  _computePositions() {
+    const canvas = this.element.querySelector('canvas');
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+
+    this.setMicPositions();
+    this.setSpeakerPositions();
+
+    this.adjustPositions(canvas);
   }
 });

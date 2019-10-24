@@ -35,52 +35,52 @@ export default Component.extend({
       data: {
         positions: [
           {
-            x: 5,
-            y: 5,
+            x: 0.05,
+            y: 0.05,
             type: 's'
           },
           {
-            x: 90,
-            y: 5,
+            x: 0.9,
+            y: 0.05,
             type: 's'
           },
           {
-            x: 45,
-            y: 10,
+            x: 0.45,
+            y: 0.1,
             type: 's'
           },
           {
             id: 0,
-            x: 5,
-            y: 10,
+            x: 0.05,
+            y: 0.1,
             type: 'm',
             errorRate: 0.12
           },
           {
             id: 1,
-            x: 10,
-            y: 15,
+            x: 0.1,
+            y: 0.15,
             type: 'm',
             errorRate: 0.09
           },
           {
             id: 2,
-            x: 30,
-            y: 30,
+            x: 0.3,
+            y: 0.3,
             type: 'm',
             errorRate: 0.07
           },
           {
             id: 3,
-            x: 50,
-            y: 15,
+            x: 0.5,
+            y: 0.15,
             type: 'm',
             errorRate: 0.09
           },
           {
             id: 4,
-            x: 80,
-            y: 30,
+            x: 0.8,
+            y: 0.3,
             type: 'm',
             errorRate: 0.13
           }

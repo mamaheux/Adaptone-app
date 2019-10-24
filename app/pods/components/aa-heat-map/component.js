@@ -30,6 +30,7 @@ export default PositionsMap.extend({
     $(window).on('resize', () => {
       run(() => {
         this.generateHeatMap(canvasWrapper);
+        this._computePositions();
       });
     });
   },
