@@ -14,7 +14,7 @@
 .text {
   font-size: 20px;
   font-family: $text-font-semibold;
-  color: $big-stone;
+  color: #fff;
   text-transform: uppercase;
   transition: 0.3s color ease;
 
@@ -40,6 +40,6 @@
 .power-off-icon {
   width: 55px;
   height: 60px;
-  fill: $big-stone;
+  fill: #fff;
   transition: 0.3s fill ease;
 }

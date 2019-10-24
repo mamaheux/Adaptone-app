@@ -15,23 +15,35 @@
   justify-content: space-between;
   background-color: #000;
   z-index: $z-index-map-overlay;
-  background-image: linear-gradient(90deg, #000, #001022, #001c3d)
+  background-color: $mono-4;
+  padding-bottom: 3px;
 }
 
 .channel-name {
-  background-color: $big-stone;
+  background-color: $mono-3;
   color: #fff;
   font-family: $text-font-semibold;
-  font-size: 20px;
-  border-radius: 4px 4px 0 0;
-  padding: 2px 12px;
+  font-size: 18px;
+  border-radius: 4px;
+  padding: 2px 12px 3px;
   margin: 0 15px 0 10px;
   z-index: $z-index-map-overlay;
 }
 
 .graph {
+  display: flex;
+  justify-content: center;
   height: 420px;
   width: 100%;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    width: 80%;
+    background-color: #fff;
+  }
 }
 
 .eq-container {
@@ -51,7 +63,7 @@
     right: -40px;
     width: 1px;
     height: 70%;
-    background-color: $big-stone
+    background-color: $mono-3;
   }
 }
 
@@ -61,7 +73,7 @@
   height: 40px;
   bottom: 10px;
   right: 10px;
-  fill: $big-stone;
+  fill: #fff;
   transform: rotate(180deg);
 }
 

@@ -2,18 +2,13 @@ const chartTheme = {
   colors: ['#006eee', '#ee9700', '#bd3cda', '#00ee7f', '#eed200', '#ee0038'],
   chart: {
     backgroundColor: {
-      linearGradient: {x1: 0, y1: 0, x2: 1, y2: 1},
+      linearGradient: {x1: 0.5, y1: 0, x2: 0.5, y2: 0.5},
       stops: [
-        [0, '#000'],
-        [1, '#003c80']
+        [0, '#323c4a'],
+        [1, '#222933']
       ]
     },
-    borderColor: '#153244',
-    borderWidth: 2,
-    className: 'dark-container',
-    plotBackgroundColor: 'rgba(255, 255, 255, .1)',
-    plotBorderColor: '#f5f5f5',
-    plotBorderWidth: 1
+    className: 'dark-container'
   },
   title: {
     style: {
@@ -28,18 +23,18 @@ const chartTheme = {
     }
   },
   xAxis: {
-    gridLineColor: '#0f2330',
+    gridLineColor: 'rgba(255, 255, 255, 0.05)',
     gridLineWidth: 1,
     labels: {
       style: {
-        color: '#f5f5f5'
+        color: '#fff'
       }
     },
-    lineColor: '#f5f5f5',
-    tickColor: '#f5f5f5',
+    lineColor: '#fff',
+    tickColor: '#fff',
     title: {
       style: {
-        color: '#f5f5f5',
+        color: '#fff',
         fontWeight: 'bold',
         fontSize: '20px',
         fontFamily: 'Open Sans, sans-serif'
@@ -48,19 +43,19 @@ const chartTheme = {
     }
   },
   yAxis: {
-    gridLineColor: '#0f2330',
+    gridLineColor: 'rgba(255, 255, 255, 0.05)',
     labels: {
       style: {
-        color: '#f5f5f5'
+        color: '#fff'
       }
     },
-    lineColor: '#f5f5f5',
+    lineColor: '#fff',
     minorTickInterval: null,
-    tickColor: '#f5f5f5',
+    tickColor: '#fff',
     tickWidth: 1,
     title: {
       style: {
-        color: '#f5f5f5',
+        color: '#fff',
         fontWeight: 'bold',
         fontSize: '20px',
         fontFamily: 'Open Sans, sans-serif'

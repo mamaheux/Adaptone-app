@@ -22,9 +22,6 @@
 
       <div class="knobs-container {{unless this.currentFilter.on "disabled"}}">
         <div class="knob">
-          <span class="knob-title">
-            {{t 'eq.frequency'}}
-          </span>
           {{aa-knob
             min=this.currentFilter.minFrequency
             mid=this.currentFilter.midFrequency
@@ -32,32 +29,29 @@
             value=this.currentFilter.freq
             onValueChange=(action "onFrequencyChange")
             isRounded=true
+            title=(t 'eq.frequency')
           }}
         </div>
 
         <div class="knob">
-          <span class="knob-title">
-            {{t 'eq.q'}}
-          </span>
           {{aa-knob
             min=0.5
             mid=2
             max=5
             value=this.currentFilter.q
             onValueChange=(action "onQChange")
+            title=(t 'eq.q')
           }}
         </div>
 
         <div class="knob">
-          <span class="knob-title">
-            {{t 'eq.gain'}}
-          </span>
           {{aa-knob
             min=-12
             mid=0
             max=12
             value=this.currentFilter.gain
             onValueChange=(action "onGainChange")
+            title=(t 'eq.gain')
           }}
         </div>
       </div>

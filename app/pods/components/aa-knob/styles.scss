@@ -2,6 +2,8 @@
 
 & {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
   margin: 5px 20px;
   width: 100px;
@@ -10,7 +12,7 @@
 .title {
   font-family: $text-font-semibold;
   font-size: 20px;
-  color: $big-stone;
+  color: #fff;
   margin-bottom: 25px;
 }
 
@@ -21,7 +23,7 @@
   text-align: center;
   font-family: $text-font-bold;
   font-size: 16px;
-  color: $big-stone;
+  color: #fff;
   z-index: 3;
 }
 
@@ -50,7 +52,6 @@
   height: 70px;
   border-radius: 50%;
   border: 14px solid #fff;
-  box-shadow: 0 0 0 2px #000, inset 0 0 0 2px #000;
 }
 
 .overlay {
@@ -59,42 +60,19 @@
   left: 19px;
   width: 60px;
   height: 60px;
-  background-color: $mercury;
+  background-color: $mono-1;
   transform: rotate(45deg);
   z-index: 2;
-}
-
-.dot {
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: #000;
-  z-index: 3;
-
-  &.min {
-    top: 77px;
-    left: 10px;
-  }
-
-  &.mid {
-    top: -3px;
-    left: 47px;
-  }
-
-  &.max {
-    top: 77px;
-    left: 80px;
-  }
 }
 
 .label-mid {
   font-family: $text-font-semibold;
   font-size: 18px;
-  color: $big-stone;
+  color: #fff;
   width: 100%;
   text-align: center;
   padding-bottom: 5px;
+  margin-right: 5px;
 }
 
 .bottom-label-container {
@@ -104,7 +82,7 @@
   justify-content: space-between;
   font-family: $text-font-semibold;
   font-size: 18px;
-  color: $big-stone;
+  color: #fff;
   z-index: 3;
 }
 

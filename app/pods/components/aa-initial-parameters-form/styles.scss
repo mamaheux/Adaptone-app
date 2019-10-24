@@ -20,7 +20,7 @@
   border-radius: 5px;
   background-color: #fff;
   color: $big-stone;
-  font-family: $text-font-light;
+  font-family: $text-font-regular;
   font-size: 14px;
   border: 1.25px solid $big-stone;
   margin-bottom: 20px;
@@ -32,14 +32,16 @@
 
   &:hover,
   &:focus {
-    border-color: $tangerine;
+    outline: none;
+    border: 1.5px solid $blue-ribbon;
+    border-radius: 5px;
   }
 }
 
 .label {
   font-family: $title-font-semibold;
   font-size: 16px;
-  color: $big-stone;
+  color: #fff;
   margin-bottom: 10px;
 }
 

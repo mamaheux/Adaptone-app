@@ -19,18 +19,20 @@
 .speaker {
   width: 60px;
   height: 60px;
-  fill: $wild-sand;
+  fill: #fff;
 }
 
 .microphone {
   width: 30px;
   height: 40px;
-  fill: $wild-sand;
+  fill: #fff;
+  cursor: pointer;
+  transition: 0.3s fill ease;
 }
 
 .selected {
   .microphone {
-    fill: $tangerine;
+    fill: $spring-green;
   }
 }
 
@@ -39,7 +41,7 @@
 
   &:before {
     z-index: 2;
-    color: $tangerine;
+    color: $spring-green;
     top: 0;
     left: 0;
     width: 100%;
@@ -56,7 +58,7 @@
 
   &:after {
     z-index: 2;
-    color: $tangerine;
+    color: $spring-green;
     top: 0;
     left: 0;
     width: 100%;
