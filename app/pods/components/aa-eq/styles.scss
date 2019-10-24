@@ -19,7 +19,7 @@
     margin: 0 auto;
     bottom: -25px;
     width: 90%;
-    border-bottom: 1px solid $big-stone;
+    border-bottom: 1px solid $mono-3;
   }
 }
 
@@ -42,12 +42,16 @@
   color: $big-stone;
   font-family: $text-font-semibold;
   font-size: 18px;
-  background-color: #fff;
+  background-color: $mono-6;
   transition: 0.3s background-color ease, 0.3s color ease;
 
   &.active {
-    background-color: $blue-ribbon;
-    color: #fff;
+    background-color: #fff;
+    color: $blue-ribbon;
+  }
+
+  &:focus {
+    outline: none;
   }
 
   &:last-child {
@@ -81,7 +85,7 @@
   margin: 0 10px;
   font-family: $text-font-semibold;
   font-size: 20px;
-  color: $big-stone;
+  color: #fff;
 }
 
 .slider-container {
@@ -97,7 +101,7 @@
 
 .slider-frequency {
   font-family: $text-font-semibold;
-  color: $big-stone;
+  color: #fff;
   font-size: 18px;
 }
 

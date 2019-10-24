@@ -3,7 +3,7 @@
 $track-width: 15.5em;
 $track-height: .25em;
 $thumb-dimensions: 1.5em;
-$track-color: $tangerine;
+$track-color: $mono-3;
 $fill-color: $blue-ribbon;
 
 & {
@@ -18,20 +18,20 @@ $fill-color: $blue-ribbon;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  height: 40%;
+  height: 80px;
   border-radius: 5px;
-  background-color: #fff;
+  background-color: $mono-3;
 }
 
 .value-text {
   text-transform: uppercase;
-  color: $big-stone;
+  color: #fff;
   font-family: $text-font-semibold;
   font-size: 20px;
 }
 
 .value-separator {
-  background-color: $big-stone;
+  background-color: #fff;
   width: 90%;
   height: 1px;
 }
@@ -85,6 +85,6 @@ $fill-color: $blue-ribbon;
     height: $thumb-dimensions;
     border-radius: 50% 50% 0;
     transform: rotate(45deg);
-    background: $big-stone;
+    background: #fff;
 	}
 }

@@ -6,13 +6,13 @@
   justify-content: space-between;
   width: 100%;
   height: 20px;
-  background-color: $big-stone;
+  background-color: $mono-3;
   -webkit-app-region: drag;
 }
 
 .logo {
   height: 10px;
-  fill: $mercury;
+  fill: #fff;
   margin-left: 5px;
 }
 
@@ -26,7 +26,7 @@
 .button {
   width: 12px;
   height: 12px;
-  fill: $mercury;
+  fill: #fff;
   padding: 4px;
 }
 

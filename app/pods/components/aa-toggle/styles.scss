@@ -5,7 +5,7 @@
   color: #fff;
   font-family: $text-font-semibold;
   font-size: 16px;
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
 $width: 40px;
@@ -15,13 +15,13 @@ input[type='checkbox'] {
   display: none;
 
   &:checked ~ .toggle {
-    background: $blue-ribbon;
+    background: #fff;
     left: ($width - ($height * 1.4 - $height) / 2) - $height;
     transition: 0.3s;
   }
 
   &:checked ~ .switch {
-    background: $big-stone;
+    background: $mono-3;
     transition: 0.3s;
   }
 }
@@ -30,7 +30,7 @@ input[type='checkbox'] {
   display: block;
   width: $width;
   height: $height;
-  background: $big-stone;
+  background: $mono-3;
   border-radius: $height / 2;
   position: absolute;
   top: 0;
@@ -41,7 +41,7 @@ input[type='checkbox'] {
   height: $height * 1.4;
   width: $height * 1.4;
   border-radius: 50%;
-  background: $blue-ribbon;
+  background: #fff;
   position: absolute;
   top: ($height * 1.4 - $height) / -2;
   left: ($height * 1.4 - $height) / -2;

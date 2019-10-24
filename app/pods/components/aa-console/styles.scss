@@ -10,10 +10,8 @@
 }
 
 .heat-map {
-  border-width: 0 2px 5px;
-  border-style: solid;
-  border-color: $big-stone;
   margin-bottom: 3px;
+  border-bottom: 2px solid $mono-3;
 }
 
 .channels {
