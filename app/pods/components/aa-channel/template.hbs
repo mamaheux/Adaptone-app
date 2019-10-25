@@ -9,6 +9,24 @@
       {{inline-svg "assets/images/arrow-icon.svg" class="link-icon"}}
     </a>
   </div>
+        
+  <div class="button-container">
+    {{aa-toggle-button
+      class="toggle-button"
+      isActive=this.channel.data.isMuted
+      text=(t 'gain.mute')
+      onButtonClick=this.onChannelMuteChange
+    }}
+
+    {{#unless this.isOutput}}
+      {{aa-toggle-button
+        class="toggle-button"
+        isActive=this.channel.data.isSolo
+        text=(t 'gain.solo')
+        onButtonClick=this.onChannelSoloChange
+      }}
+    {{/unless}}
+  </div>
 
   <div class="meter-container">
     {{aa-slider
@@ -25,23 +43,5 @@
       redLimit=-5
       value=this.peakMeterValue
     }}
-  </div>
-
-  <div class="button-container">
-    {{aa-toggle-button
-      class="toggle-button"
-      isActive=this.channel.data.isMuted
-      text="M"
-      onButtonClick=this.onChannelMuteChange
-    }}
-
-    {{#unless this.isOutput}}
-      {{aa-toggle-button
-        class="toggle-button"
-        isActive=this.channel.data.isSolo
-        text="S"
-        onButtonClick=this.onChannelSoloChange
-      }}
-    {{/unless}}
   </div>
 </div>

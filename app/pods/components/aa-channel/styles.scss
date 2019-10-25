@@ -4,12 +4,23 @@
   position: relative;
   border: 2px solid $mono-3;
   border-radius: 3px;
+  min-width: 100px;
+  min-height: 332px;
   background-color: $mono-5;
-  width: 97px;
   margin: 5px 3px 0 3px;
 
   &.output {
     background-color: $mono-4;
+
+    & > .meter-container {
+      .peak-meter {
+        height: 240px;
+      }
+
+      [type='range'] {
+        width: 240px;
+      }
+    }
   }
 }
 
@@ -50,26 +61,29 @@
 
 .button-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  margin-top: 5px;
+  justify-content: center;
+  padding-top: 10px;
 }
 
 .toggle-button {
-  & > .button {
-    padding: 0px 18px;
-    border-top: 1px solid $big-stone;
-    border-radius: 0px;
+  &:first-child {
+    margin-bottom: 5px;
   }
 
-  & > .button:first-child {
-    border-right: 1px solid $big-stone;
+  & > .button {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    padding: 3px 0;
+    width: 80px;
   }
 }
 
 .meter-container {
   display: flex;
-  flex-direction: row;
+  align-items: center;
   margin: 10px 0 10px 10px;
 }
 
