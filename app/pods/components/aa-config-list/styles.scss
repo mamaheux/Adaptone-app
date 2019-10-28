@@ -50,7 +50,7 @@ h1 {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s;
-  box-shadow: inset 0px 20px 20px -10px #fff;
+  box-shadow: inset 0px 20px 20px -10px $mono-2;
 }
 
 .bottom-shadow {
@@ -62,7 +62,7 @@ h1 {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s;
-  box-shadow: inset 0px -20px 20px -10px #fff;
+  box-shadow: inset 0px -20px 20px -10px $mono-2;
 }
 
 .shadow-active {

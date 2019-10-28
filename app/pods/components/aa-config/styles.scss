@@ -20,6 +20,7 @@
   border: 1px solid black;
   border-bottom: 0;
   outline: none;
+  padding: 0 32px;
 }
 
 .select-config:hover {
@@ -27,7 +28,9 @@
 }
 
 .delete-config {
-  color: $big-stone;
+  position: relative;
+  right: 40px;
+  color: $mono-1;
   border: none;
   background-color: transparent;
   font-size: 20px;
@@ -36,4 +39,20 @@
   text-align: center;
   width: 40px;
   height: 40px;
+}
+
+.delete-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.delete-config:focus {
+  outline: none;
+}
+
+.delete-config:hover {
+  .delete-icon {
+    color: $mono-4;
+    transition: color 0.3s ease;
+  }
 }
