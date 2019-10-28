@@ -33,39 +33,49 @@
     </div>
   </div>
 
-
-  {{#if this.isEqVisible}}
-    <div class="graph">
-      {{aa-eq-graph
-        isParametric=this.isParametric
-        channelInfos=this.channel
-        parametricEqValues=this.parametricEqGraphValues
-        graphicEqValues=this.graphicEqGraphValues
-        isOutput=this.isOutput
-      }}
-    </div>
-  {{/if}}
+  <div class="graph">
+    {{aa-eq-graph
+      isParametric=this.isParametric
+      channelInfos=this.channel
+      parametricEqValues=this.parametricEqGraphValues
+      graphicEqValues=this.graphicEqGraphValues
+      isOutput=this.isOutput
+    }}
+  </div>
 </div>
 
-{{#if this.isEqVisible}}
-  <div class="eq-container">
-    {{#unless this.isAuxiliaryOutput}}
-      {{#unless this.isMasterOutput}}
-        {{aa-gain
-          class="gain-container"
-          gain=this.channel.data.gain
-          peakMeterValue=this.peakMeterValue
-          isMuted=this.channel.data.isMuted
-          isSolo=this.channel.data.isSolo
-          onGainChange=(action "onGainChange")
-          onIsMutedChange=(action "onIsMutedChange")
-          onIsSoloChange=(action "onIsSoloChange")
-          minValue=-12
-          maxValue=12
-        }}
-      {{/unless}}
+<div class="eq-container {{if this.isInputVolumeVisible 'input-volume-visible'}}">
+  {{#unless this.isAuxiliaryOutput}}
+    {{#unless this.isMasterOutput}}
+      {{aa-gain
+        class="gain-container"
+        gain=this.channel.data.gain
+        peakMeterValue=this.peakMeterValue
+        isMuted=this.channel.data.isMuted
+        isSolo=this.channel.data.isSolo
+        onGainChange=(action "onGainChange")
+        onIsMutedChange=(action "onIsMutedChange")
+        onIsSoloChange=(action "onIsSoloChange")
+        minValue=-12
+        maxValue=12
+      }}
     {{/unless}}
+  {{/unless}}
 
+  {{#if this.isInputVolumeVisible}}
+    <div class="input-volumes-container">
+      {{#each-in this.channel.data.inputs as |index channel|}}
+        {{aa-channel
+          channel=channel
+          onChannelMuteChange=(action "onInputChannelMuteChange" channel.data)
+          onChannelSoloChange=(action "onInputChannelSoloChange")
+          isOutput=false
+        }}
+      {{/each-in}}
+    </div>
+  {{/if}}
+  
+  {{#if this.isEqVisible}}
     {{aa-eq
       auxiliaryChannelId=this.channel.data.auxiliaryChannelId
       channelId=this.channel.data.channelId
@@ -78,21 +88,8 @@
       isAuxiliaryOutput=this.isAuxiliaryOutput
       onEqChange=(action "onEqChange")
     }}
-  </div>
-{{/if}}
-
-{{#if this.isInputVolumeVisible}}
-  <div class="input-volumes-container">
-    {{#each-in this.channel.data.inputs as |index channel|}}
-      {{aa-channel
-        channel=channel
-        onChannelMuteChange=(action "onInputChannelMuteChange" channel.data)
-        onChannelSoloChange=(action "onInputChannelSoloChange")
-        isOutput=false
-      }}
-    {{/each-in}}
-  </div>
-{{/if}}
+  {{/if}}
+</div>
 
 <a onClick={{this.hideChannelDetails}}>
   {{inline-svg "assets/images/arrow-icon.svg" class="arrow-icon"}}
