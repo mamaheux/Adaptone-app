@@ -25,7 +25,7 @@
   font-family: $text-font-semibold;
   font-size: 18px;
   border-radius: 4px;
-  padding: 2px 12px 3px;
+  padding: 5px 12px;
   margin: 0 15px 0 10px;
   z-index: $z-index-map-overlay;
 }
@@ -49,8 +49,12 @@
 .eq-container {
   display: flex;
   flex-direction: row;
-  padding: 20px 50px;
+  padding: 20px 50px 0;
   justify-content: space-around;
+
+  &.input-volume-visible {
+    padding: 0;
+  }
 }
 
 .gain-container {
@@ -104,30 +108,38 @@
 
 .tabs-container {
   display: flex;
-  padding-top: 5px;
+  margin-top: 10px;
 }
 
 .tab {
-  margin-right: 2px;
-  color: #fff;
-  border-width: 2px 2px 0 2px;
-  border-style: solid;
-  border-color: $big-stone;
-  border-radius: 5px 5px 0 0;
+  margin-right: 10px;
+  color: $mono-1;
+  border-radius: 2px;
   font-family: $text-font-semibold;
   font-size: 16px;
-  padding: 4px 20px;
+  padding: 2px 20px;
   transition: 0.3s ease;
+  background-color: $mono-6;
   transition-property: background-color, color;
 
   &.active {
-    background-color: $big-stone;
-    color: #fff;
+    background-color: #fff;
+    color: $blue-ribbon;
   }
 }
 
 .input-volumes-container {
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 10px;
+
+  .channel {
+    .input {
+      width: 90px;
+    }
+
+    .details {
+      display: none;
+    }
+  }
 }
