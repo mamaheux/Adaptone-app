@@ -1,7 +1,7 @@
 @import "app/styles/variables.scss";
 
-& {
-  margin: 12px 0;
+&:last-child {
+  border-bottom: 1px solid black;
 }
 
 .config-container {
@@ -10,16 +10,20 @@
 }
 
 .select-config {
-  color: #fff;
-  background-color: $blue-ribbon;
-  border: 1px solid $blue-ribbon;
-  border-radius: 5px;
+  color: $mono-3;
+  background-color: $mono-6;
   font-family: $text-font-regular;
   font-size: 16px;
   text-align: center;
-  width: 350px;
+  width: 400px;
   height: 40px;
-  padding: 0 10px;
+  border: 1px solid black;
+  border-bottom: 0;
+  outline: none;
+}
+
+.select-config:hover {
+  background-color: $mono-5;
 }
 
 .delete-config {
