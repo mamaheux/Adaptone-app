@@ -11,7 +11,7 @@ config:
   no: Non
 config-list:
   title: Choisissez une configuration
-  new: Nouveau lieu
+  new: Nouvelle configuration
 console-loading:
   title: Initialisation complétée
   description: Chargement de la console de mixage en cours...

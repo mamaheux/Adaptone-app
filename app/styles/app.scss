@@ -47,6 +47,10 @@ body > .ember-view {
   }
 }
 
+.ember-modal-overlay {
+  z-index: $z-index-modal;
+}
+
 .liquid-container {
   transform: none;
 }

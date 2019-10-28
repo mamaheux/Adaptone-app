@@ -5,13 +5,18 @@
 </h1>
 
 <div class="configuration-list">
-  {{#each configurations as |config|}}
-    {{aa-config
-      config=config
-      removeConfig=(action "removeConfig" config.id)
-      selectConfig=(action "selectConfig" config)
-    }}
-  {{/each}}
+  <div class="list-elements">
+    {{#each configurations as |config|}}
+      {{aa-config
+        config=config
+        removeConfig=(action "removeConfig" config.id)
+        selectConfig=(action "selectConfig" config)
+      }}
+    {{/each}}
+  </div>
+
+  <div class="bottom-shadow"></div>
+  <div class="top-shadow"></div>
 </div>
 
 <button {{action "addConfig"}} class="new-config">{{t 'config-list.new'}}</button>
