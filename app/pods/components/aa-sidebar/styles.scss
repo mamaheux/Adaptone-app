@@ -11,10 +11,12 @@
   position: fixed;
   top: 4px;
   right: 6px;
-}
-
-.bars-icon {
   color: #fff;
+
+  :hover {
+    color: $mono-6;
+    transition: color $default-transition-speed;
+  }
 }
 
 .icon {

@@ -17,12 +17,12 @@ input[type='checkbox'] {
   &:checked ~ .toggle {
     background: #fff;
     left: ($width - ($height * 1.4 - $height) / 2) - $height;
-    transition: 0.3s;
+    transition: $default-transition-speed;
   }
 
   &:checked ~ .switch {
     background: $mono-3;
-    transition: 0.3s;
+    transition: $default-transition-speed;
   }
 }
 
@@ -34,7 +34,8 @@ input[type='checkbox'] {
   border-radius: $height / 2;
   position: absolute;
   top: 0;
-  transition: 0.3s;
+  transition: $default-transition-speed;
+  cursor: pointer;
 }
 
 .toggle {
@@ -46,7 +47,8 @@ input[type='checkbox'] {
   top: ($height * 1.4 - $height) / -2;
   left: ($height * 1.4 - $height) / -2;
   box-shadow: 0 $width / 50 $width / 25 rgba(black, .4);
-  transition: 0.3s;
+  transition: $default-transition-speed;
+  cursor: pointer;
 }
 
 .card {

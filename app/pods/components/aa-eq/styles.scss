@@ -43,7 +43,7 @@
   font-family: $text-font-semibold;
   font-size: 18px;
   background-color: $mono-6;
-  transition: 0.3s background-color ease, 0.3s color ease;
+  transition: $default-transition-speed background-color ease, $default-transition-speed color ease;
 
   &.active {
     background-color: #fff;

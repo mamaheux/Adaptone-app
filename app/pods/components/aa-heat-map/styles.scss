@@ -27,7 +27,11 @@
   height: 40px;
   fill: #fff;
   cursor: pointer;
-  transition: 0.3s fill ease;
+
+  :hover {
+    fill: $spring-green;
+    transition: fill $default-transition-speed;
+  }
 }
 
 .selected {

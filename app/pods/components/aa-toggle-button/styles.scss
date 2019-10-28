@@ -1,5 +1,9 @@
 @import 'app/styles/variables.scss';
 
+& {
+  cursor: pointer;
+}
+
 .button {
   display: flex;
   flex-direction: row;

@@ -16,7 +16,7 @@
   font-family: $text-font-semibold;
   color: #fff;
   text-transform: uppercase;
-  transition: 0.3s color ease;
+  transition: $default-transition-speed color ease;
 
   &.active {
     color: $blue-ribbon;
@@ -29,10 +29,18 @@
 
 .button-wrapper {
   margin-top: 15px;
+  cursor: pointer;
 
   &.active {
     >.power-off-icon {
       fill: $blue-ribbon;
+    }
+  }
+
+  &:hover {
+    >.power-off-icon {
+      fill: $blue-ribbon;
+      transition: fill $default-transition-speed ease;
     }
   }
 }
@@ -41,5 +49,5 @@
   width: 55px;
   height: 60px;
   fill: #fff;
-  transition: 0.3s fill ease;
+  transition: $default-transition-speed fill ease;
 }
