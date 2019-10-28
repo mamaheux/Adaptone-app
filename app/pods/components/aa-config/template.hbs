@@ -1,6 +1,8 @@
 <div class="config-container">
   <button onClick={{selectConfig}} class="select-config">{{config.name}}</button>
-  <button {{action "toggleModal"}} class="delete-config">x</button>
+  <button {{action "toggleModal"}} class="delete-config">
+    {{inline-svg "assets/images/trash.svg" class="delete-icon"}}
+  </button>
 </div>
 
 {{#if isShowingModal}}

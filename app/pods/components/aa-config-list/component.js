@@ -2,8 +2,12 @@ import Component from '@ember/component';
 import {inject as service} from '@ember/service';
 import steps from 'adaptone-front/models/steps';
 import SequenceIds from 'adaptone-front/constants/sequence-ids';
+import $ from 'jquery';
+import {run} from '@ember/runloop';
 
 import config from 'adaptone-front/config/environment';
+
+const MAX_LIST_HEIGHT = 300;
 
 export default Component.extend({
   fileSystem: service('file-system'),
@@ -13,6 +17,9 @@ export default Component.extend({
 
   configurations: null,
 
+  attached: false,
+  lastPosition: null,
+
   init() {
     this._super(...arguments);
 
@@ -20,6 +27,54 @@ export default Component.extend({
     const configs = result.success ? result.data : [];
 
     this.set('configurations', configs);
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+
+    $('.list-elements').on('mousedown mouseup mousemove', (e) => {
+      if (e.type === 'mousedown') {
+        this.set('attached', true);
+        this.set('lastPosition', e.clientY);
+      }
+
+      if (e.type === 'mouseup') this.set('attached', false);
+
+      if (e.type === 'mousemove' && this.get('attached')) {
+        const posY = e.clientY;
+        const lastPosition = this.get('lastPosition');
+        const deltaY = posY - lastPosition;
+
+        $('.list-elements').scrollTop($('.list-elements').scrollTop() - deltaY);
+
+        this.set('lastPosition', e.clientY);
+      }
+    });
+
+    $(window).on('mouseup', () => {
+      run(() => {
+        this.set('attached', false);
+      });
+    });
+
+    if ($('.list-elements').height() >= MAX_LIST_HEIGHT) {
+      $('.bottom-shadow').addClass('shadow-active');
+    }
+
+    $('.list-elements').scroll(() => {
+      if ($('.list-elements').scrollTop() + $('.list-elements').height() >= $('.list-elements')[0].scrollHeight) {
+        $('.bottom-shadow').removeClass('shadow-active');
+        $('.top-shadow').addClass('shadow-active');
+      } else {
+        $('.bottom-shadow').addClass('shadow-active');
+        $('.top-shadow').removeClass('shadow-active');
+      }
+    });
+  },
+
+  willDestroyElement() {
+    $('.list-elements').off('mousedown mouseup mousemove');
+    $(window).off('mouseup');
   },
 
   actions: {
