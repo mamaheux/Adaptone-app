@@ -47,7 +47,7 @@ body > .ember-view {
     text-align: center;
     margin: 0 10px;
     padding: 7px 25px;
-    transition: 0.3s background-color, color ease;
+    transition: $default-transition-speed background-color, color ease;
 
     &:hover,
     &:focus {
@@ -62,5 +62,6 @@ body > .ember-view {
 }
 
 .liquid-container {
+  height: 100%;
   transform: none;
 }

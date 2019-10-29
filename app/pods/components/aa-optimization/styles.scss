@@ -29,12 +29,12 @@
   text-align: center;
   padding: 10px 70px;
   margin-top: 40px;
-  transition: 0.3s background-color, color ease;
+  transition: $default-transition-speed background-color, color ease;
 
   &.yes {
     color: $big-stone;
     background-color: #fff;
-    
+
     &:hover,
     &:focus {
       background-color: $blue-ribbon;
@@ -46,7 +46,7 @@
     color: #fff;
     background-color: $blue-ribbon;
     margin-right: 40px;
-    
+
     &:hover,
     &:focus {
       background-color: #fff;
