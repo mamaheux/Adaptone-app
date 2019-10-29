@@ -30,6 +30,11 @@
       fill: $blue-ribbon;
     }
   }
+
+  &:hover {
+    background-color: #fff;
+    transition: $default-transition-speed;
+  }
 }
 
 .icon {
