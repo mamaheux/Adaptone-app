@@ -11,7 +11,7 @@
 
 .select-config {
   color: $mono-3;
-  background-color: $mono-6;
+  background-color: #fff;
   font-family: $text-font-regular;
   font-size: 16px;
   text-align: center;
@@ -19,15 +19,21 @@
   height: 40px;
   border: 1px solid black;
   border-bottom: 0;
+  border-radius: 1px;
   outline: none;
-  padding: 0 32px;
+  padding: 0 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .select-config:hover {
-  background-color: $mono-5;
+  background-color: $blue-ribbon;
+  color: #fff;
 }
 
 .delete-config {
+  display: flex;
   position: relative;
   right: 40px;
   color: $mono-1;
@@ -42,8 +48,8 @@
 }
 
 .delete-icon {
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
 }
 
 .delete-config:focus {

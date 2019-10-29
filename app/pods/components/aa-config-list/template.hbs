@@ -19,4 +19,7 @@
   <div class="top-shadow"></div>
 </div>
 
-<button {{action "addConfig"}} class="new-config">{{t 'config-list.new'}}</button>
+<button {{action "addConfig"}} class="new-config">
+  <span class="button-text">{{t 'config-list.new'}}</span>
+  {{inline-svg "assets/images/plus-icon.svg" class="plus-icon"}}
+</button>

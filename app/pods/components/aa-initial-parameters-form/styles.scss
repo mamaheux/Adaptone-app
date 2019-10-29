@@ -17,7 +17,7 @@
 
 .input {
   padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 1px;
   background-color: #fff;
   color: $big-stone;
   font-family: $text-font-regular;
@@ -25,6 +25,8 @@
   border: 1.25px solid $big-stone;
   margin-bottom: 20px;
   width: 400px;
+  outline: none;
+  box-sizing: border-box;
 
   &::placeholder {
     color: $silver;
@@ -32,14 +34,13 @@
 
   &:hover,
   &:focus {
-    outline: none;
     border: 1.5px solid $blue-ribbon;
-    border-radius: 5px;
+    border-radius: 1px;
   }
 }
 
 .label {
-  font-family: $title-font-semibold;
+  font-family: $text-font-semibold;
   font-size: 16px;
   color: #fff;
   margin-bottom: 10px;
@@ -52,12 +53,24 @@
   color: $big-stone;
   background-color: #fff;
   border: none;
-  border-radius: 5px;
+  outline: none;
+  border-radius: 1px;
   font-family: $text-font-semibold;
   font-size: 18px;
   text-align: center;
-  padding: 10px 40px 10px 60px;
+  padding: 10px 30px 10px 50px;
   margin-top: 15px;
+  transition: 0.3s background-color, color ease;
+
+  &:hover,
+  &:focus {
+    background-color: $blue-ribbon;
+    color: #fff;
+
+    .arrow-icon {
+      fill: #fff;
+    }
+  }
 }
 
 .arrow-icon {

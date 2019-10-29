@@ -72,19 +72,36 @@ h1 {
 }
 
 .new-config {
-  color: $big-stone;
+  position: relative;
+  outline: none;
+  color: $blue-ribbon;
   background-color: #fff;
-  border: 1px solid $blue-ribbon;
-  border-radius: 5px;
-  font-family: $text-font-bold;
+  border: none;
+  border-radius: 1px;
+  font-family: $text-font-semibold;
   font-size: 16px;
   text-align: center;
-  margin-top: 25px;
-  width: 350px;
-  padding: 10px 70px;
+  margin-top: 50px;
+  padding: 10px 50px 10px 30px;
+  transition: 0.3s background-color, color ease;
 
   &:hover,
   &:focus {
-    border-color: $tangerine;
+    background-color: $blue-ribbon;
+    color: #fff;
+
+    .plus-icon {
+      fill: #fff;
+    }
+  }
+
+  .plus-icon {
+    position: absolute;
+    top: 11px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    fill: $blue-ribbon;
+    transition: 0.3s fill ease;
   }
 }

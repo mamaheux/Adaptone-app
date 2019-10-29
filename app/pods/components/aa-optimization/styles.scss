@@ -23,22 +23,35 @@
 .optimization-button {
   width: 250px;
   border: none;
-  border-radius: 5px;
+  border-radius: 1px;
   font-family: $text-font-semibold;
   font-size: 18px;
   text-align: center;
   padding: 10px 70px;
   margin-top: 40px;
+  transition: 0.3s background-color, color ease;
 
   &.yes {
     color: $big-stone;
     background-color: #fff;
+    
+    &:hover,
+    &:focus {
+      background-color: $blue-ribbon;
+      color: #fff;
+    }
   }
 
   &.no {
     color: #fff;
     background-color: $blue-ribbon;
     margin-right: 40px;
+    
+    &:hover,
+    &:focus {
+      background-color: #fff;
+      color: $big-stone;
+    }
   }
 }
 
@@ -51,7 +64,7 @@
 .optimizing {
   color: #fff;
   font-family: $title-font-semibold;
-  font-size: 18px;
+  font-size: 24px;
   text-align: center;
-  margin: 0 0 40px;
+  margin: 0 0 50px;
 }

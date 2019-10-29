@@ -1,74 +1,41 @@
 @import "app/styles/variables.scss";
 
 & {
+  display: flex;
+  margin: 0 auto;
   position: fixed;
-  left: calc(50% - 410px);
+  left: 80px;
   bottom: 20px;
-  border: 1px solid $big-stone;
-  background-color: $big-stone;
 }
 
 .breadcrumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
   margin: 0;
   padding: 0;
-  list-style: none;
-  overflow: hidden;
-  font-family: $text-font-regular;
-  letter-spacing: 0.5px;
-  font-size: 13px;
+  text-align: center;
 
   li {
-    float: left;
-    color: #929292;
-    width: 75px;
-    min-height: 36px;
-    text-align: center;
-    text-decoration: none;
-    padding: 10px 15px 10px 48px;
-    background: #fff;
-    position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
+    font-family: $text-font-regular;
+    font-size: 16px;
+    color: $mono-6;
+    max-width: 150px;
+    padding: 20px 30px;
 
     &.active {
       color: #fff;
-      background-color: $blue-ribbon;
-
-      &::after {
-        border-left: 30px solid $blue-ribbon;
-      }
     }
 
-    &::after {
-      content: "";
-      display: block;
-      width: 0;
-      height: 0;
-      border-top: 50px solid transparent;
-      border-bottom: 50px solid transparent;
-      border-left: 30px solid #fff;
-      position: absolute;
-      top: 50%;
-      margin-top: -50px;
-      left: 100%;
-      z-index: 2;
-    }
-
-    &::before {
-      content: "";
-      display: block;
-      width: 0;
-      height: 0;
-      border-top: 50px solid transparent;
-      border-bottom: 50px solid transparent;
-      border-left: 30px solid $big-stone;
-      position: absolute;
-      top: 50%;
-      margin-top: -50px;
-      margin-left: 1px;
-      left: 100%;
-      z-index: 1;
+    &:not(:last-child)::after {
+      content: '>';
+      color: #fff;
+      font-size: 16px;
+      font-family: $title-font-semibold;
+      margin-left: 35px;
     }
   }
 }
