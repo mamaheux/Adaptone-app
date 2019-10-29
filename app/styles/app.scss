@@ -18,13 +18,15 @@ body > .ember-view {
 }
 
 .ember-modal-dialog {
-  padding: 50px 30px;
+  padding: 50px 10px;
   width: 50%;
   font-family: $title-font-regular;
+  background-color: $mono-4;
+  border-radius: 1px;
 
   .modal-message {
     text-align: center;
-    color: $big-stone;
+    color: #fff;
     font-size: 18px;
   }
 
@@ -35,15 +37,23 @@ body > .ember-view {
   }
 
   .select-config {
+    outline: none;
     color: $big-stone;
-    background-color: #fff;
-    border: 1px solid $blue-ribbon;
-    border-radius: 5px;
+    background-color: $mono-6;
+    border: none;
+    border-radius: 1px;
     font-size: 16px;
     font-family: $text-font-semibold;
     text-align: center;
     margin: 0 10px;
     padding: 7px 25px;
+    transition: 0.3s background-color, color ease;
+
+    &:hover,
+    &:focus {
+      background-color: #fff;
+      color: $blue-ribbon;
+    }
   }
 }
 

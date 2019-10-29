@@ -30,26 +30,57 @@
   fill: #fff;
 }
 
+.arrow-icon {
+  fill: $big-stone;
+  margin-left: 10px;
+  transform: rotate(180deg);
+  width: 24px;
+  height: 24px;
+}
+
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
   border: none;
-  border-radius: 5px;
+  border-radius: 1px;
   font-family: $text-font-semibold;
   font-size: 16px;
   text-align: center;
-  padding: 10px 40px 10px 30px;
+  padding: 10px 20px 10px 20px;
   min-width: 350px;
+  transition: 0.3s background-color, color ease;
 }
 
 .rerun-initialization-button {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   color: #fff;
   background-color: $blue-ribbon;
   margin-right: 30px;
+  
+  &:hover,
+  &:focus {
+    background-color: #fff;
+    color: $blue-ribbon;
+
+    .replay-icon {
+      fill: $blue-ribbon;
+    }
+  }
 }
 
 .confirm-button {
   color: $big-stone;
   background-color: #fff;
+  transition: 0.3s background-color, color ease;
+  
+  &:hover,
+  &:focus {
+    background-color: $blue-ribbon;
+    color: #fff;
+    
+    .arrow-icon {
+      fill: #fff;
+    }
+  }
 }
