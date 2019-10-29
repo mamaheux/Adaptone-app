@@ -59,6 +59,8 @@ export default Component.extend({
 
     if ($('.list-elements').height() >= MAX_LIST_HEIGHT) {
       $('.bottom-shadow').addClass('shadow-active');
+      $('.configuration-list').addClass('scrollable');
+      $('.list-elements').addClass('scrollable');
     }
 
     $('.list-elements').scroll(() => {

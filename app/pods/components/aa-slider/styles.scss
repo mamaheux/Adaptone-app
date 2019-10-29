@@ -19,7 +19,7 @@ $fill-color: $blue-ribbon;
   align-items: center;
   justify-content: space-around;
   height: 80px;
-  border-radius: 5px;
+  border-radius: 1px;
   background-color: $mono-3;
 }
 
@@ -86,5 +86,6 @@ $fill-color: $blue-ribbon;
     border-radius: 50% 50% 0;
     transform: rotate(45deg);
     background: #fff;
+    cursor: pointer;
 	}
 }
