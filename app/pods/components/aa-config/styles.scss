@@ -59,6 +59,6 @@
 .delete-config:hover {
   .delete-icon {
     color: $mono-5;
-    transition: color 0.3s ease;
+    transition: color $default-transition-speed ease;
   }
 }
