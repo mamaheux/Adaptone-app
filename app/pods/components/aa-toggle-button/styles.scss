@@ -1,5 +1,9 @@
 @import 'app/styles/variables.scss';
 
+& {
+  cursor: pointer;
+}
+
 .button {
   display: flex;
   flex-direction: row;
@@ -25,6 +29,11 @@
     >.icon {
       fill: $blue-ribbon;
     }
+  }
+
+  &:hover {
+    background-color: #fff;
+    transition: $default-transition-speed;
   }
 }
 

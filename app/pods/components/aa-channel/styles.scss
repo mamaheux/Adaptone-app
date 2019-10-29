@@ -39,6 +39,16 @@
   background-color: transparent;;
   margin: 10px 0 0 5px;
   text-align: center;
+  outline-color: $mono-3;
+
+  &:hover {
+    outline: 1px solid $mono-3;
+    transition: $default-transition-speed;
+  }
+}
+
+.input:focus {
+  outline: 1px solid $mono-3;
 }
 
 .details {
@@ -56,6 +66,13 @@
     margin: 10px 0 0 5px;
     display: flex;
     align-items: center;
+  }
+}
+
+.details:hover {
+  .link-icon {
+    fill: $mono-3;
+    transition: fill $default-transition-speed;
   }
 }
 

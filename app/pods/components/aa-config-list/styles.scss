@@ -26,13 +26,15 @@ h1 {
   display: flex;
   flex-direction: column;
   max-height: $config-list-height;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .list-elements {
   height: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
+}
+
+.scrollable {
   overflow-y: scroll;
 }
 
