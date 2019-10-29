@@ -17,7 +17,7 @@
 
 .input {
   padding: 10px 15px;
-  border-radius: 5px;
+  border-radius: 1px;
   background-color: #fff;
   color: $big-stone;
   font-family: $text-font-regular;
@@ -35,7 +35,7 @@
   &:hover,
   &:focus {
     border: 1.5px solid $blue-ribbon;
-    border-radius: 5px;
+    border-radius: 1px;
   }
 }
 
