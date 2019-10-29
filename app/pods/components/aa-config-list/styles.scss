@@ -83,7 +83,7 @@ h1 {
   text-align: center;
   margin-top: 50px;
   padding: 10px 50px 10px 30px;
-  transition: 0.3s background-color, color ease;
+  transition: $default-transition-speed background-color, color ease;
 
   &:hover,
   &:focus {
@@ -102,6 +102,6 @@ h1 {
     width: 20px;
     height: 20px;
     fill: $blue-ribbon;
-    transition: 0.3s fill ease;
+    transition: $default-transition-speed fill ease;
   }
 }

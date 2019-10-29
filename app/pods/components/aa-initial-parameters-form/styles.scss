@@ -60,7 +60,7 @@
   text-align: center;
   padding: 10px 30px 10px 50px;
   margin-top: 15px;
-  transition: 0.3s background-color, color ease;
+  transition: $default-transition-speed background-color, color ease;
 
   &:hover,
   &:focus {
