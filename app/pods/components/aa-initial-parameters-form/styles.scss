@@ -35,7 +35,10 @@
   &:hover,
   &:focus {
     border: 1.5px solid $blue-ribbon;
-    border-radius: 1px;
+  }
+
+  &:invalid {
+    border: 1px solid $torch-red;
   }
 }
 
