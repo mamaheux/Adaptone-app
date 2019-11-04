@@ -30,7 +30,6 @@ export default Component.extend({
       this.configuration.step = steps['probe-positioning'];
       this.set('configuration.monitorsNumber', +this.configuration.monitorsNumber);
       this.set('configuration.speakersNumber', +this.configuration.speakersNumber);
-      this.set('configuration.probesNumber', +this.configuration.probesNumber);
 
       const inputChannelIds = generateRange(this.currentChannelId, this.currentChannelId + INPUT_COUNT);
       this.currentChannelId += inputChannelIds.length;

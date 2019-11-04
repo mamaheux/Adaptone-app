@@ -6,7 +6,6 @@ export default class Configuration {
     this.name = null;
     this.monitorsNumber = null;
     this.speakersNumber = null;
-    this.probesNumber = null;
     this.positions = [];
     this.step = steps['initial-parameters'];
   }
