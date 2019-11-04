@@ -104,7 +104,7 @@
 }
 
 .dial-svg path {
-  transition: 0.3s cubic-bezier(0, 0, 0.24, 1);
+  transition: $default-transition-speed cubic-bezier(0, 0, 0.24, 1);
 }
 
 .inner-circle {
@@ -117,5 +117,5 @@
 
 * {
   box-sizing: border-box;
-  transition: 0.3s cubic-bezier(0.6, 0, 0.2, 1);
+  transition: $default-transition-speed cubic-bezier(0.6, 0, 0.2, 1);
 }
