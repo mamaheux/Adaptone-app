@@ -1,44 +1,17 @@
 import Component from '@ember/component';
-import {computed, observer} from '@ember/object';
+import {computed} from '@ember/object';
+import {htmlSafe} from '@ember/template';
 import RecognizerMixin from 'ember-gestures/mixins/recognizers';
-import $ from 'jquery';
 
-const START_DEG = -225;
-const DEG_RANGE = 270;
-const STEPS = 20;
-const ALIGN_TOP_DEGREES = 45;
-const SET_VALUE_DEGREES = 90;
-
-const FIXED_DECIMALS = 2;
-const ROUNDED_FIXED_DECIMALS = 0;
+const STEPS = 18;
+const MIN_ROTATION = -132;
+const MAX_ROTATION = 132;
+const OUTSIDE_BOX_DIVIDER = 184;
 
 export default Component.extend(RecognizerMixin, {
   recognizers: 'pan',
   value: 0,
   lastDragValue: 0,
-  isRounded: false,
-
-  degreesValue: computed('value', 'min', 'mid', 'max', function() {
-    const {
-      min,
-      mid,
-      max,
-      value
-    } = this.getProperties('min', 'mid', 'max', 'value');
-
-    const halfDegValue = DEG_RANGE / 2;
-    const firstHalfRange = mid - min;
-    const secondHalfRange = max - mid;
-    let degValue;
-
-    if (value <= mid) {
-      degValue = (value - min) / firstHalfRange * halfDegValue;
-    } else {
-      degValue = halfDegValue + (value - mid) / secondHalfRange * halfDegValue;
-    }
-
-    return degValue;
-  }),
 
   panMove(e) {
     const panAmount = e.originalEvent.gesture.deltaX;
@@ -55,24 +28,26 @@ export default Component.extend(RecognizerMixin, {
 
     this.set('lastDragValue', panAmount);
     this.set('value', newValue);
-    this._setValue(this.get('degreesValue'));
+    this.get('onValueChange')(value);
   },
 
-  didRender() {
-    this._super(...arguments);
-    this._setValue(this.get('degreesValue'));
-  },
+  normalizedValue: computed('value', 'min', 'max', function() {
+    const {value, min, max} = this.getProperties('value', 'min', 'max');
 
-  displayedValue: computed('value', function() {
-    let numberOfDecimals = FIXED_DECIMALS;
-
-    if (this.get('isRounded')) numberOfDecimals = ROUNDED_FIXED_DECIMALS;
-
-    return parseFloat(this.get('value')).toFixed(numberOfDecimals);
+    return (value - min) / (max - min) * (MAX_ROTATION - MIN_ROTATION) + MIN_ROTATION;
   }),
 
-  valueChanged: observer('degreesValue', function() {
-    this._setValue(this.get('degreesValue'));
+  dialStyle: computed('normalizedValue', function() {
+    const normalizedValue = this.get('normalizedValue');
+
+    return htmlSafe(`transform: translate(-50%, -50%) rotate(${normalizedValue}deg);`);
+  }),
+
+  outerStyle: computed('normalizedValue', function() {
+    const normalizedValue = this.get('normalizedValue');
+    const dashOffset = OUTSIDE_BOX_DIVIDER - OUTSIDE_BOX_DIVIDER * ((normalizedValue + MAX_ROTATION) / (2 * MAX_ROTATION));
+
+    return htmlSafe(`stroke-dashoffset: ${dashOffset};`);
   }),
 
   _getNewValue(panAmount, value, min, mid, max, lastDragValue) {
@@ -98,27 +73,5 @@ export default Component.extend(RecognizerMixin, {
     }
 
     return newValue;
-  },
-
-  _alignTop(degrees) {
-    return degrees - ALIGN_TOP_DEGREES;
-  },
-
-  _rotate(templateElement, degrees) {
-    const deg = this._alignTop(degrees);
-    templateElement.css('transform', `rotate(${deg}deg)`);
-  },
-
-  _setValue(value) {
-    const parent = this;
-    let quarterNumber = 1;
-
-    $(`#${this.elementId}`).find('.knob').find('.quarter').each(function() {
-      const angle = Math.min(quarterNumber * SET_VALUE_DEGREES, value);
-      parent._rotate($(this), START_DEG + angle);
-      quarterNumber++;
-    });
-
-    this.get('onValueChange')(value);
   }
 });
