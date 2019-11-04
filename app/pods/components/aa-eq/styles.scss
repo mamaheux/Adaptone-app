@@ -93,9 +93,11 @@
 }
 
 .slider-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .slider {
@@ -104,6 +106,9 @@
 }
 
 .slider-frequency {
+  position: absolute;
+  bottom: -10px;
+  left: 30px;
   font-family: $text-font-semibold;
   color: #fff;
   font-size: 18px;

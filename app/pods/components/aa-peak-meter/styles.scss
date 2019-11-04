@@ -3,9 +3,8 @@
 .peak-meter {
   width: 25px;
   height: 210px;
-  border: 1px solid $big-stone;
   position: relative;
-  background: #fff;
+  background: $mono-3;
 }
 
 .peak-meter-part {
@@ -29,6 +28,6 @@
     content: '';
     width: 25px;
     height: 2px;
-    background-color: $big-stone;
+    background-color: #fff;
   }
 }

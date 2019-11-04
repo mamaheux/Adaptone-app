@@ -71,7 +71,7 @@
 
 .details:hover {
   .link-icon {
-    fill: $mono-3;
+    fill: #fff;
     transition: fill $default-transition-speed;
   }
 }
@@ -108,5 +108,5 @@
   width: 24px;
   height: 28px;
   transform: rotate(-90deg);
-  fill: #fff;
+  fill: rgba(255, 255, 255, 0.6);
 }
