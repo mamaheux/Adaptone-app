@@ -4,17 +4,14 @@
 
 <div class="label-mid">{{mid}}</div>
 
-<div class="knob">
-  <div class="underlay"></div>
-
-	<div class="quarter"></div>
-  <div class="quarter"></div>
-  <div class="quarter"></div>
-  <div class="quarter"></div>
-
-	<div class="overlay"></div>
-
-  <div class="value">{{displayedValue}}</div>
+<div class="knob style1">
+  <div class="rela-block knob-dial">
+    <div class="abs-center dial-grip" style="{{dialStyle}}" />
+    <svg viewBox="0 0 100 100" class="dial-svg">
+      <path d="M20,76 A 40 40 0 1 1 80 76" fill="none" class="inner-circle" />
+      <path d="M20,76 A 40 40 0 1 1 80 76" fill="none" class="outer-circle" style="{{outerStyle}}" />
+    </svg>
+  </div>
 </div>
 
 <div class="bottom-label-container">

@@ -16,55 +16,6 @@
   margin-bottom: 25px;
 }
 
-.value {
-  position: absolute;
-  top: 35px;
-  width: 100%;
-  text-align: center;
-  font-family: $text-font-bold;
-  font-size: 16px;
-  color: #fff;
-  z-index: 3;
-}
-
-.knob {
-  position: relative;
-  width: 100px;
-  height: 100px;
-}
-
-.quarter {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border: 14px solid;
-  border-color: transparent $blue-ribbon transparent transparent;
-}
-
-.underlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  border: 14px solid #fff;
-}
-
-.overlay {
-  position: absolute;
-  top: 60px;
-  left: 19px;
-  width: 60px;
-  height: 60px;
-  background-color: $mono-1;
-  transform: rotate(45deg);
-  z-index: 2;
-}
-
 .label-mid {
   font-family: $text-font-semibold;
   font-size: 18px;
@@ -79,6 +30,7 @@
   display: flex;
   width: 100%;
   margin-top: -15px;
+  padding-top: 5px;
   justify-content: space-between;
   font-family: $text-font-semibold;
   font-size: 18px;
@@ -89,4 +41,81 @@
 .label-mid,
 .label-max {
   flex: 1 1 50%;
+}
+
+.effect-container .knob {
+  padding: 0;
+  margin: 0 0 10px;
+}
+
+.knob-dial {
+  height: 100px;
+  width: 100px;
+  transition: 0s;
+}
+.rela-block {
+  display: block;
+  position: relative;
+}
+
+.knob.style1 .dial-grip {
+  height: 72px;
+  width: 72px;
+  border: 6px solid $mono-3;
+}
+
+.dial-grip {
+  border-radius: 100%;
+  transition: 0s;
+}
+
+.abs-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.knob.style1 .dial-grip::after {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  height: 16px;
+  background-color: #fff;
+}
+
+.dial-grip::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.dial-svg {
+  pointer-events: none;
+  position: absolute;
+  stroke-width: 8;
+  stroke-dasharray: 184 184;
+  stroke-linecap: round !important;
+}
+
+.dial-svg path {
+  transition: 0.3s cubic-bezier(0, 0, 0.24, 1);
+}
+
+.inner-circle {
+  stroke: $mono-5;
+}
+
+.outer-circle {
+  stroke: $blue-ribbon;
+}
+
+* {
+  box-sizing: border-box;
+  transition: 0.3s cubic-bezier(0.6, 0, 0.2, 1);
 }
