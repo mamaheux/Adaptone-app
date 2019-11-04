@@ -58,7 +58,7 @@
   position: relative;
 }
 
-.knob.style1 .dial-grip {
+.knob.style .dial-grip {
   height: 72px;
   width: 72px;
   border: 6px solid $mono-3;
@@ -77,7 +77,7 @@
   transform: translate(-50%, -50%);
 }
 
-.knob.style1 .dial-grip::after {
+.knob.style .dial-grip::after {
   position: absolute;
   top: 5px;
   left: 50%;
