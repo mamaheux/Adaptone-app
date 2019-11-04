@@ -6,7 +6,6 @@
   "name": "example_config",
   "monitorsNumber": "2",
   "speakersNumber": "345",
-  "probesNumber": "5",
   "positions":[],
   "step": 4,
   "channels": {

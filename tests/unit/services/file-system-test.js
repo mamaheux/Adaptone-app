@@ -74,7 +74,6 @@ describe('Unit | Services | file system', () => {
         name: 'Old config',
         monitorsNumber: 1,
         speakersNumber: 2,
-        probesNumber: 3,
         positions: []
       };
 
@@ -83,7 +82,6 @@ describe('Unit | Services | file system', () => {
         name: 'New config',
         monitorsNumber: 5,
         speakersNumber: 6,
-        probesNumber: 7,
         positions: []
       };
 
@@ -113,7 +111,6 @@ describe('Unit | Services | file system', () => {
         name: 'First config',
         monitorsNumber: 1,
         speakersNumber: 2,
-        probesNumber: 3,
         positions: []
       };
 
@@ -122,7 +119,6 @@ describe('Unit | Services | file system', () => {
         name: 'First config new name',
         monitorsNumber: 11,
         speakersNumber: 22,
-        probesNumber: 33,
         positions: []
       };
 
@@ -131,7 +127,6 @@ describe('Unit | Services | file system', () => {
         name: 'Second config',
         monitorsNumber: 5,
         speakersNumber: 6,
-        probesNumber: 7,
         positions: []
       };
 
@@ -161,7 +156,6 @@ describe('Unit | Services | file system', () => {
         name: 'First config',
         monitorsNumber: 1,
         speakersNumber: 2,
-        probesNumber: 3,
         positions: []
       };
 
@@ -170,7 +164,6 @@ describe('Unit | Services | file system', () => {
         name: 'Second config',
         monitorsNumber: 5,
         speakersNumber: 6,
-        probesNumber: 7,
         positions: []
       };
 
