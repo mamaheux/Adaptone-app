@@ -1,12 +1,12 @@
 breadcrumb:
   parameters: Paramètres initiaux
-  placement: Placement des sondes
+  placement: Positionnement des sondes
   initialization: Routine d'initialisation
   confirmation: Confirmation
   optimization: Optimisation
   end: Fin
 config:
-  confirmation: Voulez-vous vraiment supprimer cette configuration?
+  confirmation: Voulez-vous supprimer cette configuration?
   yes: Oui
   no: Non
 config-list:
@@ -30,7 +30,7 @@ optimization:
   yes: Oui
 probe-initialization:
   title: Routine d'initialisation
-  description: Détermination de la position des sondes...
+  description: Localisation des sondes...
 probe-positioning:
   instructions: Veuillez placer les haut-parleurs et les sondes de façon uniforme dans la zone désirée, puis lancez la routine d'initialisation
   run: Lancer la routine d'initialisation
@@ -47,7 +47,7 @@ power-button:
   on: On
   off: Off
 eq:
-  frequency: Frequency
+  frequency: Fréquence
   q: Q
   gain: Gain
   gain-short: Gain
@@ -61,7 +61,6 @@ channel-details:
 console:
   save: Sauvegarder
 gain:
-  volume: vol
   gain: gain
   mute: Mute
   solo: Solo
@@ -70,7 +69,7 @@ eq-graph:
     frequency: Fréquence (Hz)
     gain: Gain (dB)
   tooltip:
-    frequency: Freq
+    frequency: Fréq.
     gain: Gain
   series:
     eq-gain: Gains de l'EQ
