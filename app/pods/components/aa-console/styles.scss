@@ -18,7 +18,7 @@
   display: flex;
   align-items: flex-start;
   padding-left: 70px;
-  padding-top: 12px;
+  padding-top: 8px;
 }
 
 .inputs {
@@ -30,7 +30,14 @@
 .outputs {
   display: flex;
   flex-wrap: wrap;
-  flex: 0 1 50%;
+  flex: 1 1 50%;
+  overflow-y: scroll;
+  max-height: 340px;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
 }
 
 .top-container {
