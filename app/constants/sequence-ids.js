@@ -25,7 +25,8 @@ const SequenceIds = {
   PEAKMETER_LEVELS: 23,
   CONFIG_CHOICE: 24,
   PROBE_LISTEN: 25,
-  STOP_PROBE_LISTEN: 26
+  STOP_PROBE_LISTEN: 26,
+  TOGGLE_UNIFORMIZATION: 27
 };
 
 export default SequenceIds;

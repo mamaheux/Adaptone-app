@@ -14,8 +14,9 @@ export default Component.extend({
 
   channels: null,
   positions: null,
-  isChannelDetailsVisible: false,
   currentChannel: null,
+  isChannelDetailsVisible: false,
+  isUniformizationOn: true,
 
   allChannels: computed('channels', function() {
     const channels = this.get('channels');
@@ -27,6 +28,9 @@ export default Component.extend({
     this._super(...arguments);
 
     const configuration = this.get('session').get('configuration');
+
+    this.set('isUniformizationOn', configuration.isUniformizationOn);
+
     this.set('positions', configuration.positions);
 
     // TODO : Remove this but leave it in for now as it makes testing the whole app easier
@@ -202,6 +206,20 @@ export default Component.extend({
 
     hideChannelDetails() {
       this.set('isChannelDetailsVisible', false);
+    },
+
+    onUniformizationToggleClick() {
+      const configuration = this.get('session').get('configuration');
+      configuration.isUniformizationOn = !this.get('isUniformizationOn');
+
+      this.get('connection').sendMessage({
+        seqId: SequenceIds.TOGGLE_UNIFORMIZATION,
+        data: {
+          isUniformizationOn: configuration.isUniformizationOn
+        }
+      });
+
+      this.get('session').set('configuration', configuration);
     }
   }
 });
