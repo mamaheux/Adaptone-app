@@ -17,8 +17,6 @@ export default Component.extend({
   packetDispatcher: service('packet-dispatcher'),
   session: service('session'),
 
-  isParametric: true,
-
   parametricEqGraphValues: null,
   graphicEqGraphValues: null,
 

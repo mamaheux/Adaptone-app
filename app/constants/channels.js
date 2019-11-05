@@ -7,6 +7,7 @@ const inputs = [
       gain: 3.00,
       isMuted: false,
       isSolo: false,
+      isParametric: true,
       paramEq: [
         {
           id: 0,
@@ -77,6 +78,7 @@ const inputs = [
       gain: 3.00,
       isMuted: false,
       isSolo: false,
+      isParametric: true,
       paramEq: [
         {
           id: 0,
@@ -148,6 +150,7 @@ const inputs = [
       gain: 3.00,
       isMuted: false,
       isSolo: false,
+      isParametric: true,
       paramEq: [
         {
           id: 0,
@@ -218,6 +221,7 @@ const inputs = [
       gain: 3.00,
       isMuted: false,
       isSolo: false,
+      isParametric: true,
       paramEq: [
         {
           id: 0,
@@ -380,6 +384,7 @@ const master = {
     isMuted: false,
     isSolo: false,
     inputs: masterInputs,
+    isParametric: true,
     paramEq: [
       {
         id: 0,
@@ -452,6 +457,7 @@ const auxiliaryTemplate = {
     gain: 0,
     isMuted: false,
     isSolo: false,
+    isParametric: true,
     inputs: auxInputs,
     paramEq: [
       {

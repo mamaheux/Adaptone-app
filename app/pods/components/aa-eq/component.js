@@ -27,7 +27,6 @@ export default Component.extend({
   channelId: null,
   auxiliaryChannelId: null,
   graphicEqFreqs: null,
-  isParametric: false,
 
   parametricFilters: null,
   graphicFilters: null,

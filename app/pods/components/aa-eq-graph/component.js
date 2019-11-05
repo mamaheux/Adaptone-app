@@ -30,8 +30,6 @@ export default Component.extend({
   intl: service(),
   packetDispatcher: service('packet-dispatcher'),
 
-  isParametric: true,
-
   channelInfos: null,
   parametricEqValues: null,
   graphicEqValues: null,

@@ -11,7 +11,7 @@ describe('Unit | Component | aa-eq', function() {
   const onEqChangeSpy = sinon.spy();
   const updateEqGainsConfigSpy = sinon.spy();
   const originalDebounce = Ember.run.debounce;
-  
+
   beforeEach(function() {
     const parametricFilters = [
       {
@@ -91,7 +91,6 @@ describe('Unit | Component | aa-eq', function() {
     component = this.owner.factoryFor('component:aa-eq').create({
       auxiliaryChannelId: 5,
       channelId: 1,
-      isParametric: false,
       parametricFilters,
       graphicFilters,
       parametricEqGraphValues,
@@ -107,7 +106,7 @@ describe('Unit | Component | aa-eq', function() {
       func.call(target, arg);
     }
   });
-  
+
   afterEach(function() {
     Ember.run.debounce = originalDebounce;
   });
