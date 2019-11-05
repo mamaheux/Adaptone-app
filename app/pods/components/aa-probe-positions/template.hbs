@@ -1,7 +1,20 @@
 {{aa-page-header title=(t 'probe-positions.title')}}
 
 <div class="map">
-  {{aa-positions-map positions=this.positions}}
+  {{#if this.firstSymmetrySelected}}
+    {{aa-positions-map positions=this.positions.firstSymmetryPositions}}
+  {{else}}
+    {{aa-positions-map positions=this.positions.secondSymmetryPositions}}
+  {{/if}}
+</div>
+
+<div class="symmetry-wrapper">
+  <div class="symmetry-title">{{t 'probe-positions.symmetry-title'}}</div>
+  {{aa-toggle
+    leftValue=(t 'probe-positions.first-symmetry')
+    rightValue=(t 'probe-positions.second-symmetry')
+    isActive=this.firstSymmetrySelected
+  }}
 </div>
 
 <div class="buttons-wrapper">
