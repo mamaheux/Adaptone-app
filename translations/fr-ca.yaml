@@ -39,7 +39,7 @@ probe-positions:
   title: Confirmation des positions
   rerun: Relancer la routine d'initialisation
   confirm: Confirmer
-  symmetry-title: Veillez sélectionner la configuation de la salle
+  symmetry-title: Veuillez sélectionner la bonne configuration de la salle
   first-symmetry: Première
   second-symmetry: Deuxième
 optimal-positions:
