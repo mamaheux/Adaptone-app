@@ -8,7 +8,7 @@ export default Component.extend({
   init() {
     this._super(...arguments);
     this.get('packetDispatcher').one('positions', (data) => {
-      this.get('router').transitionTo('probe-positions', {queryParams: {positions: JSON.stringify(data.firstSymmetryPositions)}});
+      this.get('router').transitionTo('probe-positions', {queryParams: {positions: JSON.stringify(data)}});
     });
   }
 });

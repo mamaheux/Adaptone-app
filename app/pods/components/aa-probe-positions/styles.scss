@@ -84,3 +84,17 @@
     }
   }
 }
+
+.symmetry-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}
+
+.symmetry-title {
+  color: #fff;
+  font-family: $text-font-regular;
+  font-size: 24px;
+  text-align: center;
+}
