@@ -30,7 +30,6 @@ export default Component.extend({
     const configuration = this.get('session').get('configuration');
 
     this.set('isUniformizationOn', configuration.isUniformizationOn);
-
     this.set('positions', configuration.positions);
 
     // TODO : Remove this but leave it in for now as it makes testing the whole app easier
