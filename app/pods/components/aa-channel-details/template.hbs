@@ -27,7 +27,7 @@
         {{aa-toggle
           leftValue=(t 'channel-details.graphic')
           rightValue=(t 'channel-details.parametric')
-          isActive=this.isParametric
+          isActive=this.channel.data.isParametric
         }}
       {{/if}}
     </div>
@@ -35,7 +35,7 @@
 
   <div class="graph">
     {{aa-eq-graph
-      isParametric=this.isParametric
+      isParametric=this.channel.data.isParametric
       channelInfos=this.channel
       parametricEqValues=this.parametricEqGraphValues
       graphicEqValues=this.graphicEqGraphValues
@@ -79,7 +79,7 @@
     {{aa-eq
       auxiliaryChannelId=this.channel.data.auxiliaryChannelId
       channelId=this.channel.data.channelId
-      isParametric=this.isParametric
+      isParametric=this.channel.data.isParametric
       parametricFilters=this.channel.data.paramEq
       graphicFilters=this.channel.data.graphEq
       parametricEqGraphValues=this.parametricEqGraphValues
