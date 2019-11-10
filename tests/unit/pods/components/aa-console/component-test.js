@@ -257,5 +257,24 @@ describe('Unit | Component | aa-console', function() {
         expect(component.get('isChannelDetailsVisible')).to.be.false;
       });
     });
+
+    describe('onUniformizationToggleClick', () => {
+      it('should send the correct message', () => {
+        const connectionSpy = sinon.spy();
+        component.connection.sendMessage = connectionSpy;
+        
+
+        component.send('onUniformizationToggleClick');
+
+        const expectedMessage = {
+          seqId: 27,
+          data: {
+            isUniformizationOn: false
+          }
+        };
+
+        expect(connectionSpy.calledWith(expectedMessage)).to.be.true;
+      });
+    });
   });
 });

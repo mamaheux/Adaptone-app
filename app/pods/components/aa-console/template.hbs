@@ -14,6 +14,18 @@
       positions=this.positions.data.positions
       class="heat-map"
     }}
+
+    <div class="uniformization-container">
+      <span class="uniformization-label">Uniformisation</span>
+
+      {{aa-toggle
+        class="uniformization-toggle"
+        leftValue="Off"
+        rightValue="On"
+        isActive=this.isUniformizationOn
+        onClick=(action "onUniformizationToggleClick")
+      }}
+    </div>
   </div>
 
   <div class="channels">
