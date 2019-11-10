@@ -35,10 +35,12 @@ describe('Unit | Component | aa-positions-map', function() {
     });
 
     describe('computed', () => {
-      describe('maxima', () => {
-        it('should return the biggest X and Y coordinates', () => {
-          expect(component.get('maxima').biggestX).to.equal(5);
-          expect(component.get('maxima').biggestY).to.equal(6);
+      describe('rangeValues', () => {
+        it('should return the biggest and smallest X and Y coordinates', () => {
+          expect(component.get('rangeValues').smallestX).to.equal(1);
+          expect(component.get('rangeValues').smallestY).to.equal(2);
+          expect(component.get('rangeValues').biggestX).to.equal(5);
+          expect(component.get('rangeValues').biggestY).to.equal(6);
         });
       });
     });
@@ -83,15 +85,15 @@ describe('Unit | Component | aa-positions-map', function() {
         it('should assign the proper mic and speaker position and styles', () => {
           const expectedMicPositions = [
             {
-              x: 28,
-              y: 47,
-              style: htmlSafe('position:absolute;top:47px;left:28px'),
+              x: 60,
+              y: 60,
+              style: htmlSafe('position:absolute;top:60px;left:60px'),
               type: 'm'
             },
             {
-              x: 84,
-              y: 95,
-              style: htmlSafe('position:absolute;top:95px;left:84px'),
+              x: 100,
+              y: 101,
+              style: htmlSafe('position:absolute;top:101px;left:100px'),
               type: 'm'
             }
           ];

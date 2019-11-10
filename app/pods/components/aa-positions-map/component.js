@@ -17,37 +17,45 @@ export default Component.extend({
     this._super(...arguments);
   },
 
-  maxima: computed('positions', function() {
+  rangeValues: computed('positions', function() {
     const xPositions = this.get('positions').map(position => position.x);
     const yPositions = this.get('positions').map(position => position.y);
 
     const biggestX = Math.max(...xPositions);
     const biggestY = Math.max(...yPositions);
+    const smallestX = Math.min(...xPositions);
+    const smallestY = Math.min(...yPositions);
 
-    return {biggestX, biggestY};
+    return {smallestX, biggestX, smallestY, biggestY};
   }),
 
   adjustPositions(canvas) {
-    const {maxima, micPositions, speakerPositions} = this.getProperties('maxima', 'micPositions', 'speakerPositions');
+    const {rangeValues, micPositions, speakerPositions} = this.getProperties('rangeValues', 'micPositions', 'speakerPositions');
 
-    const widthRatio = (canvas.clientWidth - CANVAS_PADDING) / (maxima.biggestX);
-    const heightRatio = (canvas.clientHeight - CANVAS_PADDING) / (maxima.biggestY);
+    const realClientWidth = canvas.clientWidth - (2 * CANVAS_PADDING);
+    const realClientHeight = canvas.clientHeight - (2 * CANVAS_PADDING);
 
     micPositions.forEach((micPosition, i) => {
       const currentMicPosition = micPositions.objectAt(i);
 
-      set(currentMicPosition, 'x', Math.round(micPosition.x * widthRatio));
-      set(currentMicPosition, 'y', Math.round(micPosition.y * heightRatio));
+      const normalizedX = (micPosition.x - rangeValues.smallestX) / (rangeValues.biggestX - rangeValues.smallestX) * realClientWidth + CANVAS_PADDING;
+      const normalizedY = (micPosition.y - rangeValues.smallestY) / (rangeValues.biggestY - rangeValues.smallestY) * realClientHeight + CANVAS_PADDING;
+
+      set(currentMicPosition, 'x', Math.round(normalizedX));
+      set(currentMicPosition, 'y', Math.round(normalizedY));
       set(currentMicPosition, 'value', micPosition.value);
-      set(currentMicPosition, 'style', htmlSafe(`position:absolute;top:${micPosition.y}px;left:${micPosition.x}px`));
+      set(currentMicPosition, 'style', htmlSafe(`position:absolute;top:${normalizedY}px;left:${normalizedX}px`));
     });
 
     speakerPositions.forEach((speakerPosition, i) => {
       const currentSpeakerPosition = speakerPositions.objectAt(i);
 
-      set(currentSpeakerPosition, 'x', Math.round(speakerPosition.x * widthRatio));
-      set(currentSpeakerPosition, 'y', Math.round(speakerPosition.y * heightRatio));
-      set(currentSpeakerPosition, 'style', htmlSafe(`position:absolute;top:${speakerPosition.y}px;left:${speakerPosition.x}px`));
+      const normalizedX = (speakerPosition.x - rangeValues.smallestX) / (rangeValues.biggestX - rangeValues.smallestX) * realClientWidth + CANVAS_PADDING;
+      const normalizedY = (speakerPosition.y - rangeValues.smallestY) / (rangeValues.biggestY - rangeValues.smallestY) * realClientHeight + CANVAS_PADDING;
+
+      set(currentSpeakerPosition, 'x', Math.round(normalizedX));
+      set(currentSpeakerPosition, 'y', Math.round(normalizedY));
+      set(currentSpeakerPosition, 'style', htmlSafe(`position:absolute;top:${normalizedY}px;left:${normalizedX}px`));
     });
   },
 
