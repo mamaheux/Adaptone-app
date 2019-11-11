@@ -8,5 +8,6 @@ export default class Configuration {
     this.speakersNumber = null;
     this.positions = [];
     this.step = steps['initial-parameters'];
+    this.isUniformizationOn = true;
   }
 }

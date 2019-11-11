@@ -30,6 +30,7 @@ Chaque paquet comprend un **seqId** qui permet de rapidement identifier la natur
 | 24  | [Charger une configuration](#charger-une-configuration) |
 | 25  | [Écouter une sonde](#écouter-une-sonde) |
 | 26  | [Arrêt de l'écoute d'une sonde](#arrêt-de-lécoute-dune-sonde) |
+| 27  | [Démarrer ou arrêter l'uniformisation](#démarrer-ou-arrêter-luniformisation) |
 | *Échanges de données* |
 | 21 | [Taux erreur](#taux-erreur) |
 | 22 | [Spectre sonore des entrées](#spectre-sonore-des-entrées) |
@@ -513,6 +514,17 @@ Les niveaux sonores ne sont pas en dB.
 ```json
 {
   "seqId": 26
+}
+```
+
+### Démarrer ou arrêter l'uniformisation
+
+```json
+{
+  "seqId": 27,
+  "data": {
+    "isUniformizationOn": true
+  }
 }
 ```
 
