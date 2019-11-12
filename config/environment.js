@@ -25,7 +25,7 @@ module.exports = function(environment) {
       LOCAL_STORAGE: {
         SESSION_NAMESPACE: 'adaptone-session'
       },
-      WEBSOCKET_ADDRESS: 'ws://192.168.0.103:8080/mixer'
+      WEBSOCKET_ADDRESS: 'ws://localhost:8765'
     }
   };
 

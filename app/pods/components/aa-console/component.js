@@ -28,65 +28,6 @@ export default Component.extend({
 
     const configuration = this.get('session').get('configuration');
     this.set('positions', configuration.positions);
-
-    // TODO : Remove this but leave it in for now as it makes testing the whole app easier
-    this.set('positions', {
-      seqId: 11,
-      data: {
-        positions: [
-          {
-            x: 0.05,
-            y: 0.05,
-            type: 's'
-          },
-          {
-            x: 0.9,
-            y: 0.05,
-            type: 's'
-          },
-          {
-            x: 0.45,
-            y: 0.1,
-            type: 's'
-          },
-          {
-            id: 0,
-            x: 0.05,
-            y: 0.1,
-            type: 'm',
-            errorRate: 0.12
-          },
-          {
-            id: 1,
-            x: 0.1,
-            y: 0.15,
-            type: 'm',
-            errorRate: 0.09
-          },
-          {
-            id: 2,
-            x: 0.3,
-            y: 0.3,
-            type: 'm',
-            errorRate: 0.07
-          },
-          {
-            id: 3,
-            x: 0.5,
-            y: 0.15,
-            type: 'm',
-            errorRate: 0.09
-          },
-          {
-            id: 4,
-            x: 0.8,
-            y: 0.3,
-            type: 'm',
-            errorRate: 0.13
-          }
-        ]
-      }
-    });
   },
 
   didInsertElement() {

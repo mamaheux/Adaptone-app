@@ -70,9 +70,7 @@ export default Component.extend({
         data: this.configuration
       });
 
-      this.get('router').transitionTo('console');
-      // TODO: Re-enable this when we actually want to navigate through the steps
-      // this.get('router').transitionTo('probe-positioning');
+      this.get('router').transitionTo('probe-positioning');
     }
   }
 });
