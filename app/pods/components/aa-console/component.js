@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import {inject as service} from '@ember/service';
 import {computed} from '@ember/object';
 import SequenceIds from 'adaptone-front/constants/sequence-ids';
+import config from 'adaptone-front/config/environment';
 
 const CHANNEL_GAIN_MAX_VALUE = 100;
 const DECIBEL_CONVERT = 10;
@@ -17,6 +18,8 @@ export default Component.extend({
   currentChannel: null,
   isChannelDetailsVisible: false,
   isUniformizationOn: true,
+
+  isUniformizationDemo: config.APP.UNFORMIZATION_DEMO,
 
   allChannels: computed('channels', function() {
     const channels = this.get('channels');
