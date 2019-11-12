@@ -5,6 +5,7 @@ import {set} from '@ember/object';
 import SequenceIds from 'adaptone-front/constants/sequence-ids';
 import $ from 'jquery';
 import {run} from '@ember/runloop';
+import config from 'adaptone-front/config/environment';
 
 const MIC_ICON_X_OFFSET = 15;
 const MIC_ICON_Y_OFFSET = 20;
@@ -20,6 +21,8 @@ export default PositionsMap.extend({
   radius: null,
   max: null,
   min: null,
+
+  isUniformizationDemo: config.APP.UNFORMIZATION_DEMO,
 
   didInsertElement() {
     this._super(...arguments);

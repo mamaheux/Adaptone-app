@@ -1,9 +1,17 @@
 <div class="canvas-wrapper">
-  <canvas class="canvas"></canvas>
+  <canvas class="canvas {{if this.isUniformizationDemo "huge"}}"></canvas>
   <div class="overlay">
-    {{#each this.micPositions as |micPosition|}}
+    {{#each this.micPositions as |micPosition index|}}
       <div class="{{if micPosition.selected "selected sonar"}} tooltip" style={{micPosition.style}} {{action "selectMicrophone" micPosition on="mouseUp"}}>
-        {{inline-svg "assets/images/microphone-icon.svg" class="microphone"}}
+        {{#if this.isUniformizationDemo}}
+          {{#unless index}}
+            {{inline-svg "assets/images/female-icon.svg" class="person"}}
+          {{else}}
+            {{inline-svg "assets/images/microphone-icon.svg" class="microphone"}}
+          {{/unless}}
+        {{else}}
+          {{inline-svg "assets/images/microphone-icon.svg" class="microphone"}}
+        {{/if}}
 
         <div class="tooltip-pane">
           {{percentage micPosition.errorRate 2}} {{t 'heat-map.error-rate'}}

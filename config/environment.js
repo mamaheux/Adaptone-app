@@ -25,7 +25,8 @@ module.exports = function(environment) {
       LOCAL_STORAGE: {
         SESSION_NAMESPACE: 'adaptone-session'
       },
-      WEBSOCKET_ADDRESS: 'ws://localhost:8765'
+      WEBSOCKET_ADDRESS: 'ws://localhost:8765',
+      UNFORMIZATION_DEMO: true
     }
   };
 
