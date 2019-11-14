@@ -5,7 +5,7 @@
       <div class="{{if micPosition.selected "selected sonar"}} tooltip" style={{micPosition.style}} {{action "selectMicrophone" micPosition on="mouseUp"}}>
         {{inline-svg "assets/images/microphone-icon.svg" class="microphone"}}
 
-        <div class="tooltip-pane">
+        <div class="tooltip-pane {{tooltip-position micPosition canvas}}">
           {{percentage micPosition.errorRate 2}} {{t 'heat-map.error-rate'}}
         </div>
       </div>
