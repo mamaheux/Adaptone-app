@@ -152,6 +152,22 @@ export default Component.extend({
       this.set('isInputVolumeVisible', true);
     },
 
+    onInputGainChange(channel) {
+      debounce(this, this._updateSessionConfiguration, WRITE_IN_SESSION_DEBOUNCE_TIME);
+
+      const message = {
+        seqId: SequenceIds.CHANGE_AUX_VOLUME_INPUT,
+        data: {
+          channelId: this.get('channel').data.channelId,
+          gain: channel.gain
+        }
+      };
+
+      debounce(this.get('connection'), this.get('connection').sendMessage, message, DEBOUNCE_TIME);
+
+      return channel;
+    },
+
     onInputChannelMuteChange(channel) {
       this._updateSessionConfiguration();
 

@@ -12,8 +12,9 @@ $fill-color: $blue-ribbon;
 }
 
 .value-container {
+  min-width: 60px;
   margin-left: 10px;
-  padding: 0 5px;
+  padding: 0 8px;
   display: flex;
   flex-direction: column;
   align-items: center;

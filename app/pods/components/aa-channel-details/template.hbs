@@ -67,6 +67,7 @@
       {{#each-in this.channel.data.inputs as |index channel|}}
         {{aa-channel
           channel=channel
+          onGainChange=(action "onInputGainChange" channel.data)
           onChannelMuteChange=(action "onInputChannelMuteChange" channel.data)
           onChannelSoloChange=(action "onInputChannelSoloChange")
           isOutput=false
