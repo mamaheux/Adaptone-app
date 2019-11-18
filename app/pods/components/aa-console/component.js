@@ -32,7 +32,7 @@ export default Component.extend({
     this.set('positions', configuration.positions);
 
     // TODO : Remove this but leave it in for now as it makes testing the whole app easier
-    /*this.set('positions', [
+    /* this.set('positions', [
       {
         x: 0.05,
         y: 0.05,

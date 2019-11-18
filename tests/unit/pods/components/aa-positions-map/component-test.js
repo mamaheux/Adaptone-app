@@ -86,8 +86,8 @@ describe('Unit | Component | aa-positions-map', function() {
           const expectedMicPositions = [
             {
               x: 60,
-              y: 60,
-              style: htmlSafe('position:absolute;top:60px;left:60px'),
+              y: 61,
+              style: htmlSafe('position:absolute;top:61px;left:60px'),
               type: 'm'
             },
             {
@@ -101,7 +101,7 @@ describe('Unit | Component | aa-positions-map', function() {
           const expectedSpeakerPositions = [
             {
               x: 140,
-              y: 142,
+              y: 141,
               style: htmlSafe('position:absolute;top:142px;left:140px'),
               type: 's'
             }
@@ -116,6 +116,7 @@ describe('Unit | Component | aa-positions-map', function() {
           component.setSpeakerPositions();
           component.adjustPositions(canvas);
 
+          console.log(component.get('speakerPositions'));
           expect(component.get('micPositions')).to.deep.equal(expectedMicPositions);
           expect(component.get('speakerPositions')).to.deep.equal(expectedSpeakerPositions);
         });
