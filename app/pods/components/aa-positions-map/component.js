@@ -38,8 +38,16 @@ export default Component.extend({
     micPositions.forEach((micPosition, i) => {
       const currentMicPosition = micPositions.objectAt(i);
 
-      const normalizedX = (micPosition.x - rangeValues.smallestX) / (rangeValues.biggestX - rangeValues.smallestX) * realClientWidth + CANVAS_PADDING;
-      const normalizedY = (micPosition.y - rangeValues.smallestY) / (rangeValues.biggestY - rangeValues.smallestY) * realClientHeight + CANVAS_PADDING;
+      let normalizedX;
+      let normalizedY;
+
+      if (realClientWidth > realClientHeight) {
+        normalizedX = (micPosition.x - rangeValues.smallestX) / (rangeValues.biggestX - rangeValues.smallestX) * realClientHeight + CANVAS_PADDING + ((canvas.clientWidth - canvas.clientHeight) / 2);
+        normalizedY = (micPosition.y - rangeValues.smallestY) / (rangeValues.biggestY - rangeValues.smallestY) * realClientHeight + CANVAS_PADDING;
+      } else {
+        normalizedX = (micPosition.x - rangeValues.smallestX) / (rangeValues.biggestX - rangeValues.smallestX) * realClientWidth + CANVAS_PADDING;
+        normalizedY = (micPosition.y - rangeValues.smallestY) / (rangeValues.biggestY - rangeValues.smallestY) * realClientWidth + CANVAS_PADDING + ((canvas.clientHeight - canvas.clientWidth) / 2);
+      }
 
       set(currentMicPosition, 'x', Math.round(normalizedX));
       set(currentMicPosition, 'y', Math.round(normalizedY));
@@ -50,8 +58,16 @@ export default Component.extend({
     speakerPositions.forEach((speakerPosition, i) => {
       const currentSpeakerPosition = speakerPositions.objectAt(i);
 
-      const normalizedX = (speakerPosition.x - rangeValues.smallestX) / (rangeValues.biggestX - rangeValues.smallestX) * realClientWidth + CANVAS_PADDING;
-      const normalizedY = (speakerPosition.y - rangeValues.smallestY) / (rangeValues.biggestY - rangeValues.smallestY) * realClientHeight + CANVAS_PADDING;
+      let normalizedX;
+      let normalizedY;
+
+      if (realClientWidth > realClientHeight) {
+        normalizedX = (speakerPosition.x - rangeValues.smallestX) / (rangeValues.biggestX - rangeValues.smallestX) * realClientHeight + CANVAS_PADDING + ((canvas.clientWidth - canvas.clientHeight) / 2);
+        normalizedY = (speakerPosition.y - rangeValues.smallestY) / (rangeValues.biggestY - rangeValues.smallestY) * realClientHeight + CANVAS_PADDING;
+      } else {
+        normalizedX = (speakerPosition.x - rangeValues.smallestX) / (rangeValues.biggestX - rangeValues.smallestX) * realClientWidth + CANVAS_PADDING;
+        normalizedY = (speakerPosition.y - rangeValues.smallestY) / (rangeValues.biggestY - rangeValues.smallestY) * realClientWidth + CANVAS_PADDING + ((canvas.clientHeight - canvas.clientWidth) / 2);
+      }
 
       set(currentSpeakerPosition, 'x', Math.round(normalizedX));
       set(currentSpeakerPosition, 'y', Math.round(normalizedY));

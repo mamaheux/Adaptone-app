@@ -13,7 +13,7 @@
           {{inline-svg "assets/images/microphone-icon.svg" class="microphone"}}
         {{/if}}
 
-        <div class="tooltip-pane">
+        <div class="tooltip-pane {{tooltip-position micPosition canvas}}">
           {{percentage micPosition.errorRate 2}} {{t 'heat-map.error-rate'}}
         </div>
       </div>

@@ -109,8 +109,6 @@
 
 .tooltip-pane {
   top: 50%;
-  left: 100%;
-  margin-left: 10px;
   transform: translate(0, -50%);
   padding: 5px 10px;
   color: $mono-3;
@@ -126,6 +124,16 @@
   opacity: 0;
   transition: opacity $default-transition-speed;
   white-space: nowrap;
+
+  &.right {
+    left: 100%;
+    margin-left: 10px;
+  }
+
+  &.left {
+    right: 100%;
+    margin-right: 10px;
+  }
 }
 
 .tooltip:hover {

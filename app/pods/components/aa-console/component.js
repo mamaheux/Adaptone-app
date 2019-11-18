@@ -4,7 +4,6 @@ import {computed} from '@ember/object';
 import SequenceIds from 'adaptone-front/constants/sequence-ids';
 import config from 'adaptone-front/config/environment';
 
-const CHANNEL_GAIN_MAX_VALUE = 100;
 const DECIBEL_CONVERT = 10;
 const DECIBEL_FACTOR = 20;
 
@@ -86,7 +85,7 @@ export default Component.extend({
       const seqId = this._getGainSequenceId(channel, false);
 
       let gain = channel.isMuted ? 0 : Math.pow(DECIBEL_CONVERT, channel.gain / DECIBEL_FACTOR);
-      if (seqId !== SequenceIds.CHANGE_INPUT_GAIN) gain = channel.isMuted ? 0 : channel.gain / CHANNEL_GAIN_MAX_VALUE;
+      if (seqId !== SequenceIds.CHANGE_INPUT_GAIN) gain = channel.isMuted ? 0 : channel.gain;
 
       if (this.get('allChannels').some(c => c.data.isSolo
         && c.data.channelId !== channel.channelId

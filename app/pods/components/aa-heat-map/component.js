@@ -18,6 +18,8 @@ export default PositionsMap.extend({
   connection: service('connection'),
   probeStatePersister: service('probe-state-persister'),
 
+  canvas: null,
+
   radius: null,
   max: null,
   min: null,
@@ -34,8 +36,11 @@ export default PositionsMap.extend({
       run(() => {
         this.generateHeatMap(canvasWrapper);
         this._computePositions();
+        this.set('canvas', canvasWrapper);
       });
     });
+
+    this.set('canvas', canvasWrapper);
   },
 
   willDestroyElement() {
