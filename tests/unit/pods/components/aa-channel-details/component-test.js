@@ -11,7 +11,7 @@ describe('Unit | Component | aa-channel-details', function() {
   const onChannelMuteChangeSpy = sinon.spy();
   const onChannelSoloChangeSpy = sinon.spy();
   const originalDebounce = Ember.run.debounce;
-  
+
   beforeEach(function() {
     const channel = {
       data: {
@@ -197,7 +197,7 @@ describe('Unit | Component | aa-channel-details', function() {
           expect(isOutput).to.be.true;
         });
       });
-      
+
       describe('when master output', () => {
         it('should be true', () => {
           component.set('channel', {data: {isMasterOutput: true}});
@@ -232,7 +232,7 @@ describe('Unit | Component | aa-channel-details', function() {
 
         const updateSessionConfigurationSpy = sinon.spy();
         component._updateSessionConfiguration = updateSessionConfigurationSpy;
-        
+
         const connectionSpy = sinon.spy();
         component.connection.sendMessage = connectionSpy;
 
@@ -253,7 +253,7 @@ describe('Unit | Component | aa-channel-details', function() {
         expect(onChannelMuteChangeSpy.calledOnce).to.be.true;
       });
     });
-    
+
     describe('onChannelSoloChange', () => {
       it('should call onChannelSoloChange and update session configuration', () => {
         const updateSessionConfigurationSpy = sinon.spy();
@@ -264,7 +264,7 @@ describe('Unit | Component | aa-channel-details', function() {
         expect(onChannelSoloChangeSpy.calledOnce).to.be.true;
       });
     });
-            
+
     describe('onEqTabClick', () => {
       it('should set isInputVolumeVisible to false and isEqVisible to true', () => {
         component.send('onEqTabClick');
@@ -273,7 +273,7 @@ describe('Unit | Component | aa-channel-details', function() {
         expect(component.get('isEqVisible')).to.be.true;
       });
     });
-                
+
     describe('onInputVolumeTabClick', () => {
       it('should set isInputVolumeVisible to true and isEqVisible to false', () => {
         component.send('onInputVolumeTabClick');
@@ -282,7 +282,30 @@ describe('Unit | Component | aa-channel-details', function() {
         expect(component.get('isEqVisible')).to.be.false;
       });
     });
-                    
+
+    describe('onInputGainChange', () => {
+      it('should call update update session configuration and send the gain with the correct message', () => {
+        const expectedMessage = {
+          seqId: 15,
+          data: {
+            channelId: 1,
+            gain: 0.5
+          }
+        };
+
+        const updateSessionConfigurationSpy = sinon.spy();
+        component._updateSessionConfiguration = updateSessionConfigurationSpy;
+
+        const connectionSpy = sinon.spy();
+        component.connection.sendMessage = connectionSpy;
+
+        component.send('onInputGainChange', {gain: 0.5});
+
+        expect(updateSessionConfigurationSpy.calledOnce).to.be.true;
+        expect(connectionSpy.calledWith(expectedMessage)).to.be.true;
+      });
+    });
+
     describe('onInputChannelMuteChange', () => {
       it('should update session configuration and send the gain with the correct message', () => {
         const auxiliaryChannel = Channels.auxiliaryTemplate;
@@ -298,7 +321,7 @@ describe('Unit | Component | aa-channel-details', function() {
 
         const updateSessionConfigurationSpy = sinon.spy();
         component._updateSessionConfiguration = updateSessionConfigurationSpy;
-        
+
         const connectionSpy = sinon.spy();
         component.connection.sendMessage = connectionSpy;
         component.send('onInputChannelMuteChange', auxiliaryChannel.data.inputs[0].data);
@@ -307,7 +330,7 @@ describe('Unit | Component | aa-channel-details', function() {
         expect(connectionSpy.calledWith(expectedMessage)).to.be.true;
       });
     });
-                        
+
     describe('onInputChannelSoloChange', () => {
       it('should set isInputVolumeVisible to true and isEqVisible to false', () => {
         const auxiliaryChannel = Channels.auxiliaryTemplate;
@@ -343,7 +366,7 @@ describe('Unit | Component | aa-channel-details', function() {
 
         const updateSessionConfigurationSpy = sinon.spy();
         component._updateSessionConfiguration = updateSessionConfigurationSpy;
-        
+
         const connectionSpy = sinon.spy();
         component.connection.sendMessage = connectionSpy;
         component.send('onInputChannelSoloChange');
