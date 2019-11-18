@@ -9,7 +9,7 @@ describe('Unit | Component | aa-console', function() {
   let component;
   const originalDebounce = Ember.run.debounce;
   const updateSessionConfigurationSpy = sinon.spy();
-  
+
   beforeEach(function() {
     const auxiliaries = [Channels.auxiliaryTemplate];
     const channels = {
@@ -22,13 +22,14 @@ describe('Unit | Component | aa-console', function() {
       channels
     });
 
+    component.set('isUniformizationOn', true);
     component._updateSessionConfiguration = updateSessionConfigurationSpy;
 
     Ember.run.debounce = function(target, func, arg, _) {
       func.call(target, arg);
     }
   });
-  
+
   afterEach(function() {
     Ember.run.debounce = originalDebounce;
     updateSessionConfigurationSpy.resetHistory();
@@ -248,7 +249,7 @@ describe('Unit | Component | aa-console', function() {
         expect(component.get('isChannelDetailsVisible')).to.be.true;
       });
     });
-        
+
     describe('hideChannelDetails', () => {
       it('should set the current channel to null and set isChannelDetailsVisible to false', () => {
         component.send('hideChannelDetails');
@@ -262,7 +263,6 @@ describe('Unit | Component | aa-console', function() {
       it('should send the correct message', () => {
         const connectionSpy = sinon.spy();
         component.connection.sendMessage = connectionSpy;
-        
 
         component.send('onUniformizationToggleClick');
 
