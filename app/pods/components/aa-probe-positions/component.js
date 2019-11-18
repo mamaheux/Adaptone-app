@@ -160,7 +160,7 @@ export default Component.extend({
 
       this.get('fileSystem').editConfiguration(configuration);
       this.get('session').set('configuration', configuration);
-      this.router.transitionTo('console');
+      this.get('router').transitionTo('console');
 
       // This code would be used if we had an optimization routine in place, this is not the case currently
       /*
