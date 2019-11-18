@@ -15,19 +15,17 @@
       class="heat-map"
     }}
 
-    {{#if this.isUniformizationDemo}}
-      <div class="uniformization-container">
-        <span class="uniformization-label">Uniformisation</span>
+    <div class="uniformization-container">
+      <span class="uniformization-label">Uniformisation</span>
 
-        {{aa-toggle
-          class="uniformization-toggle"
-          leftValue="Off"
-          rightValue="On"
-          isActive=this.isUniformizationOn
-          onClick=(action "onUniformizationToggleClick")
-        }}
-      </div>
-    {{/if}}
+      {{aa-toggle
+        class="uniformization-toggle"
+        leftValue="Off"
+        rightValue="On"
+        isActive=this.isUniformizationOn
+        onClick=(action "onUniformizationToggleClick")
+      }}
+    </div>
   </div>
 
   {{#unless this.isUniformizationDemo}}
