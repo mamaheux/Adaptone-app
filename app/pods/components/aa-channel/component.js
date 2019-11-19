@@ -82,8 +82,9 @@ export default Component.extend({
       // For the input peak meter, we have to multiply the channel's gain with the inputAfterEq level
       this.get('packetDispatcher').on('peakmeter-levels', (data) => {
         if (!data) return;
-
-        const currentChannelGain = this.get('gainValue') / GAIN_MAX_VALUE;
+        
+        let currentChannelGain = this.get('gainValue') / GAIN_MAX_VALUE;
+        if (this.get('channel').data.isMuted) currentChannelGain = 0;
 
         this.set('peakMeterValue',
           data.inputAfterEq.find(input => input.channelId === currentChannelId).level * currentChannelGain);

@@ -155,10 +155,13 @@ export default Component.extend({
     onInputGainChange(channel) {
       debounce(this, this._updateSessionConfiguration, WRITE_IN_SESSION_DEBOUNCE_TIME);
 
+      if (channel.isMuted) return;
+
       const message = {
         seqId: SequenceIds.CHANGE_AUX_VOLUME_INPUT,
         data: {
-          channelId: this.get('channel').data.channelId,
+          channelId: channel.channelId,
+          auxiliaryChannelId: this.get('channel').data.channelId,
           gain: channel.gain
         }
       };
@@ -179,8 +182,9 @@ export default Component.extend({
       const message = {
         seqId: SequenceIds.CHANGE_AUX_VOLUME_INPUT,
         data: {
-          channelId: this.get('channel').data.channelId,
-          gain: gain / MAX_GAIN_VALUE
+          channelId: channel.channelId,
+          auxiliaryChannelId: this.get('channel').data.channelId,
+          gain
         }
       };
 
@@ -207,6 +211,7 @@ export default Component.extend({
       const message = {
         seqId: SequenceIds.CHANGE_AUX_VOLUME_INPUTS,
         data: {
+          auxiliaryChannelId: this.get('channel').data.channelId,
           gains
         }
       };

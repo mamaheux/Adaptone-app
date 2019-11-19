@@ -127,6 +127,8 @@ export default Component.extend({
     this.notifyPropertyChange('channelSpectrums');
     this.notifyPropertyChange('addedChannelsSpectrums');
 
+    if (chart.series.length === 1) return;
+
     chart.series[AMPLITUDES_SERIE_INDEX].setData(this.get('channelSpectrums'), true);
     chart.series[ADDED_AMPLITUDES_SERIE_INDEX].setData(this.get('addedChannelsSpectrums'), true);
   }),
