@@ -9,7 +9,7 @@
   justify-content: center;
   flex-direction: row;
   position: relative;
-  width: 700px;
+  width: 800px;
 
   &::after {
     content: '';
@@ -26,7 +26,7 @@
 .graphic-filters {
   display: flex;
   flex-direction: column;
-  width: 700px;
+  width: 800px;
 }
 
 .parametric-filter-buttons-container {
@@ -68,7 +68,7 @@
   flex-direction: row;
   align-items: center;
   margin-top: 40px;
-  margin-left: 50px;
+  margin-left: 100px;
 }
 
 .graphic-filter-options {
