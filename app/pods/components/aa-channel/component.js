@@ -8,12 +8,15 @@ import SequenceIds from 'adaptone-front/constants/sequence-ids';
 const DEBOUNCE_TIME = 20;
 const WRITE_IN_SESSION_DEBOUNCE_TIME = 20;
 const GAIN_MAX_VALUE = 100;
+const AUTO_SATURATION_FACTOR = 0.98;
 
 export default Component.extend({
   connection: service('connection'),
   packetDispatcher: service('packet-dispatcher'),
 
   peakMeterValue: null,
+
+  isAutoSaturationActive: false,
 
   isAuxiliaryInput: computed('channel.data.isAuxiliaryInput', function() {
     return this.get('channel').data.isAuxiliaryInput === true;
@@ -84,16 +87,29 @@ export default Component.extend({
         if (!data) return;
 
         const currentChannelGain = this.get('gainValue') / GAIN_MAX_VALUE;
+        const value = data.inputAfterEq.find(input => input.channelId === currentChannelId).level * currentChannelGain;
 
-        this.set('peakMeterValue',
-          data.inputAfterEq.find(input => input.channelId === currentChannelId).level * currentChannelGain);
+        this.set('peakMeterValue', value);
+
+        if (this.get('isAutoSaturationActive') && value >= 1) {
+          const adjustedGain = this.get('gainValue') * AUTO_SATURATION_FACTOR;
+
+          this.set('gainValue', adjustedGain);
+        }
       });
     } else {
       this.get('packetDispatcher').on('peakmeter-levels', (data) => {
         if (!data) return;
 
-        this.set('peakMeterValue',
-          data.outputAfterGain.find(input => input.channelId === currentChannelId).level);
+        const value = data.outputAfterGain.find(input => input.channelId === currentChannelId).level;
+
+        this.set('peakMeterValue', value);
+
+        if (this.get('isAutoSaturationActive') && value >= 1) {
+          const adjustedGain = this.get('gainValue') * AUTO_SATURATION_FACTOR;
+
+          this.set('gainValue', adjustedGain);
+        }
       });
     }
 
@@ -115,6 +131,10 @@ export default Component.extend({
   actions: {
     onShowChannelDetailsClick() {
       this.get('showChannelDetails')(this.get('channel'));
+    },
+
+    onAutoSaturationClick() {
+      this.toggleProperty('isAutoSaturationActive');
     }
   }
 });

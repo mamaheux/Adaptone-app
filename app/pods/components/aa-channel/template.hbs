@@ -9,6 +9,8 @@
       {{inline-svg "assets/images/arrow-icon.svg" class="link-icon"}}
     </a>
   </div>
+
+  <div class="saturation {{if this.isAutoSaturationActive 'active'}}" onClick={{action "onAutoSaturationClick"}} />
         
   <div class="button-container">
     {{aa-toggle-button
