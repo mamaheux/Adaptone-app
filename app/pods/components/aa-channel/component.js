@@ -16,6 +16,8 @@ export default Component.extend({
 
   peakMeterValue: null,
 
+  isAutoSaturationActive: false,
+
   isAuxiliaryInput: computed('channel.data.isAuxiliaryInput', function() {
     return this.get('channel').data.isAuxiliaryInput === true;
   }),
@@ -89,7 +91,7 @@ export default Component.extend({
 
         this.set('peakMeterValue', value);
 
-        if (value >= 1) {
+        if (this.get('isAutoSaturationActive') && value >= 1) {
           const adjustedGain = this.get('gainValue') * AUTO_SATURATION_FACTOR;
 
           this.set('gainValue', adjustedGain);
@@ -103,7 +105,7 @@ export default Component.extend({
 
         this.set('peakMeterValue', value);
 
-        if (value >= 1) {
+        if (this.get('isAutoSaturationActive') && value >= 1) {
           const adjustedGain = this.get('gainValue') * AUTO_SATURATION_FACTOR;
 
           this.set('gainValue', adjustedGain);
@@ -129,6 +131,10 @@ export default Component.extend({
   actions: {
     onShowChannelDetailsClick() {
       this.get('showChannelDetails')(this.get('channel'));
+    },
+
+    onAutoSaturationClick() {
+      this.toggleProperty('isAutoSaturationActive');
     }
   }
 });
