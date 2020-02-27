@@ -1,6 +1,8 @@
 # Adaptone-App
 Adaptone front-end application build using EmberJS and Electron. This application acts as a replacement for a mixing console. 
 
+![Adaptone App](images/console.png)
+
 ## Prerequisites
 You will need the following things properly installed on your computer.
 
